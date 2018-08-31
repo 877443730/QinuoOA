@@ -1,0 +1,2208 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="~/js/jquery.form.js"></script>
+<script src="~/js/layer.js"></script>
+<script src="~/js/layer.ext.js"></script>
+<link href="~/js/layer/skin/layer.css" rel="stylesheet" />
+<link href="~/js/layer/skin/layer.ext.css" rel="stylesheet" />
+<script src="~/js/flied/flied.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+        table tr th {
+            color: black;
+        }
+
+        table tr td {
+            color: blue;
+        }
+
+    table {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body id="money1">
+    <section id="container" class="">
+        <section id="main-content">
+            <section class="wrapper" style="background-color:white">
+                <div style="position:relative;left:40%;width:300px;"><h2 style="font-weight:800">项目明细表</h2></div>
+                <div class="col-md-12 col-lg-12 portlets">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="k">项目名称</th>
+                            <td colspan="2">
+                                <select class="form-control" type="text" onchange="namechange(this.value)">
+                                    @{
+                                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
+                                        <option value="">--请选择--</option>
+                                        if (list.Any())
+                                        {
+                                            foreach (var item in list)
+                                            {
+                                                <option value="@item.ProjectName">@item.ProjectName</option>
+
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            @{
+                                <th class="k">项目代码</th>
+                                <td colspan="2">
+                                    <input class="form-control" readonly="readonly" type="text" id="code" />
+                                </td>
+                            }
+                            <th class="k">项目类别</th>
+                            <td colspan="1"><input class="form-control" readonly="readonly" type="text" id="leibie" /></td>
+                        </tr>
+                        <tr>
+                            <th class="k">集团名称</th>
+                            <td colspan="2"><input class="form-control" type="text" id="companyname" /></td>
+                            <th class="k">品牌</th>
+                            <td colspan="2"><input class="form-control" type="text" id="brandname" /></td>
+                            <th class="k">采购单码</th>
+                            <td colspan="1"><input class="form-control" readonly="readonly" type="text" id="caigoucode" /></td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目负责人</th>
+                            <td colspan="2"><input class="form-control" type="text" id="xiangmuuser" readonly="readonly" /></td>
+                            <th>项目成员</th>
+                            <td colspan="4"><input class="form-control" readonly="readonly" type="text" id="xiangmuchengyuan" /></td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目时间</th>
+                            <td colspan="2"><input id="newdate" readonly="readonly" type="text" class="form-control" aria-describedby="basic-addon2"></td>
+                            <th class="k">至</th>
+                            <td colspan="4" class="k">
+                                <input id="enddate" type="text" readonly="readonly" class="form-control" aria-describedby="basic-addon2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">非税金额</th>
+                            <td colspan="2"><input class="form-control" readonly="readonly" type="text" id="Nofenpeilirun" /></td>
+                            <th class="k">含税金额</th>
+                            <td colspan="2"><input class="form-control" readonly="readonly" type="text" id="fenpeilirun" /></td>
+                            <th class="k">项目成本</th>
+                            <td><input class="form-control" readonly="readonly" type="text" id="xiangmuchengben" /></td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目报价表</th>
+                            <td colspan="2"><a id="baojia"><input class="form-control" readonly="readonly" type="text" id="Objectbaojia" /></a></td>
+                            <th class="k">项目成本表</th>
+                            <td colspan="2"><a id="chenben"><input class="form-control" readonly="readonly" type="text" id="Objectchengben" /></a></td>
+                            <th class="k">PO单号(手填)</th>
+                            <td><input class="form-control" type="text" id="po" /></td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <th class="k">预计回款日期</th>
+                            <td colspan="2" class="k">
+                                <input type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2" id="Expectedreturndate">
+                            </td>
+                            <th class="k">实际到账日期</th>
+                            <td colspan="2" class="k">
+                                <input type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2" id="Actualdate">
+                            </td>
+                            <th>到账金额</th>
+                            <td><input type="text" class="form-control" id="daozhangjine" /></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="k">PO单/合同</th>
+                            <td>
+                                <form enctype="multipart/form-data" id="file-from" name="file-from1">
+                                    <p>
+                                        <input id="btnMCToOut" type="button" onclick="importExcel()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+
+                                        <input class="form-control" type="file" name="filed" id="filed">
+                                    </p>
+                                </form>
+                            </td>
+                            <th>结案报告</th>
+                            <td>
+                                <form enctype="multipart/form-data" id="file-from2" name="file-from2">
+                                    <p>
+                                        <input id="btnMCToOut" type="button" onclick="importExcel1()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+                                        <input class="form-control" type="file" name="filed1" id="filed1">
+                                    </p>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>发布链接汇总</th>
+                            <td colspan="3">
+                                <form enctype="multipart/form-data" id="file-from3" name="file-from3">
+                                    <p>
+                                        <input id="btnMCToOut" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+
+                                        <input class="form-control" type="file" name="filed2" id="filed2">
+                                    </p>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="personaltable1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="10"><p style="float:left;color:red">达人成明细,个人无票</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>平台</th>
+                                <th>网名</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add1" onClick="personaladdLabel()" value="添加" style="display:none">
+                        <tbody id="personalck"></tbody>
+                    </table>
+                    <table id="companytable1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="10"><p style="float:left;color:red">代理公司KOL</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>平台</th>
+                                <th>网名</th>
+                                <th>税点</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add2" onClick="companyaddLabel()" value="添加" style="display:none">
+                        <tbody id="companyck"></tbody>
+                    </table>
+                    <table id="table1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="11"><p style="float:left;color:red">其它</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>成本类别</th>
+                                <th>用途</th>
+                                <th>支付方式</th>
+                                <th>税点</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add" onClick="addLabel()" value="添加" style="display:none">
+                        <tbody id="ck"></tbody>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>备注</th>
+                            <td>
+                                <textarea class="form-control" id="beizhu">
+
+                                </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="3">销售报价合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="xsbaojiaheji" /></td>
+                            <th colspan="3">税金合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="suijinheji" /></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">不含税成本合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="Noheji" /></td>
+                            <th colspan="3">含税成本合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="heji" /></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>毛利润</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="maolirun" /></td>
+                            <th>毛利润百分比</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="maolirunbfb" /></td>
+                            <th>净利润</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="jinglirun" /></td>
+                            <th>净利润百分比</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="jinglirunbfb" /></td>
+                        </tr>
+                        <tr>
+                            <th>未支付渠道款</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="Nozhifu" /></td>
+                            <th>员工奖金</th>
+                            <td>
+                                @{if (@ViewBag.rolename == "管理员")
+                                    {<input class="form-control" type="text" id="yuangongjiangjin" onchange="weifenpeilirun(this.value)" />}}
+                            </td>
+                            <th>未分配利润</th>
+                            <td colspan="3"><input class="form-control" type="text" readonly="readonly" id="weifenpeilirun" /></td>
+                        </tr>
+                    </table>
+                    <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
+                    <div id="shenpirenliucheng" class="form-control" style="height:60px;">
+                        <table>
+                            <tr>
+                                <th>立项人</th>
+                                <th>SAE</th>
+                                <th>AD</th>
+                                <th>SAD</th>
+                                <th>营销总监</th>
+                                <th>财务</th>
+                                <th>老板</th>
+                                <th>朱老板</th>
+                            </tr>
+                            <tr id="k0">
+                                <td id="k1"></td>
+                                <td id="k3"></td>
+                                <td id="k4"></td>
+                                <td id="k5"></td>
+                                <td id="k6"></td>
+                                <td id="k7"></td>
+                                <td id="k8"></td>
+                                <td id="k9"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="button" onclick="mingxi()" class="btn btn-info btn-block" value="确定" />
+                    <input id="shenpi" type="button" onclick="shenpi()" class="btn btn-primary btn-lg btn-block" value="开始审批" />
+                </div>
+                @*对公司弹出层*@
+                <div class="modal fade" id="myModal" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel1"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th class="k">项目代码</th>
+                                            <td>
+                                                <input class="form-control" type="text" value="" id="code1" readonly="readonly" />
+                                            </td>
+                                            <th class="k">项目名称</th>
+                                            <td class="k">
+                                                <input class="form-control" type="text" value="" id="projectname1" readonly="readonly" />
+                                            </td>
+                                            <th class="k">支付对象(网名)</th>
+                                            <td colspan="3"><input class="form-control" type="text" value="" id="Paymentobject1" readonly="readonly" /></td>
+                                        </tr>
+                                        <tr>
+
+                                            <th class="k">应支付金额</th>
+                                            <td><input class="form-control p" type="text" id="ZFjine" /></td>
+                                            <th class="k">发票号</th>
+                                            <td><input class="form-control p" type="text" id="fapiao" /></td>
+                                            <th class="k">发票附件</th>
+                                            <td>
+                                                <form enctype="multipart/form-data" id="file-froms" name="file-froms">
+                                                    <p>
+                                                        <input style="display:none" id="btnMCToOutfujian" type="button" onclick="importExcel3()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入(确认后上传)">
+                                                        <input class="form-control" type="file" name="fileds" id="fileds">
+                                                    </p>
+                                                </form>
+                                            </td>
+                                            <th class="k">发票税额</th>
+                                            <td><input class="form-control p" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this) " /></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">付款时间</th>
+                                            <td><input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate" /></td>
+                                            <th class="k">公司名称(收款,手填)</th>
+                                            <td><input class="form-control p" type="text" id="gsname" /></td>
+                                            <th class="k">开户行</th>
+                                            <td><input class="form-control p" type="text" id="kaihuhang" /></td>
+                                            <th class="k">银行账号</th>
+                                            <td><input class="form-control p" type="text" id="Bankcode" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>备注</th>
+                                            <td colspan="7">
+                                                <textarea class="form-control p" id="beizhus">
+                                             </textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <input onclick="buts1();" type="button" class="btn btn-primary" value="提交">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*对个人弹出层*@
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <th class="k">付款时间</th>
+                                            <td>
+                                                <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate1" />
+                                            </td>
+                                            <th class="k">项目名称</th>
+                                            <td>
+                                                <input class="form-control" type="text" id="projectname2" readonly="readonly" />
+                                            </td>
+                                            <th class="k">项目代码</th>
+                                            <td class="k">
+                                                <input class="form-control" type="text" id="code2" readonly="readonly" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">支付对象(网名)</th>
+                                            <td><input class="form-control" type="text" id="Paymentobject2" readonly="readonly" /></td>
+                                            <th class="k">应支付金额</th>
+                                            <td colspan="3"><input class="form-control p" type="text" id="ZFjine1" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">收款人</th>
+                                            <td><input class="form-control p" type="text" id="shoukuanren" /></td>
+                                            <th class="k">开户行</th>
+                                            <td><input class="form-control p" type="text" id="kaihuhang1" /></td>
+                                            <th class="k">银行账号</th>
+                                            <td><input class="form-control p" type="text" id="Bankcode1" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>备注</th>
+                                            <td colspan="5">
+                                                <textarea class="form-control p" id="beizhu1">
+
+                                                 </textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <input onclick="butss1();" type="button" class="btn btn-primary" value="提交">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </section>
+        </section>
+    </section>
+</body>
+<script type="text/html" id="sdsa1" style="display:none">
+    <tr id="trhtml1">
+        <td><label id="shuzi" class="personalddd ddd"></label></td>
+        <td>1</td>
+        <td>
+            <input type="text" class="form-control ddd2" name="name" id="wangming" />
+            <datalist id="greetings" style="display:none;">
+                @{
+                    List<Model.Paymentapplicationform> lists1 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
+                    if (lists1.Any())
+                    {
+                        foreach (var item in lists1)
+                        {
+                            <option value="@item.wangming">@item.wangming</option>
+                        }
+
+                    }
+                }
+            </datalist>
+        </td>
+        <td>
+            <input type="text" class="ccc form-control ccc1" id="chenbenbaojia" onchange="textchange3(this)" />
+        </td>
+        <td>
+            <input type="text" class="bbb form-control" id="xiaoshoubaojia" onchange="textchange2(this)" />
+        </td>
+        <td>
+            <input id="shenqing1" type="text" class="form-control shenqing1" readonly="readonly" onchange="textchange(this)" value="" style="display:none;" />
+            <input id="shenqing" onclick="personalbut(this)" ls="aaaa" type="button" class="btn btn-primary form-control shenqing" data-target="#myModal1" value="申请" data-toggle="modal" style="float:right;" />
+        </td>
+        <td>
+            @{
+                if (@ViewBag.rolename == "管理员")
+                {
+                    <input type="text" class=" form-control personalchaiwuchenben" readonly="readonly" onchange="personaltextchange1(this)" id="chaiwuchenben" />
+                }
+                else
+                {
+                    <input type="text" class=" form-control personalchaiwuchenben" readonly="readonly" onchange="personaltextchange1(this)" id="chaiwuchenben" style="display:none" />
+                }
+            }
+        </td>
+        <td>
+            <input type="text" readonly="readonly" class="form-control personalaaa" />
+        </td>
+        <td>
+            <input id="xiugai" onclick="update(this,2)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
+        </td>
+    </tr>
+</script>
+<script type="text/html" id="sdsa2" style="display:none">
+    <tr id="trhtml2">
+        <td><label id="shuzi" class="companyddd ddd"></label></td>
+        <td>1</td>
+        <td>
+            <input type="text" class="form-control ddd2" name="name" id="wangming" />
+            <datalist id="greetings" style="display:none;">
+                @{
+                    List<Model.Paymentapplicationform> lists2 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
+                    if (lists2.Any())
+                    {
+                        foreach (var item in lists2)
+                        {
+                            <option value="@item.wangming">@item.wangming</option>
+                        }
+
+                    }
+                }
+            </datalist>
+        </td>
+        <td>
+            <input class="form-control suidian" type="text" id="suidian" />
+        </td>
+        <td>
+            <input type="text" class="ccc form-control ccc1" id="chenbenbaojia" onchange="textchange3(this)" />
+        </td>
+        <td>
+            <input type="text" class="bbb form-control" id="xiaoshoubaojia" onchange="textchange2(this)" />
+        </td>
+        <td>
+            <input id="shenqing1" type="text" class="form-control shenqing1" readonly="readonly" onchange="textchange(this)" value="" style="display:none;" />
+            <input id="shenqing" onclick="companybut(this)" ls="aaaa" type="button" class="btn btn-primary form-control shenqing" value="申请" data-toggle="modal" style="float:right;" />
+        </td>
+        <td>
+            @{
+                if (@ViewBag.rolename == "管理员")
+                {
+                    <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" />
+                }
+                else
+                {
+                    <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" style="display:none" />
+                }
+            }
+        </td>
+        <td>
+            <input type="text" readonly="readonly" class="form-control companyaaa" />
+        </td>
+        <td>
+            <input id="xiugai" onclick="update(this,3)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
+        </td>
+    </tr>
+</script>
+<script type="text/html" id="sdsa" style="display:none">
+    <tr id="trhtml">
+        <td><label id="shuzi" class="otherddd ddd"></label></td>
+        <td>
+            <input type="text" class="form-control chenbenleibie" name="chenbenleibie" id="chenbenleibie" />
+        </td>
+        <td>
+            <input type="text" class="form-control yongtu" name="yongtu" id="yongtu" />
+        </td>
+        <td>
+            <select onchange="btnChange1(this[selectedIndex].value);" class="form-control" id="leibie">
+                <option value="">--请选择--</option>
+                <option value="对个人">对个人</option>
+                <option value="对公司">对公司</option>
+            </select>
+        </td>
+        <td>
+            <input class="form-control suidian" type="text" id="suidian" readonly="readonly" />
+        </td>
+        <td>
+            <input type="text" class="ccc form-control ccc1" id="chenbenbaojia" onchange="textchange3(this)" />
+        </td>
+        <td>
+            <input type="text" class="bbb form-control" id="xiaoshoubaojia" onchange="textchange2(this)" />
+        </td>
+        <td>
+            <input id="shenqing1" type="text" class="form-control shenqing1" readonly="readonly" onchange="textchange(this)" value="" style="display:none;" />
+            <input id="shenqing" onclick="but(this)" ls="aaaa" type="button" class="btn btn-primary form-control shenqing" value="申请" data-toggle="modal" style="float:right;" />
+        </td>
+        <td>
+            @{
+                if (@ViewBag.rolename == "管理员")
+                {
+                    <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" />
+                }
+                else
+                {
+                    <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" style="display:none" />
+                }
+            }
+        </td>
+        <td>
+            <input type="text" readonly="readonly" class="form-control aaa" />
+        </td>
+        <td>
+            <input id="xiugai" onclick="update(this,Distinguish)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
+        </td>
+    </tr>
+</script>
+<script>
+    var shijifukuanjine;
+    var caiwuchengben;
+    var xiaoshoubaojia;
+    var suidian;
+    var chenbenbaojia;
+    var aaa;
+    var aaa2;
+    var aaa1;
+    var Nofenpeilirun;
+    var result1 = 0;
+    var result2 = 0;
+    var result3 = 0;
+    var result = 0;
+    function textchange(_this) {
+        var first = $(_this).parent().next().children(".form-control").val();
+        shijifukuanjine = $(_this).val();
+        var hansuiheji = parseInt(first) + parseInt(caiwuchengben);
+        var changdu = $(".aaa").length;
+        $(".aaa").eq(changdu - 1).val(hansuiheji);
+    }
+    function textchange1(_this1) {
+        caiwuchengben = $(_this1).val();
+        var secodn = $(_this1).parent().prev().children(".form-control").val();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa = $(_this1).closest('tr').find('.aaa')[0];
+        $(aaa).val(hansuiheji);
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben1",
+            type: "post",
+            data: {
+                xuhao: xuhao,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: Distinguishs,
+                hansuiheji: hansuiheji
+            }
+        })
+        var len = $(".companychaiwuchenben").length;
+        var result3 = 0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companychaiwuchenben").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalchaiwuchenben").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".chaiwuchenben").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        var len = $(".companycaiwuchenben2").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companycaiwuchenben2").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".caiwuchenben2").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+        //含税成本合计
+        var len = $(".aaa").length;
+        var result = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".aaa").eq(i).val();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresult = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".personalaaa").eq(i).val();
+            if (values1 != null && values1 != '') {
+                personalresult = parseInt(personalresult) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyaaa").eq(i).val();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+        var len = $(".hansuihejichenben2").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".hansuihejichenben2").eq(i).text();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalhansuihejichenben2").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalhansuihejichenben2").eq(i).text();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresults = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+
+        document.getElementById("suijinheji").value = parseInt(result1) + parseInt(result2) + parseInt(result3) + parseInt(results1) + parseInt(results2) + parseInt(results3);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    function personaltextchange1(_this1) {
+        caiwuchengben = $(_this1).val();
+        var secodn = $(_this1).parent().prev().children(".form-control").val();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa = $(_this1).closest('tr').find('.personalaaa')[0];
+        $(aaa).val(hansuiheji);
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben1",
+            type: "post",
+            data: {
+                xuhao: xuhao,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: Distinguishs,
+                hansuiheji: hansuiheji
+            }
+        })
+        var len = $(".companychaiwuchenben").length;
+        var result3 = 0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companychaiwuchenben").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalchaiwuchenben").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".chaiwuchenben").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        var len = $(".companycaiwuchenben2").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companycaiwuchenben2").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".caiwuchenben2").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+
+        //含税成本合计
+        var len = $(".aaa").length;
+        var result = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".aaa").eq(i).val();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresult = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".personalaaa").eq(i).val();
+            if (values1 != null && values1 != '') {
+                personalresult = parseInt(personalresult) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyaaa").eq(i).val();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+        var len = $(".hansuihejichenben2").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".hansuihejichenben2").eq(i).text();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalhansuihejichenben2").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalhansuihejichenben2").eq(i).text();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresults = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+        document.getElementById("suijinheji").value = parseInt(result1) + parseInt(result2) + parseInt(result3) + parseInt(results1) + parseInt(results2) + parseInt(results3);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value ;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    function companytextchange1(_this1) {
+        caiwuchengben = $(_this1).val();
+        var secodn = $(_this1).parent().prev().children(".form-control").val();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa = $(_this1).closest('tr').find('.companyaaa')[0];
+        $(aaa).val(hansuiheji);
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben1",
+            type: "post",
+            data: {
+                xuhao: xuhao,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: Distinguishs,
+                hansuiheji: hansuiheji
+            }
+        })
+        var len = $(".companychaiwuchenben").length;
+        var result3 = 0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companychaiwuchenben").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalchaiwuchenben").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".chaiwuchenben").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        var len = $(".companycaiwuchenben2").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companycaiwuchenben2").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".caiwuchenben2").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+        //含税成本合计
+        var len = $(".aaa").length;
+        var result = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".aaa").eq(i).val();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresult = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".personalaaa").eq(i).val();
+            if (values1 != null && values1 != '') {
+                personalresult = parseInt(personalresult) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyaaa").eq(i).val();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+        var len = $(".hansuihejichenben2").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".hansuihejichenben2").eq(i).text();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalhansuihejichenben2").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalhansuihejichenben2").eq(i).text();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresults= 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+
+        document.getElementById("suijinheji").value = parseInt(result1) + parseInt(result2) + parseInt(result3) + parseInt(results1) + parseInt(results2) + parseInt(results3);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    function textchange12(_this1, _this2,_this3) {
+        caiwuchengben= $(_this1).val();
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben",
+            type: "post",
+            data: {
+                xuhao: _this2,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: _this3
+            }, success: function (data) {
+                var a = $(_this1).closest('tr').find('.hansuihejichenben2')[0];
+                $(a).text(data.frommodel['Totaltaxcost']);
+            }
+        })
+        var secodn = $(_this1).parent().prev().children(".hansuihejichenben2").text();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa = $(_this1).closest('tr').find('.hansuihejichenben2')[0];
+        $(aaa).val(hansuiheji);
+        var len = $(".companycaiwuchenben2").length;
+        var result3 = 0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companycaiwuchenben2").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".caiwuchenben2").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+
+        var len = $(".companychaiwuchenben").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companychaiwuchenben").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalchaiwuchenben").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".chaiwuchenben").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+        //含税成本合计
+        var len = $(".hansuihejichenben2").length;
+        var result = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".hansuihejichenben2").eq(i).text();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+        var len1 = $(".personalhansuihejichenben2").length;
+        var personalresult = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".personalhansuihejichenben2").eq(i).text();
+            if (values1 != null && values1 != '') {
+                personalresult = parseInt(personalresult) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+        var len = $(".aaa").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".aaa").eq(i).val();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalaaa").eq(i).val();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresults = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyaaa").eq(i).val();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+        document.getElementById("suijinheji").value = parseInt(result3) + parseInt(result2) + parseInt(result1) + parseInt(results3) + parseInt(results2) + parseInt(results1);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value ;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    function personaltextchange12(_this1, _this2, _this3) {
+        caiwuchengben = $(_this1).val();
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben",
+            type: "post",
+            data: {
+                xuhao: _this2,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: _this3
+            }, success: function (data) {
+                var a = $(_this1).closest('tr').find('.personalhansuihejichenben2')[0];
+                $(a).text(data.frommodel['Totaltaxcost']);
+            }
+        })
+        var secodn = $(_this1).parent().prev().children(".personalhansuihejichenben2").text();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa1 = $(_this1).closest('tr').find('.personalhansuihejichenben2')[0];
+        $(aaa1).val(hansuiheji);
+        var len = $(".companycaiwuchenben2").length;
+        var result3 = 0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companycaiwuchenben2").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".caiwuchenben2").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        var len = $(".companychaiwuchenben").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companychaiwuchenben").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalchaiwuchenben").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".chaiwuchenben").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+        //含税成本合计
+        var len = $(".personalhansuihejichenben2").length;
+        var personalresult = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".personalhansuihejichenben2").eq(i).text();
+            if (values != null && values != '') {
+                personalresult = parseInt(personalresult) + parseInt(values);
+            }
+        }
+        var len1 = $(".hansuihejichenben2").length;
+        var result = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".hansuihejichenben2").eq(i).text();
+            if (values1 != null && values1 != '') {
+                result = parseInt(result) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+
+        var len = $(".aaa").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".aaa").eq(i).val();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalaaa").eq(i).val();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresults = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyaaa").eq(i).val();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+        document.getElementById("suijinheji").value = parseInt(result3) + parseInt(result2) + parseInt(result1) + parseInt(results3) + parseInt(results2) + parseInt(results1);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    function companytextchange12(_this1, _this2, _this3) {
+        caiwuchengben = $(_this1).val();
+        $.ajax({
+            async: false,
+            url: "/Home/Updatechaiwuchenben",
+            type: "post",
+            data: {
+                xuhao: _this2,
+                caiwuchengben: caiwuchengben,
+                proname: s,
+                Distinguish: _this3
+            }, success: function (data) {
+                var a = $(_this1).closest('tr').find('.companyhansuihejichenben2')[0];
+                $(a).text(data.frommodel['Totaltaxcost']);
+            }
+        })
+        var secodn = $(_this1).parent().prev().children(".companyhansuihejichenben2").text();
+        var hansuiheji = parseInt(caiwuchengben) + parseInt(secodn);
+        aaa2 = $(_this1).closest('tr').find('.companyhansuihejichenben2')[0];
+        $(aaa2).val(hansuiheji);
+        var len = $(".companycaiwuchenben2").length;
+        var result3=0;
+        for (var i = 0; i < len; i++) {
+            var values3 = $(".companycaiwuchenben2").eq(i).val();
+            if (values3 != null && values3 != '') {
+                result3 = parseInt(result3) + parseInt(values3);
+            }
+        }
+        var len = $(".personalcaiwuchenben2").length;
+        var result2 = 0;
+        for (var i = 0; i < len; i++) {
+            var values2 = $(".personalcaiwuchenben2").eq(i).val();
+            if (values2 != null && values2 != '') {
+                result2 = parseInt(result2) + parseInt(values2);
+            }
+        }
+        var len = $(".caiwuchenben2").length;
+        var result1 = 0;
+        for (var i = 0; i < len; i++) {
+            var values1 = $(".caiwuchenben2").eq(i).val();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+
+        var len = $(".companychaiwuchenben").length;
+        var results3 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess3 = $(".companychaiwuchenben").eq(i).val();
+            if (valuess3 != null && valuess3 != '') {
+                results3 = parseInt(results3) + parseInt(valuess3);
+            }
+        }
+        var len = $(".personalchaiwuchenben").length;
+        var results2 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess2 = $(".personalchaiwuchenben").eq(i).val();
+            if (valuess2 != null && valuess2 != '') {
+                results2 = parseInt(results2) + parseInt(valuess2);
+            }
+        }
+        var len = $(".chaiwuchenben").length;
+        var results1 = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess1 = $(".chaiwuchenben").eq(i).val();
+            if (valuess1 != null && valuess1 != '') {
+                results1 = parseInt(results1) + parseInt(valuess1);
+            }
+        }
+        //含税成本合计
+        var len = $(".personalhansuihejichenben2").length;
+        var personalresult = 0;
+        for (var i = 0; i < len; i++) {
+            var values = $(".personalhansuihejichenben2").eq(i).text();
+            if (values != null && values != '') {
+                personalresult = parseInt(personalresult) + parseInt(values);
+            }
+        }
+        var len1 = $(".hansuihejichenben2").length;
+        var result = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".hansuihejichenben2").eq(i).text();
+            if (values1 != null && values1 != '') {
+                result = parseInt(result) + parseInt(values1);
+            }
+        }
+        var len2 = $(".companyhansuihejichenben2").length;
+        var companyresult = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2 = $(".companyhansuihejichenben2").eq(i).text();
+            if (values2 != null && values2 != '') {
+                companyresult = parseInt(companyresult) + parseInt(values2);
+            }
+        }
+
+        var len = $(".aaa").length;
+        var results = 0;
+        for (var i = 0; i < len; i++) {
+            var valuess = $(".aaa").eq(i).val();
+            if (valuess != null && valuess != '') {
+                results = parseInt(results) + parseInt(valuess);
+            }
+        }
+        var len1 = $(".personalaaa").length;
+        var personalresults = 0;
+        for (var i = 0; i < len1; i++) {
+            var values1s = $(".personalaaa").eq(i).val();
+            if (values1s != null && values1s != '') {
+                personalresults = parseInt(personalresults) + parseInt(values1s);
+            }
+        }
+        var len2 = $(".companyaaa").length;
+        var companyresults = 0;
+        for (var i = 0; i < len2; i++) {
+            var values2s = $(".companyaaa").eq(i).val();
+            if (values2s != null && values2s != '') {
+                companyresults = parseInt(companyresults) + parseInt(values2s);
+            }
+        }
+        document.getElementById("suijinheji").value = parseInt(result3) + parseInt(result2) + parseInt(result1) + parseInt(results3) + parseInt(results2) + parseInt(results1);
+        document.getElementById("heji").value = parseInt(result) + parseInt(personalresult) + parseInt(companyresult) + parseInt(results) + parseInt(personalresults) + parseInt(companyresults);
+        //净利润
+        Nofenpeilirun = $("#Nofenpeilirun").val();
+        var jinglirun = Nofenpeilirun - document.getElementById("heji").value;
+        $("#jinglirun").val(jinglirun);
+        //净利润百分比
+        var jinglirunbfb = Nofenpeilirun / document.getElementById("heji").value;
+        $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) + "%")
+    }
+    //销售报价合计
+    function textchange2(_this2) {
+        var result = 0;
+        var len = $(".bbb").length;
+        for (var i = 0; i < len; i++) {
+            var values = $(".bbb").eq(i).val();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+        var result1 = 0;
+        var len1 = $(".bbb2").length;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".bbb2").eq(i).text();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        document.getElementById("xsbaojiaheji").value = parseInt(result) + parseInt(result1);
+    }
+    //不含税成本合计
+    function textchange3(_this3) {
+        var result = 0;
+        var len = $(".ccc").length;
+        for (var i = 0; i < len; i++) {
+            var values = $(".ccc").eq(i).val();
+            if (values != null && values != '') {
+                result = parseInt(result) + parseInt(values);
+            }
+        }
+
+        var len1 = $(".ccc2").length;
+        for (var i = 0; i < len1; i++) {
+            var values1 = $(".ccc2").eq(i).text();
+            if (values1 != null && values1 != '') {
+                result1 = parseInt(result1) + parseInt(values1);
+            }
+        }
+        document.getElementById("Noheji").value = parseInt(result)+ parseInt(result1);
+        //未支付渠道款
+        document.getElementById("Nozhifu").value = result;
+        //毛利润
+        var maolirun = $("#Nofenpeilirun").val() - document.getElementById("Noheji").value;
+        $('#maolirun').val(maolirun);
+        //毛利润百分比
+        var maolirunbfb = maolirun / document.getElementById("Noheji").value;
+        $("#maolirunbfb").val(maolirunbfb.toFixed(2) + "%");
+    }
+    //对个人
+    function personaladdLabel() {
+        $('#sdsa1').removeAttr("display")
+        $("#personalck").append($("#sdsa1").html());
+        var len = $(".personalddd").length;
+        $('.personalddd').eq(len - 1).text($("#personaltable1 tr").length - 2)
+    }
+    //对公司
+    function companyaddLabel() {
+        $('#sdsa2').removeAttr("display")
+        $("#companyck").append($("#sdsa2").html());
+        var len = $(".companyddd").length;
+        $('.companyddd').eq(len - 1).text($("#companytable1 tr").length - 2)
+    }
+    //其他
+    function addLabel() {
+        $('#sdsa').removeAttr("display")
+        $("#ck").append($("#sdsa").html());
+        var len = $(".otherddd").length;
+        $('.otherddd').eq(len - 1).text($("#table1 tr").length - 2);
+    }
+    var leixing;
+    function btnChange1(values) {
+        leixing = values;
+        if (values == "对公司") {
+            $('input[id=suidian]').removeAttr("readonly")
+        } else if (values != "对公司") {
+            $('input[id=suidian]').attr("readonly", "readonly")
+        }
+    }
+    var projectCostlujing;
+    var projectQuotationlujing;
+    var s;
+    var Distinguish;
+    var Distinguish1;
+    var Distinguish2;
+    function namechange(_this) {
+        s = _this;
+        $.ajax({
+            url: "/Home/indexs",
+            type: 'post',
+            data: {
+                name: s
+            },
+            success: function (data) {
+                console.log(data);
+                if (data == "") {
+                    var sum = 0;
+                    var t = document.getElementsByTagName("input");
+                    for (var i = 0; i
+                        < t.length; i++) {
+                        if (t[i].type == 'text') {
+                            ++sum;
+                            t[i].value = "";//清空
+                        }
+                    }
+                    return;
+                }
+                $('#code').val(data.Projectmodel['ProjectCode'])
+                $('#caigoucode').val(data.Projectmodel['PurchaseSingleCode'])
+                // $('#xiangmuchengyuan').val(data.Projectmodel['Username'])
+                $('#po').val(data.Projectmodel['POdanhao'])
+                var newdate1 = data.Projectmodel['Expectedreturndate']
+                if (newdate1 != null) {
+                    var date2 = new Date();
+                    date2.setTime(newdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                    var newdate11 = date2.toLocaleDateString();
+                    $('#Expectedreturndate').val(newdate11);
+                }
+                var newdate2 = data.Projectmodel['Actualdate']
+                if (newdate2 != null) {
+                    var date3 = new Date();
+                    date3.setTime(newdate2.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                    var newdate12 = date3.toLocaleDateString();
+                    $('#Actualdate').val(newdate12);
+                }
+                $('#daozhangjine').val(data.Projectmodel['Accountamount'])
+                $('#beizhu').val(data.Projectmodel['Remarks'])
+                var newdate = data.Projectmodel['ProjectStartDate']
+                var enddate = data.Projectmodel['ProjectEndDate']
+                var date = new Date();
+                date.setTime(newdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                var newdate1 = date.toLocaleDateString();
+                $('#newdate').val(newdate1);
+                var date1 = new Date();
+                date.setTime(enddate.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                var enddate1 = date.toLocaleDateString();
+                $('#enddate').val(enddate1)
+                $('#leibie').val(data.ProjecTtypeName);
+                $('#companyname').val(data.CompanyName);
+                $('#brandname').val(data.BrandName);
+                $('#xiangmuuser').val(data.Username);
+                $('#Nofenpeilirun').val(data.moneymodel['TotalMoney'])
+                $('#fenpeilirun').val(data.moneymodel['NoTaxlMoney'])
+                $('#xiangmuchengben').val(data.moneymodel['projectcost'])
+                $('#xsbaojiaheji').val(data.moneymodel['SalesQuotations'])
+                $('#suijinheji').val(data.moneymodel['TaxSum'])
+                $('#Noheji').val(data.moneymodel['NonTaxCostCombined'])
+                $('#heji').val(data.moneymodel['Totaltaxcosttow'])
+                $('#maolirun').val(data.moneymodel['Grossprofit'])
+                $('#maolirunbfb').val(data.moneymodel['AMargemBrutapercentual']);
+                $('#jinglirun').val(data.moneymodel['Olucrolíquido']);
+                $('#jinglirunbfb').val(data.moneymodel['Aporcentagemdelucrolíquido']);
+                $('#Nozhifu').val(data.moneymodel['Unpaidchannel']);
+                $('#yuangongjiangjin').val(data.moneymodel['Employeebonus']);
+                $('#weifenpeilirun').val(data.moneymodel['Undistributedprofit']);
+                projectCostlujing = data.projectCostlujing;
+                projectQuotationlujing = data.ProjectQuotationlujing;
+                var Costlujing = projectCostlujing.substr(34);
+                var Quotationlujing = projectQuotationlujing.substr(34);
+                $('#Objectbaojia').val(Costlujing)
+                $('#Objectchengben').val(Quotationlujing);
+                $("#baojia").attr('href', '/' + Costlujing + '');
+                $("#chenben").attr('href', '/' + Quotationlujing + '')
+                //判断当前登录人与项目建立人是否一致，不一致隐藏选择审批人
+                var employeename = "@ViewBag.employeename";
+                if (data.Username == employeename) {
+                    $("#add").attr('style', 'display:block');
+                } else if (data.Username != employeename) {
+                    $("#add").attr('style', 'display:none');
+                }
+                if (data.Username == employeename) {
+                    $("#add1").attr('style', 'display:block');
+                } else if (data.Username != employeename) {
+                    $("#add1").attr('style', 'display:none');
+                }
+                if (data.Username == employeename) {
+                    $("#add2").attr('style', 'display:block');
+                } else if (data.Username != employeename) {
+                    $("#add2").attr('style', 'display:none');
+                }
+                if (data.nodemodel != null) {
+                    //获取当前项目的审批人
+                    $("#k1").html("立项人")
+                    $("#k3").html(data.nodemodel['SAE'])
+                    $("#k4").html(data.nodemodel['AD'])
+                    $("#k5").html(data.nodemodel['SAD'])
+                    $("#k6").html(data.nodemodel['yinxiaozongjian'])
+                    $("#k7").html(data.nodemodel['caiwu'])
+                    $("#k8").html(data.nodemodel['laoban'])
+                    $("#k9").html(data.nodemodel['zhulaoban'])
+                    //获取当前项目的项目成员
+                    $("#xiangmuchengyuan").val(data.nodemodel['AE'] + "," + data.nodemodel['SAE'] + "," + data.nodemodel['AD'] + "," + data.nodemodel['SAD'] + "," + data.nodemodel['yinxiaozongjian'] + "," + data.nodemodel['caiwu'] + "," + data.nodemodel['laoban'] + "," + data.nodemodel['zhulaoban'])
+                } else {
+                    $("#k0 td").html("");
+                }
+                if (data.nodemodel != null) {
+                    switch (data.nodemodel['Stateofapproval']) {
+                        case 1:
+                            $("#k1").attr('style', 'color:red');
+                            break;
+                        case 2:
+                            $("#k1").attr('style', 'color:red');
+                            break;
+                        case 3:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            break;
+                        case 4:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            break;
+                        case 5:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            $("#k5").attr('style', 'color:red');
+                            break;
+                        case 6:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            $("#k5").attr('style', 'color:red');
+                            $("#k6").attr('style', 'color:red');
+                            break;
+                        case 7:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            $("#k5").attr('style', 'color:red');
+                            $("#k6").attr('style', 'color:red');
+                            $("#k7").attr('style', 'color:red');
+                            break;
+                        case 8:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            $("#k5").attr('style', 'color:red');
+                            $("#k6").attr('style', 'color:red');
+                            $("#k7").attr('style', 'color:red');
+                            $("#k8").attr('style', 'color:red');
+                            break;
+                        case 9:
+                            $("#k1").attr('style', 'color:red');
+                            $("#k3").attr('style', 'color:red');
+                            $("#k4").attr('style', 'color:red');
+                            $("#k5").attr('style', 'color:red');
+                            $("#k6").attr('style', 'color:red');
+                            $("#k7").attr('style', 'color:red');
+                            $("#k8").attr('style', 'color:red');
+                            $("#k9").attr('style', 'color:red');
+                            break;
+                    }
+                }
+                if (data.catmodel != null) {
+                    for (var i = 0; i < data.catmodel.length; i++) {
+                        var trhtml = '<tr><td>' + data.catmodel[i].xuhao + '</td><td>' + data.catmodel[i].Costcategory + '</td><td>' + data.catmodel[i].purpose + '</td><td>' + data.catmodel[i].ApplyforpaymentType + '</td><td>' + data.catmodel[i].shuidian + '</td><td class="ccc2">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2">' + data.catmodel[i].Salesquotation + '</td><td>' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员"){<input type="text" id="caiwuchenben2" onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td></td></tr > '
+                        $('#ck').append(trhtml)
+                    }
+                }
+                if (data.personalmodel != null) {
+                    for (var i = 0; i < data.personalmodel.length; i++) {
+                        var personaltrhtml = '<tr><td>' + data.personalmodel[i].xuhao + '</td><td>' + 1 + '</td><td>' + data.personalmodel[i].wangming + '</td><td class="ccc2">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2">' + data.personalmodel[i].Salesquotation + '</td><td>' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员"){<input type="text" id="caiwuchenben2" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td></td></tr > '
+                        $('#personalck').append(personaltrhtml)
+                    }
+                }
+                if (data.companymodel != null) {
+                    for (var i = 0; i < data.companymodel.length; i++) {
+                        var companytrhtml = '<tr><td>' + data.companymodel[i].xuhao + '</td><td>' + 1 + '</td><td>' + data.companymodel[i].wangming + '</td><td>' + data.companymodel[i].shuidian + '</td><td class="ccc2">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2">' + data.companymodel[i].Salesquotation + '</td><td>' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员"){<input type="text" id="caiwuchenben2" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2" value = "' + data.companymodel[i].Financialcost + '" />}}</td ><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td></td></tr > '
+                        $('#companyck').append(companytrhtml)
+                    }
+                }
+            }
+        })
+    }
+    
+    
+    var len1
+    var zhifujine
+    var shenqing
+    var shenqing1
+    var chenben
+    var wangming
+    var ddd
+    var xiugai
+    var yongtu
+    var chenbenleibie
+    var Distinguishss;
+    //根据状态申请跳转页面
+    function but(_this) {
+        //获取每行的点击值
+            Distinguishss = 0;
+        zhifujine = $(_this).closest('tr').find('.shenqing1')[0]
+        shenqing = $(_this).closest('tr').find('.shenqing')[0]
+        shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
+        suidian = $(_this).closest('tr').find('.suidian')[0].value;
+        chenben = $(_this).closest('tr').find('.ccc1')[0]
+        xiugai = $(_this).closest('tr').find('.xiugai')[0]
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this).closest('tr').find('.chaiwuchenben')[0]
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
+        aaa = $(_this).closest('tr').find('.aaa')[0].value;
+        yongtu  = $(_this).closest('tr').find('.yongtu')[0].value;
+        chenbenleibie= $(_this).closest('tr').find('.chenbenleibie')[0].value;
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+            if (leixing == "对公司") {
+                if (suidian != "") {
+                    $("#shenqing").attr('data-target', '#myModal');
+                    $('#myModal').modal('show');
+                    if (ddd != '') {
+                        document.getElementById("code1").value = $("#code").val();
+                        document.getElementById("projectname1").value = s;
+                        document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
+                    }
+                } else {
+                    alert("请填写税点");
+                    return;
+                }
+            } else if (leixing == "对个人") {
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                if (ddd != '') {
+                    document.getElementById("code2").value = $("#code").val();
+                    document.getElementById("projectname2").value = s;
+                    document.getElementById("Paymentobject2").value = ddd;
+                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                } else {
+                    alert("请输入网名(支付对象)");
+                    return;
+                }
+            }
+
+        } else {
+
+            alert("请填写完整");
+        }
+    }
+    //对个人
+    function personalbut(_this) {
+        //获取每行的点击值
+        ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
+        if (ddd != '' && ddd != null) {
+            Distinguishss = 2;
+        } else {
+            Distinguishss = 0;
+        }
+        zhifujine = $(_this).closest('tr').find('.shenqing1')[0]
+        shenqing = $(_this).closest('tr').find('.shenqing')[0]
+        shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
+        chenben = $(_this).closest('tr').find('.ccc1')[0]
+        xiugai = $(_this).closest('tr').find('.xiugai')[0]
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this).closest('tr').find('.personalchaiwuchenben')[0]
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
+        aaa = $(_this).closest('tr').find('.personalaaa')[0].value;
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+            if (ddd != '') {
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                document.getElementById("code2").value = $("#code").val();
+                document.getElementById("projectname2").value = s;
+                document.getElementById("Paymentobject2").value = ddd;
+                document.getElementById("myModalLabel2").innerHTML = "对个人申请付款";
+            } else {
+                alert("请输入网名(支付对象)");
+                return;
+            }
+
+        } else {
+
+            alert("请填写完整");
+        }
+
+    }
+    //对公司
+    function companybut(_this) {
+        //获取每行的点击值
+        ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
+        if (ddd != '' && ddd != null) {
+            Distinguishss = 3;
+        } else {
+            Distinguishss = 0;
+        }
+        zhifujine = $(_this).closest('tr').find('.shenqing1')[0]
+        shenqing = $(_this).closest('tr').find('.shenqing')[0]
+        shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
+        suidian = $(_this).closest('tr').find('.suidian')[0].value;
+        chenben = $(_this).closest('tr').find('.ccc1')[0]
+        xiugai = $(_this).closest('tr').find('.xiugai')[0]
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this).closest('tr').find('.companychaiwuchenben')[0]
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
+        aaa = $(_this).closest('tr').find('.companyaaa')[0].value;
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+            if (suidian != "" && ddd != "") {
+                $("#shenqing").attr('data-target', '#myModal');
+                $('#myModal').modal('show');
+
+                    $("#shenqing").attr('data-target', '#myModal');
+                    $('#myModal').modal('show');
+                    document.getElementById("code1").value = $("#code").val();
+                    document.getElementById("projectname1").value = s;
+
+                    document.getElementById("Paymentobject1").value = ddd;
+
+                    document.getElementById("myModalLabel1").innerHTML = "对公司申请付款";
+
+            } else {
+                alert("税点或者网名未填写！");
+                return;
+            }
+        }
+    }
+    //修改申请页面
+    function update(_this1,_this2) {
+        //获取每行的点击值
+        ddd = $(_this1).closest('tr').find('.ddd2')[0].value;  //网名
+        zhifujine = $(_this1).closest('tr').find('.shenqing1')[0]
+        shenqing = $(_this1).closest('tr').find('.shenqing')[0]
+        shenqing1 = $(_this1).closest('tr').find('.shenqing')[0].value;
+        chenben = $(_this1).closest('tr').find('.ccc1')[0]
+        xiugai = $(_this1).closest('tr').find('.xiugai')[0]
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this1).closest('tr').find('.chaiwuchenben')[0];
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        len1 = $(_this1).closest('tr').find('.ddd')[0].innerText;
+
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+            if (leixing == "对公司" || _this2==3) {
+                suidian = $(_this1).closest('tr').find('.suidian')[0].value;
+               // aaa = $(_this1).closest('tr').find('.companyaaa')[0].value;
+                if (suidian != "") {
+                    $("#shenqing").attr('data-target', '#myModal');
+                    $('#myModal').modal('show');
+                    if (ddd != '') {
+                        document.getElementById("code1").value = $("#code").val();
+                        document.getElementById("projectname1").value = s;
+                        document.getElementById("Paymentobject1").value = ddd;
+                        document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
+                        $.ajax({
+                            url: "/Home/updateview",
+                            type: 'post',
+                            data: {
+                                xuhao: len1,
+                                projectname: s,
+                                Distinguish:_this2
+                            },
+                            success: function (data) {
+                                document.getElementById("ZFjine").value = data.model['Actualamountofpayment']
+                                document.getElementById("fapiao").value = data.model['Invoicenumber']
+                                document.getElementById("fapiaosuie").value = data.model['Invoicetax']
+                                document.getElementById("gsname").value = data.model['Receivablescompany']
+                                document.getElementById("kaihuhang").value = data.model['Openingbank']
+                                document.getElementById("Bankcode").value = data.model['Bankaccount']
+                                var Timeofpaymentdate = data.model['Timeofpayment']
+                                var date = new Date();
+                                date.setTime(Timeofpaymentdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                                var newdate1 = date.toLocaleDateString();
+                                document.getElementById("ZFdate").value = (newdate1);
+
+                                document.getElementById("beizhus").value = data.model['Remarks']
+                            }
+
+                        })
+
+                    } else {
+                        alert("请输入网名");
+                        return;
+                    }
+                } else {
+                    alert("请填写税点");
+                    return;
+                }
+            } else if (_this2==2|| leixing == "对个人") {
+                //aaa = $(_this1).closest('tr').find('.personalaaa')[0].value;
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                if (ddd != '') {
+                    document.getElementById("code2").value = $("#code").val();
+                    document.getElementById("projectname2").value = s;
+                    document.getElementById("Paymentobject2").value = ddd;
+                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                    $.ajax({
+                        url: "/Home/updateview",
+                        type: 'post',
+                        data: {
+                            xuhao: len1,
+                            projectname: s,
+                            Distinguish: _this2
+                        },
+                        success: function (data) {
+                            document.getElementById("ZFjine1").value = data.model['Actualamountofpayment']
+                            var Timeofpaymentdate1 = data.model['Timeofpayment']
+                            var date = new Date();
+                            date.setTime(Timeofpaymentdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                            var newdate1 = date.toLocaleDateString();
+                            document.getElementById("ZFdate1").value = (newdate1);
+                            document.getElementById("shoukuanren").value = data.model['Payee']
+                            document.getElementById("kaihuhang1").value = data.model['Openingbank']
+                            document.getElementById("Bankcode1").value = data.model['Bankaccount']
+                            document.getElementById("beizhu1").value = data.model['Remarks']
+                        }
+                    })
+
+                } else {
+                    alert("请输入网名(支付对象)");
+                    return;
+                }
+            }
+        } else {
+            alert("请填写完整");
+        }
+    }
+    function files1() {
+        $.ajax({
+            url: "/Home/projectCostlujingFile",
+            type: 'post',
+            data: {
+                projectCostlujingFiless: projectCostlujing
+            }
+        })
+    }
+    function files2() {
+        $.ajax({
+            url: "/Home/projectQuotationlujingFile",
+            type: 'post',
+            data: {
+                projectQuotationlujingFiless: projectQuotationlujing
+            }
+        })
+    }
+    var chenbenbaojia2 = $("#caiwuchenben2").val();
+    //对公司申请付款
+    function buts1() {
+        var ZFjine = $("#ZFjine").val();//支付金额
+        var fapiao = $("#fapiao").val();//发票
+        var fapiaosuie = $("#fapiaosuie").val();//发票税额
+        var ZFdate = $("#ZFdate").val();//支付时间
+        var gsname = $("#gsname").val();//收款公司
+        var kaihuhang = $("#kaihuhang").val();//开户行
+        var Bankcode = $("#Bankcode").val();//银行账号
+        var projectname = $("#projectname1").val(); //项目名称
+        var Paymentobject = $("#Paymentobject1").val();//支付对象
+        var beizhu = $("#beizhus").val();
+        $.ajax({
+            url: "/Home/PaymentCompanys",
+            type: "post",
+            data: {
+                ZFjine: ZFjine,
+                fapiao: fapiao,
+                fapiaosuie: fapiaosuie,
+                ZFdate: ZFdate,
+                gsname: gsname,
+                kaihuhang: kaihuhang,
+                Bankcode: Bankcode,
+                projectname: projectname,
+                Paymentobject: Paymentobject,
+                xuhao: len1,
+                leixing: leixing,
+                beizhu: beizhu,
+                suidian: suidian,
+                chenbenbaojia: parseInt(result) + parseInt(result1),
+                xiaoshoubaojia: xiaoshoubaojia,
+                wangming: ddd,
+                //caiwuchengben: caiwuchengben.value, //获取不到值
+               // hanshuichenbenheji: aaa,
+                chenbenbaojia2: chenbenbaojia2,
+                Distinguish: Distinguishss,
+                chenbenleibie: chenbenleibie,
+                yongtu: yongtu
+
+            },
+            success: function (data) {
+                xuhao = data.formmodel['xuhao'];
+                Distinguishs = data.formmodel['Distinguish'];
+                var shenqing555 = document.getElementById("shenqing").value;
+                if (shenqing555 == "申请" && len1 == data.formmodel['xuhao']) {
+                    zhifujine.style.setProperty('display', 'block');
+                    shenqing.style.setProperty("display", "none");
+                    var shijifukuan = data.formmodel['Actualamountofpayment'];
+                    zhifujine.value = shijifukuan;
+                    document.getElementById("chaiwuchenben").removeAttribute("readonly");
+                }
+                var d = eval('(' + data.msg + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                    $("#btnMCToOutfujian").removeAttr("style");
+                    $(xiugai).removeAttr("style")
+                    $(chenben).removeClass("ccc1");
+                    textchange3();
+
+                    var sum = 0;
+                    var t = document.getElementsByClassName("p");
+                    for (var i = 0; i
+                        < t.length; i++) {
+                        if (t[i].type == 'text') {
+                            ++sum;
+                            t[i].value = "";//清空
+                        }
+                    }
+                };
+            }
+        })
+    }
+    //对其他付款
+    var xuhao;
+    var Distinguishs;
+    //对个人申请付款
+    function butss1() {
+        var ZFjine = $("#ZFjine1").val();//支付金额
+        var ZFdate = $("#ZFdate1").val();//支付时间
+        var shoukuanren = $("#shoukuanren").val();//收款人
+        var projectname = $("#projectname2").val(); //项目名称
+        var Paymentobject = $("#Paymentobject2").val();//支付对象
+        var kaihuhang = $("#kaihuhang1").val();//开户行
+        var Bankcode = $("#Bankcode1").val();//银行账号
+        var beizhu = $("#beizhu1").val();
+        $.ajax({
+            url: "/Home/PersonalPayments",
+            type: "post",
+            data: {
+                ZFjine: ZFjine,
+                ZFdate: ZFdate,
+                shoukuanren: shoukuanren,
+                projectname: projectname,
+                Paymentobject: Paymentobject,
+                kaihuhang: kaihuhang,
+                Bankcode: Bankcode,
+                beizhu: beizhu,
+                xuhao: len1,
+                leixing: leixing,
+                chenbenbaojia: chenbenbaojia,
+                xiaoshoubaojia: xiaoshoubaojia,
+                wangming: ddd,
+              // caiwuchengben:caiwuchengben.value, //获取不到值
+                //hanshuichenbenheji: aaa,
+                chenbenbaojia2: chenbenbaojia2,
+                Distinguish: Distinguishss,
+                chenbenleibie: chenbenleibie,
+                yongtu: yongtu
+            },
+            success: function (data) {
+                xuhao = data.formmodel['xuhao'];
+                Distinguishs = data.formmodel['Distinguish'];
+                var shenqing555 = document.getElementById("shenqing").value;
+                if (shenqing555 == "申请" && len1 == data.formmodel['xuhao']) {
+                    zhifujine.style.setProperty('display', 'block');
+                    shenqing.style.setProperty("display", "none");
+                    var shijifukuan = data.formmodel['Actualamountofpayment'];
+                    zhifujine.value = shijifukuan;
+                    document.getElementById("chaiwuchenben").removeAttribute("readonly");
+                }
+                var d = eval('(' + data.msg + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                    $(chenben).removeClass("ccc1");
+                    $(xiugai).removeAttr("style")
+                    textchange3();
+                    var sum = 0;
+                    var t = document.getElementsByClassName("p");
+                    for (var i = 0; i
+                        < t.length; i++) {
+                        if (t[i].type == 'text') {
+                            ++sum;
+                            t[i].value = ""; //清空
+                        }
+                    }
+                };
+            }
+        })
+    }
+    //未分配利润
+    function weifenpeilirun(_thisjiangjin) {
+        var maolirun = $("#maolirun").val();
+        var Nozhifu = $("#Nozhifu").val();
+        var yuangongjiangjin = _thisjiangjin;
+        $("#weifenpeilirun").val(maolirun - Nozhifu - yuangongjiangjin);
+    }
+    //保存明细表未存库的数据
+    function mingxi(_this) {
+        var beizu = $("#beizhu").val();
+        var xsbjhj = $("#xsbaojiaheji").val();
+        var sjhj = $("#suijinheji").val();
+        var Noheji = $("#Noheji").val();
+        var heji = $("#heji").val();
+        var maolirun = $("#maolirun").val();
+        var Nozhifu = $("#Nozhifu").val();
+        var yuangongjiangjin = $("#yuangongjiangjin").val();
+        var weifenpeilirun = $("#weifenpeilirun").val();
+        var po = $("#po").val();
+        var Expectedreturndate = $("#Expectedreturndate").val();
+        var Actualdate = $("#Actualdate").val();
+        var daozhangjine = $("#daozhangjine").val();
+        var AMargemBrutapercentual = $("#maolirunbfb").val();
+        var Olucrolíquido = $("#jinglirun").val();
+        var Aporcentagemdelucrolíquido = $("#jinglirunbfb").val();
+      //  var chenben = $("#caiwuchenben2").val();
+        if (po == null && po == "") {
+            alert("请输入PO单号");
+            return;
+        }
+        $.ajax({
+            url: "/Home/mixibaocun",
+            type: "post",
+            data: {
+                beizu: beizu,
+                xsbjhj: xsbjhj,
+                sjhj: sjhj,
+                Noheji: Noheji,
+                heji: heji,
+                maolirun: maolirun,
+                Nozhifu: Nozhifu,
+                yuangongjiangjin: yuangongjiangjin,
+                weifenpeilirun: weifenpeilirun,
+                prijectname: s,
+                po: po,
+                Expectedreturndate: Expectedreturndate,
+                Actualdate: Actualdate,
+                daozhangjine: daozhangjine,
+                AMargemBrutapercentual: AMargemBrutapercentual,
+                Olucrolíquido: Olucrolíquido,
+                Aporcentagemdelucrolíquido: Aporcentagemdelucrolíquido
+               // xuhao: _this,
+                //chenben: chenben
+
+            },
+            success: function (data) {
+                if (_this==null) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                    };
+                }
+            }
+        })
+    }
+    function shenpi() {
+        if (s == "") {
+            alert("请选择项目");
+            return
+        }
+        $.ajax({
+            url: "/Home/shenpi",
+            type: "post",
+            data: {
+                projectname: s
+            },
+            success: function (data) {
+                    var d = eval('(' + data + ')');
+                    if (d.status == 0) {
+                        layer.msg(d.msg, {
+                            icon: 5
+                        });
+                    } else if (d.status == 1) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 2) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 3) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 4) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 5) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 6) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 7) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 8) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 9) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                    } else if (d.status == 10) {
+                        layer.msg(d.msg, {
+                            icon: 5
+                        });
+                    } else if (d.status == 11) {
+                        layer.msg(d.msg, {
+                            icon: 5
+                        });
+                    }
+            }
+        })
+                }
+
+                //发票税额百分号
+    function shuieSymbol(x) {
+        var pattern = /^\d+%$|^\d+\.{1}\d+%$/;
+        var fapiaoshuie = $("#fapiaosuie").val();
+        if (!fapiaoshuie == "" || !fapiaoshuie == null || !fapiaoshuie == undefined) {
+            if (fapiaoshuie.indexOf(" ") == -1) {
+                if (pattern.test(fapiaoshuie)) {
+                    fapiaoshuie = fapiaoshuie.substring(0, fapiaoshuie.length - 1);
+                } else {
+                    fapiaoshuie = fapiaoshuie + "%";
+                }
+            } else {
+                fapiaoshuie = "";
+                layer.msg("发票税额输入不规范", {
+                    icon: 5
+                });
+            }
+        }
+    }
+</script>
