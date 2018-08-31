@@ -1,0 +1,37 @@
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<style>
+    #mohushousuo {
+        position:relative;
+    }
+        #mohushousuo #searchButton {
+            position: absolute;
+            right: 4%;
+            width: 15%;
+            height: 60%;
+            top:10px;
+            border: none;
+        }
+</style>
+
+<div class="layui-row" style="height:50px;background-color:#47a1df;line-height:50px;text-align:center">
+    <div class="layui-col-xs3">
+        Logo
+    </div>
+    <div id="mohushousuo" class="layui-col-xs7" style="padding:5px;">
+        <input id="neirong" type="text" name="title" required lay-verify="required" placeholder="搜小说丶作者" autocomplete="off" class="layui-input" style="border-radius:5px;height:40px;">
+        <input onclick="neirong();" style="background-image:url(../../img/timg.jpg)" id="searchButton" class="layui-icon-search" type="button" value="搜索"/>
+    </div>
+    <div class="layui-col-xs2">
+        <i class="layui-icon" style="color:white;font-weight:bolder;font-size:20px;">&#xe612;</i>
+    </div>
+</div>
+<script>
+    function neirong() {
+        var neirong = $("#neirong").val();
+        window.location.href = "/Book/Index?neirong="+neirong;
+           // location.replace(location);
+        }
+</script>

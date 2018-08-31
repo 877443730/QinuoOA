@@ -1,0 +1,5 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/29 14:41:06
+

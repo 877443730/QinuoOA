@@ -1,0 +1,118 @@
+﻿<script src="~/js/jquery.js"></script>
+<script src="~/js/layer.js"></script>
+<script src="~/js/layer.ext.js"></script>
+<link href="~/js/layer/skin/layer.css" rel="stylesheet" />
+<link href="~/js/layer/skin/layer.ext.css" rel="stylesheet" />
+<section id="container" class="">
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="col-md-12 col-lg-12 portlets">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="pull-left">添加集团</div>
+                        <div class="widget-icons pull-right">
+                            <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                            <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="padd">
+                            <div class="form quick-post">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="content">公司名称(必填)</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="Comyanyname">
+                                        </div>
+                                    </div>
+                                    <!-- Title -->
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="title">联系人(可填)</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="content">电话(可填)</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="content">邮箱(可填)</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="mail">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="content">备注(可填)</label>
+                                        <div class="col-lg-10">
+                                            <textarea  type="text" class="form-control" id="beizhu"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-2" for="content">公司代码(必填)</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="code">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-9">
+                                            <input onclick="but();" type="button" class="btn btn-primary" value="提交" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</section>
+</section>
+<script>
+    function but() {
+        if ($("#Comyanyname").val() == '' && $("#code").val() == '') {
+            alert("必填项有未填!");
+            return;
+        }
+        var Comyanyname = $("#Comyanyname").val();
+        var name = $("#name").val();
+        var phone = $("#phone").val();
+        var mail = $("#mail").val();
+        var beizhu = $("#beizhu").val();
+        var code = $("#code").val();
+        $.ajax({
+            url: "/ComyanyADNBrand/addcom",
+            type:"post",
+            data: {
+                Comyanyname: Comyanyname,
+                name: name,
+                phone: phone,
+                mail: mail,
+                beizhu: beizhu,
+                code: code
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                    location.reload();
+                };
+            }
+           
+
+
+        })
+
+    }
+
+
+</script>

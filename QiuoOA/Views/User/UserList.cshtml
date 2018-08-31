@@ -1,0 +1,77 @@
+﻿
+<section id="container" class="">
+    <section id="main-content">
+        <section class="wrapper" style="background-color:white">
+            <div class="col-lg-12">
+                <div class="widget-body">
+                    <div class="widget-main no-padding">
+                        <div class="page-header">
+                            @{
+                                if (ViewBag.name != null)
+                                {
+                                    if (ViewBag.name == "超级管理员" || ViewBag.name == "管理员")
+                                    {
+                                        <div class="btn-group">
+                                            <a href="/User/AddUser" class="btn btn-sm btn-primary"><i class="icon-pencil align-top bigger-125"></i>新增</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="btn-group" style="display:none">
+                                            <a href="/User/AddUser" class="btn btn-sm btn-primary"><i class="icon-pencil align-top bigger-125"></i>新增</a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <table class="table table-bordered table-striped">
+                            <thead class="thin-border-bottom">
+                                <tr>
+                                    <th>用户</th>
+                                    <th>职务</th>
+                                    <th>管理权限</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            @{
+                                IList<Model.t_user> list = ViewData["userlist"] as IList<Model.t_user>;
+                                if (list.Any())
+                                {
+                                    foreach (var item in list)
+                                    {
+                                        <tbody>
+                                            <tr>
+                                                <td>@item.employeename</td>
+                                                <td>
+                                                    @item.name
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-important">@item.pename</span>
+                                                </td>
+                                                @if (ViewBag.name != null)
+                                                {
+                                                    if (ViewBag.name == "超级管理员" || ViewBag.name == "管理员")
+                                                    {
+
+                                                        <td>
+                                                            <a href="@Url.Action("UpdateUser", "User", new { item.id })"><span class="badge ">修改</span></a>
+                                                            <a href="@Url.Action("DeleteUser", "User", new { item.id })" onclick="location.reload()"><span class="badge ">删除</span></a>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    }
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </section>
+</section>
+</section>

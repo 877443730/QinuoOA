@@ -1,0 +1,11 @@
+  user表
+
+id  主键
+username 用户名/账号
+pwd      密码
+
+phone    手机号
+
+
+
+

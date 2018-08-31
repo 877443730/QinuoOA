@@ -1,0 +1,15 @@
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Project set ProjectNumber=@ProjectNumber,ProjectStartDate=@ProjectStartDate,ProjectEndDate=@ProjectEndDate,Username=@Username,ProjectCode=@ProjectCode,ProjectName=@ProjectName,Remarks=@Remarks,yearProjectName=@yearProjectName,OfferId=@OfferId,PlatformId=@PlatformId,CompanyId=@CompanyId,ProjecttypeId=@ProjecttypeId,PurchaseSingleCode=@PurchaseSingleCode,userid=@userid,Planprogress=@Planprogress,POdanhao=@POdanhao,Expectedreturndate=@Expectedreturndate,Actualdate=@Actualdate,Accountamount=@Accountamount where Id=@Id
+必须声明标量变量 "@yearProjectName"。
+　  2018/6/15 14:49:47
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Project set ProjectNumber=@ProjectNumber,ProjectStartDate=@ProjectStartDate,ProjectEndDate=@ProjectEndDate,Username=@Username,ProjectCode=@ProjectCode,ProjectName=@ProjectName,Remarks=@Remarks,yearProjectName=@yearProjectName,OfferId=@OfferId,PlatformId=@PlatformId,CompanyId=@CompanyId,ProjecttypeId=@ProjecttypeId,PurchaseSingleCode=@PurchaseSingleCode,userid=@userid,Planprogress=@Planprogress,POdanhao=@POdanhao,Expectedreturndate=@Expectedreturndate,Actualdate=@Actualdate,Accountamount=@Accountamount where Id=@Id
+必须声明标量变量 "@yearProjectName"。
+　  2018/6/15 14:51:27
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Project set ProjectNumber=@ProjectNumber,ProjectStartDate=@ProjectStartDate,ProjectEndDate=@ProjectEndDate,Username=@Username,ProjectCode=@ProjectCode,ProjectName=@ProjectName,Remarks=@Remarks,yearProjectName=@yearProjectName,OfferId=@OfferId,PlatformId=@PlatformId,CompanyId=@CompanyId,ProjecttypeId=@ProjecttypeId,PurchaseSingleCode=@PurchaseSingleCode,userid=@userid,Planprogress=@Planprogress,POdanhao=@POdanhao,Expectedreturndate=@Expectedreturndate,Actualdate=@Actualdate,Accountamount=@Accountamount where Id=@Id
+必须声明标量变量 "@yearProjectName"。
+　  2018/6/15 14:54:46
+

@@ -1,0 +1,5 @@
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Paymentapplicationform set Invoicenumber=@Invoicenumber,Invoicetax=@Invoicetax,Timeofpayment=@Timeofpayment,Receivablescompany=@Receivablescompany,Openingbank=@Openingbank,Bankaccount=@Bankaccount,Remarks=@Remarks,ProjectId=@ProjectId,Payee=@Payee,ApplyforpaymentType=@ApplyforpaymentType,Paymentobject=@Paymentobject,xuhao=@xuhao,MoneyId=@MoneyId,CostQuotation=@CostQuotation,Salesquotation=@Salesquotation,Actualamountofpayment=@Actualamountofpayment,Financialcost=@Financialcost,Totaltaxcost=@Totaltaxcost,shuidian=@shuidian,wangming=@wangming,Distinguish=@DistinguishCostcategory=@Costcategorypurpose=@purpose where Id=@Id
+必须声明标量变量 "@DistinguishCostcategory"。
+　  2018/8/30 17:50:45
+

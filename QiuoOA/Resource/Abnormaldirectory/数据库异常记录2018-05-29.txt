@@ -1,0 +1,32 @@
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+“nchar”附近有语法错误。
+　  2018/5/29 18:07:29
+
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+“nchar”附近有语法错误。
+　  2018/5/29 18:11:58
+
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+“nchar”附近有语法错误。
+　  2018/5/29 18:13:03
+
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+“@Name”附近有语法错误。
+必须声明标量变量 "@Name"。
+　  2018/5/29 18:16:03
+
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where a.username=帅的被人砍
+列名 '帅的被人砍' 无效。
+　  2018/5/29 18:21:18
+
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where a.employeename=帅的被人砍
+列名 '帅的被人砍' 无效。
+　  2018/5/29 18:25:57
+
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where a.employeename=帅的被人砍
+列名 '帅的被人砍' 无效。
+　  2018/5/29 18:27:56
+

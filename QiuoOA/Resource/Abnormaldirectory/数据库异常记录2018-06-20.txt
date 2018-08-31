@@ -1,0 +1,10 @@
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Project set ProjectNumber=@ProjectNumber,ProjectStartDate=@ProjectStartDate,ProjectEndDate=@ProjectEndDate,Username=@Username,ProjectCode=@ProjectCode,ProjectName=@ProjectName,Remarks=@Remarks,OfferId=@OfferId,PlatformId=@PlatformId,CompanyId=@CompanyId,ProjecttypeId=@ProjecttypeId,PurchaseSingleCode=@PurchaseSingleCode,userid=@userid,Planprogress=@Planprogress,POdanhao=@POdanhao,Expectedreturndate=@Expectedreturndate,Actualdate=@Actualdate,Accountamount=@Accountamount,typefinished=@typefinished where Id=@Id
+SqlDateTime 溢出。必须介于 1/1/1753 12:00:00 AM 和 12/31/9999 11:59:59 PM 之间。
+　  2018/6/20 14:22:56
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update Project set ProjectNumber=@ProjectNumber,ProjectStartDate=@ProjectStartDate,ProjectEndDate=@ProjectEndDate,Username=@Username,ProjectCode=@ProjectCode,ProjectName=@ProjectName,Remarks=@Remarks,OfferId=@OfferId,PlatformId=@PlatformId,CompanyId=@CompanyId,ProjecttypeId=@ProjecttypeId,PurchaseSingleCode=@PurchaseSingleCode,userid=@userid,Planprogress=@Planprogress,POdanhao=@POdanhao,Expectedreturndate=@Expectedreturndate,Actualdate=@Actualdate,Accountamount=@Accountamount,typefinished=@typefinished where Id=@Id
+SqlDateTime 溢出。必须介于 1/1/1753 12:00:00 AM 和 12/31/9999 11:59:59 PM 之间。
+　  2018/6/20 14:26:49
+

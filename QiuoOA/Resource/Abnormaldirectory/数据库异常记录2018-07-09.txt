@@ -1,0 +1,38 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Name,UName  FROM ProjecTtype  where 1=1
+列名 'UName' 无效。
+　  2018/7/9 12:11:56
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Name,UName  FROM ProjecTtype  where 1=1
+列名 'UName' 无效。
+　  2018/7/9 12:12:06
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where 1=1 order by case'c.name'when '管理员' this 1 when '营销总监' this 2 when 'SAE' this 3 when 'AE' this 4 when 'AD' this 5 when 'SAD' this 6 when '财务' this 7 when '美工' this 8
+“this”附近有语法错误。
+　  2018/7/9 14:25:00
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where 1=1 order by case'c.name'when '管理员' then 1 when '营销总监' then 2 when 'SAE' then 3 when 'AE' then 4 when 'AD' then 5 when 'SAD' then 6 when '财务' then 7 when '美工' then 8
+“8”附近有语法错误。
+　  2018/7/9 15:03:16
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT(c.name)  a.*,,e.pename case'c.name'when '管理员' then 1 when '营销总监' then 2 when 'SAE' then 3 when 'AE' then 4 when 'AD' then 5 when 'SAD' then 6 when '财务' then 7 when '美工' then 8 
+                         end as ttt from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where 1=1 order by ttt
+“.”附近有语法错误。
+　  2018/7/9 15:04:00
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT(c.name)  a.*,,e.pename case'c.name'when '管理员' then 1 when '营销总监' then 2 when 'SAE' then 3 when 'AE' then 4 when 'AD' then 5 when 'SAD' then 6 when '财务' then 7 when '美工' then 8 
+                         end as ttt from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where 1=1 order by ttt
+“.”附近有语法错误。
+　  2018/7/9 15:05:37
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT(c.name)  a.*,,e.pename case'c.name'when '管理员' then 1 when '营销总监' then 2 when 'SAE' then 3 when 'AE' then 4 when 'AD' then 5 when 'SAD' then 6 when '财务' then 7 when '美工' then 8
+                         end as ttt from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where 1=1 order by ttt
+“.”附近有语法错误。
+　  2018/7/9 15:08:41
+

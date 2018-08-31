@@ -1,0 +1,512 @@
+﻿<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+        table tr th {
+            color: black;
+        }
+
+        table tr td {
+            color: blue;
+        }
+
+    table {
+        width: 100%;
+        height: 100%;
+    }
+
+    .exc {
+        height: 70px;
+        width: 600px;
+    }
+
+    .beizhu {
+        width: 600px;
+    }
+</style>
+<script src="~/js/jquery.form.js"></script>
+<script src="~/js/layer.js"></script>
+<script src="~/js/layer.ext.js"></script>
+<link href="~/js/layer/skin/layer.css" rel="stylesheet" />
+<link href="~/js/layer/skin/layer.ext.css" rel="stylesheet" />
+<body onclick="money();">
+    <section id="container" class="">
+        <section id="main-content">
+            <section class="wrapper" style="background-color:white">
+                <div style="position:relative;left:35%;width:300px;"><h2 style="font-weight:800">立项申请表</h2></div>
+                <div class="col-md-12 col-lg-12 portlets">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="k">项目名称</th>
+                            <td class="k">
+                                <input class="form-control" id="name" type="text" name="greeting" list="greetings">
+                                <datalist id="greetings" style="display:none;">
+                                    @{
+                                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
+                                        if (list.Any())
+                                        {
+                                            foreach (var item in list)
+                                            {
+                                                <option value="@item.ProjectName">@item.ProjectName</option>
+                                            }
+                                        }
+                                    }
+                                </datalist>
+                            </td>
+                            <th class="k">项目代码</th>
+                            <td class="k">
+                                <input class="form-control" type="text" id="core" value="" />
+                            </td>
+                            <th class="k">项目类别</th>
+                            <td class="k">
+                                <input class="form-control" id="sele" type="text" name="greeting" list="seles">
+                                <datalist id="seles" style="display:none;">
+                                    @{
+                                        List<Model.ProjecTtype> list1 = ViewData["ProjecTtype"] as List<Model.ProjecTtype>;
+                                        if (list1.Any())
+                                        {
+                                            foreach (var item in list1)
+                                            {
+                                                <option value="@item.Name">@item.USName</option>
+                                                <input type="hidden" id="usname" value="@item.USName" />
+                                            }
+                                        }
+                                    }
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">集团名称</th>
+                            <td class="k">
+                                <input class="form-control" id="companyname" type="text" name="greeting" list="companynames">
+                                <datalist id="companynames" style="display:none;">
+                                    @{
+                                        List<Model.Company> list2 = ViewData["company"] as List<Model.Company>;
+                                        if (list2.Any())
+                                        {
+                                            foreach (var item in list2)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+                                        }
+                                    }
+                                </datalist>
+                            </td>
+                            <th class="k">品牌</th>
+                            <td class="k">
+                                <input class="form-control" id="pingpai" type="text" name="greeting" list="pingpais">
+                                <datalist id="pingpais" style="display:none;">
+                                    @{
+                                        List<Model.Brand> list3 = ViewData["brand"] as List<Model.Brand>;
+                                        if (list3.Any())
+                                        {
+                                            foreach (var item in list3)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+                                        }
+                                    }
+                                </datalist>
+                            </td>
+                            <th class="k">采购单码</th>
+                            <td class="k">
+                                <input id="core2" class="form-control" type="text" style="color:blue" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目负责人</th>
+                            <td class="k">
+                                <select class="form-control" id="zhiwu" onchange="zhiwu1(this.value)">
+                                    <option value="">--请选择--</option>
+                                    @{
+                                        IList<Model.t_user> lists = ViewData["user"] as IList<Model.t_user>;
+                                        if (lists.Any())
+                                        {
+                                            foreach (var item in lists)
+                                            {
+                                                <option value="@item.employeename">@item.employeename</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <th class="k">项目时间</th>
+                            <td class="k">
+                                <input id="date" type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2">
+                            </td>
+                            <th class="k">至</th>
+                            <td class="k">
+                                <input id="date2" type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目成员(申请后选择)</th>
+                            <td class="k" colspan="5">
+                                @*@{
+                                        IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
+                                        if (lists.Any())
+                                        {
+                                            foreach (var item in lists1)
+                                            {
+                                                <label>
+                                                    <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
+                                                </label>
+                                            }
+                                        }
+                                    }*@
+                                <input id="shenpiren" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">非税金额</th>
+                            <td class="k">
+                                <input class="form-control" type="text" id="Totalmoney" />
+                            </td>
+                            <th class="k">含税金额</th>
+                            <td class="k">
+                                <input class="form-control" readonly="readonly" type="text" id="Notaxmoney" />
+                            </td>
+                            <th class="k">项目成本</th>
+                            <td class="k">
+                                <input class="form-control" type="text" id="cost" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">项目报价表(申请后上传)</th>
+                            <td class="k" colspan="2">
+                                <form enctype="multipart/form-data" id="file-from1" name="file-from1">
+                                    <p>
+                                        <input style="display:none" id="btnMCToOut" type="button" onclick="importExcel1()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">
+                                        <input class="form-control" type="file" name="filed" id="filed">
+                                    </p>
+                                </form>
+                            </td>
+                            <th class="k">项目成本表(申请后上传)</th>
+                            <td class="k" colspan="2">
+                                <form enctype="multipart/form-data" id="file-from2" name="file-from2">
+                                    <p>
+                                        <input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">
+                                        <input class="form-control" type="file" name="filed1" id="filed1">
+                                    </p>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>计划进度</th>
+                            <td class="k" colspan="5">
+                                <input id="jingdu" type="text" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="k">备注</th>
+                            <td id="beizhu1" class="beizhu1" colspan="5">
+                                <input class="form-control" type="text" id="beizhu" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div> <input onclick="but();" type="button" class="btn btn-primary btn-lg btn-block" value="确认申请" /> </div>
+                </div>
+                <!-- 选择审批人员模态框（Modal） -->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <th class="k">AE</th>
+                                            <td>
+                                                <select class="form-control" type="text" id="AE">
+                                                    <option value="">--请选择--</option>
+                                                    @{
+                                                        List<Model.t_user> list15 = ViewData["AE"] as List<Model.t_user>;
+                                                        if (list1.Any())
+                                                        {
+                                                            foreach (var item in list15)
+                                                            {
+                                                                <option value="@item.employeename">@item.employeename</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <th class="k">SAE</th>
+                                            <td>
+                                                <select class="form-control" type="text" id="SAE">
+                                                    <option value="">--请选择--</option>
+                                                    @{
+                                                        List<Model.t_user> list25 = ViewData["SAE"] as List<Model.t_user>;
+                                                        if (list2.Any())
+                                                        {
+                                                            foreach (var item in list25)
+                                                            {
+                                                                <option value="@item.employeename">@item.employeename</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <th class="k">AD</th>
+                                            <td class="k">
+                                                <select class="form-control" type="text" id="AD">
+                                                    <option value="">--请选择--</option>
+                                                    @{
+                                                        List<Model.t_user> list35 = ViewData["AD"] as List<Model.t_user>;
+                                                        if (list3.Any())
+                                                        {
+                                                            foreach (var item in list35)
+                                                            {
+                                                                <option value="@item.employeename">@item.employeename</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <th class="k">SAD</th>
+                                            <td class="k">
+                                                <select class="form-control" type="text" id="SAD">
+                                                    <option value="">--请选择--</option>
+                                                    @{
+                                                        List<Model.t_user> list4 = ViewData["SAD"] as List<Model.t_user>;
+                                                        if (list4.Any())
+                                                        {
+                                                            foreach (var item in list4)
+                                                            {
+                                                                <option value="@item.employeename">@item.employeename</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">营销总监</th>
+                                            <td>
+                                                <input class="form-control" readonly="readonly" type="text" id="yingxiao" value="齐雅卿">
+                                            </td>
+                                            <th class="k">财务</th>
+                                            <td>
+                                                <select class="form-control" type="text" id="caiwu">
+                                                    <option value="">--请选择--</option>
+                                                    @{
+                                                        List<Model.t_user> list6 = ViewData["caiwu"] as List<Model.t_user>;
+                                                        if (list6.Any())
+                                                        {
+                                                            foreach (var item in list6)
+                                                            {
+                                                                <option value="@item.employeename">@item.employeename</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <th class="k">老板</th>
+                                            <td>
+                                                <input class="form-control" readonly="readonly"  type="text" id="laoban" value="师国庆">
+                                            </td>
+                                            <th class="k">朱老板</th>
+                                            <td>
+                                                <input class="form-control" readonly="readonly" type="text" id="zhulaoban" value="朱媛媛">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <input onclick="butss2();" type="button" class="btn btn-primary" value="提交">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </section>
+        </section>
+    </section>
+</body>
+<script>
+    function money() {
+        var f = Math.round(document.getElementById("Totalmoney").value * 100) / 100;
+        var s = f.toString();
+        var rs = s.indexOf('.');
+        if (rs < 0) {
+            rs = s.length;
+            s += '.';
+        }
+        while (s.length <= rs + 2) {
+            s += '0';
+            document.getElementById("Totalmoney").value = s;
+            var totalmoney = s;
+        }
+        if (s == 0.00) {
+            document.getElementById("Totalmoney").value = "";
+        }
+        //不含税金额
+        document.getElementById("Notaxmoney").value = totalmoney - (totalmoney / 1.06 * 0.06).toFixed(2);
+        if (document.getElementById("Notaxmoney").value == 0) {
+            document.getElementById("Notaxmoney").value = "";
+        }
+    }
+    var name = $("#name").val();
+    function qlcTrainS(idName) {
+        var arrValue = document.getElementById(idName).options[document.getElementById(idName).selectedIndex].value;
+        $("#" + idName + "").parent('span').next('span').children('input.ccdd').val(arrValue)
+    }
+    function importExcel1() {
+        var file = $("#filed").val();
+        if (file == null || file.length == 0) {
+            alert("请先上传文件");
+            return false;
+        }
+        $('#file-from1').ajaxSubmit({
+            type: 'post', // HTTP请求方式
+            url: '/Home/projectCostlujing', // 请求的URL地址
+            dataType: 'text'// 服务器返回数据转换成的类型
+        });
+        alert("上传成功");
+    }
+    function importExcel2() {
+        var file = $("#filed1").val();
+        if (file == null || file.length == 0) {
+            alert("请先上传文件");
+            return false;
+        }
+        $('#file-from2').ajaxSubmit({
+            type: 'post', // HTTP请求方式
+            url: '/Home/ProjectQuotationlujing', // 请求的URL地址
+            dataType: 'text'
+        });
+        alert("上传成功");
+    }
+    var xiangmufuzeren;
+    function zhiwu1(_this) {
+        $("#zhiwu").val(_this);
+        xiangmufuzeren = _this
+    }
+    function but() {
+        //obj = document.getElementsByName("chengyuan");
+        //check_val = [];
+        //for (k in obj) {
+        //    if (obj[k].checked)
+        //        check_val.push(obj[k].value);
+        //}
+        var name = $("#name").val();//项目名称
+        var core = $("#core").val();//项目代码
+        var sele = $("#sele").val();//项目类别
+        var usname = $("#usname").val();//项目类别
+        var companyname = $("#companyname").val();//集团名称
+        var pingpai = $("#pingpai").val();//品牌
+        var core2 = $("#core2").val();//采购单码
+        var xiangmuuser = xiangmufuzeren;//项目负责人
+        var date = $("#date").val();//项目时间
+        var date2 = $("#date2").val();//结束时间
+        // var xiangmuchengyuan = check_val;//项目成员
+        var Totalmoney = $("#Totalmoney").val();//非税金额
+        var Notaxmoney = $("#Notaxmoney").val();//含税金额
+        var cost = $("#cost").val();//项目成本
+        var jingdu = $("#jingdu").val();//计划进度
+        var beizhu = $("#beizhu").val();//备注
+        //var result = JSON.stringify(xiangmuchengyuan)
+        $.ajax({
+            type: 'post',
+            url: "/Home/AddProjects",
+            data: {
+                name: name,
+                core: core,
+                sele: sele,
+                companyname: companyname,
+                pingpai: pingpai,
+                core2: core2,
+                xiangmuuser: xiangmuuser,
+                date: date,
+                date2: date2,
+                // xiangmuchengyuan: result,
+                Totalmoney: Totalmoney,
+                Notaxmoney: Notaxmoney,
+                cost: cost,
+                jingdu: jingdu,
+                beizhu: beizhu,
+                usname: usname
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                    $("#btnMCToOut").removeAttr("style");
+                    $("#btnMCToOut1").removeAttr("style");
+                    $("#shenpiren").removeAttr("style");
+                    var sum = 0;
+                    var t = document.getElementsByTagName("input");
+                    for (var i = 0; i
+                        < t.length; i++) {
+                        if (t[i].type == 'text') {
+                            ++sum;
+                            t[i].value = "";//清空
+                        }
+                    }
+                };
+            }
+        })
+    }
+
+    //保存当前项目的审批人
+    function butss2() {
+        var ae = $("#AE").val();
+        var sae = $("#SAE").val();
+        var ad = $("#AD").val();
+        var sad = $("#SAD").val();
+        var yingxiao = $("#yingxiao").val();
+        var caiwu = $("#caiwu").val();
+        var laoban = $("#laoban").val();
+        var zhulaoban = $("#zhulaoban").val();
+        $.ajax({
+            url: "/Home/shenpiren",
+            type: "post",
+            data: {
+                ae: ae,
+                sae: sae,
+                ad: ad,
+                sad: sad,
+                yingxiao: yingxiao,
+                caiwu: caiwu,
+                laoban: laoban,
+                zhulaoban: zhulaoban
+            },
+            success: function (data) {
+                if (data == "成功添加当前项目审批人!") {
+                    layer.msg(data, {
+                        icon: 1
+                    });
+                } else if (data == "添加当前项目审批人失败!") {
+                    layer.msg(data, {
+                        icon: 5
+                    });
+                } else if (data == "您没有权限添加当前项目的审批人!") {
+                    layer.msg(data, {
+                        icon: 5
+                    });
+                }
+            }
+        })
+    }
+</script>

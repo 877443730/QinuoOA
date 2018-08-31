@@ -1,0 +1,20 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming  FROM Paymentapplicationform  where ProjectId=1034 and shuidian='' and ApplyforpaymentType=''
+从数据类型 varchar 转换为 numeric 时出错。
+　  2018/7/17 14:54:09
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming  FROM Paymentapplicationform  where ProjectId=1034 and shuidian='' and ApplyforpaymentType=''
+从数据类型 varchar 转换为 numeric 时出错。
+　  2018/7/17 14:55:04
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming  FROM Paymentapplicationform  where ProjectId=1034 and shuidian='' and ApplyforpaymentType=''
+从数据类型 varchar 转换为 numeric 时出错。
+　  2018/7/17 14:55:50
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming  FROM Paymentapplicationform  where ProjectId=1034 and shuidian='' and ApplyforpaymentType=''
+从数据类型 varchar 转换为 numeric 时出错。
+　  2018/7/17 14:59:44
+

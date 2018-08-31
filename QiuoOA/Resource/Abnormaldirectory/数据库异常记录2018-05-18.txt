@@ -1,0 +1,30 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.description  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.roleidorder by a.adddate desc
+关键字 'by' 附近有语法错误。
+　  2018/5/18 16:35:18
+
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.description  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.roleidorder by a.adddate desc
+关键字 'by' 附近有语法错误。
+　  2018/5/18 16:35:49
+
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+INSERT 语句与 FOREIGN KEY 约束"FK_user_role_t_user"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.t_user", column 'id'。
+语句已终止。
+　  2018/5/18 16:40:49
+
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+INSERT 语句与 FOREIGN KEY 约束"FK_user_role_t_user"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.t_user", column 'id'。
+语句已终止。
+　  2018/5/18 16:41:33
+
+-----------执行查询语句，返回DataSet)Query-----------
+select   a.*,c.name,e.name  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.roleid where 1=1
+列名 'name' 无效。
+　  2018/5/18 17:08:18
+
+-----------执行查询语句，返回DataSet)Query-----------
+select   a.*,c.name,e.name  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.roleid where 1=1
+列名 'name' 无效。
+　  2018/5/18 17:08:57
+

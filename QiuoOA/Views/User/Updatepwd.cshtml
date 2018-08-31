@@ -1,0 +1,84 @@
+﻿<script src="~/js/jquery.js"></script>
+<script src="~/js/layer.js"></script>
+<script src="~/js/layer.ext.js"></script>
+<link href="~/js/layer/skin/layer.css" rel="stylesheet" />
+<link href="~/js/layer/skin/layer.ext.css" rel="stylesheet" />
+<div class="col-md-12 col-lg-12 portlets">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-left">修改密码</div>
+            <div class="widget-icons pull-right">
+                <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="padd">
+                <div class="form quick-post">
+                    <!-- Edit profile form (not working)-->
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-lg-2" for="content">请输入账号</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2" for="content">用户新密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="updatepwd">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2" for="content">确认密码</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="updatepwd2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-9">
+                                <input onclick="aa();" type="button" class="btn btn-primary" value="确定" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function aa() {
+        var updatepwd = $("#updatepwd").val();
+        var updatepwd2 = $("#updatepwd2").val();
+        var username = $("#username").val();
+        $.ajax({
+            url: "/User/Updatepwds",
+            type: "post",
+            data: {
+                updatepwd: updatepwd,
+                updatepwd2: updatepwd2,
+                username: username
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                }
+                if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                }
+            }
+
+
+        })
+
+    }
+
+</script>
+
+

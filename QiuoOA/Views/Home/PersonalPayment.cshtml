@@ -1,0 +1,133 @@
+﻿<style>
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+        table tr th {
+            color: black;
+        }
+
+        table tr td {
+            color: blue;
+        }
+
+    table {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script src="~/js/jquery.form.js"></script>
+<script src="~/js/layer.js"></script>
+<script src="~/js/layer.ext.js"></script>
+<link href="~/js/layer/skin/layer.css" rel="stylesheet" />
+<link href="~/js/layer/skin/layer.ext.css" rel="stylesheet" />
+<script src="~/js/flied/flied.js"></script>
+<section id="container" class="">
+    <section id="main-content">
+        <section class="wrapper">
+            <div style="position:relative;left:35%;width:300px;"><h2 style="font-weight:800">付款申请(对个人)</h2></div>
+            <div class="col-md-12 col-lg-12 portlets">
+                <table>
+                    <tr>
+                        <th class="k">付款时间</th>
+                        <td>
+                            <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2" type="text" id="ZFdate" />
+                        </td>
+                        <th class="k">项目名称</th>
+                        <td>
+                            <input class="form-control" type="text" value="@Model.ProjectName" id="projectname" />
+                        </td>
+                        <th class="k">项目代码</th>
+                        <td class="k">
+                            <input class="form-control" type="text" value="@Model.ProjectCode" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="k">支付对象(网名)</th>
+                        <td><input class="form-control" type="text" value="@ViewBag.wangming" id="Paymentobject" /></td>
+                        <th class="k">应支付金额</th>
+                        <td colspan="3"><input class="form-control" type="text" id="ZFjine" /></td>
+                    </tr>
+                    <tr>
+                        <th class="k">收款人</th>
+                        <td><input class="form-control" type="text" id="shoukuanren" /></td>
+                        <th class="k">开户行</th>
+                        <td><input class="form-control" type="text" id="kaihuhang" /></td>
+                        <th class="k">银行账号</th>
+                        <td><input class="form-control" type="text" id="Bankcode" /></td>
+                    </tr>
+                    <tr>
+                        <th>备注</th>
+                        <td colspan="5">
+                            <textarea class="form-control" id="beizhu">
+
+                           </textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div> <input onclick="butss();" type="button" class="btn btn-primary btn-lg btn-block" value="确认" /> </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+<script>
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = location.search.substr(1).match(reg);
+        if (r != null) return unescape(decodeURI(r[2])); return null;
+    }
+    function butss() {
+        var ZFjine = $("#ZFjine").val();//支付金额
+        var ZFdate = $("#ZFdate").val();//支付时间
+        var shoukuanren = $("#shoukuanren").val();//收款人
+        var projectname = $("#projectname").val(); //项目名称
+        var Paymentobject = $("#Paymentobject").val();//支付对象
+        var kaihuhang = $("#kaihuhang").val();//开户行
+        var Bankcode = $("#Bankcode").val();//银行账号
+        var beizhu = $("#beizhu").val();
+        var xuhao = getQueryString("xuhao");
+        var leixing = getQueryString("leixing");
+        $.ajax({
+            url: "/Home/PersonalPayments",
+            type: "post",
+            data: {
+                ZFjine: ZFjine,
+                ZFdate: ZFdate,
+                shoukuanren: shoukuanren,
+                projectname: projectname,
+                Paymentobject: Paymentobject,
+                kaihuhang: kaihuhang,
+                Bankcode: Bankcode,
+                beizhu: beizhu,
+                xuhao: xuhao,
+                leixing: leixing
+
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                    var sum = 0;
+                    var t = document.getElementsByTagName("input");
+                    for (var i = 0; i
+                        < t.length; i++) {
+                        if (t[i].type == 'text') {
+                            ++sum;
+                            t[i].value = ""; //清空
+                        }
+                    }
+                };
+            }
+
+        })
+    }
+
+</script>

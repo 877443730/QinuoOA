@@ -1,0 +1,55 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:14:02
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:14:13
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =123213
+在将 nvarchar 值 '测试' 转换成数据类型 int 时失败。
+　  2018/7/2 11:14:15
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =123213
+在将 nvarchar 值 '测试' 转换成数据类型 int 时失败。
+　  2018/7/2 11:14:17
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =3
+在将 nvarchar 值 '测试' 转换成数据类型 int 时失败。
+　  2018/7/2 11:14:23
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:14:35
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:14:41
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:17:05
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =测试
+列名 '测试' 无效。
+　  2018/7/2 11:19:34
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished from Project   where ProjectName =4
+在将 nvarchar 值 '测试' 转换成数据类型 int 时失败。
+　  2018/7/2 11:19:44
+
+-----------执行查询语句，返回DataSet)Query-----------
+select top 1  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where a.username='zhaoyue'left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where a.username='zhaoyue'
+关键字 'left' 附近有语法错误。
+　  2018/7/2 13:41:57
+

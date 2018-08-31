@@ -1,0 +1,14 @@
+----------- 执行查询语句，返回DataSet)Query-----------
+执行超时已过期。完成操作之前已超时或服务器未响应。 
+　  2018/6/25 13:54:59
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where b.roleid=30
+执行超时已过期。完成操作之前已超时或服务器未响应。 
+　  2018/6/25 13:56:56
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished  FROM Project  where 1=1
+执行超时已过期。完成操作之前已超时或服务器未响应。 
+　  2018/6/25 14:56:52
+

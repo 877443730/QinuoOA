@@ -1,0 +1,30 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:29
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:30
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:30
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:30
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:30
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/6/8 13:51:38
+

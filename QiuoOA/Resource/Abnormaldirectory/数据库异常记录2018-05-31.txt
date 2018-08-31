@@ -1,0 +1,40 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName=
+“=”附近有语法错误。
+　  2018/5/31 13:46:35
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/5/31 13:48:32
+
+----------- 执行查询语句，返回DataSet)Query-----------
+“@Id”附近有语法错误。
+必须声明标量变量 "@Id"。
+　  2018/5/31 15:52:54
+
+----------- 执行查询语句，返回DataSet)Query-----------
+“@Id”附近有语法错误。
+必须声明标量变量 "@Id"。
+　  2018/5/31 15:53:38
+
+----------- 执行查询语句，返回DataSet)Query-----------
+“@Id”附近有语法错误。
+必须声明标量变量 "@Id"。
+　  2018/5/31 15:54:52
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/5/31 17:08:17
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/5/31 17:14:01
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =
+“=”附近有语法错误。
+　  2018/5/31 17:14:33
+

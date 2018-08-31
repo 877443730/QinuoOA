@@ -1,0 +1,39 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  top 1 id,name,description,adddate from t_role  where name=AE
+列名 'AE' 无效。
+　  2018/6/22 11:14:16
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  top 1 id,name,description,adddate from t_role  where name=AE
+列名 'AE' 无效。
+　  2018/6/22 11:14:29
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  top 1 id,name,description,adddate from t_role  where name=AE
+列名 'AE' 无效。
+　  2018/6/22 11:17:43
+
+-----------执行查询语句，返回DataSet)Query-----------
+select a.id,a.username, a.employeename,a.pwd,a.name,a.pename,a.adddate from [dbo].[t_user] a left join [dbo].[user_role] b on a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid where b.roleid=26
+列名 'name' 无效。
+列名 'pename' 无效。
+　  2018/6/22 12:11:12
+
+-----------执行查询语句，返回DataSet)Query-----------
+select a.id,a.username, a.employeename,a.pwd,a.name,a.pename,a.adddate from [dbo].[t_user] a left join [dbo].[user_role] b on a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid where b.roleid=26
+列名 'name' 无效。
+列名 'pename' 无效。
+　  2018/6/22 12:11:41
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+delete from t_role  where id=@id
+DELETE 语句与 REFERENCE 约束"FK_user_role_t_role"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.user_role", column 'roleid'。
+语句已终止。
+　  2018/6/22 14:42:58
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+delete from t_role  where id=@id
+DELETE 语句与 REFERENCE 约束"FK_user_role_t_role"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.user_role", column 'roleid'。
+语句已终止。
+　  2018/6/22 14:46:09
+

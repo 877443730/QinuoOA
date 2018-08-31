@@ -1,0 +1,9 @@
+----------- 执行一条计算查询结果语句，返回查询结果（object）GetSingle-----------
+当 IDENTITY_INSERT 设置为 OFF 时，不能为表 'Publishlinksummary' 中的标识列插入显式值。
+　  2018/6/5 11:46:04
+
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress from Project   where ProjectName =123213wangming=111
+“wangming”附近有语法错误。
+　  2018/6/5 16:59:18
+

@@ -1,0 +1,48 @@
+﻿<section id="container" class="">
+    <section id="main-content">
+        <section class="wrapper">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>项目名称</th>
+                        <th>项目日期</th>
+                        <th>项目结束日期</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*warning*@
+                    @{
+                        List<Model.Project> list = ViewData["projectlist"] as List<Model.Project>;
+                        if (list.Any())
+                        {
+                            foreach (var item in list)
+                            {
+                                if (item.typefinished != 1)
+                                {
+                                    <tr class="warning">
+                                        <td>@item.ProjectName</td>
+                                        <td>@item.ProjectStartDate</td>
+                                        <td>@item.ProjectEndDate</td>
+                                        <td>未审批</td>
+                                    </tr>
+                                }
+                                else if (item.typefinished == 1)
+                                {
+                                    <tr class="success">
+                                        <td>@item.ProjectName</td>
+                                        <td>@item.ProjectStartDate</td>
+                                        <td>@item.ProjectEndDate</td>
+                                        <td>已结案</td>
+                                    </tr>
+                                }
+                            }
+                        }
+
+                    }
+                </tbody>
+            </table>
+
+        </section>
+    </section>
+</section>

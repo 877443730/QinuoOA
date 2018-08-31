@@ -1,0 +1,75 @@
+项目表
+id
+项目名称 ProjectName
+项目编号 ProjectNumber
+项目时间 ProjectStartDate
+项目结束时间 ProjectEndDate
+项目负责人 Username
+项目代码 ProjectCode
+备注 Remarks
+报价类型id offerid
+集团Id CompanyId
+项目类别id ProjecttypeId
+采购单码  PurchaseSingleCode
+计划进度 Planprogress
+
+项目类别表
+id
+name
+
+
+
+
+
+集团表
+id
+集团名称
+联系人 Contact
+电话 phone
+邮箱 mail
+备注 Remarks
+公司代码 code
+
+
+
+
+
+品牌表
+id
+品牌名称 name
+集团ID CompanyId
+
+金额表
+Id
+非税金额
+含税金额
+项目成本 projectcost
+成本报价 CostQuotation
+销售报价 Sales quotation
+实际付款金额 Actualamountofpayment（应付款金额）
+财务成本 Financial cost
+含税合计成本 Total tax cost
+销售报价合计 Sales quotations
+税金合计 Tax sum
+不含税成本合计 Non tax cost combined
+含税成本合计 Total tax costtow
+
+
+编号
+项目id
+
+报价类型表
+Id
+offername
+
+平台表 Platform
+id
+name
+
+
+
+
+
+
+
+
