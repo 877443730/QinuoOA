@@ -216,7 +216,6 @@ namespace Dal
                     new SqlParameter("@Id", SqlDbType.Int,4)
             };
             parameters[0].Value = Id;
-
             Model.node model = new Model.node();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
@@ -229,6 +228,52 @@ namespace Dal
             }
         }
 
+        public Model.node GetModelsprocessstate(int Id,int processstate)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Stateofapproval,projectid,AE,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,processstate from node ");
+            strSql.Append(" where projectid=@Id and processstate=@processstate ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Id", SqlDbType.Int,4),
+                     new SqlParameter("@processstate", SqlDbType.Int,4)
+            };
+            parameters[0].Value = Id;
+            parameters[1].Value = processstate;
+            Model.node model = new Model.node();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public Model.node GetfModels(int Id, int processstate)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Stateofapproval,projectid,AE,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,processstate from node ");
+            strSql.Append(" where projectid=@Id and processstate=@processstate");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Id", SqlDbType.Int,4),
+                     new SqlParameter("@processstate", SqlDbType.Int,4)
+            };
+            parameters[0].Value = Id;
+            parameters[1].Value = processstate;
+            Model.node model = new Model.node();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

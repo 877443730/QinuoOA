@@ -73,6 +73,16 @@ namespace Bll
 
             return dal.GetModels(Id);
         }
+        public Model.node GetModelsprocessstate(int Id,int processstate)
+        {
+
+            return dal.GetModelsprocessstate(Id, processstate);
+        }
+        public Model.node GetfModels(int Id, int processstate)
+        {
+
+            return dal.GetfModels(Id, processstate);
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>

@@ -49,14 +49,14 @@
                                 <input class="form-control" id="name" type="text" name="greeting" list="greetings">
                                 <datalist id="greetings" style="display:none;">
                                     @{
-                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
-                        if (list.Any())
-                        {
-                            foreach (var item in list)
-                            {
-                                <option value="@item.ProjectName">@item.ProjectName</option>
-            }
-        }
+                                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
+                                        if (list.Any())
+                                        {
+                                            foreach (var item in list)
+                                            {
+                                                <option value="@item.ProjectName">@item.ProjectName</option>
+                                            }
+                                        }
                                     }
                                 </datalist>
                             </td>
@@ -69,15 +69,15 @@
                                 <input class="form-control" id="sele" type="text" name="greeting" list="seles">
                                 <datalist id="seles" style="display:none;">
                                     @{
-                        List<Model.ProjecTtype> list1 = ViewData["ProjecTtype"] as List<Model.ProjecTtype>;
-                        if (list1.Any())
-                        {
-                            foreach (var item in list1)
-                            {
-                                <option value="@item.Name">@item.USName</option>
-                                <input type="hidden" id="usname" value="@item.USName" />
-            }
-        }
+                                        List<Model.ProjecTtype> list1 = ViewData["ProjecTtype"] as List<Model.ProjecTtype>;
+                                        if (list1.Any())
+                                        {
+                                            foreach (var item in list1)
+                                            {
+                                                <option value="@item.Name">@item.USName</option>
+                                                <input type="hidden" id="usname" value="@item.USName" />
+                                            }
+                                        }
                                     }
                                 </datalist>
                             </td>
@@ -88,14 +88,14 @@
                                 <input class="form-control" id="companyname" type="text" name="greeting" list="companynames">
                                 <datalist id="companynames" style="display:none;">
                                     @{
-                        List<Model.Company> list2 = ViewData["company"] as List<Model.Company>;
-                        if (list2.Any())
-                        {
-                            foreach (var item in list2)
-                            {
-                                <option value="@item.Name">@item.Name</option>
-            }
-        }
+                                        List<Model.Company> list2 = ViewData["company"] as List<Model.Company>;
+                                        if (list2.Any())
+                                        {
+                                            foreach (var item in list2)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+                                        }
                                     }
                                 </datalist>
                             </td>
@@ -104,14 +104,14 @@
                                 <input class="form-control" id="pingpai" type="text" name="greeting" list="pingpais">
                                 <datalist id="pingpais" style="display:none;">
                                     @{
-                        List<Model.Brand> list3 = ViewData["brand"] as List<Model.Brand>;
-                        if (list3.Any())
-                        {
-                            foreach (var item in list3)
-                            {
-                                <option value="@item.Name">@item.Name</option>
-            }
-        }
+                                        List<Model.Brand> list3 = ViewData["brand"] as List<Model.Brand>;
+                                        if (list3.Any())
+                                        {
+                                            foreach (var item in list3)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+                                        }
                                     }
                                 </datalist>
                             </td>
@@ -126,14 +126,14 @@
                                 <select class="form-control" id="zhiwu" onchange="zhiwu1(this.value)">
                                     <option value="">--请选择--</option>
                                     @{
-                        IList<Model.t_user> lists = ViewData["user"] as IList<Model.t_user>;
-                        if (lists.Any())
-                        {
-                            foreach (var item in lists)
-                            {
-                                <option value="@item.employeename">@item.employeename</option>
-            }
-        }
+                                        IList<Model.t_user> lists = ViewData["user"] as IList<Model.t_user>;
+                                        if (lists.Any())
+                                        {
+                                            foreach (var item in lists)
+                                            {
+                                                <option value="@item.employeename">@item.employeename</option>
+                                            }
+                                        }
                                     }
                                 </select>
                             </td>
@@ -150,17 +150,17 @@
                             <th class="k">项目成员(申请后选择)</th>
                             <td class="k" colspan="5">
                                 @*@{
-                        IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
-                        if (lists.Any())
-                        {
-                            foreach (var item in lists1)
-                            {
-                                <label>
-                                    <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
-                                </label>
-                            }
-                        }
-                    }*@
+                                        IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
+                                        if (lists.Any())
+                                        {
+                                            foreach (var item in lists1)
+                                            {
+                                                <label>
+                                                    <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
+                                                </label>
+                                            }
+                                        }
+                                    }*@
                                 <input id="shenpiren" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
                             </td>
                         </tr>
@@ -294,9 +294,7 @@
                                         </tr>
                                         <tr>
                                             <th class="k">营销总监</th>
-                                            <td>
-                                                <input class="form-control" readonly="readonly" type="text" id="yingxiao" value="齐雅卿">
-                                            </td>
+                                            <td class="form-control" readonly="readonly" id="yingxiao">齐雅卿</td>
                                             <th class="k">财务</th>
                                             <td>
                                                 <select class="form-control" type="text" id="caiwu">
@@ -314,13 +312,9 @@
                                                 </select>
                                             </td>
                                             <th class="k">老板</th>
-                                            <td>
-                                                <input class="form-control" readonly="readonly" type="text" id="laoban" value="师国庆">
-                                            </td>
+                                            <td class="form-control" readonly="readonly" id="laoban">师国庆</td>
                                             <th class="k">朱老板</th>
-                                            <td>
-                                                <input class="form-control" readonly="readonly" type="text" id="zhulaoban" value="朱媛媛">
-                                            </td>
+                                            <td class="form-control" readonly="readonly" id="zhulaoban">朱媛媛</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -479,14 +473,13 @@
             if (obj[k].checked)
                 check_val.push(obj[k].value);
         }
-        var ae = $("#AE").val();
         var sae = $("#SAE").val();
         var ad = $("#AD").val();
         var sad = $("#SAD").val();
-        var yingxiao = $("#yingxiao").val();
+        var yingxiao = $("#yingxiao").text();
         var caiwu = $("#caiwu").val();
-        var laoban = $("#laoban").val();
-        var zhulaoban = $("#zhulaoban").val();
+        var laoban = $("#laoban").text();
+        var zhulaoban = $("#zhulaoban").text();
         var xiangmuchengyuan = check_val;//项目成员
         var result = JSON.stringify(xiangmuchengyuan)
 
@@ -501,7 +494,8 @@
                 yingxiao: yingxiao,
                 caiwu: caiwu,
                 laoban: laoban,
-                zhulaoban: zhulaoban
+                zhulaoban: zhulaoban,
+                processstate:1
             },
             success: function (data) {
                 if (data == "成功添加当前项目审批人!") {

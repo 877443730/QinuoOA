@@ -78,6 +78,7 @@ namespace Model
         public string purpose { get; set; }
         public int paystate { get; set; }
         public int readState { get; set; }
+        public string pingtai { get; set; }
         #endregion Model
 
     }

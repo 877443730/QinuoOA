@@ -42,9 +42,9 @@ namespace Dal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Paymentapplicationform(");
-            strSql.Append("Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState)");
+            strSql.Append("Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai)");
             strSql.Append(" values (");
-            strSql.Append("@Invoicenumber,@Invoicetax,@Timeofpayment,@Receivablescompany,@Openingbank,@Bankaccount,@Remarks,@ProjectId,@Payee,@ApplyforpaymentType,@Paymentobject,@xuhao,@MoneyId,@CostQuotation,@Salesquotation,@Actualamountofpayment,@Financialcost,@Totaltaxcost,@shuidian,@wangming,@Distinguish,@Costcategory,@purpose,@paystate,@readState)");
+            strSql.Append("@Invoicenumber,@Invoicetax,@Timeofpayment,@Receivablescompany,@Openingbank,@Bankaccount,@Remarks,@ProjectId,@Payee,@ApplyforpaymentType,@Paymentobject,@xuhao,@MoneyId,@CostQuotation,@Salesquotation,@Actualamountofpayment,@Financialcost,@Totaltaxcost,@shuidian,@wangming,@Distinguish,@Costcategory,@purpose,@paystate,@readState,@pingtai)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
                     new SqlParameter("@Invoicenumber", SqlDbType.Int,4),
@@ -72,6 +72,7 @@ namespace Dal
                        new SqlParameter("@purpose", SqlDbType.NVarChar,200),
                        new SqlParameter("@paystate", SqlDbType.Int,4),
                        new SqlParameter("@readState", SqlDbType.Int,4),
+                       new SqlParameter("@pingtai", SqlDbType.NVarChar,500),
             };
             parameters[0].Value = model.Invoicenumber;
             parameters[1].Value = model.Invoicetax;
@@ -98,6 +99,7 @@ namespace Dal
             parameters[22].Value = model.purpose;
             parameters[23].Value = model.paystate;
             parameters[24].Value = model.readState;
+            parameters[25].Value = model.pingtai;
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {
@@ -139,7 +141,8 @@ namespace Dal
             strSql.Append("Costcategory=@Costcategory,");
             strSql.Append("purpose=@purpose,");
             strSql.Append("paystate=@paystate,");
-            strSql.Append("readState=@readState");
+            strSql.Append("readState=@readState,");
+            strSql.Append("pingtai=@pingtai");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@Invoicenumber", SqlDbType.Int,4),
@@ -167,6 +170,7 @@ namespace Dal
                         new SqlParameter("@purpose", SqlDbType.NVarChar,200),
                         new SqlParameter("@paystate",SqlDbType.Int,4),
                         new SqlParameter("@readState",SqlDbType.Int,4),
+                        new SqlParameter("@pingtai", SqlDbType.NVarChar,500),
                     new SqlParameter("@Id", SqlDbType.Int,4)};
             parameters[0].Value = model.Invoicenumber;
             parameters[1].Value = model.Invoicetax;
@@ -193,7 +197,8 @@ namespace Dal
             parameters[22].Value = model.purpose;
             parameters[23].Value = model.paystate;
             parameters[24].Value = model.readState;
-            parameters[25].Value = model.Id;
+            parameters[25].Value = model.pingtai;
+            parameters[26].Value = model.Id;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -256,7 +261,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4)
@@ -279,7 +284,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" where "+ strwhere);
             Model.Paymentapplicationform model = new Model.Paymentapplicationform();
             DataSet ds = DbHelperSQL.Query(strSql.ToString());
@@ -299,7 +304,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" where ProjectId=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4)
@@ -324,7 +329,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" where ProjectId=@Id and xuhao=@xuhao");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4),
@@ -350,7 +355,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" where ProjectId=@ProjectId and xuhao=@xuhao and Distinguish=@Distinguish");
             SqlParameter[] parameters = {
                     new SqlParameter("@ProjectId", SqlDbType.Int,4),
@@ -379,7 +384,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState from Paymentapplicationform ");
+            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
             strSql.Append(" order by Id desc");
             Model.Paymentapplicationform model = new Model.Paymentapplicationform();
             DataSet ds = DbHelperSQL.Query(strSql.ToString());
@@ -506,6 +511,10 @@ namespace Dal
                 {
                     model.readState = int.Parse(row["readState"].ToString());
                 }
+                if (row["pingtai"] != null)
+                {
+                    model.pingtai = row["pingtai"].ToString();
+                }
             }
             return model;
         }
@@ -516,7 +525,7 @@ namespace Dal
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState ");
+            strSql.Append("select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai ");
             strSql.Append(" FROM Paymentapplicationform ");
             if (strWhere.Trim() != "")
             {
@@ -536,7 +545,7 @@ namespace Dal
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState ");
+            strSql.Append(" Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai ");
             strSql.Append(" FROM Paymentapplicationform ");
             if (strWhere.Trim() != "")
             {
