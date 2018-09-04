@@ -860,6 +860,7 @@ namespace QiuoOA.Controllers
                 model.laoban = laoban;
                 model.zhulaoban = zhulaoban;
                 model.Stateofapproval = 0;
+                //sabi
                 //插入三条数据
                 model.processstate = Convert.ToInt32(processstate);
                 nodebll.Add(model);
