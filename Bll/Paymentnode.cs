@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace NWJ.Bll
 {
-    public partial class paymentnode
+    public partial class Paymentnode
     {
-        private readonly Dal.paymentnode dal = new Dal.paymentnode();
-        public paymentnode()
+        private readonly Dal.Paymentnode dal = new Dal.Paymentnode();
+        public Paymentnode()
         { //a
         }
         #region  BasicMethod
@@ -25,7 +25,7 @@ namespace NWJ.Bll
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public int Add(Model.paymentnode model)
+        public int Add(Model.Paymentnode model)
         {
             return dal.Add(model);
         }
@@ -33,7 +33,7 @@ namespace NWJ.Bll
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(Model.paymentnode model)
+        public bool Update(Model.Paymentnode model)
         {
             return dal.Update(model);
         }
@@ -50,7 +50,7 @@ namespace NWJ.Bll
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public Model.paymentnode GetModel(int Id)
+        public Model.Paymentnode GetModel(int Id)
         {
 
             return dal.GetModel(Id);
@@ -72,7 +72,7 @@ namespace NWJ.Bll
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Model.paymentnode> GetModelList(string strWhere)
+        public List<Model.Paymentnode> GetModelList(string strWhere)
         {
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
@@ -80,13 +80,13 @@ namespace NWJ.Bll
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Model.paymentnode> DataTableToList(DataTable dt)
+        public List<Model.Paymentnode> DataTableToList(DataTable dt)
         {
-            List<Model.paymentnode> modelList = new List<Model.paymentnode>();
+            List<Model.Paymentnode> modelList = new List<Model.Paymentnode>();
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                Model.paymentnode model;
+                Model.Paymentnode model;
                 for (int n = 0; n < rowsCount; n++)
                 {
                     model = dal.DataRowToModel(dt.Rows[n]);

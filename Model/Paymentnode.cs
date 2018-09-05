@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NWJ.Model
 {
     [Serializable]
-    public partial class paymentnode
+    public partial class Paymentnode
     {
-        public paymentnode()
+        public Paymentnode()
         { }
         #region Model
         /// <summary>
@@ -60,6 +56,9 @@ namespace NWJ.Model
         /// 
         /// </summary>
         public string zhulaoban { set; get; }
+
+        public string paymentapplicationformiId { set; get; }
+
         #endregion Model
 
     }
