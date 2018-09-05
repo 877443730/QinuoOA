@@ -11,7 +11,6 @@ namespace NWJ.Model
     {
         public paymentnode()
         { }
-        //test
         #region Model
         /// <summary>
         /// 
