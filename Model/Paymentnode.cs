@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NWJ.Model
+namespace Model
 {
     [Serializable]
     public partial class Paymentnode
@@ -57,7 +57,7 @@ namespace NWJ.Model
         /// </summary>
         public string zhulaoban { set; get; }
 
-        public string paymentapplicationformiId { set; get; }
+        public int paymentapplicationformiId { set; get; }
 
         #endregion Model
 

@@ -33,6 +33,7 @@ namespace QiuoOA.Controllers
         Bll.projectCostlujing projectCostlujingbll = new Bll.projectCostlujing();
         Bll.ProjectQuotationlujing ProjectQuotationlujingbll = new Bll.ProjectQuotationlujing();
         Bll.Paymentapplicationform Paymentapplicationformbll = new Bll.Paymentapplicationform();
+        Bll.Paymentnode Paymentnodebll = new Bll.Paymentnode();
         Bll.node nodebll = new Bll.node();
         Bll.PO pobll = new Bll.PO();
         Bll.ProjectFinalReport reportbll = new Bll.ProjectFinalReport();
@@ -354,6 +355,7 @@ namespace QiuoOA.Controllers
             //数据库加一个区分字段 1,2,3 然后页面添加的时候传过来这个字段用这个字段+序号+项目ID查询，有就修改没有添加，不用管是A还是B还是C，
             //页面绑定数据加隐藏域获取区分字段以便于修改能定位到该数据
             Model.Paymentapplicationform Paymentapplicationmodel = new Paymentapplicationform();
+            Model.Paymentnode Paymentnodemodel = new Paymentnode();
             Project model = Projectbll.GetModelss(projectname);
             var xuhaopanduan = Paymentapplicationformbll.Exists(Convert.ToInt32(xuhao), model.Id);
             Model.Paymentapplicationform Paymentapplicationmodel1 = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
@@ -385,6 +387,22 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.purpose = yongtu;
                     Paymentapplicationmodel.Distinguish=Convert.ToInt32(Distinguish);
                     Paymentapplicationmodel.pingtai = pingtai;
+
+                    //保存付款审批流程表的数据
+                    Paymentnodemodel.projectId = model.Id;
+                    Paymentnodemodel.xuhao = Convert.ToInt32(xuhao);
+                    Paymentnodemodel.Distinguish = Convert.ToInt32(Distinguish);
+                    Paymentnodemodel.Stateofapproval = 0;
+                    //获取项目审批人员并且保存到数据库
+                    node nodemodel = nodebll.GetModels(model.Id);
+                    Paymentnodemodel.SAE = nodemodel.SAE;
+                    Paymentnodemodel.AD = nodemodel.AD;
+                    Paymentnodemodel.SAD = nodemodel.SAD;
+                    Paymentnodemodel.yinxiaozongjian = nodemodel.yinxiaozongjian;
+                    Paymentnodemodel.caiwu = nodemodel.caiwu;
+                    Paymentnodemodel.laoban = nodemodel.laoban;
+                    Paymentnodemodel.zhulaoban = nodemodel.zhulaoban;
+                    Paymentnodebll.Add(Paymentnodemodel);
                     Paymentapplicationformbll.Add(Paymentapplicationmodel);
 
                     return "{\"status\": 1,\"msg\":\"消息提示:添加成功！\"}";
@@ -460,6 +478,7 @@ namespace QiuoOA.Controllers
         private string PaymentCompanyss(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
         {
             Model.Paymentapplicationform Paymentapplicationmodel = new Paymentapplicationform();
+            Model.Paymentnode Paymentnodemodel = new Paymentnode();
             Project model = Projectbll.GetModelss(projectname);
             var xuhaopanduan = Paymentapplicationformbll.Exists(Convert.ToInt32(xuhao), model.Id);
             Model.Paymentapplicationform Paymentapplicationmodel1 = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
@@ -495,6 +514,21 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.Costcategory = chenbenleibie;
                     Paymentapplicationmodel.purpose = yongtu;
                     Paymentapplicationmodel.Distinguish = Convert.ToInt32(Distinguish);
+                    //保存付款审批流程表的数据
+                    Paymentnodemodel.projectId= model.Id;
+                    Paymentnodemodel.xuhao = Convert.ToInt32(xuhao);
+                    Paymentnodemodel.Distinguish= Convert.ToInt32(Distinguish);
+                    Paymentnodemodel.Stateofapproval = 0;
+                    //获取项目审批人员并且保存到数据库
+                    node nodemodel = nodebll.GetModels(model.Id);
+                    Paymentnodemodel.SAE = nodemodel.SAE;
+                    Paymentnodemodel.AD = nodemodel.AD;
+                    Paymentnodemodel.SAD = nodemodel.SAD;
+                    Paymentnodemodel.yinxiaozongjian = nodemodel.yinxiaozongjian;
+                    Paymentnodemodel.caiwu = nodemodel.caiwu;
+                    Paymentnodemodel.laoban = nodemodel.laoban;
+                    Paymentnodemodel.zhulaoban = nodemodel.zhulaoban;
+                    Paymentnodebll.Add(Paymentnodemodel);
                     Paymentapplicationformbll.Add(Paymentapplicationmodel);
 
                     return "{\"status\": 1,\"msg\":\"消息提示:添加成功！\"}";
@@ -824,6 +858,137 @@ namespace QiuoOA.Controllers
                 return "{\"status\": 11,\"msg\":\"审批失败\"}";
             }
         }
+
+
+
+        //付款审批
+        [HttpPost]
+        public JsonResult paymentshenpi(string projectname,string xuhao, string Distinguish)
+        {
+            string msg = paymentshenpis(projectname, xuhao, Distinguish);
+            return Json(msg, JsonRequestBehavior.AllowGet);
+        }
+        private string paymentshenpis(string projectname, string xuhao, string Distinguish)
+        {
+            Project projectmodel = Projectbll.GetModelss(projectname);
+            Paymentapplicationform formmodel = Paymentapplicationformbll.GetModelsDistinguish(projectmodel.Id, xuhao, Distinguish);
+            Model.t_user usermodel = GetUserInfo();
+            Model.t_user usermodel1 = userbll.GetModel(projectmodel.userid.Value);
+            Bll.Paymentnode nodebll = new Bll.Paymentnode();
+            Paymentnode model = new Paymentnode();
+            model = nodebll.GetModels(projectmodel.Id, Convert.ToInt32(xuhao), Convert.ToInt32(Distinguish));
+            //if (Distinguish=="2"&& model.Stateofapproval!=0)
+            //{
+            //    return "{\"status\": 12,\"msg\":\"上次审批未审批通过!\"}";
+            //}
+            if (formmodel.readState == 1)
+            {
+                return "{\"status\": 0,\"msg\":\"审批已通过!\"}";
+            }
+            if (model != null)
+            {
+                //if (model.Stateofapproval==1&& usermodel.employeename== usermodel1.employeename)
+                //{
+                //    return "{\"status\": 0,\"msg\":\"您是当前项目负责人已经审批过了!\"}";
+                //}
+                if (model.Stateofapproval == 0)
+                {
+                    model.Stateofapproval = 1;
+                    nodebll.Update(model);
+                    return "{\"status\": 1,\"msg\":\"项目负责人审批成功!\"}";
+                }
+                //if (model.AE=="" && model.Stateofapproval == 1)
+                //{
+                //    model.Stateofapproval = 2;
+                //    nodebll.Update(model);
+                //}
+                //else if (model.AE == usermodel.employeename && model.Stateofapproval == 1)
+                //{
+                //    model.Stateofapproval = 2;
+                //    nodebll.Update(model);
+                //    return "{\"status\": 2,\"msg\":\"AE审批成功\"}";
+                //}
+                if (model.SAE == "" && model.Stateofapproval == 1)
+                {
+                    model.Stateofapproval = 3;
+                    nodebll.Update(model);
+                }
+                else if (model.SAE == usermodel.employeename && model.Stateofapproval == 1)
+                {
+                    model.Stateofapproval = 3;
+                    nodebll.Update(model);
+                    return "{\"status\": 3,\"msg\":\"SAE审批成功\"}";
+
+                }
+                if (model.AD == "" && model.Stateofapproval == 3)
+                {
+                    model.Stateofapproval = 4;
+                    nodebll.Update(model);
+                }
+                else if (model.AD == usermodel.employeename && model.Stateofapproval == 3)
+                {
+                    model.Stateofapproval = 4;
+                    nodebll.Update(model);
+                    return "{\"status\": 4,\"msg\":\"AD审批成功\"}";
+                }
+                if (model.SAD == "" && model.Stateofapproval == 4)
+                {
+                    model.Stateofapproval = 5;
+                    nodebll.Update(model);
+                }
+                else if (model.SAD == usermodel.employeename && model.Stateofapproval == 4)
+                {
+                    model.Stateofapproval = 5;
+                    nodebll.Update(model);
+                    return "{\"status\": 5,\"msg\":\"SAD审批成功\"}";
+                }
+                if (model.yinxiaozongjian == "" && model.Stateofapproval == 5)
+                {
+                    model.Stateofapproval = 6;
+                    nodebll.Update(model);
+                }
+                else if (model.yinxiaozongjian == usermodel.employeename && model.Stateofapproval == 5)
+                {
+                    model.Stateofapproval = 6;
+                    nodebll.Update(model);
+                    return "{\"status\": 6,\"msg\":\"营销负责人审批成功\"}";
+                }
+                if (model.caiwu == "" && model.Stateofapproval == 6)
+                {
+                    model.Stateofapproval = 8;
+                    nodebll.Update(model);
+                }
+                else if (model.caiwu == usermodel.employeename && model.Stateofapproval == 6)
+                {
+                    model.Stateofapproval = 8;
+                    nodebll.Update(model);
+                    return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                }
+                //if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
+                //  {
+                //      model.Stateofapproval = 8;
+                //      nodebll.Update(model);
+                //      return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
+                //  }
+                if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
+                {
+                       model.Stateofapproval = 9;
+                       formmodel.readState = 1;
+                        Paymentapplicationformbll.Update(formmodel);
+                        nodebll.Update(model);
+                        return "{\"status\":15,\"msg\":\"当前付款,审批成功!\"}";
+                }
+                return "{\"status\": 10,\"msg\":\"您的上一审批人未审批,或您已审批或您没有权限\"}";
+            }
+            else
+            {
+                return "{\"status\": 11,\"msg\":\"审批失败\"}";
+            }
+        }
+
+
+
+
         //保存当前项目的审批人
         [HttpPost]
         public JsonResult shenpiren(string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban,string processstate)
@@ -926,7 +1091,6 @@ namespace QiuoOA.Controllers
                 return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
             }
         }
-
         //[HttpPost]
         //public JsonResult Updatepaystate(string xuhao,string proname, string Distinguish) {
         //    Project promodle = Projectbll.GetModelss(proname);
@@ -951,5 +1115,11 @@ namespace QiuoOA.Controllers
         //        return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
         //    }
         //}
+        [HttpPost]
+        public JsonResult Paymentapprovalprocess(string projectname, string xuhao,string Distinguish) {
+            Project projectmodel = Projectbll.GetModelss(projectname);
+            Paymentnode nodemodel = Paymentnodebll.GetModels(projectmodel.Id, Convert.ToInt32(xuhao), Convert.ToInt32(Distinguish));
+            return Json(new { msg, nodemodel });
+        }
     }
 }

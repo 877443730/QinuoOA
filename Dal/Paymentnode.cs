@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NWJ.Dal
+namespace Dal
 {
     public partial class Paymentnode
     {
@@ -96,7 +96,7 @@ namespace NWJ.Dal
             strSql.Append("yinxiaozongjian=@yinxiaozongjian,");
             strSql.Append("caiwu=@caiwu,");
             strSql.Append("laoban=@laoban,");
-            strSql.Append("zhulaoban=@zhulaoban");
+            strSql.Append("zhulaoban=@zhulaoban,");
             strSql.Append("paymentapplicationformiId=@paymentapplicationformiId");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
@@ -208,7 +208,31 @@ namespace NWJ.Dal
             }
         }
 
+        public Model.Paymentnode GetModels(int Id,int xuhao,int Distinguish)
+        {
 
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId from paymentnode ");
+            strSql.Append(" where projectId=@Id and xuhao=@xuhao and Distinguish=@Distinguish");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Id", SqlDbType.Int,4),
+                     new SqlParameter("@xuhao", SqlDbType.Int,4),
+                      new SqlParameter("@Distinguish", SqlDbType.Int,4)
+            };
+            parameters[0].Value = Id;
+            parameters[1].Value = xuhao;
+            parameters[2].Value = Distinguish;
+            Model.Paymentnode model = new Model.Paymentnode();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -265,9 +289,9 @@ namespace NWJ.Dal
                 {
                     model.zhulaoban = row["zhulaoban"].ToString();
                 }
-                if (row["paymentapplicationformiId"] != null)
+                if (row["paymentapplicationformiId"] != null && row["paymentapplicationformiId"].ToString() != "")
                 {
-                    model.paymentapplicationformiId = row["paymentapplicationformiId"].ToString();
+                    model.paymentapplicationformiId = int.Parse(row["paymentapplicationformiId"].ToString());
                 }
             }
             return model;

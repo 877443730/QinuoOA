@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NWJ.Bll
+namespace Bll
 {
     public partial class Paymentnode
     {
@@ -54,6 +54,11 @@ namespace NWJ.Bll
         {
 
             return dal.GetModel(Id);
+        }
+        public Model.Paymentnode GetModels(int Id, int xuhao, int Distinguish)
+        {
+
+            return dal.GetModels(Id, xuhao, Distinguish);
         }
         /// <summary>
         /// 获得数据列表

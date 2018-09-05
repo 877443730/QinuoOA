@@ -1,0 +1,35 @@
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+将参数值从 String 转换到 Int32 失败。
+　  2018/9/5 13:46:46
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+将参数值从 String 转换到 Int32 失败。
+　  2018/9/5 13:47:04
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+将参数值从 String 转换到 Int32 失败。
+　  2018/9/5 13:47:52
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+将参数值从 String 转换到 Int32 失败。
+　  2018/9/5 13:48:41
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+必须声明标量变量 "@zhulaobanpaymentapplicationformiId"。
+　  2018/9/5 13:51:16
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+必须声明标量变量 "@zhulaobanpaymentapplicationformiId"。
+　  2018/9/5 13:51:33
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+update paymentnode set projectId=@projectId,xuhao=@xuhao,Distinguish=@Distinguish,Stateofapproval=@Stateofapproval,SAE=@SAE,AD=@AD,SAD=@SAD,yinxiaozongjian=@yinxiaozongjian,caiwu=@caiwu,laoban=@laoban,zhulaoban=@zhulaobanpaymentapplicationformiId=@paymentapplicationformiId where Id=@Id
+必须声明标量变量 "@zhulaobanpaymentapplicationformiId"。
+　  2018/9/5 13:52:46
+
