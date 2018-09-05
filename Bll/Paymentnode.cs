@@ -107,21 +107,6 @@ namespace NWJ.Bll
             return GetList("");
         }
 
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
-        public int GetRecordCount(string strWhere)
-        {
-            return dal.GetRecordCount(strWhere);
-        }
-        /// <summary>
-        /// 分页获取数据列表
-        /// </summary>
-        public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
-        {
-            return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
-        }
-
         #endregion  BasicMethod
         #region  ExtensionMethod
 
