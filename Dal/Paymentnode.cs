@@ -267,7 +267,7 @@ namespace NWJ.Dal
                 }
                 if (row["paymentapplicationformiId"] != null)
                 {
-                    model.paymentapplicationformiId = row["paymentapplicationformiId"].ToString();
+                    model.paymentapplicationformiId = int.Parse(row["paymentapplicationformiId"].ToString());
                 }
             }
             return model;
