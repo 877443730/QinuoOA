@@ -11,7 +11,8 @@ namespace NWJ.Bll
     {
         private readonly Dal.paymentnode dal = new Dal.paymentnode();
         public paymentnode()
-        { }
+        { //a
+        }
         #region  BasicMethod
         /// <summary>
         /// 是否存在该记录
