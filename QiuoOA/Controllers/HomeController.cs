@@ -775,21 +775,21 @@ namespace QiuoOA.Controllers
                 }
                 if (model.caiwu=="" && model.Stateofapproval == 6)
                 {
-                    model.Stateofapproval = 7;
+                    model.Stateofapproval = 8;
                     nodebll.Update(model);
                 }
                 else if (model.caiwu == usermodel.employeename && model.Stateofapproval == 6)
                 {
-                    model.Stateofapproval = 7;
-                    nodebll.Update(model);
-                    return "{\"status\": 7,\"msg\":\"财务审批成功\"}";
-                }
-              if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
-                {
                     model.Stateofapproval = 8;
                     nodebll.Update(model);
-                    return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
+                    return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
                 }
+              //if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
+              //  {
+              //      model.Stateofapproval = 8;
+              //      nodebll.Update(model);
+              //      return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
+              //  }
                if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
                 {
                     if (processstate=="2")
@@ -862,8 +862,6 @@ namespace QiuoOA.Controllers
                 model.Stateofapproval = 0;
                 //插入三条数据
                 model.processstate = Convert.ToInt32(processstate);
-                nodebll.Add(model);
-                model.processstate = Convert.ToInt32(processstate) + 1;
                 nodebll.Add(model);
                 model.processstate = Convert.ToInt32(processstate) + 2;
                 nodebll.Add(model);

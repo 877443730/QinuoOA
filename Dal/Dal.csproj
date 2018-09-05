@@ -50,6 +50,7 @@
     <Compile Include="node.cs" />
     <Compile Include="OfferTable.cs" />
     <Compile Include="Paymentapplicationform.cs" />
+    <Compile Include="Paymentnode.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="PO.cs" />
     <Compile Include="Project.cs" />

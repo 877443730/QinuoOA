@@ -51,6 +51,7 @@
     <Compile Include="node.cs" />
     <Compile Include="OfferTablebll.cs" />
     <Compile Include="Paymentapplicationform.cs" />
+    <Compile Include="Paymentnode.cs" />
     <Compile Include="Platformbll.cs" />
     <Compile Include="PO.cs" />
     <Compile Include="Projectbll.cs" />
