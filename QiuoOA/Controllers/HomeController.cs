@@ -929,29 +929,29 @@ namespace QiuoOA.Controllers
             }
         }
 
-        [HttpPost]
-        public JsonResult Updatepaystate(string xuhao,string proname, string Distinguish) {
-            Project promodle = Projectbll.GetModelss(proname);
-            string msg = Updatepaystates(xuhao, proname, Distinguish);
-            Paymentapplicationform frommodel = Paymentapplicationformbll.GetModelsDistinguish(promodle.Id, xuhao, Distinguish);
-            return Json(new { msg, frommodel });
-        }
-        private string Updatepaystates(string xuhao, string proname, string Distinguish) {
-            Project promodle = Projectbll.GetModelss(proname);
-            Paymentapplicationform frommodel = Paymentapplicationformbll.GetModelsDistinguish(promodle.Id, xuhao, Distinguish);
-            node nodemodel = nodebll.GetModelsprocessstate(promodle.Id,2);
-            if (frommodel != null)
-            {
-                frommodel.paystate = 1;
-                nodemodel.Stateofapproval = 0;
-                nodebll.Update(nodemodel);
-                Paymentapplicationformbll.Update(frommodel);
-                return "{\"status\": 1,\"msg\":\"消息提示:修改成功！\"}";
-            }
-            else
-            {
-                return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
-            }
-        }
+        //[HttpPost]
+        //public JsonResult Updatepaystate(string xuhao,string proname, string Distinguish) {
+        //    Project promodle = Projectbll.GetModelss(proname);
+        //    string msg = Updatepaystates(xuhao, proname, Distinguish);
+        //    Paymentapplicationform frommodel = Paymentapplicationformbll.GetModelsDistinguish(promodle.Id, xuhao, Distinguish);
+        //    return Json(new { msg, frommodel });
+        //}
+        //private string Updatepaystates(string xuhao, string proname, string Distinguish) {
+        //    Project promodle = Projectbll.GetModelss(proname);
+        //    Paymentapplicationform frommodel = Paymentapplicationformbll.GetModelsDistinguish(promodle.Id, xuhao, Distinguish);
+        //    node nodemodel = nodebll.GetModelsprocessstate(promodle.Id,2);
+        //    if (frommodel != null)
+        //    {
+        //        frommodel.paystate = 1;
+        //        nodemodel.Stateofapproval = 0;
+        //        nodebll.Update(nodemodel);
+        //        Paymentapplicationformbll.Update(frommodel);
+        //        return "{\"status\": 1,\"msg\":\"消息提示:修改成功！\"}";
+        //    }
+        //    else
+        //    {
+        //        return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
+        //    }
+        //}
     }
 }
