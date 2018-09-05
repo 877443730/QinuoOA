@@ -277,7 +277,7 @@ namespace NWJ.Dal
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
-
+        //qqq
         /// <summary>
         /// 获得前几行数据
         /// </summary>
