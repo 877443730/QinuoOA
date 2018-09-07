@@ -30,8 +30,9 @@
         width: 100%;
         height: 100%;
     }
+
     .shifoufukuan1 {
-        color:red;
+        color: red;
     }
 </style>
 <body id="money1">
@@ -576,15 +577,15 @@
             <input type="text" class="form-control ddd2" name="name" id="wangming" />
             <datalist id="greetings" style="display:none;">
                 @{
-                List<Model.Paymentapplicationform> lists2 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
-                if (lists2.Any())
-                {
-                    foreach (var item in lists2)
+                    List<Model.Paymentapplicationform> lists2 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
+                    if (lists2.Any())
                     {
-                        <option value="@item.wangming">@item.wangming</option>
-                }
+                        foreach (var item in lists2)
+                        {
+                            <option value="@item.wangming">@item.wangming</option>
+                        }
 
-            }
+                    }
                 }
             </datalist>
         </td>
@@ -603,14 +604,14 @@
         </td>
         <td>
             @{
-            if (@ViewBag.rolename == "管理员")
-            {
-                <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" />
-        }
-        else
-        {
-            <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" style="display:none" />
-    }
+                if (@ViewBag.rolename == "管理员")
+                {
+                    <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" />
+                }
+                else
+                {
+                    <input type="text" class=" form-control companychaiwuchenben" readonly="readonly" onchange="companytextchange1(this)" id="chaiwuchenben" style="display:none" />
+                }
             }
         </td>
         <td>未付款</td>
@@ -656,14 +657,14 @@
         </td>
         <td>
             @{
-            if (@ViewBag.rolename == "管理员")
-            {
-                <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" />
-        }
-        else
-        {
-            <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" style="display:none" />
-    }
+                if (@ViewBag.rolename == "管理员")
+                {
+                    <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" />
+                }
+                else
+                {
+                    <input type="text" class=" form-control chaiwuchenben" readonly="readonly" onchange="textchange1(this)" id="chaiwuchenben" style="display:none" />
+                }
             }
         </td>
         <td>未付款</td>
@@ -1713,7 +1714,7 @@
                     $("#k7").html(data.nodemodel['caiwu'])
                     $("#k8").html(data.nodemodel['laoban'])
                     $("#k9").html(data.nodemodel['zhulaoban'])
-                   
+
                     //获取当前项目的项目成员
                     $("#xiangmuchengyuan").val(data.nodemodel['AE'] + "," + data.nodemodel['SAE'] + "," + data.nodemodel['AD'] + "," + data.nodemodel['SAD'] + "," + data.nodemodel['yinxiaozongjian'] + "," + data.nodemodel['caiwu'] + "," + data.nodemodel['laoban'] + "," + data.nodemodel['zhulaoban'])
                 } else {

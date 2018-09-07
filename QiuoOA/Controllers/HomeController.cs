@@ -74,6 +74,25 @@ namespace QiuoOA.Controllers
             }
             return View();
         }
+        public ActionResult Unapproved() {
+            ViewBag.islogin = IsUserLogin() ? 1 : 0;
+            if (IsUserLogin())
+            {
+                Model.t_user model = GetUserInfo();
+                if (model != null)
+                {
+                    ViewBag.employeename = model.employeename;
+                    //查询需要该当前登录人审批的项目信息
+                    //立项
+                    ViewData["lixiang"] = nodebll.GetModelLists("a.processstate=1");
+                    //结案
+                    ViewData["jiean"] = nodebll.GetModelLists("a.processstate=3");
+                    //付款审批
+                    ViewData["fukuan"] = Paymentnodebll.GetModelLists("1=1");
+                }
+            }
+                    return View();
+        }
         public ActionResult ProjectList()
         {
             Model.t_user model = GetUserInfo();
@@ -451,7 +470,6 @@ namespace QiuoOA.Controllers
             {
                 return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
             }
-
         }
         //对公司付款
         [Authorizer]
@@ -595,10 +613,7 @@ namespace QiuoOA.Controllers
             {
                 return Json("错误");
             }
-
         }
-
-
         //打开项目报价表
         [HttpPost]
         public JsonResult projectCostlujingFile(string projectCostlujingFiless)

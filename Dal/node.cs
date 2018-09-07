@@ -330,6 +330,17 @@ namespace Dal
                 {
                     model.processstate = int.Parse(row["processstate"].ToString());
                 }
+                try
+                {
+                    if (row["ProjectName"] != null)
+                    {
+                        model.ProjectName = row["ProjectName"].ToString();
+                    }
+                }
+                catch (Exception e)
+                {
+                }
+    
             }
             return model;
         }
@@ -349,6 +360,16 @@ namespace Dal
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet GetLists(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select a.*,b.ProjectName from node a left join Project b on a.projectid =b.id");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
         /// <summary>
         /// 获得前几行数据
         /// </summary>

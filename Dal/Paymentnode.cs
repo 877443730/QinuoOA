@@ -293,6 +293,18 @@ namespace Dal
                 {
                     model.paymentapplicationformiId = int.Parse(row["paymentapplicationformiId"].ToString());
                 }
+                try
+                {
+                    if (row["ProjectName"] != null)
+                    {
+                        model.ProjectName = row["ProjectName"].ToString();
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+
             }
             return model;
         }
@@ -305,6 +317,17 @@ namespace Dal
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId ");
             strSql.Append(" FROM paymentnode ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetLists(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select a.*,b.ProjectName from paymentnode a left join Project b on a.projectid =b.id");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

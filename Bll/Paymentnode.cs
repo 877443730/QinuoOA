@@ -82,6 +82,12 @@ namespace Bll
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
+
+        public List<Model.Paymentnode> GetModelLists(string strWhere)
+        {
+            DataSet ds = dal.GetLists(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>
