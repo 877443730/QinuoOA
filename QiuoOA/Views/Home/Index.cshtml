@@ -347,21 +347,30 @@
                                         <tr>
                                             <th class="k">项目代码</th>
                                             <td>
-                                                <input class="form-control" type="text" value="" id="code1" readonly="readonly" />
+                                                <input class="form-control code1" type="text" value="" id="code1" readonly="readonly" />
                                             </td>
                                             <th class="k">项目名称</th>
                                             <td class="k">
-                                                <input class="form-control" type="text" value="" id="projectname1" readonly="readonly" />
+                                                <input class="form-control projectname1" type="text" value="" id="projectname1" readonly="readonly" />
                                             </td>
                                             <th class="k">支付对象(网名)</th>
-                                            <td colspan="3"><input class="form-control" type="text" value="" id="Paymentobject1" readonly="readonly" /></td>
+                                            <td colspan="3"><input class="form-control p Paymentobject1" type="text" value="" id="Paymentobject1" readonly="readonly" /></td>
                                         </tr>
                                         <tr>
-
+                                            <th class="k">平台</th>
+                                            <td><input class="form-control p insidePingtai1" type="text" id="insidePingtai1" /></td>
+                                            <th class="k">成本报价</th>
+                                            <td><input class="form-control p insideChenbenbaojia1" type="text" id="insideChenbenbaojia1" /></td>
+                                            <th class="k">销售报价</th>
+                                            <td><input class="form-control p insideXiaoshoubaojia1" type="text" id="insideXiaoshoubaojia1" /></td>
+                                            <th class="k">税点</th>
+                                            <td><input class="form-control p insideSuidian1" type="text" id="insideSuidian1" /></td>
+                                        </tr>
+                                        <tr>
                                             <th class="k">应支付金额</th>
-                                            <td><input class="form-control p" type="text" id="ZFjine" /></td>
+                                            <td><input class="form-control p ZFjine1" type="text" id="ZFjine" /></td>
                                             <th class="k">发票号</th>
-                                            <td><input class="form-control p" type="text" id="fapiao" /></td>
+                                            <td><input class="form-control p fapiao1" type="text" id="fapiao" /></td>
                                             <th class="k">发票附件</th>
                                             <td>
                                                 <form enctype="multipart/form-data" id="file-froms" name="file-froms">
@@ -372,22 +381,22 @@
                                                 </form>
                                             </td>
                                             <th class="k">发票税额</th>
-                                            <td><input class="form-control p" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this) " /></td>
+                                            <td><input class="form-control p fapiaosuie1" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this) " /></td>
                                         </tr>
                                         <tr>
                                             <th class="k">付款时间</th>
-                                            <td><input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate" /></td>
+                                            <td><input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p ZFdate1" aria-describedby="basic-addon2" type="text" id="ZFdate" /></td>
                                             <th class="k">公司名称(收款,手填)</th>
-                                            <td><input class="form-control p" type="text" id="gsname" /></td>
+                                            <td><input class="form-control p gsname1" type="text" id="gsname" /></td>
                                             <th class="k">开户行</th>
-                                            <td><input class="form-control p" type="text" id="kaihuhang" /></td>
+                                            <td><input class="form-control p kaihuhang1" type="text" id="kaihuhang" /></td>
                                             <th class="k">银行账号</th>
-                                            <td><input class="form-control p" type="text" id="Bankcode" /></td>
+                                            <td><input class="form-control p Bankcode1" type="text" id="Bankcode" /></td>
                                         </tr>
                                         <tr>
                                             <th>备注</th>
                                             <td colspan="7">
-                                                <textarea class="form-control p" id="beizhus">
+                                                <textarea class="form-control p beizhus1" id="beizhus">
                                              </textarea>
                                             </td>
                                         </tr>
@@ -398,7 +407,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                     关闭
                                 </button>
-                                <input onclick="buts1();" type="button" class="btn btn-primary" value="提交">
+                                <input onclick="buts1(this);" type="button" class="btn btn-primary" value="提交">
                             </div>
                         </div>
                     </div>
@@ -418,37 +427,45 @@
                                 <div>
                                     <table>
                                         <tr>
+                                            <th class="k">平台</th>
+                                            <td><input class="form-control p insidePingtai2" type="text" id="insidePingtai" /></td>
+                                            <th class="k">成本报价</th>
+                                            <td><input class="form-control p insideChenbenbaojia2" type="text" id="insideChenbenbaojia" /></td>
+                                            <th class="k">销售报价</th>
+                                            <td><input class="form-control p insideXiaoshoubaojia2" type="text" id="insideXiaoshoubaojia" /></td>
+                                        </tr>
+                                        <tr>
                                             <th class="k">付款时间</th>
                                             <td>
-                                                <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate1" />
+                                                <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p ZFdate2" aria-describedby="basic-addon2" type="text" id="ZFdate1" />
                                             </td>
                                             <th class="k">项目名称</th>
                                             <td>
-                                                <input class="form-control" type="text" id="projectname2" readonly="readonly" />
+                                                <input class="form-control projectname2" type="text" id="projectname2" readonly="readonly" />
                                             </td>
                                             <th class="k">项目代码</th>
                                             <td class="k">
-                                                <input class="form-control" type="text" id="code2" readonly="readonly" />
+                                                <input class="form-control code2" type="text" id="code2" readonly="readonly" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <th class="k">支付对象(网名)</th>
-                                            <td><input class="form-control" type="text" id="Paymentobject2" readonly="readonly" /></td>
+                                            <td><input class="form-control p Paymentobject2" type="text" id="Paymentobject2" readonly="readonly" /></td>
                                             <th class="k">应支付金额</th>
-                                            <td colspan="3"><input class="form-control p" type="text" id="ZFjine1" /></td>
+                                            <td colspan="3"><input class="form-control p ZFjine2" type="text" id="ZFjine1" /></td>
                                         </tr>
                                         <tr>
                                             <th class="k">收款人</th>
-                                            <td><input class="form-control p" type="text" id="shoukuanren" /></td>
+                                            <td><input class="form-control p shoukuanren2" type="text" id="shoukuanren" /></td>
                                             <th class="k">开户行</th>
-                                            <td><input class="form-control p" type="text" id="kaihuhang1" /></td>
+                                            <td><input class="form-control p kaihuhang2" type="text" id="kaihuhang1" /></td>
                                             <th class="k">银行账号</th>
-                                            <td><input class="form-control p" type="text" id="Bankcode1" /></td>
+                                            <td><input class="form-control p Bankcode2" type="text" id="Bankcode1" /></td>
                                         </tr>
                                         <tr>
                                             <th>备注</th>
                                             <td colspan="5">
-                                                <textarea class="form-control p" id="beizhu1">
+                                                <textarea class="form-control p beizhu2" id="beizhu1">
 
                                                  </textarea>
                                             </td>
@@ -636,7 +653,7 @@
             <input type="text" class="form-control yongtu" name="yongtu" id="yongtu" />
         </td>
         <td>
-            <select onchange="btnChange1(this[selectedIndex].value);" class="form-control" id="leibie">
+            <select onchange="btnChange1(this[selectedIndex].value,this);" class="form-control modeltype" id="leibie">
                 <option value="">--请选择--</option>
                 <option value="对个人">对个人</option>
                 <option value="对公司">对公司</option>
@@ -672,7 +689,7 @@
             <input type="text" readonly="readonly" class="form-control aaa" />
         </td>
         <td>
-            <input id="xiugai" onclick="update(this,Distinguish)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
+            <input id="xiugai" onclick="update(this,0)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
         </td>
         <td>
             <input id="caiwushenpi" type="button" onclick="fangfa3(3)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
@@ -1585,12 +1602,16 @@
     }
     var leixing;
 
-    function btnChange1(values) {
+    function btnChange1(values, _this) {
+        var suidiankuang = $(_this).closest('tr').find('.suidian')[0];
+        var xialakuang = $(_this).closest('tr').find('.modeltype')[0];
+        //$(xialakuang).attr('type', 'text');
+        $(xialakuang).attr('disabled', 'disabled');
         leixing = values;
         if (values == "对公司") {
-            $('input[id=suidian]').removeAttr("readonly")
+            $(suidiankuang).removeAttr("readonly");
         } else if (values != "对公司") {
-            $('input[id=suidian]').attr("readonly", "readonly")
+            $(suidiankuang).attr("readonly", "readonly");
         }
     }
     var projectCostlujing;
@@ -1714,7 +1735,6 @@
                     $("#k7").html(data.nodemodel['caiwu'])
                     $("#k8").html(data.nodemodel['laoban'])
                     $("#k9").html(data.nodemodel['zhulaoban'])
-
                     //获取当前项目的项目成员
                     $("#xiangmuchengyuan").val(data.nodemodel['AE'] + "," + data.nodemodel['SAE'] + "," + data.nodemodel['AD'] + "," + data.nodemodel['SAD'] + "," + data.nodemodel['yinxiaozongjian'] + "," + data.nodemodel['caiwu'] + "," + data.nodemodel['laoban'] + "," + data.nodemodel['zhulaoban'])
                 } else {
@@ -1876,41 +1896,74 @@
     }
     var len1
     var zhifujine
+    var shifujine;
     var shenqing
     var shenqing1
     var chenben
+    var xiaoshou;
     var wangming
     var ddd
     var xiugai
     var yongtu
-    var chenbenleibie
+    var chenbenleibie;
+    var chengbenleibeikuang;
+    var yongtukuang;
     var Distinguishss;
     //平台
     var pingtai
+    var pinttai1;
+    var wangmingddd;
     //根据状态申请跳转页面
     function but(_this) {
         //获取每行的点击值
-            Distinguishss = 0;
+        var sum = 0;
+        var t = document.getElementsByClassName("p");
+        for (var i = 0; i
+            < t.length; i++) {
+            if (t[i].type == 'text') {
+                ++sum;
+                t[i].value = "";//清空
+            }
+        }
+        Distinguishss = 0;
+        pingtai = "";
+        wangming = "";
+        suidiankuang = $(_this).closest('tr').find('.suidian')[0];
+        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
         zhifujine = $(_this).closest('tr').find('.shenqing1')[0]
         shenqing = $(_this).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         suidian = $(_this).closest('tr').find('.suidian')[0].value;
         chenben = $(_this).closest('tr').find('.ccc1')[0]
         xiugai = $(_this).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $("#chenbenbaojia").val();
-        caiwuchengben = $(_this).closest('tr').find('.chaiwuchenben')[0]
-        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
+        caiwuchengben = $(_this).closest('tr').find('.chaiwuchenben')[0];
+        chengbenleibeikuang = $(_this).closest('tr').find('.chenbenleibie')[0];
+        yongtukuang = $(_this).closest('tr').find('.yongtu')[0];
+        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.aaa')[0].value;
         yongtu  = $(_this).closest('tr').find('.yongtu')[0].value;
         chenbenleibie= $(_this).closest('tr').find('.chenbenleibie')[0].value;
-        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
-            if (leixing == "对公司") {
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null && chenbenleibie != "" && yongtu != "") {
                 if (suidian != "") {
+                    leixing = "对公司";
+                    if (suidian != "" && chenbenleibie != "" && yongtu != "") {
+                        $(chengbenleibeikuang).attr('readonly', 'readonly');
+                        $(yongtukuang).attr('readonly', 'readonly');
+                        $(pinttai1).attr('readonly', 'readonly');
+                        $(suidiankuang).attr('readonly', 'readonly');
+                        $(wangmingddd).attr('readonly', 'readonly');
+                        $(chenben).attr('readonly', 'readonly');
+                        $(xiaoshou).attr('readonly', 'readonly');
                     $("#shenqing").attr('data-target', '#myModal');
                     $('#myModal').modal('show');
                     if (ddd != '') {
                         document.getElementById("code1").value = $("#code").val();
+                        document.getElementById("insidePingtai1").value = pingtai;
+                        document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
+                        document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
+                        document.getElementById("insideSuidian1").value = suidian;
                         document.getElementById("projectname1").value = s;
                         document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
                     }
@@ -1918,14 +1971,25 @@
                     alert("请填写税点");
                     return;
                 }
-            } else if (leixing == "对个人") {
-                $("#shenqing").attr('data-target', '#myModal1');
-                $('#myModal1').modal('show');
-                if (ddd != '') {
-                    document.getElementById("code2").value = $("#code").val();
-                    document.getElementById("projectname2").value = s;
-                    document.getElementById("Paymentobject2").value = ddd;
-                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                } else if (suidian == "") {
+                    leixing = "对个人";
+                    $(chengbenleibeikuang).attr('readonly', 'readonly');
+                    $(yongtukuang).attr('readonly', 'readonly');
+                    $(pinttai1).attr('readonly', 'readonly');
+                    $(wangmingddd).attr('readonly', 'readonly');
+                    $(chenben).attr('readonly', 'readonly');
+                    $(xiaoshou).attr('readonly', 'readonly');
+                    if (ddd != "") {
+                        $("#shenqing").attr('data-target', '#myModal1');
+                        $('#myModal1').modal('show');
+                        document.getElementById("insidePingtai").value = pingtai;
+                        document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
+                        document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
+                        document.getElementById("code2").value = $("#code").val();
+                        document.getElementById("projectname2").value = s;
+                        document.getElementById("Paymentobject2").value = ddd;
+                        document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                        return;
                 } else {
                     alert("请输入网名(支付对象)");
                     return;
@@ -1933,13 +1997,26 @@
             }
         } else {
             alert("请填写完整");
+            return;
         }
     }
     //对个人
     function personalbut(_this) {
         //获取每行的点击值
+        var sum = 0;
+        var t = document.getElementsByClassName("p");
+        for (var i = 0; i
+            < t.length; i++) {
+            if (t[i].type == 'text') {
+                ++sum;
+                t[i].value = "";//清空
+            }
+        }
+        leixing = "对个人";
         ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
+        wangmingddd = $(_this).closest('tr').find('.ddd2')[0];  //网名
         pingtai = $(_this).closest('tr').find('.pingtai')[0].value;  //平台
+        pinttai1 = $(_this).closest('tr').find('.pingtai')[0];  //平台
         if (ddd != '' && ddd != null) {
             Distinguishss = 2;
         } else {
@@ -1950,15 +2027,23 @@
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         chenben = $(_this).closest('tr').find('.ccc1')[0]
         xiugai = $(_this).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $("#chenbenbaojia").val();
+        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
+        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
+        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
         caiwuchengben = $(_this).closest('tr').find('.personalchaiwuchenben')[0]
-        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        $(pinttai1).attr('readonly', 'readonly');
+        $(wangmingddd).attr('readonly', 'readonly');
+        $(chenben).attr('readonly', 'readonly');
+        $(xiaoshou).attr('readonly', 'readonly');
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.personalaaa')[0].value;
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
             if (ddd != "") {
                 $("#shenqing").attr('data-target', '#myModal1');
                 $('#myModal1').modal('show');
+                document.getElementById("insidePingtai").value = pingtai;
+                document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
+                document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
                 document.getElementById("code2").value = $("#code").val();
                 document.getElementById("projectname2").value = s;
                 document.getElementById("Paymentobject2").value = ddd;
@@ -1973,8 +2058,20 @@
     //对公司
     function companybut(_this) {
         //获取每行的点击值
+        var sum = 0;
+        var t = document.getElementsByClassName("p");
+        for (var i = 0; i
+            < t.length; i++) {
+            if (t[i].type == 'text') {
+                ++sum;
+                t[i].value = "";//清空
+            }
+        }
+        leixing = "对公司";
         ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
+        wangmingddd = $(_this).closest('tr').find('.ddd2')[0];  //网名
         pingtai = $(_this).closest('tr').find('.pingtai')[0].value;  //平台
+        pinttai1 = $(_this).closest('tr').find('.pingtai')[0];  //平台
         if (ddd != '' && ddd != null) {
             Distinguishss = 3;
         } else {
@@ -1984,11 +2081,18 @@
         shenqing = $(_this).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         suidian = $(_this).closest('tr').find('.suidian')[0].value;
-        chenben = $(_this).closest('tr').find('.ccc1')[0]
-        xiugai = $(_this).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $("#chenbenbaojia").val();
+        chenben = $(_this).closest('tr').find('.ccc1')[0];
+        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
+        xiugai = $(_this).closest('tr').find('.xiugai')[0];
+        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
+        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
         caiwuchengben = $(_this).closest('tr').find('.companychaiwuchenben')[0]
-        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        suidiankuang = $(_this).closest('tr').find('.suidian')[0];
+        $(pinttai1).attr('readonly', 'readonly');
+        $(suidiankuang).attr('readonly', 'readonly');
+        $(wangmingddd).attr('readonly', 'readonly');
+        $(chenben).attr('readonly', 'readonly');
+        $(xiaoshou).attr('readonly', 'readonly');
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.companyaaa')[0].value;
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
@@ -2000,9 +2104,11 @@
                     $('#myModal').modal('show');
                     document.getElementById("code1").value = $("#code").val();
                     document.getElementById("projectname1").value = s;
-
+                    document.getElementById("insidePingtai1").value = pingtai;
+                    document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
+                    document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
+                    document.getElementById("insideSuidian1").value = suidian;
                     document.getElementById("Paymentobject1").value = ddd;
-
                     document.getElementById("myModalLabel1").innerHTML = "对公司申请付款";
 
             } else {
@@ -2014,28 +2120,44 @@
     //修改申请页面
     function update(_this1,_this2) {
         //获取每行的点击值
-        ddd = $(_this1).closest('tr').find('.ddd2')[0].value;  //网名
-        pingtai = $(_this1).closest('tr').find('.pingtai')[0].value;  //平台
+        if ($(_this1).closest('tr').find('.wangming').length > 0) {
+            ddd = $(_this1).closest('tr').find('.ddd2')[0].value;  //网名
+            pingtai = $(_this1).closest('tr').find('.pingtai')[0].value;  //平台
+        } else {
+            wangming = "";
+        }
+        if ($(_this1).closest('tr').find('.suidian').length > 0) {
+            suidian = $(_this1).closest('tr').find('.suidian')[0].value;
+            alert(suidian);
+            if (suidian != "") {
+                leixing = "对公司";
+            } else {
+                leixing = "对个人";
+            }
+        } else {
+            leixing = "对个人";
+        }
         zhifujine = $(_this1).closest('tr').find('.shenqing1')[0]
         shenqing = $(_this1).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this1).closest('tr').find('.shenqing')[0].value;
         chenben = $(_this1).closest('tr').find('.ccc1')[0]
         xiugai = $(_this1).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $("#chenbenbaojia").val();
-        caiwuchengben = $(_this1).closest('tr').find('.chaiwuchenben')[0];
-        xiaoshoubaojia = $("#xiaoshoubaojia").val();
+        chenbenbaojia = $(_this1).closest('tr').find('#chenbenbaojia')[0].value;
+        caiwuchengben = $(_this1).closest('tr').find('#xiaoshoubaojia')[0];
+        xiaoshoubaojia = $(_this1).closest('tr').find('.shenqing')[0].value;
         len1 = $(_this1).closest('tr').find('.ddd')[0].innerText;
-
+        shifujine = $(_this1).closest('tr').find('.shenqing1')[0].value;
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
-            if (leixing == "对公司" || _this2==3) {
+            if (leixing == "对公司" || _this2 == 3) {
                 suidian = $(_this1).closest('tr').find('.suidian')[0].value;
-               // aaa = $(_this1).closest('tr').find('.companyaaa')[0].value;
+                // aaa = $(_this1).closest('tr').find('.companyaaa')[0].value;
                 if (suidian != "") {
                     $("#shenqing").attr('data-target', '#myModal');
                     $('#myModal').modal('show');
                     if (ddd != '') {
                         document.getElementById("code1").value = $("#code").val();
                         document.getElementById("projectname1").value = s;
+                        document.getElementById("ZFjine").value = shifujine;
                         document.getElementById("Paymentobject1").value = ddd;
                         document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
                         $.ajax({
@@ -2044,7 +2166,7 @@
                             data: {
                                 xuhao: len1,
                                 projectname: s,
-                                Distinguish:_this2
+                                Distinguish: _this2
                             },
                             success: function (data) {
                                 document.getElementById("ZFjine").value = data.model['Actualamountofpayment']
@@ -2053,17 +2175,19 @@
                                 document.getElementById("gsname").value = data.model['Receivablescompany']
                                 document.getElementById("kaihuhang").value = data.model['Openingbank']
                                 document.getElementById("Bankcode").value = data.model['Bankaccount']
+                                document.getElementById("insidePingtai1").value = data.model['pingtai'];
+                                document.getElementById("insideChenbenbaojia1").value = data.model['CostQuotation'];
+                                document.getElementById("insideXiaoshoubaojia1").value = data.model['Salesquotation'];
+                                document.getElementById("insideSuidian1").value = data.model['shuidian'];
                                 var Timeofpaymentdate = data.model['Timeofpayment']
                                 var date = new Date();
                                 date.setTime(Timeofpaymentdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
                                 var newdate1 = date.toLocaleDateString();
                                 document.getElementById("ZFdate").value = (newdate1);
-
+                                Distinguishss = _this2;
                                 document.getElementById("beizhus").value = data.model['Remarks']
                             }
-
                         })
-
                     } else {
                         alert("请输入网名");
                         return;
@@ -2072,12 +2196,98 @@
                     alert("请填写税点");
                     return;
                 }
-            } else if (_this2==2|| leixing == "对个人") {
+            } else if (_this2 == 2 || leixing == "对个人") {
                 //aaa = $(_this1).closest('tr').find('.personalaaa')[0].value;
                 $("#shenqing").attr('data-target', '#myModal1');
                 $('#myModal1').modal('show');
                 if (ddd != '') {
                     document.getElementById("code2").value = $("#code").val();
+                    document.getElementById("projectname2").value = s;
+                    document.getElementById("Paymentobject2").value = ddd;
+                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                    $.ajax({
+                        url: "/Home/updateview",
+                        type: 'post',
+                        data: {
+                            xuhao: len1,
+                            projectname: s,
+                            Distinguish: _this2
+                        },
+                        success: function (data) {
+                            document.getElementById("ZFjine1").value = data.model['Actualamountofpayment']
+                            var Timeofpaymentdate1 = data.model['Timeofpayment']
+                            var date = new Date();
+                            date.setTime(Timeofpaymentdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                            var newdate1 = date.toLocaleDateString();
+                            document.getElementById("ZFdate1").value = (newdate1);
+                            document.getElementById("shoukuanren").value = data.model['Payee']
+                            document.getElementById("kaihuhang1").value = data.model['Openingbank']
+                            document.getElementById("Bankcode1").value = data.model['Bankaccount']
+                            document.getElementById("beizhu1").value = data.model['Remarks']
+                            document.getElementById("insidePingtai").value = data.model['pingtai'];
+                            document.getElementById("insideChenbenbaojia").value = data.model['CostQuotation'];
+                            document.getElementById("insideXiaoshoubaojia").value = data.model['Salesquotation'];
+                            Distinguishss = _this2;
+                        }
+                    })
+
+                } else {
+                    alert("请输入网名(支付对象)");
+                    return;
+                }
+            } else if (_this2 == 0 && leixing == "对个人") {
+                //aaa = $(_this1).closest('tr').find('.personalaaa')[0].value;
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                if (ddd != '') {
+                    document.getElementById("code2").value = $("#code").val();
+                    document.getElementById("insidePingtai").value = pingtai;
+                    document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
+                    document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
+                    //合并的内容
+                    document.getElementById("projectname2").value = s;
+                    document.getElementById("Paymentobject2").value = ddd;
+                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
+                    $.ajax({
+                        url: "/Home/updateview",
+                        type: 'post',
+                        data: {
+                            xuhao: len1,
+                            projectname: s,
+                            Distinguish: _this2
+                        },
+                        success: function (data) {
+                            document.getElementById("ZFjine1").value = data.model['Actualamountofpayment']
+                            var Timeofpaymentdate1 = data.model['Timeofpayment']
+                            var date = new Date();
+                            date.setTime(Timeofpaymentdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                            var newdate1 = date.toLocaleDateString();
+                            document.getElementById("ZFdate1").value = (newdate1);
+                            document.getElementById("shoukuanren").value = data.model['Payee']
+                            document.getElementById("kaihuhang1").value = data.model['Openingbank']
+                            document.getElementById("Bankcode1").value = data.model['Bankaccount']
+                            document.getElementById("beizhu1").value = data.model['Remarks']
+                            document.getElementById("insidePingtai").value = data.model['pingtai'];
+                            document.getElementById("insideChenbenbaojia").value = data.model['CostQuotation'];
+                            document.getElementById("insideXiaoshoubaojia").value = data.model['Salesquotation'];
+                            Distinguishss = _this2;
+                        }
+                    })
+
+                } else {
+                    alert("请输入网名(支付对象)");
+                    return;
+                }
+            } else if (_this2 == 0 && leixing == "对个人") {
+                //aaa = $(_this1).closest('tr').find('.personalaaa')[0].value;
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                if (ddd != '') {
+                    document.getElementById("code2").value = $("#code").val();
+                    document.getElementById("insidePingtai").value = pingtai;
+                    document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
+                    document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
+                    //合并的内容
                     document.getElementById("projectname2").value = s;
                     document.getElementById("Paymentobject2").value = ddd;
                     document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
@@ -2107,10 +2317,74 @@
                     alert("请输入网名(支付对象)");
                     return;
                 }
+                //合并的内容
+            } else if (_this2 == 0 && leixing == "对公司") {
+                suidian = $(_this1).closest('tr').find('.suidian')[0].value;
+                // aaa = $(_this1).closest('tr').find('.companyaaa')[0].value;
+                if (suidian != "") {
+                    $("#shenqing").attr('data-target', '#myModal');
+                    $('#myModal').modal('show');
+                    if (ddd != '') {
+                        document.getElementById("code1").value = $("#code").val();
+                        document.getElementById("projectname1").value = s;
+                        document.getElementById("insidePingtai1").value = pingtai;
+                        document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
+                        document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
+                        document.getElementById("insideSuidian1").value = suidian;
+                        document.getElementById("Paymentobject1").value = ddd;
+                        document.getElementById("ZFjine").value = shifujine;
+
+                        document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
+                        $.ajax({
+                            url: "/Home/updateview",
+                            type: 'post',
+                            data: {
+                                xuhao: len1,
+                                projectname: s,
+                                Distinguish: _this2
+                            },
+                            success: function (data) {
+                                document.getElementById("ZFjine").value = data.model['Actualamountofpayment']
+                                document.getElementById("fapiao").value = data.model['Invoicenumber']
+                                document.getElementById("fapiaosuie").value = data.model['Invoicetax']
+                                document.getElementById("gsname").value = data.model['Receivablescompany']
+                                document.getElementById("kaihuhang").value = data.model['Openingbank']
+                                document.getElementById("Bankcode").value = data.model['Bankaccount']
+                                var Timeofpaymentdate = data.model['Timeofpayment']
+                                var date = new Date();
+                                date.setTime(Timeofpaymentdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
+                                var newdate1 = date.toLocaleDateString();
+                                document.getElementById("ZFdate").value = (newdate1);
+
+                                document.getElementById("beizhus").value = data.model['Remarks']
+                            }
+
+                        })
+
+                    } else {
+                        alert("请输入网名");
+                        return;
+                    }
+                } else {
+                    alert("请填写税点");
+                    return;
+                    //合并的内容
+                }
+            }
+            var sum = 0;
+            var t = document.getElementsByClassName("p");
+            for (var i = 0; i
+                < t.length; i++) {
+                if (t[i].type == 'text') {
+                    ++sum;
+                    t[i].value = "";//清空
+                    t[i].text = "";
+                }
             }
         } else {
             alert("请填写完整");
         }
+        Distinguishss = _this2;
     }
     function files1() {
         $.ajax({
@@ -2142,11 +2416,19 @@
         var Bankcode = $("#Bankcode").val();//银行账号
         var projectname = $("#projectname1").val(); //项目名称
         var Paymentobject = $("#Paymentobject1").val();//支付对象
+        var pingtai1 = $("#insidePingtai1").val();//平台
+        var chenbenbaojia1 = $("#insideChenbenbaojia1").val();//平台
+        var xiaoshoubaojia1 = $("#insideXiaoshoubaojia1").val();//平台insideSuidian1
+        var suidian1 = $("#insideSuidian1").val();
         var beizhu = $("#beizhus").val();
         $.ajax({
             url: "/Home/PaymentCompanys",
             type: "post",
             data: {
+                pingtai1: pingtai1,
+                chenbenbaojia1: chenbenbaojia1,
+                xiaoshoubaojia1: xiaoshoubaojia1,
+                suidian1: suidian1,
                 ZFjine: ZFjine,
                 fapiao: fapiao,
                 fapiaosuie: fapiaosuie,
@@ -2160,7 +2442,7 @@
                 leixing: leixing,
                 beizhu: beizhu,
                 suidian: suidian,
-                chenbenbaojia: parseInt(result) + parseInt(result1),
+                chenbenbaojia: chenbenbaojia,
                 xiaoshoubaojia: xiaoshoubaojia,
                 wangming: ddd,
                 //caiwuchengben: caiwuchengben.value, //获取不到值
@@ -2223,6 +2505,9 @@
         var kaihuhang = $("#kaihuhang1").val();//开户行
         var Bankcode = $("#Bankcode1").val();//银行账号
         var beizhu = $("#beizhu1").val();
+        var pingtai = $("#insidePingtai").val();//平台
+        var chenbenbaojia1 = $("#insideChenbenbaojia").val();//弹出框成本报价
+        var xiaoshoubaojia1 = $("#insideXiaoshoubaojia").val();//弹出框销售报价
         $.ajax({
             url: "/Home/PersonalPayments",
             type: "post",
@@ -2246,7 +2531,9 @@
                 Distinguish: Distinguishss,
                 chenbenleibie: chenbenleibie,
                 yongtu: yongtu,
-                pingtai: pingtai
+                pingtai: pingtai,
+                chenbenbaojia1: chenbenbaojia1,
+                xiaoshoubaojia1: xiaoshoubaojia1
             },
             success: function (data) {
                 xuhao = data.formmodel['xuhao'];
