@@ -58,6 +58,7 @@ namespace Model
         public string zhulaoban { set; get; }
 
         public int paymentapplicationformiId { set; get; }
+        public string ProjectName { set; get; }
 
         #endregion Model
 

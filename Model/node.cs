@@ -30,6 +30,7 @@ namespace Model
         public string laoban { set; get; }
         public string zhulaoban { set; get; }
         public int processstate { set; get; }
+        public string ProjectName { set; get; }
         #endregion Model
 
     }

@@ -30,6 +30,10 @@
         width: 100%;
         height: 100%;
     }
+
+    .shifoufukuan1 {
+        color: red;
+    }
 </style>
 <body id="money1">
     <section id="container" class="">
@@ -43,16 +47,16 @@
                             <td colspan="2">
                                 <select class="form-control" type="text" onchange="namechange(this.value)">
                                     @{
-                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
-                        <option value="">--请选择--</option>
-        if (list.Any())
-        {
-            foreach (var item in list)
-            {
-                <option value="@item.ProjectName">@item.ProjectName</option>
+                                        List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
+                                        <option value="">--请选择--</option>
+                                        if (list.Any())
+                                        {
+                                            foreach (var item in list)
+                                            {
+                                                <option value="@item.ProjectName">@item.ProjectName</option>
 
-}
-}
+                                            }
+                                        }
                                     }
                                 </select>
                             </td>
@@ -152,7 +156,7 @@
                             </td>
                         </tr>
                     </table>
-                    </div>
+                </div>
                 <div class="lixiangshenpi" style="display:none">
                     <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
                     <div id="shenpirenliucheng" class="form-control" style="height:60px;">
@@ -181,351 +185,333 @@
                     </div>
                     <input id="shenpi" type="button" onclick="shenpi(1)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
                 </div>
-                    <div id="detailed">
-                        <table id="personaltable1" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td colspan="11"><p style="float:left;color:red">达人成明细,个人无票</p></td>
-                                </tr>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>平台</th>
-                                    <th>网名</th>
-                                    <th>成本报价</th>
-                                    <th>销售报价</th>
-                                    <th>实际付款金额</th>
-                                    <th>财务成本</th>
-                                    <th>是否付款</th>
-                                    <th>含税合计成本</th>
-                                    <th>操作</th>
-                                    <th>付款审批</th>
-                                </tr>
-                            </thead>
-                            <input type="button" class="btn-default form-control" id="add1" onClick="personaladdLabel()" value="添加" style="display:none">
-                            <tbody id="personalck"></tbody>
-                        </table>
-                        <table id="companytable1" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td colspan="12"><p style="float:left;color:red">代理公司KOL</p></td>
-                                </tr>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>平台</th>
-                                    <th>网名</th>
-                                    <th>税点</th>
-                                    <th>成本报价</th>
-                                    <th>销售报价</th>
-                                    <th>实际付款金额</th>
-                                    <th>财务成本</th>
-                                    <th>是否付款</th>
-                                    <th>含税合计成本</th>
-                                    <th>操作</th>
-                                    <th>付款审批</th>
-                                </tr>
-                            </thead>
-                            <input type="button" class="btn-default form-control" id="add2" onClick="companyaddLabel()" value="添加" style="display:none">
-                            <tbody id="companyck"></tbody>
-                        </table>
-                        <table id="table1" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td colspan="13"><p style="float:left;color:red">其它</p></td>
-                                </tr>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>成本类别</th>
-                                    <th>用途</th>
-                                    <th>支付方式</th>
-                                    <th>税点</th>
-                                    <th>成本报价</th>
-                                    <th>销售报价</th>
-                                    <th>实际付款金额</th>
-                                    <th>财务成本</th>
-                                    <th>是否付款</th>
-                                    <th>含税合计成本</th>
-                                    <th>操作</th>
-                                    <th>付款审批</th>
-                                </tr>
-                            </thead>
-                            <input type="button" class="btn-default form-control" id="add" onClick="addLabel()" value="添加" style="display:none">
-                            <tbody id="ck"></tbody>
-                        </table>
-                        <table class="table table-bordered">
+                <div id="detailed">
+                    <table id="personaltable1" class="table table-bordered">
+                        <thead>
                             <tr>
-                                <th>备注</th>
-                                <td>
-                                    <textarea class="form-control" id="beizhu">
+                                <td colspan="11"><p style="float:left;color:red">达人成明细,个人无票</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>平台</th>
+                                <th>网名</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>是否付款</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                                <th>付款审批</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add1" onClick="personaladdLabel()" value="添加" style="display:none">
+                        <tbody id="personalck"></tbody>
+                    </table>
+                    <table id="companytable1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="12"><p style="float:left;color:red">代理公司KOL</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>平台</th>
+                                <th>网名</th>
+                                <th>税点</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>是否付款</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                                <th>付款审批</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add2" onClick="companyaddLabel()" value="添加" style="display:none">
+                        <tbody id="companyck"></tbody>
+                    </table>
+                    <table id="table1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td colspan="13"><p style="float:left;color:red">其它</p></td>
+                            </tr>
+                            <tr>
+                                <th>序号</th>
+                                <th>成本类别</th>
+                                <th>用途</th>
+                                <th>支付方式</th>
+                                <th>税点</th>
+                                <th>成本报价</th>
+                                <th>销售报价</th>
+                                <th>实际付款金额</th>
+                                <th>财务成本</th>
+                                <th>是否付款</th>
+                                <th>含税合计成本</th>
+                                <th>操作</th>
+                                <th>付款审批</th>
+                            </tr>
+                        </thead>
+                        <input type="button" class="btn-default form-control" id="add" onClick="addLabel()" value="添加" style="display:none">
+                        <tbody id="ck"></tbody>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>备注</th>
+                            <td>
+                                <textarea class="form-control" id="beizhu">
 
                                 </textarea>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th colspan="3">销售报价合计</th>
-                                <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="xsbaojiaheji" /></td>
-                                <th colspan="3">税金合计</th>
-                                <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="suijinheji" /></td>
-                            </tr>
-                            <tr>
-                                <th colspan="3">不含税成本合计</th>
-                                <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="Noheji" /></td>
-                                <th colspan="3">含税成本合计</th>
-                                <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="heji" /></td>
-                            </tr>
-                        </table>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>毛利润</th>
-                                <td><input class="form-control" type="text" readonly="readonly" id="maolirun" /></td>
-                                <th>毛利润百分比</th>
-                                <td><input class="form-control" type="text" readonly="readonly" id="maolirunbfb" /></td>
-                                <th>净利润</th>
-                                <td><input class="form-control" type="text" readonly="readonly" id="jinglirun" /></td>
-                                <th>净利润百分比</th>
-                                <td><input class="form-control" type="text" readonly="readonly" id="jinglirunbfb" /></td>
-                            </tr>
-                            <tr>
-                                <th>未支付渠道款</th>
-                                <td><input class="form-control" type="text" readonly="readonly" id="Nozhifu" /></td>
-                                <th>员工奖金</th>
-                                <td>
-                                    @{if (@ViewBag.rolename == "管理员")
-                        {<input class="form-control" type="text" id="yuangongjiangjin" onchange="weifenpeilirun(this.value)" />}}
-                                </td>
-                                <th>未分配利润</th>
-                                <td colspan="3"><input class="form-control" type="text" readonly="readonly" id="weifenpeilirun" /></td>
-                            </tr>
-                        </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="3">销售报价合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="xsbaojiaheji" /></td>
+                            <th colspan="3">税金合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="suijinheji" /></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">不含税成本合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="Noheji" /></td>
+                            <th colspan="3">含税成本合计</th>
+                            <td colspan="2"><input class="form-control" type="text" readonly="readonly" id="heji" /></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>毛利润</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="maolirun" /></td>
+                            <th>毛利润百分比</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="maolirunbfb" /></td>
+                            <th>净利润</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="jinglirun" /></td>
+                            <th>净利润百分比</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="jinglirunbfb" /></td>
+                        </tr>
+                        <tr>
+                            <th>未支付渠道款</th>
+                            <td><input class="form-control" type="text" readonly="readonly" id="Nozhifu" /></td>
+                            <th>员工奖金</th>
+                            <td>
+                                @{if (@ViewBag.rolename == "管理员")
+                                    {<input class="form-control" type="text" id="yuangongjiangjin" onchange="weifenpeilirun(this.value)" />}}
+                            </td>
+                            <th>未分配利润</th>
+                            <td colspan="3"><input class="form-control" type="text" readonly="readonly" id="weifenpeilirun" /></td>
+                        </tr>
+                    </table>
 
-                        <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
-                        <div id="shenpirenliucheng" class="form-control" style="height:60px;">
-                            <table>
-                                <tr>
-                                    <th>立项人</th>
-                                    <th>SAE</th>
-                                    <th>AD</th>
-                                    <th>SAD</th>
-                                    <th>营销总监</th>
-                                    <th>财务</th>
-                                    <th>总经理</th>
-                                    <th>朱老板</th>
-                                </tr>
-                                <tr id="k0">
-                                    <td id="k1"></td>
-                                    <td id="k3"></td>
-                                    <td id="k4"></td>
-                                    <td id="k5"></td>
-                                    <td id="k6"></td>
-                                    <td id="k7"></td>
-                                    <td id="k8"></td>
-                                    <td id="k9"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <input type="button" id="detailed1" onclick="mingxi()" class="btn btn-info btn-block" value="确定" />
-                        <input id="shenpi" type="button" onclick="shenpi(3)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
+                    <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
+                    <div id="shenpirenliucheng" class="form-control" style="height:60px;">
+                        <table>
+                            <tr>
+                                <th>立项人</th>
+                                <th>SAE</th>
+                                <th>AD</th>
+                                <th>SAD</th>
+                                <th>营销总监</th>
+                                <th>财务</th>
+                                <th>总经理</th>
+                                <th>朱老板</th>
+                            </tr>
+                            <tr id="k0">
+                                <td id="k1"></td>
+                                <td id="k3"></td>
+                                <td id="k4"></td>
+                                <td id="k5"></td>
+                                <td id="k6"></td>
+                                <td id="k7"></td>
+                                <td id="k8"></td>
+                                <td id="k9"></td>
+                            </tr>
+                        </table>
                     </div>
-                    @*对公司弹出层*@
-                    <div class="modal fade" id="myModal" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content" style="width:1200px;right:200px;">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel1"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div>
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <th class="k">项目代码</th>
-                                                <td>
-                                                    <input class="form-control code1" type="text" value="" id="code1" readonly="readonly" />
-                                                </td>
-                                                <th class="k">项目名称</th>
-                                                <td class="k">
-                                                    <input class="form-control projectname1" type="text" value="" id="projectname1" readonly="readonly" />
-                                                </td>
-                                                <th class="k">支付对象(网名)</th>
-                                                <td colspan="3"><input class="form-control p Paymentobject1" type="text" value="" id="Paymentobject1"/></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="k">平台</th>
-                                                <td><input class="form-control p insidePingtai1" type="text" id="insidePingtai1" /></td>
-                                                <th class="k">成本报价</th>
-                                                <td><input class="form-control p insideChenbenbaojia1" type="text" id="insideChenbenbaojia1" /></td>
-                                                <th class="k">销售报价</th>
-                                                <td><input class="form-control p insideXiaoshoubaojia1" type="text" id="insideXiaoshoubaojia1" /></td>
-                                                <th class="k">税点</th>
-                                                <td><input class="form-control p insideSuidian1" type="text" id="insideSuidian1" /></td>
-                                            </tr>
-                                            <tr>
+                    <input type="button" id="detailed1" onclick="mingxi()" class="btn btn-info btn-block" value="确定" />
+                    <input id="shenpi" type="button" onclick="shenpi(3)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
+                </div>
+                @*对公司弹出层*@
+                <div class="modal fade" id="myModal" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel1"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th class="k">项目代码</th>
+                                            <td>
+                                                <input class="form-control" type="text" value="" id="code1" readonly="readonly" />
+                                            </td>
+                                            <th class="k">项目名称</th>
+                                            <td class="k">
+                                                <input class="form-control" type="text" value="" id="projectname1" readonly="readonly" />
+                                            </td>
+                                            <th class="k">支付对象(网名)</th>
+                                            <td colspan="3"><input class="form-control" type="text" value="" id="Paymentobject1" readonly="readonly" /></td>
+                                        </tr>
+                                        <tr>
 
-                                                <th class="k">应支付金额</th>
-                                                <td><input class="form-control p ZFjine1" type="text" id="ZFjine" /></td>
-                                                <th class="k">发票号</th>
-                                                <td><input class="form-control p fapiao1" type="text" id="fapiao" /></td>
-                                                <th class="k">发票附件</th>
-                                                <td>
-                                                    <form enctype="multipart/form-data" id="file-froms" name="file-froms">
-                                                        <p>
-                                                            <input style="display:none" id="btnMCToOutfujian" type="button" onclick="importExcel3()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入(确认后上传)">
-                                                            <input class="form-control" type="file" name="fileds" id="fileds">
-                                                        </p>
-                                                    </form>
-                                                </td>
-                                                <th class="k">发票税额</th>
-                                                <td><input class="form-control p fapiaosuie1" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this) " /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="k">付款时间</th>
-                                                <td><input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p ZFdate1" aria-describedby="basic-addon2" type="text" id="ZFdate" /></td>
-                                                <th class="k">公司名称(收款,手填)</th>
-                                                <td><input class="form-control p gsname1" type="text" id="gsname" /></td>
-                                                <th class="k">开户行</th>
-                                                <td><input class="form-control p kaihuhang1" type="text" id="kaihuhang" /></td>
-                                                <th class="k">银行账号</th>
-                                                <td><input class="form-control p Bankcode1" type="text" id="Bankcode" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th>备注</th>
-                                                <td colspan="7">
-                                                    <textarea class="form-control p beizhus1" id="beizhus">
+                                            <th class="k">应支付金额</th>
+                                            <td><input class="form-control p" type="text" id="ZFjine" /></td>
+                                            <th class="k">发票号</th>
+                                            <td><input class="form-control p" type="text" id="fapiao" /></td>
+                                            <th class="k">发票附件</th>
+                                            <td>
+                                                <form enctype="multipart/form-data" id="file-froms" name="file-froms">
+                                                    <p>
+                                                        <input style="display:none" id="btnMCToOutfujian" type="button" onclick="importExcel3()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入(确认后上传)">
+                                                        <input class="form-control" type="file" name="fileds" id="fileds">
+                                                    </p>
+                                                </form>
+                                            </td>
+                                            <th class="k">发票税额</th>
+                                            <td><input class="form-control p" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this) " /></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">付款时间</th>
+                                            <td><input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate" /></td>
+                                            <th class="k">公司名称(收款,手填)</th>
+                                            <td><input class="form-control p" type="text" id="gsname" /></td>
+                                            <th class="k">开户行</th>
+                                            <td><input class="form-control p" type="text" id="kaihuhang" /></td>
+                                            <th class="k">银行账号</th>
+                                            <td><input class="form-control p" type="text" id="Bankcode" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>备注</th>
+                                            <td colspan="7">
+                                                <textarea class="form-control p" id="beizhus">
                                              </textarea>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        关闭
-                                    </button>
-                                    <input onclick="buts1(this);" type="button" class="btn btn-primary" value="提交">
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <input onclick="buts1();" type="button" class="btn btn-primary" value="提交">
                             </div>
                         </div>
                     </div>
-                    @*对个人弹出层*@
-                    <!-- 模态框（Modal） -->
-                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content" style="width:1200px;right:200px;">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel2"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div>
-                                        <table>
-                                            <tr>
-                                                <th class="k">平台</th>
-                                                <td><input class="form-control p insidePingtai2" type="text" id="insidePingtai" /></td>
-                                                <th class="k">成本报价</th>
-                                                <td><input class="form-control p insideChenbenbaojia2" type="text" id="insideChenbenbaojia" /></td>
-                                                <th class="k">销售报价</th>
-                                                <td><input class="form-control p insideXiaoshoubaojia2" type="text" id="insideXiaoshoubaojia" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="k">付款时间</th>
-                                                <td>
-                                                    <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p ZFdate2" aria-describedby="basic-addon2" type="text" id="ZFdate1" />
-                                                </td>
-                                                <th class="k">项目名称</th>
-                                                <td>
-                                                    <input class="form-control projectname2" type="text" id="projectname2" readonly="readonly" />
-                                                </td>
-                                                <th class="k">项目代码</th>
-                                                <td class="k">
-                                                    <input class="form-control code2" type="text" id="code2" readonly="readonly" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th class="k">支付对象(网名)</th>
-                                                <td><input class="form-control p Paymentobject2" type="text" id="Paymentobject2" /></td>
-                                                <th class="k">应支付金额</th>
-                                                <td colspan="3"><input class="form-control p ZFjine2" type="text" id="ZFjine1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="k">收款人</th>
-                                                <td><input class="form-control p shoukuanren2" type="text" id="shoukuanren" /></td>
-                                                <th class="k">开户行</th>
-                                                <td><input class="form-control p kaihuhang2" type="text" id="kaihuhang1" /></td>
-                                                <th class="k">银行账号</th>
-                                                <td><input class="form-control p Bankcode2" type="text" id="Bankcode1" /></td>
-                                            </tr>
-                                            <tr>
-                                                <th>备注</th>
-                                                <td colspan="5">
-                                                    <textarea class="form-control p beizhu2" id="beizhu1">
+                </div>
+                @*对个人弹出层*@
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <th class="k">付款时间</th>
+                                            <td>
+                                                <input onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control p" aria-describedby="basic-addon2" type="text" id="ZFdate1" />
+                                            </td>
+                                            <th class="k">项目名称</th>
+                                            <td>
+                                                <input class="form-control" type="text" id="projectname2" readonly="readonly" />
+                                            </td>
+                                            <th class="k">项目代码</th>
+                                            <td class="k">
+                                                <input class="form-control" type="text" id="code2" readonly="readonly" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">支付对象(网名)</th>
+                                            <td><input class="form-control" type="text" id="Paymentobject2" readonly="readonly" /></td>
+                                            <th class="k">应支付金额</th>
+                                            <td colspan="3"><input class="form-control p" type="text" id="ZFjine1" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="k">收款人</th>
+                                            <td><input class="form-control p" type="text" id="shoukuanren" /></td>
+                                            <th class="k">开户行</th>
+                                            <td><input class="form-control p" type="text" id="kaihuhang1" /></td>
+                                            <th class="k">银行账号</th>
+                                            <td><input class="form-control p" type="text" id="Bankcode1" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>备注</th>
+                                            <td colspan="5">
+                                                <textarea class="form-control p" id="beizhu1">
 
                                                  </textarea>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        关闭
-                                    </button>
-                                    <input onclick="butss1();" type="button" class="btn btn-primary" value="提交">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <input onclick="butss1();" type="button" class="btn btn-primary" value="提交">
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <!-- 财务审批人员模态框 -->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:1200px;right:200px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
+                                <div id="shenpirenliucheng" class="form-control" style="height:60px;">
+                                    <table>
+                                        <tr>
+                                            <th>立项人</th>
+                                            <th>SAE</th>
+                                            <th>AD</th>
+                                            <th>SAD</th>
+                                            <th>营销总监</th>
+                                            <th>财务</th>
+                                            <th>总经理</th>
+                                            <th>朱老板</th>
+                                        </tr>
+                                        <tr id="k0s">
+                                            <td id="k1s"></td>
+                                            <td id="k3s"></td>
+                                            <td id="k4s"></td>
+                                            <td id="k5s"></td>
+                                            <td id="k6s"></td>
+                                            <td id="k7s"></td>
+                                            <td id="k8s"></td>
+                                            <td id="k9s"></td>
+                                        </tr>
+                                    </table>
                                 </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal -->
-                    </div>
-                    <!-- 财务审批人员模态框 -->
-                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content" style="width:1200px;right:200px;">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel2"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p style="color:red">提示:颜色为蓝色的则未审批,颜色为红色的则已审批</p>
-                                    <div id="shenpirenliucheng" class="form-control" style="height:60px;">
-                                        <table>
-                                            <tr>
-                                                <th>立项人</th>
-                                                <th>SAE</th>
-                                                <th>AD</th>
-                                                <th>SAD</th>
-                                                <th>营销总监</th>
-                                                <th>财务</th>
-                                                <th>总经理</th>
-                                                <th>朱老板</th>
-                                            </tr>
-                                            <tr id="k0s">
-                                                <td id="k1s"></td>
-                                                <td id="k3s"></td>
-                                                <td id="k4s"></td>
-                                                <td id="k5s"></td>
-                                                <td id="k6s"></td>
-                                                <td id="k7s"></td>
-                                                <td id="k8s"></td>
-                                                <td id="k9s"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <input id="shenpi" type="button" onclick="shenpi(2)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        关闭
-                                    </button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal -->
-                    </div>
-</section>
+                                <input id="shenpi" type="button" onclick="paymentshenpi()" class="btn btn-primary btn-lg btn-block" value="通过审批" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    关闭
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </section>
         </section>
     </section>
 </body>
@@ -571,7 +557,7 @@
                 }
             }
         </td>
-        <td></td>
+        <td>未付款</td>
         <td>
             <input type="text" readonly="readonly" class="form-control personalaaa" />
         </td>
@@ -579,7 +565,7 @@
             <input id="xiugai" onclick="update(this,2)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa1(1)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
         </td>
     </tr>
 </script>
@@ -628,7 +614,7 @@
                 }
             }
         </td>
-        <td></td>
+        <td>未付款</td>
         <td>
             <input type="text" readonly="readonly" class="form-control companyaaa" />
         </td>
@@ -636,7 +622,7 @@
             <input id="xiugai" onclick="update(this,3)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa2(2)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
         </td>
     </tr>
 </script>
@@ -649,8 +635,8 @@
         <td>
             <input type="text" class="form-control yongtu" name="yongtu" id="yongtu" />
         </td>
-        <td> 
-            <select onchange="btnChange1(this[selectedIndex].value,this);" class="form-control modeltype" id="leibie">
+        <td>
+            <select onchange="btnChange1(this[selectedIndex].value);" class="form-control" id="leibie">
                 <option value="">--请选择--</option>
                 <option value="对个人">对个人</option>
                 <option value="对公司">对公司</option>
@@ -681,15 +667,15 @@
                 }
             }
         </td>
-        <td></td>
+        <td>未付款</td>
         <td>
             <input type="text" readonly="readonly" class="form-control aaa" />
         </td>
         <td>
-            <input id="xiugai" onclick="update(this,0)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
+            <input id="xiugai" onclick="update(this,Distinguish)" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" style="display:none" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa3(3)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
         </td>
     </tr>
 </script>
@@ -1598,16 +1584,13 @@
         $('.otherddd').eq(len - 1).text($("#table1 tr").length - 2);
     }
     var leixing;
-    function btnChange1(values,_this) {
-        var suidiankuang = $(_this).closest('tr').find('.suidian')[0];
-        var xialakuang = $(_this).closest('tr').find('.modeltype')[0];
-        //$(xialakuang).attr('type', 'text');
-        $(xialakuang).attr('disabled', 'disabled');
+
+    function btnChange1(values) {
         leixing = values;
         if (values == "对公司") {
-            $(suidiankuang).removeAttr("readonly");
+            $('input[id=suidian]').removeAttr("readonly")
         } else if (values != "对公司") {
-            $(suidiankuang).attr("readonly", "readonly");
+            $('input[id=suidian]').attr("readonly", "readonly")
         }
     }
     var projectCostlujing;
@@ -1731,14 +1714,7 @@
                     $("#k7").html(data.nodemodel['caiwu'])
                     $("#k8").html(data.nodemodel['laoban'])
                     $("#k9").html(data.nodemodel['zhulaoban'])
-                    $("#k1s").html("立项人")
-                    $("#k3s").html(data.nodemodels['SAE'])
-                    $("#k4s").html(data.nodemodels['AD'])
-                    $("#k5s").html(data.nodemodels['SAD'])
-                    $("#k6s").html(data.nodemodels['yinxiaozongjian'])
-                    $("#k7s").html(data.nodemodels['caiwu'])
-                    $("#k8s").html(data.nodemodels['laoban'])
-                    $("#k9s").html(data.nodemodels['zhulaoban'])
+
                     //获取当前项目的项目成员
                     $("#xiangmuchengyuan").val(data.nodemodel['AE'] + "," + data.nodemodel['SAE'] + "," + data.nodemodel['AD'] + "," + data.nodemodel['SAD'] + "," + data.nodemodel['yinxiaozongjian'] + "," + data.nodemodel['caiwu'] + "," + data.nodemodel['laoban'] + "," + data.nodemodel['zhulaoban'])
                 } else {
@@ -1805,65 +1781,6 @@
                             break;
                     }
                 }
-                if (data.nodemodel != null) {
-                    switch (data.nodemodels['Stateofapproval']) {
-                        case 1:
-                            $("#k1s").attr('style', 'color:red');
-                            break;
-                        case 2:
-                            $("#k1s").attr('style', 'color:red');
-                            break;
-                        case 3:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            break;
-                        case 4:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            break;
-                        case 5:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            $("#k5s").attr('style', 'color:red');
-                            break;
-                        case 6:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            $("#k5s").attr('style', 'color:red');
-                            $("#k6s").attr('style', 'color:red');
-                            break;
-                        case 7:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            $("#k5s").attr('style', 'color:red');
-                            $("#k6s").attr('style', 'color:red');
-                            $("#k7s").attr('style', 'color:red');
-                            break;
-                        case 8:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            $("#k5s").attr('style', 'color:red');
-                            $("#k6s").attr('style', 'color:red');
-                            $("#k7s").attr('style', 'color:red');
-                            $("#k8s").attr('style', 'color:red');
-                            break;
-                        case 9:
-                            $("#k1s").attr('style', 'color:red');
-                            $("#k3s").attr('style', 'color:red');
-                            $("#k4s").attr('style', 'color:red');
-                            $("#k5s").attr('style', 'color:red');
-                            $("#k6s").attr('style', 'color:red');
-                            $("#k7s").attr('style', 'color:red');
-                            $("#k8s").attr('style', 'color:red');
-                            $("#k9s").attr('style', 'color:red');
-                            break;
-                    }
-                }
                 if (data.nodesmodel != null) {
                     switch (data.nodesmodel['Stateofapproval']) {
                         case 1:
@@ -1926,30 +1843,30 @@
                 //1
                 if (data.catmodel != null) {
                     for (var i = 0; i < data.catmodel.length; i++) {
-                        if (data.catmodel[i].paystate=="1") {
-                            var trhtml = '<tr><td>' + data.catmodel[i].xuhao + '</td><td>' + data.catmodel[i].Costcategory + '</td><td>' + data.catmodel[i].purpose + '</td><td>' + data.catmodel[i].ApplyforpaymentType + '</td><td>' + data.catmodel[i].shuidian + '</td><td class="ccc2">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2">' + data.catmodel[i].Salesquotation + '</td><td>' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" readonly="readonly" id="shifoufukuan"  value="已付款"  />} }</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批" disabled="disabled" data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                        if (data.catmodel[i].readState=="1") {
+                            var trhtml = '<tr><td>' + data.catmodel[i].xuhao + '</td><td>' + data.catmodel[i].Costcategory + '</td><td>' + data.catmodel[i].purpose + '</td><td>' + data.catmodel[i].ApplyforpaymentType + '</td><td>' + data.catmodel[i].shuidian + '</td><td class="ccc2">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2">' + data.catmodel[i].Salesquotation + '</td><td>' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2 chenben" value = "' + data.catmodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批" disabled="disabled" data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         } else {
-                        var trhtml = '<tr><td>' + data.catmodel[i].xuhao + '</td><td>' + data.catmodel[i].Costcategory + '</td><td>' + data.catmodel[i].purpose + '</td><td>' + data.catmodel[i].ApplyforpaymentType + '</td><td>' + data.catmodel[i].shuidian + '</td><td class="ccc2">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2">' + data.catmodel[i].Salesquotation + '</td><td>' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2"  onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" id="shifoufukuan" value="未付款" />} }</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                            var trhtml = '<tr><td>' + data.catmodel[i].xuhao + '</td><td>' + data.catmodel[i].Costcategory + '</td><td>' + data.catmodel[i].purpose + '</td><td>' + data.catmodel[i].ApplyforpaymentType + '</td><td>' + data.catmodel[i].shuidian + '</td><td class="ccc2">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2">' + data.catmodel[i].Salesquotation + '</td><td>' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2"  onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2 chenben" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         }
                         $('#ck').append(trhtml)
                     }
                 }
                 if (data.personalmodel != null) {
                     for (var i = 0; i < data.personalmodel.length; i++) {
-                        if (data.personalmodel[i].paystate == "1") {
-                            var personaltrhtml = '<tr><td>' + data.personalmodel[i].xuhao + '</td><td>' + data.personalmodel[i].pingtai + '</td><td>' + data.personalmodel[i].wangming + '</td><td class="ccc2">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2">' + data.personalmodel[i].Salesquotation + '</td><td>' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" readonly="readonly"  id="shifoufukuan" value="已付款" />}}</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批" disabled="disabled"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                        if (data.personalmodel[i].readState == "1") {
+                            var personaltrhtml = '<tr><td>' + data.personalmodel[i].xuhao + '</td><td>' + data.personalmodel[i].pingtai + '</td><td>' + data.personalmodel[i].wangming + '</td><td class="ccc2">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2">' + data.personalmodel[i].Salesquotation + '</td><td>' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2 chenben" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批" disabled="disabled"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         } else {
-                            var personaltrhtml = '<tr><td>' + data.personalmodel[i].xuhao + '</td><td>' + data.personalmodel[i].pingtai + '</td><td>' + data.personalmodel[i].wangming + '</td><td class="ccc2">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2">' + data.personalmodel[i].Salesquotation + '</td><td>' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" id="shifoufukuan"  value="未付款" />}}</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                            var personaltrhtml = '<tr><td>' + data.personalmodel[i].xuhao + '</td><td>' + data.personalmodel[i].pingtai + '</td><td>' + data.personalmodel[i].wangming + '</td><td class="ccc2">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2">' + data.personalmodel[i].Salesquotation + '</td><td>' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2 chenben" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         }
                         $('#personalck').append(personaltrhtml)
                     }
                 }
                 if (data.companymodel != null) {
                     for (var i = 0; i < data.companymodel.length; i++) {
-                        if (data.companymodel[i].paystate=="1") {
-                            var companytrhtml = '<tr><td>' + data.companymodel[i].xuhao + '</td><td>' + data.companymodel[i].pingtai + '</td><td>' + data.companymodel[i].wangming + '</td><td>' + data.companymodel[i].shuidian + '</td><td class="ccc2">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2">' + data.companymodel[i].Salesquotation + '</td><td>' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2" value = "' + data.companymodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" readonly="readonly" id="shifoufukuan" value="已付款" />}}</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批" disabled="disabled" data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                        if (data.companymodel[i].readState=="1") {
+                            var companytrhtml = '<tr><td>' + data.companymodel[i].xuhao + '</td><td>' + data.companymodel[i].pingtai + '</td><td>' + data.companymodel[i].wangming + '</td><td>' + data.companymodel[i].shuidian + '</td><td class="ccc2">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2">' + data.companymodel[i].Salesquotation + '</td><td>' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批" disabled="disabled" data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         } else {
-                            var companytrhtml = '<tr><td>' + data.companymodel[i].xuhao + '</td><td>' + data.companymodel[i].pingtai + '</td><td>' + data.companymodel[i].wangming + '</td><td>' + data.companymodel[i].shuidian + '</td><td class="ccc2">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2">' + data.companymodel[i].Salesquotation + '</td><td>' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2" value = "' + data.companymodel[i].Financialcost + '" />}}</td ><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" class="btn btn-primary form-control shifoufukuan" id="shifoufukuan" readonly="readonly"  value="未付款" />}}</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
+                            var companytrhtml = '<tr><td>' + data.companymodel[i].xuhao + '</td><td>' + data.companymodel[i].pingtai + '</td><td>' + data.companymodel[i].wangming + '</td><td>' + data.companymodel[i].shuidian + '</td><td class="ccc2">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2">' + data.companymodel[i].Salesquotation + '</td><td>' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批"  data-toggle="modal" data-target="#myModal2" /></td></tr > '
                         }
                         $('#companyck').append(companytrhtml)
                     }
@@ -1959,131 +1876,70 @@
     }
     var len1
     var zhifujine
-    var shifujine;
     var shenqing
     var shenqing1
     var chenben
-    var xiaoshou;
     var wangming
     var ddd
     var xiugai
     var yongtu
-    var chenbenleibie;
-    var chengbenleibeikuang;
-    var yongtukuang;
+    var chenbenleibie
     var Distinguishss;
     //平台
     var pingtai
-    var pinttai1;
-    var wangmingddd;
     //根据状态申请跳转页面
     function but(_this) {
         //获取每行的点击值
-        var sum = 0;
-        var t = document.getElementsByClassName("p");
-        for (var i = 0; i
-            < t.length; i++) {
-            if (t[i].type == 'text') {
-                ++sum;
-                t[i].value = "";//清空
-            }
-        }
-        Distinguishss = 0;
-        pingtai = "";
-        wangming = "";
+            Distinguishss = 0;
         zhifujine = $(_this).closest('tr').find('.shenqing1')[0]
         shenqing = $(_this).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         suidian = $(_this).closest('tr').find('.suidian')[0].value;
-        alert(suidian);
         chenben = $(_this).closest('tr').find('.ccc1')[0]
-        suidiankuang = $(_this).closest('tr').find('.suidian')[0];
-        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
         xiugai = $(_this).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
-        caiwuchengben = $(_this).closest('tr').find('.chaiwuchenben')[0];
-        chengbenleibeikuang = $(_this).closest('tr').find('.chenbenleibie')[0];
-        yongtukuang = $(_this).closest('tr').find('.yongtu')[0];
-        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this).closest('tr').find('.chaiwuchenben')[0]
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.aaa')[0].value;
         yongtu  = $(_this).closest('tr').find('.yongtu')[0].value;
-        chenbenleibie = $(_this).closest('tr').find('.chenbenleibie')[0].value;
-        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null && chenbenleibie != "" && yongtu != "") {
-            if (suidian != "") {
-                leixing = "对公司";
-                if (suidian != "" && chenbenleibie !="" && yongtu!="") {
-                    $(chengbenleibeikuang).attr('readonly', 'readonly');
-                    $(yongtukuang).attr('readonly', 'readonly');
-                    $(pinttai1).attr('readonly', 'readonly');
-                    $(suidiankuang).attr('readonly', 'readonly');
-                    $(wangmingddd).attr('readonly', 'readonly');
-                    $(chenben).attr('readonly', 'readonly');
-                    $(xiaoshou).attr('readonly', 'readonly');
+        chenbenleibie= $(_this).closest('tr').find('.chenbenleibie')[0].value;
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+            if (leixing == "对公司") {
+                if (suidian != "") {
                     $("#shenqing").attr('data-target', '#myModal');
                     $('#myModal').modal('show');
                     if (ddd != '') {
-                        document.getElementById("insidePingtai1").value = pingtai;
-                        document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
-                        document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
-                        document.getElementById("insideSuidian1").value = suidian;
+                        document.getElementById("code1").value = $("#code").val();
                         document.getElementById("projectname1").value = s;
                         document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
-                        return;
                     }
                 } else {
                     alert("请填写税点");
                     return;
                 }
-            } else if (suidian == "") {
-                leixing = "对个人";
-                $(chengbenleibeikuang).attr('readonly', 'readonly');
-                $(yongtukuang).attr('readonly', 'readonly');
-                $(pinttai1).attr('readonly', 'readonly');
-                $(wangmingddd).attr('readonly', 'readonly');
-                $(chenben).attr('readonly', 'readonly');
-                $(xiaoshou).attr('readonly', 'readonly');
-                if (ddd != "") {
-                    $("#shenqing").attr('data-target', '#myModal1');
-                    $('#myModal1').modal('show');
-                    document.getElementById("insidePingtai").value = pingtai;
-                    document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
-                    document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
+            } else if (leixing == "对个人") {
+                $("#shenqing").attr('data-target', '#myModal1');
+                $('#myModal1').modal('show');
+                if (ddd != '') {
                     document.getElementById("code2").value = $("#code").val();
                     document.getElementById("projectname2").value = s;
                     document.getElementById("Paymentobject2").value = ddd;
                     document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
-                    return;
                 } else {
                     alert("请输入网名(支付对象)");
                     return;
                 }
             }
-            
-
         } else {
-
             alert("请填写完整");
-            return;
         }
     }
     //对个人
     function personalbut(_this) {
         //获取每行的点击值
-        var sum = 0;
-        var t = document.getElementsByClassName("p");
-        for (var i = 0; i
-            < t.length; i++) {
-            if (t[i].type == 'text') {
-                ++sum;
-                t[i].value = "";//清空
-            }
-        }
-        leixing = "对个人";
         ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
-        wangmingddd = $(_this).closest('tr').find('.ddd2')[0];  //网名
         pingtai = $(_this).closest('tr').find('.pingtai')[0].value;  //平台
-        pinttai1 = $(_this).closest('tr').find('.pingtai')[0];  //平台
         if (ddd != '' && ddd != null) {
             Distinguishss = 2;
         } else {
@@ -2094,23 +1950,15 @@
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         chenben = $(_this).closest('tr').find('.ccc1')[0]
         xiugai = $(_this).closest('tr').find('.xiugai')[0]
-        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
-        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
-        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
+        chenbenbaojia = $("#chenbenbaojia").val();
         caiwuchengben = $(_this).closest('tr').find('.personalchaiwuchenben')[0]
-        $(pinttai1).attr('readonly', 'readonly');
-        $(wangmingddd).attr('readonly', 'readonly');
-        $(chenben).attr('readonly', 'readonly');
-        $(xiaoshou).attr('readonly', 'readonly');
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.personalaaa')[0].value;
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
-            if (ddd != "" ) {
+            if (ddd != "") {
                 $("#shenqing").attr('data-target', '#myModal1');
                 $('#myModal1').modal('show');
-                document.getElementById("insidePingtai").value = pingtai;
-                document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
-                document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
                 document.getElementById("code2").value = $("#code").val();
                 document.getElementById("projectname2").value = s;
                 document.getElementById("Paymentobject2").value = ddd;
@@ -2122,24 +1970,11 @@
         }
 
     }
-    
     //对公司
     function companybut(_this) {
         //获取每行的点击值
-        var sum = 0;
-        var t = document.getElementsByClassName("p");
-        for (var i = 0; i
-            < t.length; i++) {
-            if (t[i].type == 'text') {
-                ++sum;
-                t[i].value = "";//清空
-            }
-        }
-        leixing = "对公司";
         ddd = $(_this).closest('tr').find('.ddd2')[0].value;  //网名
-        wangmingddd = $(_this).closest('tr').find('.ddd2')[0];  //网名
         pingtai = $(_this).closest('tr').find('.pingtai')[0].value;  //平台
-        pinttai1 = $(_this).closest('tr').find('.pingtai')[0];  //平台
         if (ddd != '' && ddd != null) {
             Distinguishss = 3;
         } else {
@@ -2149,34 +1984,26 @@
         shenqing = $(_this).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this).closest('tr').find('.shenqing')[0].value;
         suidian = $(_this).closest('tr').find('.suidian')[0].value;
-        chenben = $(_this).closest('tr').find('.ccc1')[0];
-        xiaoshou = $(_this).closest('tr').find('.bbb')[0];
-        xiugai = $(_this).closest('tr').find('.xiugai')[0];
-        chenbenbaojia = $(_this).closest('tr').find('.ccc1')[0].value;
-        xiaoshoubaojia = $(_this).closest('tr').find('.bbb')[0].value;
+        chenben = $(_this).closest('tr').find('.ccc1')[0]
+        xiugai = $(_this).closest('tr').find('.xiugai')[0]
+        chenbenbaojia = $("#chenbenbaojia").val();
         caiwuchengben = $(_this).closest('tr').find('.companychaiwuchenben')[0]
-        suidiankuang = $(_this).closest('tr').find('.suidian')[0];
-        $(pinttai1).attr('readonly', 'readonly');
-        $(suidiankuang).attr('readonly', 'readonly');
-        $(wangmingddd).attr('readonly', 'readonly');
-        $(chenben).attr('readonly', 'readonly');
-        $(xiaoshou).attr('readonly', 'readonly');
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
         len1 = $(_this).closest('tr').find('.ddd')[0].innerText;
         aaa = $(_this).closest('tr').find('.companyaaa')[0].value;
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
             if (suidian != "" && ddd != "") {
                 $("#shenqing").attr('data-target', '#myModal');
                 $('#myModal').modal('show');
-                $("#shenqing").attr('data-target', '#myModal');
-                $('#myModal').modal('show');
-                document.getElementById("code1").value = $("#code").val();
-                document.getElementById("projectname1").value = s;
-                document.getElementById("insidePingtai1").value = pingtai;
-                document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
-                document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
-                document.getElementById("insideSuidian1").value = suidian;
-                document.getElementById("Paymentobject1").value = ddd;
-                document.getElementById("myModalLabel1").innerHTML = "对公司申请付款";
+
+                    $("#shenqing").attr('data-target', '#myModal');
+                    $('#myModal').modal('show');
+                    document.getElementById("code1").value = $("#code").val();
+                    document.getElementById("projectname1").value = s;
+
+                    document.getElementById("Paymentobject1").value = ddd;
+
+                    document.getElementById("myModalLabel1").innerHTML = "对公司申请付款";
 
             } else {
                 alert("税点或者网名未填写！");
@@ -2187,33 +2014,18 @@
     //修改申请页面
     function update(_this1,_this2) {
         //获取每行的点击值
-        if ($(_this1).closest('tr').find('.wangming').length>0) {
-            ddd = $(_this1).closest('tr').find('.ddd2')[0].value;  //网名
-            pingtai = $(_this1).closest('tr').find('.pingtai')[0].value;  //平台
-        } else {
-            wangming = "";
-        }
-        if ($(_this1).closest('tr').find('.suidian').length>0) {
-            suidian = $(_this1).closest('tr').find('.suidian')[0].value;
-            alert(suidian);
-            if (suidian != "") {
-                leixing = "对公司";
-            } else {
-                leixing = "对个人";
-            }
-        } else {
-            leixing = "对个人";
-        }
+        ddd = $(_this1).closest('tr').find('.ddd2')[0].value;  //网名
+        pingtai = $(_this1).closest('tr').find('.pingtai')[0].value;  //平台
         zhifujine = $(_this1).closest('tr').find('.shenqing1')[0]
         shenqing = $(_this1).closest('tr').find('.shenqing')[0]
         shenqing1 = $(_this1).closest('tr').find('.shenqing')[0].value;
         chenben = $(_this1).closest('tr').find('.ccc1')[0]
         xiugai = $(_this1).closest('tr').find('.xiugai')[0]
-        chenbenbaojia = $(_this1).closest('tr').find('#chenbenbaojia')[0].value;
-        caiwuchengben = $(_this1).closest('tr').find('#xiaoshoubaojia')[0];
-        xiaoshoubaojia = $(_this1).closest('tr').find('.shenqing')[0].value;
+        chenbenbaojia = $("#chenbenbaojia").val();
+        caiwuchengben = $(_this1).closest('tr').find('.chaiwuchenben')[0];
+        xiaoshoubaojia = $("#xiaoshoubaojia").val();
         len1 = $(_this1).closest('tr').find('.ddd')[0].innerText;
-        shifujine = $(_this1).closest('tr').find('.shenqing1')[0].value;
+
         if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
             if (leixing == "对公司" || _this2==3) {
                 suidian = $(_this1).closest('tr').find('.suidian')[0].value;
@@ -2224,10 +2036,7 @@
                     if (ddd != '') {
                         document.getElementById("code1").value = $("#code").val();
                         document.getElementById("projectname1").value = s;
-                        
                         document.getElementById("Paymentobject1").value = ddd;
-                        document.getElementById("ZFjine").value = shifujine;
-
                         document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
                         $.ajax({
                             url: "/Home/updateview",
@@ -2244,19 +2053,17 @@
                                 document.getElementById("gsname").value = data.model['Receivablescompany']
                                 document.getElementById("kaihuhang").value = data.model['Openingbank']
                                 document.getElementById("Bankcode").value = data.model['Bankaccount']
-                                document.getElementById("insidePingtai1").value = data.model['pingtai'];
-                                document.getElementById("insideChenbenbaojia1").value = data.model['CostQuotation'];
-                                document.getElementById("insideXiaoshoubaojia1").value = data.model['Salesquotation'];
-                                document.getElementById("insideSuidian1").value = data.model['shuidian'];
-                                var Timeofpaymentdate = data.model['Timeofpayment'];
+                                var Timeofpaymentdate = data.model['Timeofpayment']
                                 var date = new Date();
                                 date.setTime(Timeofpaymentdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
                                 var newdate1 = date.toLocaleDateString();
                                 document.getElementById("ZFdate").value = (newdate1);
-                                document.getElementById("beizhus").value = data.model['Remarks'];
-                                Distinguishss = _this2;
+
+                                document.getElementById("beizhus").value = data.model['Remarks']
                             }
+
                         })
+
                     } else {
                         alert("请输入网名");
                         return;
@@ -2293,121 +2100,17 @@
                             document.getElementById("kaihuhang1").value = data.model['Openingbank']
                             document.getElementById("Bankcode1").value = data.model['Bankaccount']
                             document.getElementById("beizhu1").value = data.model['Remarks']
-                            document.getElementById("insidePingtai").value = data.model['pingtai'];
-                            document.getElementById("insideChenbenbaojia").value = data.model['CostQuotation'];
-                            document.getElementById("insideXiaoshoubaojia").value = data.model['Salesquotation'];
-                            Distinguishss = _this2;
                         }
                     })
 
                 } else {
                     alert("请输入网名(支付对象)");
                     return;
-                }
-            } else if (_this2 == 0 && leixing == "对个人" ) {
-                //aaa = $(_this1).closest('tr').find('.personalaaa')[0].value;
-                $("#shenqing").attr('data-target', '#myModal1');
-                $('#myModal1').modal('show');
-                if (ddd != '') {
-                    document.getElementById("code2").value = $("#code").val();
-                    document.getElementById("insidePingtai").value = pingtai;
-                    document.getElementById("insideChenbenbaojia").value = chenbenbaojia;
-                    document.getElementById("insideXiaoshoubaojia").value = xiaoshoubaojia;
-                    document.getElementById("projectname2").value = s;
-                    document.getElementById("Paymentobject2").value = ddd;
-                    document.getElementById("myModalLabel2").innerHTML = "申请付款" + leixing;
-                    $.ajax({
-                        url: "/Home/updateview",
-                        type: 'post',
-                        data: {
-                            xuhao: len1,
-                            projectname: s,
-                            Distinguish: _this2
-                        },
-                        success: function (data) {
-                            document.getElementById("ZFjine1").value = data.model['Actualamountofpayment']
-                            var Timeofpaymentdate1 = data.model['Timeofpayment']
-                            var date = new Date();
-                            date.setTime(Timeofpaymentdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
-                            var newdate1 = date.toLocaleDateString();
-                            document.getElementById("ZFdate1").value = (newdate1);
-                            document.getElementById("shoukuanren").value = data.model['Payee']
-                            document.getElementById("kaihuhang1").value = data.model['Openingbank']
-                            document.getElementById("Bankcode1").value = data.model['Bankaccount']
-                            document.getElementById("beizhu1").value = data.model['Remarks']
-                        }
-                    })
-
-                } else {
-                    alert("请输入网名(支付对象)");
-                    return;
-                }
-            } else if (_this2 == 0 && leixing == "对公司") {
-                suidian = $(_this1).closest('tr').find('.suidian')[0].value;
-                // aaa = $(_this1).closest('tr').find('.companyaaa')[0].value;
-                if (suidian != "") {
-                    $("#shenqing").attr('data-target', '#myModal');
-                    $('#myModal').modal('show');
-                    if (ddd != '') {
-                        document.getElementById("code1").value = $("#code").val();
-                        document.getElementById("projectname1").value = s;
-                        document.getElementById("insidePingtai1").value = pingtai;
-                        document.getElementById("insideChenbenbaojia1").value = chenbenbaojia;
-                        document.getElementById("insideXiaoshoubaojia1").value = xiaoshoubaojia;
-                        document.getElementById("insideSuidian1").value = suidian;
-                        document.getElementById("Paymentobject1").value = ddd;
-                        document.getElementById("ZFjine").value = shifujine;
-
-                        document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;
-                        $.ajax({
-                            url: "/Home/updateview",
-                            type: 'post',
-                            data: {
-                                xuhao: len1,
-                                projectname: s,
-                                Distinguish: _this2
-                            },
-                            success: function (data) {
-                                document.getElementById("ZFjine").value = data.model['Actualamountofpayment']
-                                document.getElementById("fapiao").value = data.model['Invoicenumber']
-                                document.getElementById("fapiaosuie").value = data.model['Invoicetax']
-                                document.getElementById("gsname").value = data.model['Receivablescompany']
-                                document.getElementById("kaihuhang").value = data.model['Openingbank']
-                                document.getElementById("Bankcode").value = data.model['Bankaccount']
-                                var Timeofpaymentdate = data.model['Timeofpayment']
-                                var date = new Date();
-                                date.setTime(Timeofpaymentdate.replace(/\/Date\((\d+)\)\//gi, '$1'));
-                                var newdate1 = date.toLocaleDateString();
-                                document.getElementById("ZFdate").value = (newdate1);
-
-                                document.getElementById("beizhus").value = data.model['Remarks']
-                            }
-
-                        })
-
-                    } else {
-                        alert("请输入网名");
-                        return;
-                    }
-                } else {
-                    alert("请填写税点");
-                    return;
-                }
-            }
-            var sum = 0;
-            var t = document.getElementsByClassName("p");
-            for (var i = 0; i
-                < t.length; i++) {
-                if (t[i].type == 'text') {
-                    ++sum;
-                    t[i].value = "";//清空
-                    t[i].text = "";
                 }
             }
         } else {
             alert("请填写完整");
         }
-        Distinguishss = _this2;
     }
     function files1() {
         $.ajax({
@@ -2439,19 +2142,11 @@
         var Bankcode = $("#Bankcode").val();//银行账号
         var projectname = $("#projectname1").val(); //项目名称
         var Paymentobject = $("#Paymentobject1").val();//支付对象
-        var pingtai1 = $("#insidePingtai1").val();//平台
-        var chenbenbaojia1 = $("#insideChenbenbaojia1").val();//平台
-        var xiaoshoubaojia1 = $("#insideXiaoshoubaojia1").val();//平台insideSuidian1
-        var suidian1 = $("#insideSuidian1").val();
         var beizhu = $("#beizhus").val();
         $.ajax({
             url: "/Home/PaymentCompanys",
             type: "post",
             data: {
-                pingtai1: pingtai1,
-                chenbenbaojia1: chenbenbaojia1,
-                xiaoshoubaojia1: xiaoshoubaojia1,
-                suidian1: suidian1,
                 ZFjine: ZFjine,
                 fapiao: fapiao,
                 fapiaosuie: fapiaosuie,
@@ -2465,7 +2160,7 @@
                 leixing: leixing,
                 beizhu: beizhu,
                 suidian: suidian,
-                chenbenbaojia: chenbenbaojia,
+                chenbenbaojia: parseInt(result) + parseInt(result1),
                 xiaoshoubaojia: xiaoshoubaojia,
                 wangming: ddd,
                 //caiwuchengben: caiwuchengben.value, //获取不到值
@@ -2528,11 +2223,6 @@
         var kaihuhang = $("#kaihuhang1").val();//开户行
         var Bankcode = $("#Bankcode1").val();//银行账号
         var beizhu = $("#beizhu1").val();
-        var pingtai = $("#insidePingtai").val();//平台
-        var chenbenbaojia1 = $("#insideChenbenbaojia").val();//弹出框成本报价
-        var xiaoshoubaojia1 = $("#insideXiaoshoubaojia").val();//弹出框销售报价
-        alert(chenbenbaojia1);
-        alert(xiaoshoubaojia1);
         $.ajax({
             url: "/Home/PersonalPayments",
             type: "post",
@@ -2556,10 +2246,7 @@
                 Distinguish: Distinguishss,
                 chenbenleibie: chenbenleibie,
                 yongtu: yongtu,
-                pingtai: pingtai,
-                chenbenbaojia1: chenbenbaojia1,
-                xiaoshoubaojia1: xiaoshoubaojia1
-
+                pingtai: pingtai
             },
             success: function (data) {
                 xuhao = data.formmodel['xuhao'];
@@ -2571,7 +2258,6 @@
                     var shijifukuan = data.formmodel['Actualamountofpayment'];
                     zhifujine.value = shijifukuan;
                     document.getElementById("chaiwuchenben").removeAttribute("readonly");
-                    
                 }
                 var d = eval('(' + data.msg + ')');
                 if (d.status == 0) {
@@ -2583,7 +2269,7 @@
                         icon: 1
                     });
                     $(chenben).removeClass("ccc1");
-                    $(xiugai).removeAttr("style");
+                    $(xiugai).removeAttr("style")
                     textchange3();
                     var sum = 0;
                     var t = document.getElementsByClassName("p");
@@ -2669,10 +2355,115 @@
         })
     }
     //获取回显数据的区分个人，公司，其他字段 和当前行的序号
-    function fangfa(a,b) {
+    function fangfa(a, b) {
+        $('#k1s').removeAttr('style', 'color:red');
+        $('#k2s').removeAttr('style', 'color:red');
+        $('#k3s').removeAttr('style', 'color:red');
+        $('#k4s').removeAttr('style', 'color:red');
+        $('#k5s').removeAttr('style', 'color:red');
+        $('#k6s').removeAttr('style', 'color:red');
+        $('#k7s').removeAttr('style', 'color:red');
+        $('#k8s').removeAttr('style', 'color:red');
+        $('#k9s').removeAttr('style', 'color:red');
         xuhao = a;
         Distinguishs = b;
+        //回显当条数据审批步骤
+        $.ajax({
+            url: "/Home/Paymentapprovalprocess",
+            type: "post",
+            data: {
+                projectname: s,
+                xuhao: xuhao,
+                Distinguish: Distinguishs
+            },
+            success: function (data) {
+                $("#k1s").html("立项人")
+                $("#k3s").html(data.nodemodel['SAE'])
+                $("#k4s").html(data.nodemodel['AD'])
+                $("#k5s").html(data.nodemodel['SAD'])
+                $("#k6s").html(data.nodemodel['yinxiaozongjian'])
+                $("#k7s").html(data.nodemodel['caiwu'])
+                $("#k8s").html(data.nodemodel['laoban'])
+                $("#k9s").html(data.nodemodel['zhulaoban'])
+                if (data.nodemodel != null) {
+                    switch (data.nodemodel['Stateofapproval']) {
+                        case 1:
+                            $("#k1s").attr('style', 'color:red');
+                            break;
+                        case 2:
+                            $("#k1s").attr('style', 'color:red');
+                            break;
+                        case 3:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            break;
+                        case 4:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            break;
+                        case 5:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            $("#k5s").attr('style', 'color:red');
+                            break;
+                        case 6:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            $("#k5s").attr('style', 'color:red');
+                            $("#k6s").attr('style', 'color:red');
+                            break;
+                        case 7:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            $("#k5s").attr('style', 'color:red');
+                            $("#k6s").attr('style', 'color:red');
+                            $("#k7s").attr('style', 'color:red');
+                            break;
+                        case 8:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            $("#k5s").attr('style', 'color:red');
+                            $("#k6s").attr('style', 'color:red');
+                            $("#k7s").attr('style', 'color:red');
+                            $("#k8s").attr('style', 'color:red');
+                            break;
+                        case 9:
+                            $("#k1s").attr('style', 'color:red');
+                            $("#k3s").attr('style', 'color:red');
+                            $("#k4s").attr('style', 'color:red');
+                            $("#k5s").attr('style', 'color:red');
+                            $("#k6s").attr('style', 'color:red');
+                            $("#k7s").attr('style', 'color:red');
+                            $("#k8s").attr('style', 'color:red');
+                            $("#k9s").attr('style', 'color:red');
+                            break;
+                    }
+                }
+            }
+        })
     }
+    //function fangfa1(_this) {
+    //    var a = $(_this).closest('tr').find('.ddd')[0].value;  //序号
+    //    xuhao = a;
+    //    alert(xuhao);
+    //    Distinguishs = 2;
+    //}
+    //function fangfa2(_this) {
+    //    var a = $(_this).closest('tr').find('.ddd')[0].value;  //序号
+    //    xuhao = a;
+    //    alert(xuhao);
+    //    Distinguishs = 3;
+    //}
+    //function fangfa3(_this) {
+    //    var a = $(_this).closest('tr').find('.ddd')[0].value;  //序号
+    //    xuhao = a;
+    //    Distinguishs = 0;
+    //}
     function shenpi(_this) {
         var shenpitype = _this;
         if (s == "") {
@@ -2757,29 +2548,107 @@
                 }
             }
         })
+    }
+    //付款审批
+    function paymentshenpi() {
+        if (s == "") {
+            alert("请选择项目");
+            return
+        }
+        $.ajax({
+            url: "/Home/paymentshenpi",
+            type: "post",
+            data: {
+                projectname: s,
+                xuhao: xuhao,
+                Distinguish: Distinguishs
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 0) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 2) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 3) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 4) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 5) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 6) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 7) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 8) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 9) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 10) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 11) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 12) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 13) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                } else if (d.status == 14) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
+                } else if (d.status == 15) {
+                    layer.msg(d.msg, {
+                        icon: 1
+                    });
                 }
+            }
+        })
+    }
                 //发票税额百分号
     function shuieSymbol(x) {
         var pattern = /^\d+%$|^\d+\.{1}\d+%$/;
-        var fapiaoshuie = $(x).closest('tr').find('#fapiaoshuie')[0].value;
-        alert(fapiaoshuie);
+        var fapiaoshuie = $("#fapiaosuie").val();
         if (!fapiaoshuie == "" || !fapiaoshuie == null || !fapiaoshuie == undefined) {
-            alert(2);
             if (fapiaoshuie.indexOf(" ") == -1) {
-                alert(3);
                 if (pattern.test(fapiaoshuie)) {
                     fapiaoshuie = fapiaoshuie.substring(0, fapiaoshuie.length - 1);
-                    alert(4);
                 } else {
                     fapiaoshuie = fapiaoshuie + "%";
-                    alert(5);
                 }
             } else {
                 fapiaoshuie = "";
                 layer.msg("发票税额输入不规范", {
                     icon: 5
                 });
-                alert(6);
             }
         }
     }

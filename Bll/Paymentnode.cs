@@ -55,6 +55,11 @@ namespace Bll
 
             return dal.GetModel(Id);
         }
+        public Model.Paymentnode GetModels(int Id, int xuhao, int Distinguish)
+        {
+
+            return dal.GetModels(Id, xuhao, Distinguish);
+        }
         /// <summary>
         /// 获得数据列表
         /// </summary>
@@ -75,6 +80,12 @@ namespace Bll
         public List<Model.Paymentnode> GetModelList(string strWhere)
         {
             DataSet ds = dal.GetList(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+
+        public List<Model.Paymentnode> GetModelLists(string strWhere)
+        {
+            DataSet ds = dal.GetLists(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
         /// <summary>
