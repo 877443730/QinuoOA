@@ -361,15 +361,15 @@ namespace QiuoOA.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult PersonalPayments(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish,string chenbenleibie,string yongtu, string pingtai, string chenbenbaojia1, string xiaoshoubaojia1)
+        public JsonResult PersonalPayments(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish,string chenbenleibie,string yongtu,string pingtai)
         {
-            string msg = PersonalPaymentss(ZFjine, ZFdate, shoukuanren, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu,pingtai, chenbenbaojia1, xiaoshoubaojia1);
+            string msg = PersonalPaymentss(ZFjine, ZFdate, shoukuanren, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu,pingtai);
             Project model = Projectbll.GetModelss(projectname);
             Model.Paymentapplicationform formmodel = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
             return Json(new { msg, formmodel });
 
         }
-        private string PersonalPaymentss(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai, string chenbenbaojia1, string xiaoshoubaojia1)
+        private string PersonalPaymentss(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
         {
             //数据库加一个区分字段 1,2,3 然后页面添加的时候传过来这个字段用这个字段+序号+项目ID查询，有就修改没有添加，不用管是A还是B还是C，
             //页面绑定数据加隐藏域获取区分字段以便于修改能定位到该数据
@@ -445,25 +445,9 @@ namespace QiuoOA.Controllers
                 cationmodel.Remarks = beizhu;
                 Model.Money moneymodel = Moneybll.GetModels(model.Id);
                 cationmodel.MoneyId = moneymodel.Id; //金额ID
-                if (chenbenbaojia1 != "")
-                {
-                    cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia1);//成本报价
-
-                }
-                else
-                {
-                    cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
-                }
-                if (xiaoshoubaojia1 != "")
-                {
-                    cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia1);//销售报价
-
-                }
-                else
-                {
-                    cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
-                }
                 cationmodel.Actualamountofpayment = Convert.ToDecimal(ZFjine);//应支付金额
+                cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
+                cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
                 //if (caiwuchengben != null&& caiwuchengben != "")
                 //{
                 //    cationmodel.Financialcost = Convert.ToDecimal(caiwuchengben);//财务成本
@@ -476,7 +460,7 @@ namespace QiuoOA.Controllers
                 cationmodel.Distinguish = Convert.ToInt32(Distinguish);
                 cationmodel.Costcategory = chenbenleibie;
                 cationmodel.purpose = yongtu;
-                    cationmodel.pingtai = pingtai;
+                cationmodel.pingtai = pingtai;
                 //cationmodel.Totaltaxcost = Convert.ToDecimal(hanshuichenbenheji);//含税成本合计
                 Paymentapplicationformbll.Update(cationmodel);
 
@@ -500,16 +484,16 @@ namespace QiuoOA.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult PaymentCompanys(string pingtai1,string chenbenbaojia1,string xiaoshoubaojia1,string suidian1, string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
+        public JsonResult PaymentCompanys(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
         {
-            string msg = PaymentCompanyss(pingtai1, chenbenbaojia1, xiaoshoubaojia1, suidian1, ZFjine, fapiao, fapiaosuie, ZFdate, gsname, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, suidian, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu, pingtai);
+            string msg = PaymentCompanyss(ZFjine, fapiao, fapiaosuie, ZFdate, gsname, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, suidian, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu, pingtai);
             Project model = Projectbll.GetModelss(projectname);
             Model.Paymentapplicationform formmodel = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
             return Json(new { msg, formmodel });
             // return Json(msg, formmodel, JsonRequestBehavior.AllowGet);
 
         }
-        private string PaymentCompanyss(string pingtai1, string chenbenbaojia1, string xiaoshoubaojia1, string suidian1, string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
+        private string PaymentCompanyss(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai)
         {
             Model.Paymentapplicationform Paymentapplicationmodel = new Paymentapplicationform();
             Model.Paymentnode Paymentnodemodel = new Paymentnode();
@@ -537,13 +521,7 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.MoneyId = moneymodel.Id; //金额ID
                     Paymentapplicationmodel.Actualamountofpayment = Convert.ToDecimal(ZFjine);//应支付金额
                     Paymentapplicationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
-                    if (xiaoshoubaojia=="申请")
-                    {
-                        Paymentapplicationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia1);
-                    }
-                    else { 
-                        Paymentapplicationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
-                    }
+                    Paymentapplicationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
                     //Paymentapplicationmodel.Financialcost= Convert.ToDecimal(caiwuchengben);//财务成本
                     Paymentapplicationmodel.shuidian = Convert.ToDecimal(suidian);//税点
                     Paymentapplicationmodel.pingtai = pingtai;
@@ -595,24 +573,8 @@ namespace QiuoOA.Controllers
                 Model.Money moneymodel = Moneybll.GetModels(model.Id);
                 cationmodel.MoneyId = moneymodel.Id; //金额ID
                 cationmodel.Actualamountofpayment = Convert.ToDecimal(ZFjine);//应支付金额
-                if (chenbenbaojia1 != "")
-                {
-                    cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia1);//成本报价
-
-                }
-                else
-                {
-                    cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
-                }
-                if (xiaoshoubaojia1!="")
-                {
-                    cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia1);//销售报价
-
-                }
-                else
-                {
-                    cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
-                }
+                cationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
+                cationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
                 //if (caiwuchengben != null)
                 //{
                 //    cationmodel.Financialcost = Convert.ToDecimal(caiwuchengben);//财务成本
@@ -621,27 +583,12 @@ namespace QiuoOA.Controllers
                 {
                     cationmodel.Financialcost = Convert.ToDecimal(chenbenbaojia2);//财务成本2
                 }
-                if (suidian1!="")
-                {
-                    cationmodel.shuidian = Convert.ToDecimal(suidian1);//税点
-
-                }
-                else
-                {
-                    cationmodel.shuidian = Convert.ToDecimal(suidian);//税点
-                }
+                cationmodel.shuidian = Convert.ToDecimal(suidian);//税点
                 cationmodel.wangming = wangming;
                 cationmodel.Distinguish = Convert.ToInt32(Distinguish);
                 cationmodel.Costcategory = chenbenleibie;
                 cationmodel.purpose = yongtu;
-                if (pingtai1!="")
-                {
-                    cationmodel.pingtai = pingtai1;
-                }
-                else
-                {
-                    cationmodel.pingtai = pingtai;
-                }
+                cationmodel.pingtai = pingtai;
                 //  cationmodel.Totaltaxcost = Convert.ToDecimal(hanshuichenbenheji);//含税成本合计
                 Paymentapplicationformbll.Update(cationmodel);
 
