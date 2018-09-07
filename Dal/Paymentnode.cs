@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NWJ.Dal
+namespace Dal
 {
     public partial class Paymentnode
     {
@@ -96,7 +96,7 @@ namespace NWJ.Dal
             strSql.Append("yinxiaozongjian=@yinxiaozongjian,");
             strSql.Append("caiwu=@caiwu,");
             strSql.Append("laoban=@laoban,");
-            strSql.Append("zhulaoban=@zhulaoban");
+            strSql.Append("zhulaoban=@zhulaoban,");
             strSql.Append("paymentapplicationformiId=@paymentapplicationformiId");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {

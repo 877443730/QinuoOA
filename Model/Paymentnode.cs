@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NWJ.Model
+namespace Model
 {
     [Serializable]
     public partial class Paymentnode

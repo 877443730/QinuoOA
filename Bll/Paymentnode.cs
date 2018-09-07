@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NWJ.Bll
+namespace Bll
 {
     public partial class Paymentnode
     {
