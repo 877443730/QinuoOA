@@ -45,7 +45,7 @@
                         <tr>
                             <th class="k">项目名称</th>
                             <td colspan="2">
-                                <select class="form-control" type="text" onchange="namechange(this.value)">
+                                <select class="form-control" type="text" id="chufashijian" onchange="namechange(this.value)">
                                     @{
                                         List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
                                         <option value="">--请选择--</option>
@@ -183,11 +183,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div style="margin: 10px 5px 45px 35%;">
-                        <input id="shenpi" type="button" onclick="shenpi(1)" class="btn btn-primary" value="通过审批" />
-                        <input style="margin-left: 10%;" id="shenpi" type="button" onclick="lixiangxiugai()" class="btn btn-danger" value="立项修改" />
-                    </div>
-
+                    <input id="shenpi" type="button" onclick="shenpi(1)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
                 </div>
                 <div id="detailed">
                     <table id="personaltable1" class="table table-bordered">
@@ -594,7 +590,7 @@
             <input id="xiugai" onclick="update(this,2)" style="display:none" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" onclick="fangfa1(1)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa1(this)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
         </td>
     </tr>
 </script>
@@ -1628,7 +1624,24 @@
     var Distinguish;
     var Distinguish1;
     var Distinguish2;
+    var projectnames = "@ViewBag.projectname";
+    namechange();
+    //if (projectname!="") {
+    //                window.onload = function () {
+    //                    var obj = document.getElementById("chufashijian");
+    //                    if (window.event) obj.fireEvent("onchange='namechange()'");
+    //    else {
+    //        var e = document.createEvent('HTMLEvents');
+    //        e.initEvent("change", false, false);
+    //        obj.dispatchEvent(e);
+    //    }
+    //}
+    //};
+
     function namechange(_this) {
+        if (projectnames!="") {
+            _this = projectnames;
+        }
         $('#companyck').empty();
         $('#personalck').empty();
         $('#ck').empty();
@@ -3097,10 +3110,6 @@
                 });
             }
         }
-    }
-    function lixiangxiugai() {
-        var link = "/Home/AddProject" + '?projectname=' + s;
-        window.location.href = link;   //这样就可以传过去了
     }
 
 </script>

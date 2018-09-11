@@ -33,27 +33,27 @@
                             {
                                 if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                                 else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                                 else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                                 else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                                 else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                                 else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
                                 {
-                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                    <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                 }
                             }
                         }
@@ -71,7 +71,7 @@
                                 if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -92,7 +92,7 @@
                                 else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -112,7 +112,7 @@
                                 else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -132,7 +132,7 @@
                                 else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -152,7 +152,7 @@
                                 else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -172,7 +172,7 @@
                                 else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
                                 {
                                     <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p>@item.ProjectName</p>
+                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
                                         @switch (@item.Distinguish)
                                         {
                                         case 0:
@@ -205,27 +205,27 @@
                                 {
                                     if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                     else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                     else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                     else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                     else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                     else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
                                     {
-                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p>@item.ProjectName</p></div>
+                                        <div class="biankuang"><p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p></div>
                                     }
                                 }
                             }
