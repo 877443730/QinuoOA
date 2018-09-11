@@ -1,0 +1,41 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai  FROM Paymentapplicationform  where p.ProjectId=1064 and ApplyforpaymentType!=''
+无法绑定由多个部分组成的标识符 "p.ProjectId"。
+　  2018/9/11 15:33:37
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai  FROM Paymentapplicationform  where p.ProjectId=1055 and ApplyforpaymentType!=''
+无法绑定由多个部分组成的标识符 "p.ProjectId"。
+　  2018/9/11 15:35:23
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai  FROM Paymentapplicationform  where p.ProjectId=1064 and ApplyforpaymentType!=''
+无法绑定由多个部分组成的标识符 "p.ProjectId"。
+　  2018/9/11 15:37:03
+
+-----------执行查询语句，返回DataSet)Query-----------
+select a.*,b.Stateofapproval  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId   where p.ProjectId=1064 and ApplyforpaymentType!=''
+无法绑定由多个部分组成的标识符 "p.ProjectId"。
+　  2018/9/11 15:43:44
+
+-----------执行查询语句，返回DataSet)Query-----------
+select a.*,b.Stateofapproval  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId   where p.ProjectId=1055 and ApplyforpaymentType!=''
+无法绑定由多个部分组成的标识符 "p.ProjectId"。
+　  2018/9/11 15:44:30
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT a.*,b.Stateofapproval  FROM Paymentapplicationform  a FULL join [dbo].[paymentnode] b on a.ProjectId=b.projectId   where a.ProjectId=1054 and ApplyforpaymentType!=''  and Distinguish = 0
+列名 'Distinguish' 不明确。
+　  2018/9/11 16:05:56
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT(b.Stateofapproval) a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId   where 1=1
+“.”附近有语法错误。
+　  2018/9/11 16:09:34
+
+----------- 执行查询语句，返回DataSet)Query-----------
+列名 'ProjectId' 不明确。
+列名 'xuhao' 不明确。
+列名 'Distinguish' 不明确。
+　  2018/9/11 16:37:41
+

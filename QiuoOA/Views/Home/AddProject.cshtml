@@ -46,8 +46,8 @@
                         <tr>
                             <th class="k">项目名称</th>
                             <td class="k">
-                                <input class="form-control" id="name" type="text" name="greeting" list="greetings">
-                                <datalist id="greetings" style="display:none;">
+                                <input class="form-control" id="name" type="text" name="greeting" onchange="checkProjectName(this)" @*list="greetings"*@>
+                                @*<datalist id="greetings" style="display:none;">
                                     @{
                                         List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
                                         if (list.Any())
@@ -58,7 +58,7 @@
                                             }
                                         }
                                     }
-                                </datalist>
+                                </datalist>*@
                             </td>
                             <th class="k">项目代码</th>
                             <td class="k">
@@ -237,7 +237,7 @@
                                                         foreach (var item in list15)
                                                         {
                                                             <label>
-                                                                <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" />@item.employeename<br>
+                                                                <input name="chengyuan" class="bingpai" type="checkbox" value="@item.employeename" />@item.employeename<br>
                                                             </label>
                                                         }
                                                     }
@@ -292,9 +292,9 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr style="margin-top:auto;margin-bottom:auto">
                                             <th class="k">营销总监</th>
-                                            <td class="form-control" readonly="readonly" id="yingxiao">齐雅卿</td>
+                                            <td class="k" readonly="readonly" id="yingxiao">齐雅卿</td>
                                             <th class="k">财务</th>
                                             <td>
                                                 <select class="form-control" type="text" id="caiwu">
@@ -311,10 +311,10 @@
                                                     }
                                                 </select>
                                             </td>
-                                            <th class="k">老板</th>
-                                            <td class="form-control" readonly="readonly" id="laoban"></td>
-                                            <th class="k">朱老板</th>
-                                            <td class="form-control" readonly="readonly" id="zhulaoban">朱媛媛</td>
+                                            <th class="k">总经理</th>
+                                            <td class="k" readonly="readonly" id="laoban"></td>
+                                            <th class="k">财务总监</th>
+                                            <td class="k" readonly="readonly" id="zhulaoban">朱媛媛</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -400,7 +400,26 @@
     var xiangmufuzeren;
     function zhiwu1(_this) {
         $("#zhiwu").val(_this);
-        xiangmufuzeren = _this
+        xiangmufuzeren = _this;
+    }
+    //判断项目名称是否已存在
+    function checkProjectName(_this) {
+        var name = $(_this).val();//项目名称
+        $.ajax({
+            type: 'post',
+            url: "/Home/checkProjectName",
+            data: {
+                projectName: name
+            },
+            success: function (data) {
+                var d = eval('(' + data + ')');
+                if (d.status == 1) {
+                    layer.msg(d.msg, {
+                        icon: 5
+                    });
+                }
+            }
+        });
     }
     function but() {
         var name = $("#name").val();//项目名称
@@ -481,7 +500,7 @@
         var laoban = $("#laoban").text();
         var zhulaoban = $("#zhulaoban").text();
         var xiangmuchengyuan = check_val;//项目成员
-        var result = JSON.stringify(xiangmuchengyuan)
+        var result = JSON.stringify(xiangmuchengyuan);
         $.ajax({
             url: "/Home/shenpiren",
             type: "post",
@@ -494,7 +513,7 @@
                 caiwu: caiwu,
                 laoban: laoban,
                 zhulaoban: zhulaoban,
-                processstate:1
+                processstate: 1
             },
             success: function (data) {
                 if (data == "成功添加当前项目审批人!") {
@@ -511,6 +530,6 @@
                     });
                 }
             }
-        })
+        });
     }
 </script>
