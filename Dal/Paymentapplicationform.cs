@@ -355,8 +355,8 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai from Paymentapplicationform ");
-            strSql.Append(" where ProjectId=@ProjectId and xuhao=@xuhao and Distinguish=@Distinguish");
+            strSql.Append("select top 1 b.Stateofapproval, a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");//关联查询出财务审批进行的步骤
+            strSql.Append(" where a.ProjectId=@ProjectId and a.xuhao=@xuhao and a.Distinguish=@Distinguish");
             SqlParameter[] parameters = {
                     new SqlParameter("@ProjectId", SqlDbType.Int,4),
                     new SqlParameter("@xuhao", SqlDbType.Int,4),
@@ -515,6 +515,10 @@ namespace Dal
                 {
                     model.pingtai = row["pingtai"].ToString();
                 }
+                if (row["Stateofapproval"] != null && row["Stateofapproval"].ToString() != "")
+                {
+                    model.Stateofapproval = int.Parse(row["Stateofapproval"].ToString());
+                }
             }
             return model;
         }
@@ -525,15 +529,14 @@ namespace Dal
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,Invoicenumber,Invoicetax,Timeofpayment,Receivablescompany,Openingbank,Bankaccount,Remarks,ProjectId,Payee,ApplyforpaymentType,Paymentobject,xuhao,MoneyId,CostQuotation,Salesquotation,Actualamountofpayment,Financialcost,Totaltaxcost,shuidian,wangming,Distinguish,Costcategory,purpose,paystate,readState,pingtai ");
-            strSql.Append(" FROM Paymentapplicationform ");
+            strSql.Append("select DISTINCT(b.Stateofapproval), a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
-
+        
         /// <summary>
         /// 获得前几行数据
         /// </summary>

@@ -73,12 +73,13 @@ namespace Model
 
         public decimal? shuidian { set; get; }
         public string wangming { set; get; }
-        public int Distinguish { get; set; }
-        public string Costcategory { get; set; }
-        public string purpose { get; set; }
-        public int paystate { get; set; }
-        public int readState { get; set; }
-        public string pingtai { get; set; }
+        public int Distinguish { set; get; }
+        public string Costcategory { set; get; }
+        public string purpose { set; get; }
+        public int paystate { set; get; }
+        public int readState { set; get; }
+        public string pingtai { set; get; }
+        public int Stateofapproval { set; get; }
         #endregion Model
 
     }

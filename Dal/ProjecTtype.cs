@@ -67,16 +67,16 @@ namespace Dal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update ProjecTtype set ");
-            strSql.Append("Name= @Name,");
-            strSql.Append("USName= @USName");
-            strSql.Append(" where Id= @Id");
+            strSql.Append("Name=@Name,");
+            strSql.Append("USName=@USName");
+            strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
-                    new SqlParameter(" @Name", SqlDbType.NChar,10),
-                    new SqlParameter(" @USName", SqlDbType.NVarChar,200),
-                    new SqlParameter(" @Id", SqlDbType.Int,4)};
+                    new SqlParameter("@Name", SqlDbType.NVarChar,50),
+                    new SqlParameter("@USName", SqlDbType.NVarChar,200),
+                    new SqlParameter("@Id", SqlDbType.Int,4)};
             parameters[0].Value = model.Name;
-            parameters[1].Value = model.Id;
-
+            parameters[1].Value = model.USName;
+            parameters[2].Value = model.Id;
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
