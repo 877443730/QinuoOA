@@ -80,6 +80,7 @@ namespace Model
         public int readState { set; get; }
         public string pingtai { set; get; }
         public int Stateofapproval { set; get; }
+        public string Applicant { set; get; }
         #endregion Model
 
     }

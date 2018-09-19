@@ -288,7 +288,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="k">营销总监</th>
-                                                <td class="form-control" readonly="readonly" id="yingxiao">齐雅卿</td>
+                                                <td id="yingxiao">齐雅卿</td>
                                                 <th class="k">财务</th>
                                                 <td>
                                                     <input class="form-control" id="caiwu" type="text" name="greeting" list="caiwu1" value="">
@@ -306,10 +306,10 @@
                                                         }
                                                     </datalist>
                                                 </td>
-                                                <th class="k">老板</th>
-                                                <td class="form-control" readonly="readonly" id="laoban"></td>
-                                                <th class="k">朱老板</th>
-                                                <td class="form-control" readonly="readonly" id="zhulaoban">朱媛媛</td>
+                                                <th class="k">总经理</th>
+                                                <td id="laoban"></td>
+                                                <th class="k">财务总监</th>
+                                                <td id="zhulaoban">朱媛媛</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -431,23 +431,12 @@ else
                             <tr>
                                 <th class="k">项目成员(申请后选择)</th>
                                 <td class="k" colspan="5">
-                                    @*@{
-                                            IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
-                                            if (lists.Any())
-                                            {
-                                                foreach (var item in lists1)
-                                                {
-                                                    <label>
-                                                        <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
-                                                    </label>
-                                                }
-                                            }
-                                        }*@
                                     <input id="shenpiren" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">非税金额</th>
+                                             @*改了名字*@
+                                <th class="k">不含税金额</th>
                                 <td class="k">
                                     <input class="form-control" type="text" id="Totalmoney" />
                                 </td>
@@ -519,7 +508,7 @@ else
                                                             foreach (var item in list15)
                                                             {
                                                                 <label>
-                                                                    <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" />@item.employeename<br>
+                                                                    <input name="chengyuan" class="bingpai" type="checkbox"  value="@item.employeename" />@item.employeename<br>
                                                                 </label>
                                                             }
                                                         }
@@ -644,7 +633,8 @@ else
             document.getElementById("Totalmoney").value = "";
         }
         //不含税金额
-        document.getElementById("Notaxmoney").value = totalmoney - (totalmoney / 1.06 * 0.06).toFixed(2);
+        //更改算法 2018年9月13日15:49:09
+        document.getElementById("Notaxmoney").value =(totalmoney * 1.06).toFixed(2);
         if (document.getElementById("Notaxmoney").value == 0) {
             document.getElementById("Notaxmoney").value = "";
         }
@@ -685,7 +675,7 @@ else
         $("#zhiwu").val(_this);
         xiangmufuzeren = _this
     }
-        function but() {
+     function but() {
             var porjectname = "@ViewBag.projectname";
             if (porjectname != "") {
                 porjectname = porjectname
