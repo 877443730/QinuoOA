@@ -79,7 +79,15 @@ namespace Model
         public int paystate { set; get; }
         public int readState { set; get; }
         public string pingtai { set; get; }
+        public string Applicant { set; get; }
         public int Stateofapproval { set; get; }
+        public string SAE { set; get; }
+        public string AD { set; get; }
+        public string SAD { set; get; }
+        public string yinxiaozongjian { set; get; }
+        public string caiwu { set; get; }
+        public string laoban { set; get; }
+        public string zhulaoban { set; get; }
         #endregion Model
 
     }

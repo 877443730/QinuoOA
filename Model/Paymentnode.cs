@@ -59,7 +59,7 @@ namespace Model
 
         public int paymentapplicationformiId { set; get; }
         public string ProjectName { set; get; }
-
+        public string Rejection { set; get; }
         #endregion Model
 
     }

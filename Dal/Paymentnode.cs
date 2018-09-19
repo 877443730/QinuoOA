@@ -38,9 +38,9 @@ namespace Dal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into paymentnode(");
-            strSql.Append("projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId)");
+            strSql.Append("projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection)");
             strSql.Append(" values (");
-            strSql.Append("@projectId,@xuhao,@Distinguish,@Stateofapproval,@SAE,@AD,@SAD,@yinxiaozongjian,@caiwu,@laoban,@zhulaoban,@paymentapplicationformiId)");
+            strSql.Append("@projectId,@xuhao,@Distinguish,@Stateofapproval,@SAE,@AD,@SAD,@yinxiaozongjian,@caiwu,@laoban,@zhulaoban,@paymentapplicationformiId,@Rejection)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
                     new SqlParameter("@projectId", SqlDbType.Int,4),
@@ -54,7 +54,8 @@ namespace Dal
                     new SqlParameter("@caiwu", SqlDbType.NVarChar,50),
                     new SqlParameter("@laoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@zhulaoban", SqlDbType.NVarChar,50),
-                    new SqlParameter("@paymentapplicationformiId", SqlDbType.Int,4)
+                    new SqlParameter("@paymentapplicationformiId", SqlDbType.Int,4),
+                    new SqlParameter("@Rejection", SqlDbType.NVarChar,500)
             };
             parameters[0].Value = model.projectId;
             parameters[1].Value = model.xuhao;
@@ -68,6 +69,7 @@ namespace Dal
             parameters[9].Value = model.laoban;
             parameters[10].Value = model.zhulaoban;
             parameters[11].Value = model.paymentapplicationformiId;
+            parameters[12].Value = model.Rejection;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -97,7 +99,8 @@ namespace Dal
             strSql.Append("caiwu=@caiwu,");
             strSql.Append("laoban=@laoban,");
             strSql.Append("zhulaoban=@zhulaoban,");
-            strSql.Append("paymentapplicationformiId=@paymentapplicationformiId");
+            strSql.Append("paymentapplicationformiId=@paymentapplicationformiId,");
+            strSql.Append("Rejection=@Rejection");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@projectId", SqlDbType.Int,4),
@@ -112,6 +115,7 @@ namespace Dal
                     new SqlParameter("@laoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@zhulaoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@paymentapplicationformiId", SqlDbType.Int,4),
+                    new SqlParameter("@Rejection", SqlDbType.NVarChar,500),
                     new SqlParameter("@Id", SqlDbType.Int,4)};
             parameters[0].Value = model.projectId;
             parameters[1].Value = model.xuhao;
@@ -125,7 +129,8 @@ namespace Dal
             parameters[9].Value = model.laoban;
             parameters[10].Value = model.zhulaoban;
             parameters[11].Value = model.paymentapplicationformiId;
-            parameters[12].Value = model.Id;
+            parameters[12].Value = model.Rejection;
+            parameters[13].Value = model.Id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -189,7 +194,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId from paymentnode ");
+            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection from paymentnode ");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4)
@@ -212,7 +217,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId from paymentnode ");
+            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection from paymentnode ");
             strSql.Append(" where projectId=@Id and xuhao=@xuhao and Distinguish=@Distinguish");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4),
@@ -293,6 +298,10 @@ namespace Dal
                 {
                     model.paymentapplicationformiId = int.Parse(row["paymentapplicationformiId"].ToString());
                 }
+                if (row["Rejection"] != null)
+                {
+                    model.Rejection = row["Rejection"].ToString();
+                }
                 try
                 {
                     if (row["ProjectName"] != null)
@@ -315,7 +324,7 @@ namespace Dal
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId ");
+            strSql.Append("select Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection ");
             strSql.Append(" FROM paymentnode ");
             if (strWhere.Trim() != "")
             {
@@ -346,7 +355,7 @@ namespace Dal
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId ");
+            strSql.Append(" Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection ");
             strSql.Append(" FROM paymentnode ");
             if (strWhere.Trim() != "")
             {

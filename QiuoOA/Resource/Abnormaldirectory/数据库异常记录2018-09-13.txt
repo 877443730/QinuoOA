@@ -1,0 +1,10 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select  Id,ProjectNumber,ProjectStartDate,ProjectEndDate,Username,ProjectCode,ProjectName,Remarks,OfferId,PlatformId,CompanyId,ProjecttypeId,PurchaseSingleCode,userid,Planprogress,POdanhao,Expectedreturndate,Actualdate,Accountamount,typefinished,caseclosed from Project   where ProjectName ='sasdqw'
+在从服务器接收结果时发生传输级错误。 (provider: Session Provider, error: 19 - 物理连接不可用)
+　  2018/9/13 13:51:10
+
+-----------执行查询语句，返回DataSet)Query-----------
+select Id,Stateofapproval,projectid,AE,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,processstate  FROM node  where AE like '%朱媛媛%' or SAE ='朱媛媛' or AD ='朱媛媛' or SAD ='朱媛媛' or yinxiaozongjian ='朱媛媛' or caiwu = '朱媛媛' or laoban ='朱媛媛' or zhulaobao='朱媛媛'
+列名 'zhulaobao' 无效。
+　  2018/9/13 16:56:39
+

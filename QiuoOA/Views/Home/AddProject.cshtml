@@ -152,11 +152,11 @@
                                                 }
                                             }
                                         }*@
-                                    <input id="shenpiren" onclick="renyuan()" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" />
+                                    <input id="shenpiren" onclick="renyuan()" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none"/>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">非税金额</th>
+                                <th class="k">不含税金额</th>
                                 <td class="k">
                                     <input class="form-control" type="text" id="Totalmoney" value="@ViewBag.TotalMoney" />
                                 </td>
@@ -228,7 +228,7 @@
                                                             foreach (var item in list15)
                                                             {
                                                                 <label>
-                                                                    <input name="chengyuan" class="bingpai" type="checkbox"  value="@item.employeename" />@item.employeename<br>
+                                                                    <input name="chengyuan" class="bingpai" type="checkbox" value="@item.employeename" />@item.employeename<br>
                                                                 </label>
                                                             }
                                                         }
@@ -288,7 +288,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="k">营销总监</th>
-                                                <td class="form-control" readonly="readonly" id="yingxiao">齐雅卿</td>
+                                                <td id="yingxiao">齐雅卿</td>
                                                 <th class="k">财务</th>
                                                 <td>
                                                     <input class="form-control" id="caiwu" type="text" name="greeting" list="caiwu1" value="">
@@ -306,10 +306,10 @@
                                                         }
                                                     </datalist>
                                                 </td>
-                                                <th class="k">老板</th>
-                                                <td class="form-control" readonly="readonly" id="laoban"></td>
-                                                <th class="k">朱老板</th>
-                                                <td class="form-control" readonly="readonly" id="zhulaoban">朱媛媛</td>
+                                                <th class="k">总经理</th>
+                                                <td id="laoban">师国庆</td>
+                                                <th class="k">财务总监</th>
+                                                <td id="zhulaoban">朱媛媛</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -447,7 +447,7 @@ else
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">非税金额</th>
+                                <th class="k">不含税金额</th>
                                 <td class="k">
                                     <input class="form-control" type="text" id="Totalmoney" />
                                 </td>
@@ -519,7 +519,7 @@ else
                                                             foreach (var item in list15)
                                                             {
                                                                 <label>
-                                                                    <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" />@item.employeename<br>
+                                                                    <input name="chengyuan" class="bingpai" type="checkbox" value="@item.employeename" />@item.employeename<br>
                                                                 </label>
                                                             }
                                                         }
@@ -594,7 +594,7 @@ else
                                                     </select>
                                                 </td>
                                                 <th class="k">总经理</th>
-                                                <td id="laoban"></td>
+                                                <td id="laoban">师国庆</td>
                                                 <th class="k">财务总监</th>
                                                 <td id="zhulaoban">朱媛媛</td>
                                             </tr>
@@ -644,7 +644,8 @@ else
             document.getElementById("Totalmoney").value = "";
         }
         //不含税金额
-        document.getElementById("Notaxmoney").value = totalmoney - (totalmoney / 1.06 * 0.06).toFixed(2);
+        //更改算法 2018年9月13日15:49:09
+        document.getElementById("Notaxmoney").value = (totalmoney * 1.06).toFixed(2);
         if (document.getElementById("Notaxmoney").value == 0) {
             document.getElementById("Notaxmoney").value = "";
         }
@@ -683,12 +684,12 @@ else
     var xiangmufuzeren;
     function zhiwu1(_this) {
         $("#zhiwu").val(_this);
-        xiangmufuzeren = _this
+        xiangmufuzeren = _this;
     }
         function but() {
             var porjectname = "@ViewBag.projectname";
             if (porjectname != "") {
-                porjectname = porjectname
+                porjectname = porjectname;
             } else {
                 porjectname = "";
             }
@@ -707,60 +708,64 @@ else
         var Notaxmoney = $("#Notaxmoney").val();//含税金额
         var cost = $("#cost").val();//项目成本
         var jingdu = $("#jingdu").val();//计划进度
-        var beizhu = $("#beizhu").val();//备注
-        $.ajax({
-            type: 'post',
-            url: "/Home/AddProjects",
-            data: {
-                name: name,
-                core: core,
-                sele: sele,
-                companyname: companyname,
-                pingpai: pingpai,
-                core2: core2,
-                xiangmuuser: xiangmuuser,
-                date: date,
-                date2: date2,
-                Totalmoney: Totalmoney,
-                Notaxmoney: Notaxmoney,
-                cost: cost,
-                jingdu: jingdu,
-                beizhu: beizhu,
-                usname: usname,
-                porjectname:porjectname
-            },
-            success: function (data) {
-                var d = eval('(' + data + ')');
-                if (d.status == 0) {
-                    layer.msg(d.msg, {
-                        icon: 5
-                    });
-                } else if (d.status == 1) {
-                    layer.msg(d.msg, {
-                        icon: 1
-                    });
-                    $("#btnMCToOut").removeAttr("style");
-                    $("#btnMCToOut1").removeAttr("style");
-                    $("#shenpiren").removeAttr("style");
-                    var sum = 0;
-                    var t = document.getElementsByTagName("input");
-                    for (var i = 0; i
-                        < t.length; i++) {
-                        if (t[i].type == 'text') {
-                            ++sum;
-                            t[i].value = "";//清空
+            var beizhu = $("#beizhu").val();//备注
+            if (name == "" || core == "" || sele == "" || xiangmufuzeren == "" || usname == "" || companyname == "" || pingpai == "" || core2 == "" || date == "" || date2 == "" || Totalmoney == "" || Notaxmoney == "" || cost == "") {
+                alert("表内仍有未填写的内容，请仔细核对后再次提交");
+                return;
+            }
+            $.ajax({
+                type: 'post',
+                url: "/Home/AddProjects",
+                data: {
+                    name: name,
+                    core: core,
+                    sele: sele,
+                    companyname: companyname,
+                    pingpai: pingpai,
+                    core2: core2,
+                    xiangmuuser: xiangmuuser,
+                    date: date,
+                    date2: date2,
+                    Totalmoney: Totalmoney,
+                    Notaxmoney: Notaxmoney,
+                    cost: cost,
+                    jingdu: jingdu,
+                    beizhu: beizhu,
+                    usname: usname,
+                    porjectname: porjectname
+                },
+                success: function (data) {
+                    var d = eval('(' + data + ')');
+                    if (d.status == 0) {
+                        layer.msg(d.msg, {
+                            icon: 5
+                        });
+                    } else if (d.status == 1) {
+                        layer.msg(d.msg, {
+                            icon: 1
+                        });
+                        $("#btnMCToOut").removeAttr("style");
+                        $("#btnMCToOut1").removeAttr("style");
+                        $("#shenpiren").removeAttr("style");
+                        var sum = 0;
+                        var t = document.getElementsByTagName("input");
+                        for (var i = 0; i
+                            < t.length; i++) {
+                            if (t[i].type == 'text') {
+                                ++sum;
+                                t[i].value = "";//清空
+                            }
                         }
                     }
-                };
-            }
-        })
+                }
+            });
     }
 
     //保存当前项目的审批人
         function butss2() {
             var porjectname = "@ViewBag.projectname";
             if (porjectname!="") {
-                porjectname = porjectname
+                porjectname = porjectname;
             } else {
                 porjectname = "";
             }
@@ -776,63 +781,72 @@ else
         var yingxiao = $("#yingxiao").text();
         var caiwu = $("#caiwu").val();
         var laoban = $("#laoban").text();
-        var zhulaoban = $("#zhulaoban").text();
-        var xiangmuchengyuan = check_val;//项目成员
-        var result = JSON.stringify(xiangmuchengyuan)
-        $.ajax({
-            url: "/Home/shenpiren",
-            type: "post",
-            data: {
-                ae: result,
-                sae: sae,
-                ad: ad,
-                sad: sad,
-                yingxiao: yingxiao,
-                caiwu: caiwu,
-                laoban: laoban,
-                zhulaoban: zhulaoban,
-                processstate: 1,
-                projectname: porjectname
-            },
-            success: function (data) {
-                if (data == "成功添加当前项目审批人!") {
-                    layer.msg(data, {
-                        icon: 1
-                    });
-                } else if (data == "添加当前项目审批人失败!") {
-                    layer.msg(data, {
-                        icon: 5
-                    });
-                } else if (data == "您没有权限添加当前项目的审批人!") {
-                    layer.msg(data, {
-                        icon: 5
-                    });
-                }
+            var zhulaoban = $("#zhulaoban").text();
+            if (sae == "" || caiwu == "") {
+                alert("未能成功提交，请填写SAE或财务人员");
+                return;
             }
-        })
+            var xiangmuchengyuan = check_val;//项目成员
+            if (xiangmuchengyuan.length == 0) {
+                alert("请勾选AE人员");
+                return;
+            }
+        var result = JSON.stringify(xiangmuchengyuan);
+            $.ajax({
+                url: "/Home/shenpiren",
+                type: "post",
+                data: {
+                    ae: result,
+                    sae: sae,
+                    ad: ad,
+                    sad: sad,
+                    yingxiao: yingxiao,
+                    caiwu: caiwu,
+                    laoban: laoban,
+                    zhulaoban: zhulaoban,
+                    processstate: 1,
+                    projectname: porjectname
+                },
+                success: function (data) {
+                    if (data == "成功添加当前项目审批人!") {
+                        layer.msg(data, {
+                            icon: 1
+                        });
+                    } else if (data == "添加当前项目审批人失败!") {
+                        layer.msg(data, {
+                            icon: 5
+                        });
+                    } else if (data == "您没有权限添加当前项目的审批人!") {
+                        layer.msg(data, {
+                            icon: 5
+                        });
+                    }
+                    alert("注意：项目报价表与成本表必须点击上传按钮，请仔细核对！");
+                }
+            });
         }
         function renyuan() {
          var porjectname="@ViewBag.projectname";
-        $.ajax({
-            url:"/Home/jsonAddProject",
-            type:"post",
-            data: {
-                projectname: porjectname
-            },
-            success: function (data) {
-                $("#SAE").val(data['SAE']);
-                $("#AD").val(data['AD']);
-                $("#SAD").val(data['SAD']);
-                $("#caiwu").val(data['caiwu']);
-                //var ae = data['AE'];
-                //var obj = document.getElementsByName("chengyuan");
+            $.ajax({
+                url: "/Home/jsonAddProject",
+                type: "post",
+                data: {
+                    projectname: porjectname
+                },
+                success: function (data) {
+                    $("#SAE").val(data['SAE']);
+                    $("#AD").val(data['AD']);
+                    $("#SAD").val(data['SAD']);
+                    $("#caiwu").val(data['caiwu']);
+                    //var ae = data['AE'];
+                    //var obj = document.getElementsByName("chengyuan");
 
-                //var cks = $("input[type='checkbox']:checked");
-                //for (var i = 0; i < ae.length; i++) {
-                //    ae[i] + "," == obj
-                //}
-            }
-        })
+                    //var cks = $("input[type='checkbox']:checked");
+                    //for (var i = 0; i < ae.length; i++) {
+                    //    ae[i] + "," == obj
+                    //}
+                }
+            });
         }
         //判断项目名称是否已存在
         function checkProjectName(_this) {

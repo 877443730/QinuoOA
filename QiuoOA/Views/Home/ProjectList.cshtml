@@ -5,6 +5,9 @@
                 <thead>
                     <tr>
                         <th>项目名称</th>
+                        <th>项目代码</th>
+                        <th>项目含税金额</th>
+                        <th>项目成本</th>
                         <th>项目日期</th>
                         <th>项目结束日期</th>
                         <th>状态</th>
@@ -14,27 +17,45 @@
                     @*warning*@
                     @{
                         List<Model.Project> list = ViewData["projectlist"] as List<Model.Project>;
+                        List<Model.Money> list1 =ViewData["moneylist"] as List<Model.Money>;
                         if (list.Any())
                         {
                             foreach (var item in list)
                             {
-                                if (item.typefinished != 1)
+                                var hanshuijine = 0;
+                                var xiangmuchengben = 0;
+                                foreach (var item1 in list1)
                                 {
-                                    <tr class="warning">
-                                        <td>@item.ProjectName</td>
-                                        <td>@item.ProjectStartDate</td>
-                                        <td>@item.ProjectEndDate</td>
-                                        <td>未审批</td>
-                                    </tr>
+                                    if (item1.ProjectId.Equals(item.Id))
+                                    {
+                                        hanshuijine = Convert.ToInt32(item1.NoTaxlMoney);
+                                        xiangmuchengben = Convert.ToInt32(item1.projectcost);
+                                    }
+                                }
+                            if (item.typefinished != 1)
+                            {
+                                <tr class="warning">
+                                    <td>@item.ProjectName</td>
+                                    <td>@item.ProjectCode</td>
+                                    
+                                    <td>@hanshuijine</td>
+                                    <td>@xiangmuchengben</td>
+                                    <td>@item.ProjectStartDate</td>
+                                    <td>@item.ProjectEndDate</td>
+                                    <td>未审批</td>
+                                </tr>
                                 }
                                 else if (item.typefinished == 1)
                                 {
-                                    <tr class="success">
-                                        <td>@item.ProjectName</td>
-                                        <td>@item.ProjectStartDate</td>
-                                        <td>@item.ProjectEndDate</td>
-                                        <td>已结案</td>
-                                    </tr>
+                                <tr class="success">
+                                    <td>@item.ProjectName</td>
+                                    <td>@item.ProjectCode</td>
+                                    <td>@hanshuijine</td>
+                                    <td>@xiangmuchengben</td>
+                                    <td>@item.ProjectStartDate</td>
+                                    <td>@item.ProjectEndDate</td>
+                                    <td>已结案</td>
+                                </tr>
                                 }
                             }
                         }
