@@ -59,7 +59,6 @@ namespace Model
 
         public int paymentapplicationformiId { set; get; }
         public string ProjectName { set; get; }
-        //修改 2018年9月13日17:43:42
         public string Rejection { set; get; }
         #endregion Model
 

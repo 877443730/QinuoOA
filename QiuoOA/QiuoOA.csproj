@@ -578,6 +578,8 @@
     <Content Include="img\icons\social.png" />
     <Content Include="img\icons\weather-hover.png" />
     <Content Include="img\icons\weather.png" />
+    <Content Include="img\icons\上拉图标.png" />
+    <Content Include="img\icons\下拉图标.png" />
     <Content Include="img\India.png" />
     <Content Include="img\left-arrow.png" />
     <Content Include="img\logo-big.png" />

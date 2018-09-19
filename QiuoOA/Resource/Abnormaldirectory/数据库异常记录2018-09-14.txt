@@ -1,0 +1,9 @@
+----------- 执行查询语句，返回DataSet)Query-----------
+Timeout 时间已到。在操作完成之前超时时间已过或服务器未响应。
+　  2018/9/14 18:15:23
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT(b.Stateofapproval), a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao  where 1=1
+Timeout 时间已到。在操作完成之前超时时间已过或服务器未响应。
+　  2018/9/14 18:27:51
+

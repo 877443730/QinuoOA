@@ -65,15 +65,15 @@ namespace Dal
                     new SqlParameter("@Actualamountofpayment", SqlDbType.Decimal,9),
                     new SqlParameter("@Financialcost", SqlDbType.Decimal,9),
                     new SqlParameter("@Totaltaxcost", SqlDbType.Decimal,9),
-                 new SqlParameter("@shuidian", SqlDbType.Decimal,9),
-                  new SqlParameter("@wangming", SqlDbType.NVarChar,200),
-                   new SqlParameter("@Distinguish", SqlDbType.Int,4),
-                     new SqlParameter("@Costcategory", SqlDbType.NVarChar,200),
-                       new SqlParameter("@purpose", SqlDbType.NVarChar,200),
+                    new SqlParameter("@shuidian", SqlDbType.Decimal,9),
+                    new SqlParameter("@wangming", SqlDbType.NVarChar,200),
+                    new SqlParameter("@Distinguish", SqlDbType.Int,4),
+                    new SqlParameter("@Costcategory", SqlDbType.NVarChar,200),
+                    new SqlParameter("@purpose", SqlDbType.NVarChar,200),
                        new SqlParameter("@paystate", SqlDbType.Int,4),
                        new SqlParameter("@readState", SqlDbType.Int,4),
                        new SqlParameter("@pingtai", SqlDbType.NVarChar,500),
-                        new SqlParameter("@Applicant", SqlDbType.NVarChar,50)
+                       new SqlParameter("@Applicant", SqlDbType.NVarChar,50)
             };
             parameters[0].Value = model.Invoicenumber;
             parameters[1].Value = model.Invoicetax;
@@ -169,12 +169,12 @@ namespace Dal
                     new SqlParameter("@shuidian", SqlDbType.Decimal,9),
                     new SqlParameter("@wangming", SqlDbType.NVarChar,200),
                     new SqlParameter("@Distinguish",SqlDbType.Int,4),
-                      new SqlParameter("@Costcategory", SqlDbType.NVarChar,200),
-                        new SqlParameter("@purpose", SqlDbType.NVarChar,200),
-                        new SqlParameter("@paystate",SqlDbType.Int,4),
-                        new SqlParameter("@readState",SqlDbType.Int,4),
-                        new SqlParameter("@pingtai", SqlDbType.NVarChar,500),
-                         new SqlParameter("@Applicant", SqlDbType.NVarChar,50),
+                    new SqlParameter("@Costcategory", SqlDbType.NVarChar,200),
+                    new SqlParameter("@purpose", SqlDbType.NVarChar,200),
+                    new SqlParameter("@paystate",SqlDbType.Int,4),
+                    new SqlParameter("@readState",SqlDbType.Int,4),
+                    new SqlParameter("@pingtai", SqlDbType.NVarChar,500),
+                    new SqlParameter("@Applicant", SqlDbType.NVarChar,50),
                     new SqlParameter("@Id", SqlDbType.Int,4)};
             parameters[0].Value = model.Invoicenumber;
             parameters[1].Value = model.Invoicetax;
@@ -360,7 +360,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select top 1 b.Stateofapproval, a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");//关联查询出财务审批进行的步骤
+            strSql.Append("select top 1 b.Stateofapproval,b.SAE,b.AD,b.SAD,b.yinxiaozongjian,b.caiwu,b.laoban,b.zhulaoban,a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");//关联查询出财务审批进行的步骤
             strSql.Append(" where a.ProjectId=@ProjectId and a.xuhao=@xuhao and a.Distinguish=@Distinguish");
             SqlParameter[] parameters = {
                     new SqlParameter("@ProjectId", SqlDbType.Int,4),
@@ -520,13 +520,41 @@ namespace Dal
                 {
                     model.pingtai = row["pingtai"].ToString();
                 }
+                if (row["Applicant"] != null)
+                {
+                    model.Applicant = row["Applicant"].ToString();
+                }
                 if (row["Stateofapproval"] != null && row["Stateofapproval"].ToString() != "")
                 {
                     model.Stateofapproval = int.Parse(row["Stateofapproval"].ToString());
                 }
-                if (row["Applicant"] != null)
+                if (row["SAE"] != null)
                 {
-                    model.Applicant = row["Applicant"].ToString();
+                    model.SAE = row["SAE"].ToString();
+                }
+                if (row["AD"] != null)
+                {
+                    model.AD = row["AD"].ToString();
+                }
+                if (row["SAD"] != null)
+                {
+                    model.SAD = row["SAD"].ToString();
+                }
+                if (row["yinxiaozongjian"] != null)
+                {
+                    model.yinxiaozongjian = row["yinxiaozongjian"].ToString();
+                }
+                if (row["caiwu"] != null)
+                {
+                    model.caiwu = row["caiwu"].ToString();
+                }
+                if (row["laoban"] != null)
+                {
+                    model.laoban = row["laoban"].ToString();
+                }
+                if (row["zhulaoban"] != null)
+                {
+                    model.zhulaoban = row["zhulaoban"].ToString();
                 }
             }
             return model;
@@ -538,7 +566,7 @@ namespace Dal
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select DISTINCT(b.Stateofapproval), a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");
+            strSql.Append("select DISTINCT b.Stateofapproval,b.SAE,b.AD,b.SAD,b.yinxiaozongjian,b.caiwu,b.laoban,b.zhulaoban,a.*  FROM Paymentapplicationform  a left join [dbo].[paymentnode] b on a.ProjectId=b.projectId and a.Distinguish=b.Distinguish and a.xuhao= b.xuhao ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);

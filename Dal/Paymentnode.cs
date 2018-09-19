@@ -30,7 +30,7 @@ namespace Dal
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
-        //修改 2018年9月13日17:44:34 Rejection
+
         /// <summary>
         /// 增加一条数据
         /// </summary>
@@ -55,7 +55,7 @@ namespace Dal
                     new SqlParameter("@laoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@zhulaoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@paymentapplicationformiId", SqlDbType.Int,4),
-                     new SqlParameter("@Rejection", SqlDbType.NVarChar,50)
+                    new SqlParameter("@Rejection", SqlDbType.NVarChar,500)
             };
             parameters[0].Value = model.projectId;
             parameters[1].Value = model.xuhao;
@@ -115,7 +115,7 @@ namespace Dal
                     new SqlParameter("@laoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@zhulaoban", SqlDbType.NVarChar,50),
                     new SqlParameter("@paymentapplicationformiId", SqlDbType.Int,4),
-                      new SqlParameter("@Rejection", SqlDbType.NVarChar,500),
+                    new SqlParameter("@Rejection", SqlDbType.NVarChar,500),
                     new SqlParameter("@Id", SqlDbType.Int,4)};
             parameters[0].Value = model.projectId;
             parameters[1].Value = model.xuhao;
@@ -131,6 +131,7 @@ namespace Dal
             parameters[11].Value = model.paymentapplicationformiId;
             parameters[12].Value = model.Rejection;
             parameters[13].Value = model.Id;
+
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
             {
@@ -193,7 +194,7 @@ namespace Dal
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId from paymentnode ");
+            strSql.Append("select  top 1 Id,projectId,xuhao,Distinguish,Stateofapproval,SAE,AD,SAD,yinxiaozongjian,caiwu,laoban,zhulaoban,paymentapplicationformiId,Rejection from paymentnode ");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
                     new SqlParameter("@Id", SqlDbType.Int,4)
@@ -297,6 +298,10 @@ namespace Dal
                 {
                     model.paymentapplicationformiId = int.Parse(row["paymentapplicationformiId"].ToString());
                 }
+                if (row["Rejection"] != null)
+                {
+                    model.Rejection = row["Rejection"].ToString();
+                }
                 try
                 {
                     if (row["ProjectName"] != null)
@@ -307,10 +312,6 @@ namespace Dal
                 catch (Exception e)
                 {
 
-                }
-                if (row["Rejection"] != null)
-                {
-                    model.Rejection = row["Rejection"].ToString();
                 }
 
             }
@@ -338,7 +339,7 @@ namespace Dal
             strSql.Append("select a.*,b.ProjectName from paymentnode a left join Project b on a.projectid =b.id");
             if (strWhere.Trim() != "")
             {
-                strSql.Append(" where " + strWhere+ " order by a.xuhao");
+                strSql.Append(" where " + strWhere);
             }
             return DbHelperSQL.Query(strSql.ToString());
         }
