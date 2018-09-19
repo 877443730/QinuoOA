@@ -19,7 +19,6 @@ namespace Model
         /// 
         /// </summary>
         public int Id { set; get; }
-
         /// <summary>
         /// 
         /// </summary>
