@@ -183,7 +183,6 @@ namespace QiuoOA.Controllers
         [Authorizer]
         public ActionResult UpdateUser(int id) {
             Bll.t_role bllrole = new Bll.t_role();
-         
             Model.t_user model = userbll.GetModel(id);
             ViewBag.username = model.username; //账号
             ViewBag.employeename = model.employeename;//姓名
@@ -222,7 +221,10 @@ namespace QiuoOA.Controllers
             {
                 model.username = username;
                 model.employeename = name;
-                model.pwd = DESEncrypt.Encrypt(pwd);
+                if (model.pwd != pwd)
+                {
+                    model.pwd = DESEncrypt.Encrypt(pwd);
+                }
                 userbll.Update(model);
             }
             Model.user_role urmodel = user_rolebll.GetModels(model.id);

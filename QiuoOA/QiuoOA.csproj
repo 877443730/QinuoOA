@@ -554,6 +554,8 @@
     <Content Include="css\widgets.css" />
     <Content Include="css\xcharts.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\ElegantIcons.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -769,6 +771,13 @@
     <Content Include="assets\morris.js-0.4.3\spec\lib\pad_spec.coffee" />
     <Content Include="assets\morris.js-0.4.3\spec\lib\parse_time_spec.coffee" />
     <Content Include="assets\morris.js-0.4.3\spec\support\placeholder.coffee" />
+    <Content Include="fonts\ElegantIcons.eot" />
+    <Content Include="fonts\ElegantIcons.ttf" />
+    <Content Include="fonts\ElegantIcons.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

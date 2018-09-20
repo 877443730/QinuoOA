@@ -63,9 +63,11 @@
                                 <label class="control-label col-lg-2" for="tags">拥有权限</label>
                                 <div class="col-lg-10">
                                     <select class="form-control" id="jurisdiction">
+                                        <option value="@ViewBag.pername">@ViewBag.pername</option>
+                                        <option value="">--请选择--</option>
                                         <option value="管理员">管理员</option>
-                                        <option value="执行">执行</option>
                                         <option value="财务管理">财务管理</option>
+                                        <option value="执行">执行</option>
                                         <option value="初级审核">初级审核</option>
                                     </select>
                                 </div>

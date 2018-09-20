@@ -190,8 +190,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <ol class="breadcrumb">
-                                <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                                <li><i class="fa fa-laptop"></i>首页</li>
+                                <li><i class="fa fa-home"></i><a href="/Home/index">首页</a></li>
+                                <li><i class="fa fa-laptop"></i><a onclick="go()" style="cursor:pointer">返回上一级</a></li>
                             </ol>
                         </div>
                     </div>
@@ -218,5 +218,11 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
+<script>
+    function go() {
+        window.history.go(-1);
+    }
+</script>
