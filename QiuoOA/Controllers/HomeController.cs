@@ -451,7 +451,7 @@ namespace QiuoOA.Controllers
                         {
                             nodemodel.Stateofapproval = 1;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"项目负责人审批成功!\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且项目负责人审批成功!\"}";
                         }
                         if (nodemodel.SAE == "" && nodemodel.Stateofapproval == 1)
                         {
@@ -471,7 +471,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 3,\"msg\":\"SAE审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且SAE审批成功\"}";
 
                         }
                         if (nodemodel.AD == "" && nodemodel.Stateofapproval == 3)
@@ -491,7 +491,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 4,\"msg\":\"AD审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且AD审批成功\"}";
                         }
                         if (nodemodel.SAD == "" && nodemodel.Stateofapproval == 4)
                         {
@@ -510,7 +510,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 5,\"msg\":\"SAD审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且SAD审批成功\"}";
                         }
                         if (nodemodel.yinxiaozongjian == "" && nodemodel.Stateofapproval == 5)
                         {
@@ -525,7 +525,7 @@ namespace QiuoOA.Controllers
                                 nodemodel.Stateofapproval = 8;
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 6,\"msg\":\"营销负责人审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且营销负责人审批成功\"}";
                         }
                         if (nodemodel.caiwu == "" && nodemodel.Stateofapproval == 6)
                         {
@@ -536,7 +536,7 @@ namespace QiuoOA.Controllers
                         {
                             nodemodel.Stateofapproval = 8;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，且财务审批成功\"}";
                         }
 
                         if (nodemodel.zhulaoban == getusermodel.employeename && nodemodel.Stateofapproval == 8)
@@ -545,9 +545,9 @@ namespace QiuoOA.Controllers
                             projectmodel.caseclosed = 1;
                             Projectbll.Update(projectmodel);
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 14,\"msg\":\"审批成功,已立案!\"}";
+                            return "{\"status\": 1,\"msg\":\"审批成功,已立案!\"}";
                         }
-                        return "{\"status\": 10,\"msg\":\"您的上一审批人未审批,或您已审批或您没有权限\"}";
+                        return "{\"status\": 1,\"msg\":\"修改成功，但由于您的上一审批人未审批,或您已审批或您没有权限，未能进行审批通过操作\"}";
                     }
                     nodebll.Update(nodemodel);
                     

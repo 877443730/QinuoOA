@@ -605,7 +605,7 @@
             <input id="xiugai" onclick="update(this,2)" style="display:none" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" onclick="fangfa1(1)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa1(1)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" disabled="disabled" data-target="#myModal2" />
         </td>
         @*修改 2018年9月13日14:16:39*@
         <td id="Applicant2" class="Applicant2"></td>
@@ -665,7 +665,7 @@
             <input id="xiugai" onclick="update(this,3)" style="display:none" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" onclick="fangfa2(2)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa2(2)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" disabled="disabled" data-target="#myModal2" />
         </td>
         @*修改 2018年9月13日14:16:39*@
         <td id="Applicant3" class="Applicant3"></td>.
@@ -720,7 +720,7 @@
             <input id="xiugai" onclick="update(this,0)" style="display:none" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" />
         </td>
         <td>
-            <input id="caiwushenpi" type="button" onclick="fangfa3(3)" class="btn btn-primary form-control caiwushenpi" value="审批" data-toggle="modal" data-target="#myModal2" />
+            <input id="caiwushenpi" type="button" onclick="fangfa3(3)" class="btn btn-primary form-control caiwushenpi" value="审批" disabled="disabled" data-toggle="modal" data-target="#myModal2" />
         </td>
         @*修改 2018年9月13日14:16:39*@
         <td id="Applicant0" class="Applicant0"></td>
@@ -2086,7 +2086,7 @@
         Applicant1 = $(_this).closest('tr').find('.Applicant0')[0];
         chenbenleibie = $(_this).closest('tr').find('.chenbenleibie')[0].value;
         //修改2018年9月13日14:55:20
-        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null && s != "" && chenbenbaojia != "" && xiaoshoubaojia != "") {
             if (leixing == "对公司") {
                 if (suidian != "") {
                     $("#shenqing").attr('data-target', '#myModal');
@@ -2165,7 +2165,7 @@
         aaa = $(_this).closest('tr').find('.personalaaa')[0].value;
         //修改2018年9月13日14:47:43
         Applicant1 = $(_this).closest('tr').find('.Applicant2')[0];
-        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null && s != "" && chenbenbaojia != "" && xiaoshoubaojia != "") {
             if (ddd != "") {
                 $("#shenqing").attr('data-target', '#myModal1');
                 $('#myModal1').modal('show');
@@ -2192,6 +2192,8 @@
                 alert("请输入网名(支付对象)");
                 return;
             }
+        } else {
+            alert("请输入完整");
         }
 
     }
@@ -2219,7 +2221,7 @@
         aaa = $(_this).closest('tr').find('.companyaaa')[0].value;
         //修改2018年9月13日14:47:43
         Applicant1 = $(_this).closest('tr').find('.Applicant3')[0];
-        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null) {
+        if (s != null && chenbenbaojia != null && xiaoshoubaojia != null && s != "" && chenbenbaojia != "" && xiaoshoubaojia != "") {
             if (suidian != "" && ddd != "") {
                 $("#shenqing").attr('data-target', '#myModal');
                 $('#myModal').modal('show');
@@ -2238,7 +2240,7 @@
                 document.getElementById("insidePingtai1").value = pingtai;
                 document.getElementById("insideChengbenbaojia1").value = chenbenbaojia;
                 document.getElementById("insedeXiaoshoubaojia1").value = xiaoshoubaojia;
-                document.getElementById("insideSuidian1").value = suidian+"%";
+                document.getElementById("insideSuidian1").value = suidian + "%";
                 document.getElementById("code1").value = $("#code").val();
                 document.getElementById("projectname1").value = s;
                 document.getElementById("Paymentobject1").value = ddd;
@@ -2247,6 +2249,8 @@
                 alert("税点或者网名未填写！");
                 return;
             }
+        } else {
+            alert("请输入完整")
         }
     }
     //修改申请页面
