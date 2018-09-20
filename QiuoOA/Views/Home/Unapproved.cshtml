@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <caption><img class="title" id="menu1" onclick="showmenu('1')" height="18" width="18" src="~/img/icons/下拉图标.png" /></caption>
-                    <tbody id="list1">
+                    <tbody id="list1" style="display:none">
                         @{
                             List<Model.Paymentnode> list4 = ViewData["Nofukuan"] as List<Model.Paymentnode>;
                             if (list4.Any())
@@ -194,7 +194,7 @@
                             <th>项目名称</th>
                         </tr>
                     </thead>
-                    <tbody id="list2">
+                    <tbody id="list2" style="display:none">
                         @{
                             List<Model.node> list1 = ViewData["lixiang"] as List<Model.node>;
                             if (list1.Any())
@@ -251,7 +251,7 @@
                             <th>项目名称</th>
                         </tr>
                     </thead>
-                    <tbody id="list3">
+                    <tbody id="list3" style="display:none">
                         @{
                             List<Model.node> list2 = ViewData["jiean"] as List<Model.node>;
                             if (list2.Any())
@@ -310,7 +310,7 @@
                             <th>类型</th>
                         </tr>
                     </thead>
-                    <tbody id="list4">
+                    <tbody id="list4" style="display:none">
                         @{
                             List<Model.Paymentnode> list3 = ViewData["fukuan"] as List<Model.Paymentnode>;
                             if (list4.Any())
