@@ -562,7 +562,7 @@ namespace DBUtility
                     SqlDataAdapter command = new SqlDataAdapter(SQLString, connection);
                     command.Fill(ds, "ds");
                 }
-                catch (System.Data.SqlClient.SqlException ex)
+                catch (SqlException ex)
                 {
                     Logger.writeInfos("-----------执行查询语句，返回DataSet)Query-----------\r\n" + SQLString + "\r\n" + ex.Message + "\r\n");
                     throw new Exception(ex.Message);

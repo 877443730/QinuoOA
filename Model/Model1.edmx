@@ -1,0 +1,1223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QinuoOAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InvoiceAttachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoiceurl" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="PaymentapplicationformId" Type="int" />
+        </EntityType>
+        <EntityType Name="Money">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalMoney" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="NoTaxlMoney" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="projectcost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CostQuotation" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SalesQuotation" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Actualamountofpayment" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Financialcost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SalesQuotations" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TaxSum" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="NonTaxCostCombined" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcosttow" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Grossprofit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Unpaidchannel" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Employeebonus" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Undistributedprofit" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Percentageofprofit" Type="nvarchar" MaxLength="200" />
+          <Property Name="AMargemBrutapercentual" Type="nvarchar" MaxLength="200" />
+          <Property Name="Olucrolíquido" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Aporcentagemdelucrolíquido" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="node">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stateofapproval" Type="int" />
+          <Property Name="projectid" Type="int" />
+          <Property Name="AE" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAE" Type="nvarchar" MaxLength="50" />
+          <Property Name="AD" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="yinxiaozongjian" Type="nvarchar" MaxLength="50" />
+          <Property Name="caiwu" Type="nvarchar" MaxLength="50" />
+          <Property Name="laoban" Type="nvarchar" MaxLength="50" />
+          <Property Name="zhulaoban" Type="nvarchar" MaxLength="50" />
+          <Property Name="processstate" Type="int" />
+        </EntityType>
+        <EntityType Name="OfferTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="offerName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Paymentapplicationform">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Invoicenumber" Type="int" />
+          <Property Name="Invoicetax" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Timeofpayment" Type="datetime" />
+          <Property Name="Receivablescompany" Type="nvarchar" MaxLength="200" />
+          <Property Name="Openingbank" Type="nvarchar" MaxLength="200" />
+          <Property Name="Bankaccount" Type="nvarchar" MaxLength="200" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Payee" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplyforpaymentType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Paymentobject" Type="nvarchar" MaxLength="200" />
+          <Property Name="xuhao" Type="int" />
+          <Property Name="MoneyId" Type="int" />
+          <Property Name="CostQuotation" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Salesquotation" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Actualamountofpayment" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Financialcost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcost" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="shuidian" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="wangming" Type="nvarchar" MaxLength="200" />
+          <Property Name="Distinguish" Type="int" />
+          <Property Name="Costcategory" Type="nvarchar" MaxLength="200" />
+          <Property Name="purpose" Type="nvarchar" MaxLength="200" />
+          <Property Name="paystate" Type="int" />
+          <Property Name="readState" Type="int" />
+          <Property Name="pingtai" Type="nvarchar" MaxLength="500" />
+          <Property Name="Applicant" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="paymentnode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectId" Type="int" />
+          <Property Name="xuhao" Type="int" />
+          <Property Name="Distinguish" Type="int" />
+          <Property Name="Stateofapproval" Type="int" />
+          <Property Name="SAE" Type="nvarchar" MaxLength="50" />
+          <Property Name="AD" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="yinxiaozongjian" Type="nvarchar" MaxLength="50" />
+          <Property Name="caiwu" Type="nvarchar" MaxLength="50" />
+          <Property Name="laoban" Type="nvarchar" MaxLength="50" />
+          <Property Name="zhulaoban" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentapplicationformiId" Type="int" />
+          <Property Name="Rejection" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="POlujing" Type="nvarchar" MaxLength="500" />
+          <Property Name="PorjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProjectStartDate" Type="datetime" />
+          <Property Name="ProjectEndDate" Type="datetime" />
+          <Property Name="Username" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProjectCode" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="OfferId" Type="int" />
+          <Property Name="PlatformId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ProjecttypeId" Type="int" />
+          <Property Name="PurchaseSingleCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="userid" Type="int" />
+          <Property Name="Planprogress" Type="nvarchar" MaxLength="500" />
+          <Property Name="POdanhao" Type="nvarchar" MaxLength="500" />
+          <Property Name="Expectedreturndate" Type="datetime" />
+          <Property Name="Actualdate" Type="datetime" />
+          <Property Name="Accountamount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="typefinished" Type="int" />
+          <Property Name="caseclosed" Type="int" />
+        </EntityType>
+        <EntityType Name="projectCostlujing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectCostUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjectFinalReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reportlujing" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectQuotationlujing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectQuotationUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProjecTtype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="USName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Publishlinksummary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="summarylujing" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role_permission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="permissionid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_permission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pename" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="adddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="adddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="employeename" Type="nvarchar" MaxLength="50" />
+          <Property Name="adddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="roleid" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Brand_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Brand">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Money_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Money" Type="Self.Money" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Money">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_OfferTable">
+          <End Role="OfferTable" Type="Self.OfferTable" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="OfferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Platform">
+          <End Role="Platform" Type="Self.Platform" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_ProjecTtype">
+          <End Role="ProjecTtype" Type="Self.ProjecTtype" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjecTtype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjecttypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjecTtype_ProjecTtype1">
+          <End Role="ProjecTtype" Type="Self.ProjecTtype" Multiplicity="1" />
+          <End Role="ProjecTtype1" Type="Self.ProjecTtype" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProjecTtype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjecTtype1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_permission_t_permission">
+          <End Role="t_permission" Type="Self.t_permission" Multiplicity="1" />
+          <End Role="role_permission" Type="Self.role_permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_permission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role_permission">
+              <PropertyRef Name="permissionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_permission_t_role">
+          <End Role="t_role" Type="Self.t_role" Multiplicity="1" />
+          <End Role="role_permission" Type="Self.role_permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role_permission">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role_t_role">
+          <End Role="t_role" Type="Self.t_role" Multiplicity="1" />
+          <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role_t_user">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QinuoOAModelStoreContainer">
+          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceAttachments" EntityType="Self.InvoiceAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Money" EntityType="Self.Money" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="node" EntityType="Self.node" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferTable" EntityType="Self.OfferTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paymentapplicationform" EntityType="Self.Paymentapplicationform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentnode" EntityType="Self.paymentnode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PO" EntityType="Self.PO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projectCostlujing" EntityType="Self.projectCostlujing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectFinalReport" EntityType="Self.ProjectFinalReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectQuotationlujing" EntityType="Self.ProjectQuotationlujing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjecTtype" EntityType="Self.ProjecTtype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publishlinksummary" EntityType="Self.Publishlinksummary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role_permission" EntityType="Self.role_permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_permission" EntityType="Self.t_permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_role" EntityType="Self.t_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Brand_Company" Association="Self.FK_Brand_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Brand" EntitySet="Brand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Money_Project" Association="Self.FK_Money_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Money" EntitySet="Money" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_OfferTable" Association="Self.FK_Project_OfferTable">
+            <End Role="OfferTable" EntitySet="OfferTable" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Platform" Association="Self.FK_Project_Platform">
+            <End Role="Platform" EntitySet="Platform" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_ProjecTtype" Association="Self.FK_Project_ProjecTtype">
+            <End Role="ProjecTtype" EntitySet="ProjecTtype" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjecTtype_ProjecTtype1" Association="Self.FK_ProjecTtype_ProjecTtype1">
+            <End Role="ProjecTtype" EntitySet="ProjecTtype" />
+            <End Role="ProjecTtype1" EntitySet="ProjecTtype" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_permission_t_permission" Association="Self.FK_role_permission_t_permission">
+            <End Role="t_permission" EntitySet="t_permission" />
+            <End Role="role_permission" EntitySet="role_permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_permission_t_role" Association="Self.FK_role_permission_t_role">
+            <End Role="t_role" EntitySet="t_role" />
+            <End Role="role_permission" EntitySet="role_permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role_t_role" Association="Self.FK_user_role_t_role">
+            <End Role="t_role" EntitySet="t_role" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role_t_user" Association="Self.FK_user_role_t_user">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QinuoOAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Brand_Company" FromRole="Brand" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Company" FromRole="Company" ToRole="Brand" />
+        </EntityType>
+        <EntityType Name="InvoiceAttachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoiceurl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentapplicationformId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Money">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NoTaxlMoney" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="projectcost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CostQuotation" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SalesQuotation" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Actualamountofpayment" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Financialcost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SalesQuotations" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TaxSum" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NonTaxCostCombined" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcosttow" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Grossprofit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Unpaidchannel" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Employeebonus" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Undistributedprofit" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Percentageofprofit" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AMargemBrutapercentual" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Olucrolíquido" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Aporcentagemdelucrolíquido" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Money_Project" FromRole="Money" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="node">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stateofapproval" Type="Int32" />
+          <Property Name="projectid" Type="Int32" />
+          <Property Name="AE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="yinxiaozongjian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="caiwu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="laoban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zhulaoban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="processstate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OfferTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="offerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Project_OfferTable" FromRole="OfferTable" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Paymentapplicationform">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoicenumber" Type="Int32" />
+          <Property Name="Invoicetax" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Timeofpayment" Type="DateTime" Precision="3" />
+          <Property Name="Receivablescompany" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Openingbank" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Bankaccount" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Payee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyforpaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Paymentobject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="xuhao" Type="Int32" />
+          <Property Name="MoneyId" Type="Int32" />
+          <Property Name="CostQuotation" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Salesquotation" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Actualamountofpayment" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Financialcost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Totaltaxcost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="shuidian" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="wangming" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Distinguish" Type="Int32" />
+          <Property Name="Costcategory" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="purpose" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="paystate" Type="Int32" />
+          <Property Name="readState" Type="Int32" />
+          <Property Name="pingtai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Applicant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="paymentnode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectId" Type="Int32" />
+          <Property Name="xuhao" Type="Int32" />
+          <Property Name="Distinguish" Type="Int32" />
+          <Property Name="Stateofapproval" Type="Int32" />
+          <Property Name="SAE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="yinxiaozongjian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="caiwu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="laoban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zhulaoban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentapplicationformiId" Type="Int32" />
+          <Property Name="Rejection" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Project_Platform" FromRole="Platform" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="PO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POlujing" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PorjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectStartDate" Type="DateTime" Precision="3" />
+          <Property Name="ProjectEndDate" Type="DateTime" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectCode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OfferId" Type="Int32" />
+          <Property Name="PlatformId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ProjecttypeId" Type="Int32" />
+          <Property Name="PurchaseSingleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="Planprogress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="POdanhao" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Expectedreturndate" Type="DateTime" Precision="3" />
+          <Property Name="Actualdate" Type="DateTime" Precision="3" />
+          <Property Name="Accountamount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="typefinished" Type="Int32" />
+          <Property Name="caseclosed" Type="Int32" />
+          <NavigationProperty Name="Money" Relationship="Self.FK_Money_Project" FromRole="Project" ToRole="Money" />
+          <NavigationProperty Name="OfferTable" Relationship="Self.FK_Project_OfferTable" FromRole="Project" ToRole="OfferTable" />
+          <NavigationProperty Name="Platform" Relationship="Self.FK_Project_Platform" FromRole="Project" ToRole="Platform" />
+          <NavigationProperty Name="ProjecTtype" Relationship="Self.FK_Project_ProjecTtype" FromRole="Project" ToRole="ProjecTtype" />
+        </EntityType>
+        <EntityType Name="projectCostlujing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectCostUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProjectFinalReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reportlujing" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectQuotationlujing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectQuotationUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProjecTtype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Project_ProjecTtype" FromRole="ProjecTtype" ToRole="Project" />
+          <NavigationProperty Name="ProjecTtype1" Relationship="Self.FK_ProjecTtype_ProjecTtype1" FromRole="ProjecTtype" ToRole="ProjecTtype1" />
+          <NavigationProperty Name="ProjecTtype2" Relationship="Self.FK_ProjecTtype_ProjecTtype1" FromRole="ProjecTtype1" ToRole="ProjecTtype" />
+        </EntityType>
+        <EntityType Name="Publishlinksummary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="summarylujing" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role_permission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="permissionid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_permission" Relationship="Self.FK_role_permission_t_permission" FromRole="role_permission" ToRole="t_permission" />
+          <NavigationProperty Name="t_role" Relationship="Self.FK_role_permission_t_role" FromRole="role_permission" ToRole="t_role" />
+        </EntityType>
+        <EntityType Name="t_permission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="role_permission" Relationship="Self.FK_role_permission_t_permission" FromRole="t_permission" ToRole="role_permission" />
+        </EntityType>
+        <EntityType Name="t_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="role_permission" Relationship="Self.FK_role_permission_t_role" FromRole="t_role" ToRole="role_permission" />
+          <NavigationProperty Name="user_role" Relationship="Self.FK_user_role_t_role" FromRole="t_role" ToRole="user_role" />
+        </EntityType>
+        <EntityType Name="t_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user_role" Relationship="Self.FK_user_role_t_user" FromRole="t_user" ToRole="user_role" />
+        </EntityType>
+        <EntityType Name="user_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="t_role" Relationship="Self.FK_user_role_t_role" FromRole="user_role" ToRole="t_role" />
+          <NavigationProperty Name="t_user" Relationship="Self.FK_user_role_t_user" FromRole="user_role" ToRole="t_user" />
+        </EntityType>
+        <Association Name="FK_Brand_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Brand" Type="Self.Brand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Brand">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Money_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Money" Type="Self.Money" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Money">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_OfferTable">
+          <End Role="OfferTable" Type="Self.OfferTable" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="OfferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Platform">
+          <End Role="Platform" Type="Self.Platform" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_ProjecTtype">
+          <End Role="ProjecTtype" Type="Self.ProjecTtype" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjecTtype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="ProjecttypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjecTtype_ProjecTtype1">
+          <End Role="ProjecTtype" Type="Self.ProjecTtype" Multiplicity="1" />
+          <End Role="ProjecTtype1" Type="Self.ProjecTtype" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProjecTtype">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjecTtype1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_permission_t_permission">
+          <End Role="t_permission" Type="Self.t_permission" Multiplicity="1" />
+          <End Role="role_permission" Type="Self.role_permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_permission">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role_permission">
+              <PropertyRef Name="permissionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_permission_t_role">
+          <End Role="t_role" Type="Self.t_role" Multiplicity="1" />
+          <End Role="role_permission" Type="Self.role_permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role_permission">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role_t_role">
+          <End Role="t_role" Type="Self.t_role" Multiplicity="1" />
+          <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role_t_user">
+          <End Role="t_user" Type="Self.t_user" Multiplicity="1" />
+          <End Role="user_role" Type="Self.user_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user_role">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QinuoOAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brand" EntityType="Self.Brand" />
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="InvoiceAttachments" EntityType="Self.InvoiceAttachments" />
+          <EntitySet Name="Money" EntityType="Self.Money" />
+          <EntitySet Name="node" EntityType="Self.node" />
+          <EntitySet Name="OfferTable" EntityType="Self.OfferTable" />
+          <EntitySet Name="Paymentapplicationform" EntityType="Self.Paymentapplicationform" />
+          <EntitySet Name="paymentnode" EntityType="Self.paymentnode" />
+          <EntitySet Name="Platform" EntityType="Self.Platform" />
+          <EntitySet Name="PO" EntityType="Self.PO" />
+          <EntitySet Name="Project" EntityType="Self.Project" />
+          <EntitySet Name="projectCostlujing" EntityType="Self.projectCostlujing" />
+          <EntitySet Name="ProjectFinalReport" EntityType="Self.ProjectFinalReport" />
+          <EntitySet Name="ProjectQuotationlujing" EntityType="Self.ProjectQuotationlujing" />
+          <EntitySet Name="ProjecTtype" EntityType="Self.ProjecTtype" />
+          <EntitySet Name="Publishlinksummary" EntityType="Self.Publishlinksummary" />
+          <EntitySet Name="role_permission" EntityType="Self.role_permission" />
+          <EntitySet Name="t_permission" EntityType="Self.t_permission" />
+          <EntitySet Name="t_role" EntityType="Self.t_role" />
+          <EntitySet Name="t_user" EntityType="Self.t_user" />
+          <EntitySet Name="user_role" EntityType="Self.user_role" />
+          <AssociationSet Name="FK_Brand_Company" Association="Self.FK_Brand_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Brand" EntitySet="Brand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Money_Project" Association="Self.FK_Money_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Money" EntitySet="Money" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_OfferTable" Association="Self.FK_Project_OfferTable">
+            <End Role="OfferTable" EntitySet="OfferTable" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Platform" Association="Self.FK_Project_Platform">
+            <End Role="Platform" EntitySet="Platform" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_ProjecTtype" Association="Self.FK_Project_ProjecTtype">
+            <End Role="ProjecTtype" EntitySet="ProjecTtype" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjecTtype_ProjecTtype1" Association="Self.FK_ProjecTtype_ProjecTtype1">
+            <End Role="ProjecTtype" EntitySet="ProjecTtype" />
+            <End Role="ProjecTtype1" EntitySet="ProjecTtype" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_permission_t_permission" Association="Self.FK_role_permission_t_permission">
+            <End Role="t_permission" EntitySet="t_permission" />
+            <End Role="role_permission" EntitySet="role_permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_permission_t_role" Association="Self.FK_role_permission_t_role">
+            <End Role="t_role" EntitySet="t_role" />
+            <End Role="role_permission" EntitySet="role_permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role_t_role" Association="Self.FK_user_role_t_role">
+            <End Role="t_role" EntitySet="t_role" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role_t_user" Association="Self.FK_user_role_t_user">
+            <End Role="t_user" EntitySet="t_user" />
+            <End Role="user_role" EntitySet="user_role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QinuoOAModelStoreContainer" CdmEntityContainer="QinuoOAEntities">
+          <EntitySetMapping Name="Brand">
+            <EntityTypeMapping TypeName="QinuoOAModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="QinuoOAModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceAttachments">
+            <EntityTypeMapping TypeName="QinuoOAModel.InvoiceAttachments">
+              <MappingFragment StoreEntitySet="InvoiceAttachments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Invoiceurl" ColumnName="Invoiceurl" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="PaymentapplicationformId" ColumnName="PaymentapplicationformId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Money">
+            <EntityTypeMapping TypeName="QinuoOAModel.Money">
+              <MappingFragment StoreEntitySet="Money">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="NoTaxlMoney" ColumnName="NoTaxlMoney" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="projectcost" ColumnName="projectcost" />
+                <ScalarProperty Name="CostQuotation" ColumnName="CostQuotation" />
+                <ScalarProperty Name="SalesQuotation" ColumnName="SalesQuotation" />
+                <ScalarProperty Name="Actualamountofpayment" ColumnName="Actualamountofpayment" />
+                <ScalarProperty Name="Financialcost" ColumnName="Financialcost" />
+                <ScalarProperty Name="Totaltaxcost" ColumnName="Totaltaxcost" />
+                <ScalarProperty Name="SalesQuotations" ColumnName="SalesQuotations" />
+                <ScalarProperty Name="TaxSum" ColumnName="TaxSum" />
+                <ScalarProperty Name="NonTaxCostCombined" ColumnName="NonTaxCostCombined" />
+                <ScalarProperty Name="Totaltaxcosttow" ColumnName="Totaltaxcosttow" />
+                <ScalarProperty Name="Grossprofit" ColumnName="Grossprofit" />
+                <ScalarProperty Name="Unpaidchannel" ColumnName="Unpaidchannel" />
+                <ScalarProperty Name="Employeebonus" ColumnName="Employeebonus" />
+                <ScalarProperty Name="Undistributedprofit" ColumnName="Undistributedprofit" />
+                <ScalarProperty Name="Percentageofprofit" ColumnName="Percentageofprofit" />
+                <ScalarProperty Name="AMargemBrutapercentual" ColumnName="AMargemBrutapercentual" />
+                <ScalarProperty Name="Olucrolíquido" ColumnName="Olucrolíquido" />
+                <ScalarProperty Name="Aporcentagemdelucrolíquido" ColumnName="Aporcentagemdelucrolíquido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="node">
+            <EntityTypeMapping TypeName="QinuoOAModel.node">
+              <MappingFragment StoreEntitySet="node">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Stateofapproval" ColumnName="Stateofapproval" />
+                <ScalarProperty Name="projectid" ColumnName="projectid" />
+                <ScalarProperty Name="AE" ColumnName="AE" />
+                <ScalarProperty Name="SAE" ColumnName="SAE" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SAD" ColumnName="SAD" />
+                <ScalarProperty Name="yinxiaozongjian" ColumnName="yinxiaozongjian" />
+                <ScalarProperty Name="caiwu" ColumnName="caiwu" />
+                <ScalarProperty Name="laoban" ColumnName="laoban" />
+                <ScalarProperty Name="zhulaoban" ColumnName="zhulaoban" />
+                <ScalarProperty Name="processstate" ColumnName="processstate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfferTable">
+            <EntityTypeMapping TypeName="QinuoOAModel.OfferTable">
+              <MappingFragment StoreEntitySet="OfferTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="offerName" ColumnName="offerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paymentapplicationform">
+            <EntityTypeMapping TypeName="QinuoOAModel.Paymentapplicationform">
+              <MappingFragment StoreEntitySet="Paymentapplicationform">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Invoicenumber" ColumnName="Invoicenumber" />
+                <ScalarProperty Name="Invoicetax" ColumnName="Invoicetax" />
+                <ScalarProperty Name="Timeofpayment" ColumnName="Timeofpayment" />
+                <ScalarProperty Name="Receivablescompany" ColumnName="Receivablescompany" />
+                <ScalarProperty Name="Openingbank" ColumnName="Openingbank" />
+                <ScalarProperty Name="Bankaccount" ColumnName="Bankaccount" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Payee" ColumnName="Payee" />
+                <ScalarProperty Name="ApplyforpaymentType" ColumnName="ApplyforpaymentType" />
+                <ScalarProperty Name="Paymentobject" ColumnName="Paymentobject" />
+                <ScalarProperty Name="xuhao" ColumnName="xuhao" />
+                <ScalarProperty Name="MoneyId" ColumnName="MoneyId" />
+                <ScalarProperty Name="CostQuotation" ColumnName="CostQuotation" />
+                <ScalarProperty Name="Salesquotation" ColumnName="Salesquotation" />
+                <ScalarProperty Name="Actualamountofpayment" ColumnName="Actualamountofpayment" />
+                <ScalarProperty Name="Financialcost" ColumnName="Financialcost" />
+                <ScalarProperty Name="Totaltaxcost" ColumnName="Totaltaxcost" />
+                <ScalarProperty Name="shuidian" ColumnName="shuidian" />
+                <ScalarProperty Name="wangming" ColumnName="wangming" />
+                <ScalarProperty Name="Distinguish" ColumnName="Distinguish" />
+                <ScalarProperty Name="Costcategory" ColumnName="Costcategory" />
+                <ScalarProperty Name="purpose" ColumnName="purpose" />
+                <ScalarProperty Name="paystate" ColumnName="paystate" />
+                <ScalarProperty Name="readState" ColumnName="readState" />
+                <ScalarProperty Name="pingtai" ColumnName="pingtai" />
+                <ScalarProperty Name="Applicant" ColumnName="Applicant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentnode">
+            <EntityTypeMapping TypeName="QinuoOAModel.paymentnode">
+              <MappingFragment StoreEntitySet="paymentnode">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="projectId" ColumnName="projectId" />
+                <ScalarProperty Name="xuhao" ColumnName="xuhao" />
+                <ScalarProperty Name="Distinguish" ColumnName="Distinguish" />
+                <ScalarProperty Name="Stateofapproval" ColumnName="Stateofapproval" />
+                <ScalarProperty Name="SAE" ColumnName="SAE" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="SAD" ColumnName="SAD" />
+                <ScalarProperty Name="yinxiaozongjian" ColumnName="yinxiaozongjian" />
+                <ScalarProperty Name="caiwu" ColumnName="caiwu" />
+                <ScalarProperty Name="laoban" ColumnName="laoban" />
+                <ScalarProperty Name="zhulaoban" ColumnName="zhulaoban" />
+                <ScalarProperty Name="PaymentapplicationformiId" ColumnName="PaymentapplicationformiId" />
+                <ScalarProperty Name="Rejection" ColumnName="Rejection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platform">
+            <EntityTypeMapping TypeName="QinuoOAModel.Platform">
+              <MappingFragment StoreEntitySet="Platform">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PO">
+            <EntityTypeMapping TypeName="QinuoOAModel.PO">
+              <MappingFragment StoreEntitySet="PO">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="POlujing" ColumnName="POlujing" />
+                <ScalarProperty Name="PorjectId" ColumnName="PorjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="QinuoOAModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectNumber" ColumnName="ProjectNumber" />
+                <ScalarProperty Name="ProjectStartDate" ColumnName="ProjectStartDate" />
+                <ScalarProperty Name="ProjectEndDate" ColumnName="ProjectEndDate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ProjecttypeId" ColumnName="ProjecttypeId" />
+                <ScalarProperty Name="PurchaseSingleCode" ColumnName="PurchaseSingleCode" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="Planprogress" ColumnName="Planprogress" />
+                <ScalarProperty Name="POdanhao" ColumnName="POdanhao" />
+                <ScalarProperty Name="Expectedreturndate" ColumnName="Expectedreturndate" />
+                <ScalarProperty Name="Actualdate" ColumnName="Actualdate" />
+                <ScalarProperty Name="Accountamount" ColumnName="Accountamount" />
+                <ScalarProperty Name="typefinished" ColumnName="typefinished" />
+                <ScalarProperty Name="caseclosed" ColumnName="caseclosed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projectCostlujing">
+            <EntityTypeMapping TypeName="QinuoOAModel.projectCostlujing">
+              <MappingFragment StoreEntitySet="projectCostlujing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="projectCostUrl" ColumnName="projectCostUrl" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectFinalReport">
+            <EntityTypeMapping TypeName="QinuoOAModel.ProjectFinalReport">
+              <MappingFragment StoreEntitySet="ProjectFinalReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Reportlujing" ColumnName="Reportlujing" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectQuotationlujing">
+            <EntityTypeMapping TypeName="QinuoOAModel.ProjectQuotationlujing">
+              <MappingFragment StoreEntitySet="ProjectQuotationlujing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectQuotationUrl" ColumnName="ProjectQuotationUrl" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjecTtype">
+            <EntityTypeMapping TypeName="QinuoOAModel.ProjecTtype">
+              <MappingFragment StoreEntitySet="ProjecTtype">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="USName" ColumnName="USName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishlinksummary">
+            <EntityTypeMapping TypeName="QinuoOAModel.Publishlinksummary">
+              <MappingFragment StoreEntitySet="Publishlinksummary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="summarylujing" ColumnName="summarylujing" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role_permission">
+            <EntityTypeMapping TypeName="QinuoOAModel.role_permission">
+              <MappingFragment StoreEntitySet="role_permission">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="permissionid" ColumnName="permissionid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_permission">
+            <EntityTypeMapping TypeName="QinuoOAModel.t_permission">
+              <MappingFragment StoreEntitySet="t_permission">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pename" ColumnName="pename" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_role">
+            <EntityTypeMapping TypeName="QinuoOAModel.t_role">
+              <MappingFragment StoreEntitySet="t_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_user">
+            <EntityTypeMapping TypeName="QinuoOAModel.t_user">
+              <MappingFragment StoreEntitySet="t_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="employeename" ColumnName="employeename" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_role">
+            <EntityTypeMapping TypeName="QinuoOAModel.user_role">
+              <MappingFragment StoreEntitySet="user_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
