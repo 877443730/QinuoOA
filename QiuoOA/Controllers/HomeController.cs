@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -94,7 +95,7 @@ namespace QiuoOA.Controllers
             }
                     return View();
         }
-        public ActionResult ProjectList()
+        public ActionResult ProjectList(string proname,int count)
         {
             Model.t_user model = GetUserInfo();
             if (model!=null)
@@ -106,16 +107,27 @@ namespace QiuoOA.Controllers
                 {
                     projectids += (","+item.projectid);
                 }
-                if (model.name=="管理员")
-                {
-                    ViewData["projectlist"] = Projectbll.GetModelList("1=1");
-                    ViewData["moneylist"] = Moneybll.GetModelList("1=1");
-                }
-                else
-                {
-                    ViewData["moneylist"] = Moneybll.GetModelList("ProjectId in ("+ projectids + ")");
-                    ViewData["projectlist"] = Projectbll.GetModelList("id in (" + projectids + ")");
-                }
+                ViewBag.choosecount = count;
+                ViewBag.count = Math.Ceiling(Projectbll.GetModelList("id in (" + projectids + ")").Count() / 20.00);
+                var startnum = count * 20 + 1;
+                var endnum = (count + 1) * 20;
+                if (proname != ""&& proname != null)
+                    {
+                        string projectids2 = "0";
+                        var projects= Projectbll.GetListByPage1("id in (" + projectids + ") and ProjectName like '%"+ proname + "%'", "", startnum, endnum);
+                        List<Project> projects1 = projects;
+                        foreach (var item in projects)
+                        {
+                            projectids2 += ("," + item.Id);
+                        }
+                        projectids = projectids2;
+                    }
+
+                    ViewData["moneylist"] = Moneybll.GetListByPage1("ProjectId in ("+ projectids + ")","", startnum, endnum);
+                    ViewData["projectlist"] = Projectbll.GetListByPage1("id in (" + projectids + ")", "", startnum, endnum);
+                    
+                //}
+                
             }
             return View();
         }

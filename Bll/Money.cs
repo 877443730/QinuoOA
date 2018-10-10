@@ -139,6 +139,11 @@ namespace Bll
         {
             return dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
+        public List<Model.Money> GetListByPage1(string strWhere, string orderby, int startIndex, int endIndex)
+        {
+            DataSet ds = dal.GetListByPage(strWhere, orderby, startIndex, endIndex);
+            return DataTableToList(ds.Tables[0]);
+        }
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
