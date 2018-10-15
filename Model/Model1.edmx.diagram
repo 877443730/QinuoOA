@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a789a8a77e64435a89e45883a0b7f28" Name="Diagram1">
+        <EntityTypeShape EntityType="QinuoOAModel.Brand" Width="1.5" PointX="5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Company" Width="1.5" PointX="2.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.InvoiceAttachments" Width="1.5" PointX="7.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Money" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.node" Width="1.5" PointX="9.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.OfferTable" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Paymentapplicationform" Width="1.5" PointX="9.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.paymentnode" Width="1.5" PointX="11.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Platform" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.PO" Width="1.5" PointX="11.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Project" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.projectCostlujing" Width="1.5" PointX="12.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.ProjectFinalReport" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.ProjectQuotationlujing" Width="1.5" PointX="2.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.ProjecTtype" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.Publishlinksummary" Width="1.5" PointX="4.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.role_permission" Width="1.5" PointX="10" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.t_permission" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.t_role" Width="1.5" PointX="7.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.t_user" Width="1.5" PointX="7.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QinuoOAModel.user_role" Width="1.5" PointX="10" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="QinuoOAModel.FK_Brand_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_Money_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_Project_OfferTable" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_Project_Platform" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_Project_ProjecTtype" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_ProjecTtype_ProjecTtype1" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_role_permission_t_permission" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_role_permission_t_role" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_user_role_t_role" ManuallyRouted="false" />
+        <AssociationConnector Association="QinuoOAModel.FK_user_role_t_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LC.ClassLibraries.DBUtility;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,19 @@ namespace Bll
         public Project()
         { }
         #region  BasicMethod
+
+        public List<Project> getcesshi(string userid) {
+            try
+            {
+                StringBuilder str = new StringBuilder();
+                return LCDBHelper.GetAllList<Project>("userid=@userid", new SqlParameter[] {new SqlParameter("@userid", userid) });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         /// <summary>
         /// 是否存在该记录
         /// </summary>
@@ -39,7 +54,6 @@ namespace Bll
         {
             return dal.Update(model);
         }
-
         /// <summary>
         /// 删除一条数据
         /// </summary>

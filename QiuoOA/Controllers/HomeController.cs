@@ -1,21 +1,14 @@
 ﻿using Cll;
-using CustomerAttribute;
 using Model;
-using Newtonsoft.Json;
-using NWJ.Cmn;
 using QiuoOA.Authorizers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using System.Web.UI.WebControls;
 
 namespace QiuoOA.Controllers
 {
@@ -73,7 +66,12 @@ namespace QiuoOA.Controllers
                     ViewData["zhulaoban"] = userbll.GetModelListss("1");
                 }
                 ViewData["Paymentapplicationform"] = Paymentapplicationformbll.GetModelList("1=1");
+                //var model5 = Projectbll.getcesshi("1025");
             }
+            return View();
+
+        }
+        public ActionResult cheshi() {
             return View();
         }
         public ActionResult Unapproved() {
@@ -218,7 +216,6 @@ namespace QiuoOA.Controllers
         [Authorizer]
         public ActionResult AddProject(string projectname)
         {
-
             ViewBag.islogin = IsUserLogin() ? 1 : 0;
             if (IsUserLogin())
             {
@@ -309,13 +306,11 @@ namespace QiuoOA.Controllers
         [HttpPost]
         public JsonResult AddProjects(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname)
         {
-
-
             string msg = AddProjectss(name, core, sele, companyname, pingpai, core2, xiangmuuser, date, date2, Totalmoney, Notaxmoney, cost, jingdu, beizhu, usname, porjectname);
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult projectCostlujing()
+        public JsonResult projectCostlujing(string porjectname)
         {
             var bianliang = System.Web.HttpContext.Current;
             bianliang.Response.ContentType = "text/plain";
@@ -324,34 +319,55 @@ namespace QiuoOA.Controllers
             Model.Project model = Projectbll.GetModels();
             Model.projectCostlujing projectCostlujingmodel = new Model.projectCostlujing();
             Bll.projectCostlujing bll = new Bll.projectCostlujing();
-            projectCostlujingmodel.projectCostUrl = filePath;
-            projectCostlujingmodel.ProjectId = model.Id;
-            if (projectCostlujingmodel != null)
+            //修改文件
+            if (filePath!=null)
             {
-                bll.Add(projectCostlujingmodel);
+            if (porjectname!=null)
+            {
+                Project model1 = Projectbll.GetModelss(porjectname);
+                projectCostlujing projectCostlujingmodel1 = bll.GetModels(model1.Id);
+                projectCostlujingmodel1.projectCostUrl = filePath;
+                bll.Update(projectCostlujingmodel1);
+            }
+            else
+            {
+                    projectCostlujingmodel.projectCostUrl = filePath;
+                    projectCostlujingmodel.ProjectId = model.Id;
+                    bll.Add(projectCostlujingmodel);
+            }
             }
             return Json(filePath, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult ProjectQuotationlujing()
+        public JsonResult ProjectQuotationlujing(string porjectname)
         {
             var bianliang1 = System.Web.HttpContext.Current;
             bianliang1.Response.ContentType = "text/plain";
             HttpPostedFile filePost1 = bianliang1.Request.Files["filed1"]; // 获取上传的文件  
             string filePath1 = SaveExcelFile(filePost1);
-            if (filePost1 != null)
+            if (filePath1 != null)
             {
+
                 // 保存文件并获取文件路径
                 Model.Project model = Projectbll.GetModels();
                 Model.ProjectQuotationlujing ProjectQuotationlujingmodel = new Model.ProjectQuotationlujing();
                 Bll.ProjectQuotationlujing bll = new Bll.ProjectQuotationlujing();
-                ProjectQuotationlujingmodel.ProjectQuotationUrl = filePath1;
-                ProjectQuotationlujingmodel.ProjectId = model.Id;
-                if (ProjectQuotationlujingmodel != null)
+                //修改文件
+                if (porjectname!=null)
                 {
+                    Project model1 = Projectbll.GetModelss(porjectname);
+                    ProjectQuotationlujing projectCostlujingmodel1 = bll.GetModels(model1.Id);
+                    projectCostlujingmodel1.ProjectQuotationUrl = filePath1;
+                    bll.Update(projectCostlujingmodel1);
+                }
+                else
+                {
+                    ProjectQuotationlujingmodel.ProjectQuotationUrl = filePath1;
+                    ProjectQuotationlujingmodel.ProjectId = model.Id;
                     bll.Add(ProjectQuotationlujingmodel);
                 }
+
             }
 
             return Json(filePath1, JsonRequestBehavior.AllowGet);
@@ -1158,7 +1174,7 @@ namespace QiuoOA.Controllers
             {
                 return "{\"status\": 11,\"msg\":\"审批失败\"}";
             }
-        }
+        } 
 
 
 
@@ -1328,7 +1344,7 @@ namespace QiuoOA.Controllers
             Bll.node nodebll = new Bll.node();
             node model = new node();
             Project projectmodel = Projectbll.GetModels();
-            Model.t_user usermodel = GetUserInfo();
+            t_user usermodel = GetUserInfo();
             //if (projectmodel.userid != usermodel.id)
             //{
             //    return "您没有权限添加当前项目的审批人!";
@@ -1392,8 +1408,6 @@ namespace QiuoOA.Controllers
                 return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
             }
         }
-
-
         [HttpPost]
         public JsonResult Updatechaiwuchenben(string xuhao, string caiwuchengben, string proname, string Distinguish)
         {
@@ -1409,7 +1423,7 @@ namespace QiuoOA.Controllers
             if (frommodel != null)
             {
                 frommodel.Financialcost = Convert.ToDecimal(caiwuchengben);
-                 frommodel.Totaltaxcost = (frommodel.Actualamountofpayment) + Convert.ToDecimal(caiwuchengben);
+                frommodel.Totaltaxcost = (frommodel.Actualamountofpayment) + Convert.ToDecimal(caiwuchengben);
                 Paymentapplicationformbll.Update(frommodel);
                 return "{\"status\": 1,\"msg\":\"消息提示:修改成功！\"}";
             }

@@ -655,7 +655,8 @@ else
         var arrValue = document.getElementById(idName).options[document.getElementById(idName).selectedIndex].value;
         $("#" + idName + "").parent('span').next('span').children('input.ccdd').val(arrValue)
     }
-    function importExcel1() {
+        function importExcel1() {
+         var porjectname ="@ViewBag.projectname";
         var file = $("#filed").val();
         if (file == null || file.length == 0) {
             alert("请先上传文件");
@@ -664,11 +665,15 @@ else
         $('#file-from1').ajaxSubmit({
             type: 'post', // HTTP请求方式
             url: '/Home/projectCostlujing', // 请求的URL地址
-            dataType: 'text'// 服务器返回数据转换成的类型
+            dataType: 'text',// 服务器返回数据转换成的类型
+            data: {
+                porjectname: porjectname
+            }
         });
         alert("上传成功");
     }
-    function importExcel2() {
+        function importExcel2() {
+            var porjectname ="@ViewBag.projectname";
         var file = $("#filed1").val();
         if (file == null || file.length == 0) {
             alert("请先上传文件");
@@ -677,7 +682,10 @@ else
         $('#file-from2').ajaxSubmit({
             type: 'post', // HTTP请求方式
             url: '/Home/ProjectQuotationlujing', // 请求的URL地址
-            dataType: 'text'
+            dataType: 'text',
+            data: {
+                porjectname: porjectname
+            }
         });
         alert("上传成功");
     }
