@@ -4,8 +4,8 @@ using QiuoOA.Authorizers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -216,7 +216,6 @@ namespace QiuoOA.Controllers
         [Authorizer]
         public ActionResult AddProject(string projectname)
         {
-
             ViewBag.islogin = IsUserLogin() ? 1 : 0;
             if (IsUserLogin())
             {
@@ -1175,7 +1174,7 @@ namespace QiuoOA.Controllers
             {
                 return "{\"status\": 11,\"msg\":\"审批失败\"}";
             }
-        }
+        } 
 
 
 

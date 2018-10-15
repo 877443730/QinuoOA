@@ -52,7 +52,6 @@
                                                 {
                                                     if (ViewBag.name == "超级管理员" || ViewBag.name == "管理员")
                                                     {
-
                                                         <td>
                                                             <a href="@Url.Action("UpdateUser", "User", new { item.id })"><span class="badge ">修改</span></a>
                                                             <a href="@Url.Action("DeleteUser", "User", new { item.id })" onclick="location.reload()"><span class="badge ">删除</span></a>
