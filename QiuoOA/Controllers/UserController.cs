@@ -184,9 +184,8 @@ namespace QiuoOA.Controllers
         public ActionResult UpdateUser(int id) {
             Bll.t_role bllrole = new Bll.t_role();
             Model.t_user model = userbll.GetModel(id);
-            Model.t_user model1 = GetUserInfo();
             ViewBag.username = model.username; //账号
-            ViewBag.employeename = model1.employeename;//姓名
+            ViewBag.employeename = model.employeename;//姓名
             ViewBag.pwd = model.pwd;
             if (model != null)
             {
