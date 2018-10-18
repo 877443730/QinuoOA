@@ -93,41 +93,41 @@ namespace QiuoOA.Controllers
                     ViewData["Nofukuan"] = Paymentnodebll.GetModelLists("1=1 and Rejection!=''");
                 }
             }
-                    return View();
+            return View();
         }
-        public ActionResult ProjectList(string proname,int count)
+        public ActionResult ProjectList(string proname, int count)
         {
             Model.t_user model = GetUserInfo();
-            if (model!=null)
+            if (model != null)
             {
                 ViewBag.employeename = model.employeename;
-                string projectids="0";
-                List<node> nodes = nodebll.GetModelList("AE like '%"+model.employeename+ "%' or SAE ='" + model.employeename + "' or AD ='" + model.employeename + "' or SAD ='" + model.employeename + "' or yinxiaozongjian ='" + model.employeename + "' or caiwu = '" + model.employeename + "' or laoban ='" + model.employeename + "' or zhulaoban='" + model.employeename + "'");
+                string projectids = "0";
+                List<node> nodes = nodebll.GetModelList("AE like '%" + model.employeename + "%' or SAE ='" + model.employeename + "' or AD ='" + model.employeename + "' or SAD ='" + model.employeename + "' or yinxiaozongjian ='" + model.employeename + "' or caiwu = '" + model.employeename + "' or laoban ='" + model.employeename + "' or zhulaoban='" + model.employeename + "'");
                 foreach (var item in nodes)
                 {
-                    projectids += (","+item.projectid);
+                    projectids += ("," + item.projectid);
                 }
                 ViewBag.choosecount = count;
                 ViewBag.count = Math.Ceiling(Projectbll.GetModelList("id in (" + projectids + ")").Count() / 20.00);
                 var startnum = count * 20 + 1;
                 var endnum = (count + 1) * 20;
-                if (proname != ""&& proname != null)
+                if (proname != "" && proname != null)
+                {
+                    string projectids2 = "0";
+                    var projects = Projectbll.GetListByPage1("id in (" + projectids + ") and ProjectName like '%" + proname + "%'", "", startnum, endnum);
+                    List<Project> projects1 = projects;
+                    foreach (var item in projects)
                     {
-                        string projectids2 = "0";
-                        var projects= Projectbll.GetListByPage1("id in (" + projectids + ") and ProjectName like '%"+ proname + "%'", "", startnum, endnum);
-                        List<Project> projects1 = projects;
-                        foreach (var item in projects)
-                        {
-                            projectids2 += ("," + item.Id);
-                        }
-                        projectids = projectids2;
+                        projectids2 += ("," + item.Id);
                     }
+                    projectids = projectids2;
+                }
 
-                    ViewData["moneylist"] = Moneybll.GetListByPage1("ProjectId in ("+ projectids + ")","", startnum, endnum);
-                    ViewData["projectlist"] = Projectbll.GetListByPage1("id in (" + projectids + ")", "", startnum, endnum);
-                    
+                ViewData["moneylist"] = Moneybll.GetListByPage1("ProjectId in (" + projectids + ")", "", startnum, endnum);
+                ViewData["projectlist"] = Projectbll.GetListByPage1("id in (" + projectids + ")", "", startnum, endnum);
+
                 //}
-                
+
             }
             return View();
         }
@@ -145,12 +145,12 @@ namespace QiuoOA.Controllers
                 Model.projectCostlujing projectCostlujingmodel = projectCostlujingbll.GetModels(Projectmodel.Id);
                 Model.ProjectQuotationlujing ProjectQuotationlujingmodel = ProjectQuotationlujingbll.GetModels(Projectmodel.Id);
                 node nodesmodel = nodebll.GetfModels(Projectmodel.Id, 1);
-                node nodemodel = nodebll.GetfModels(Projectmodel.Id,3);
-                node nodemodels = nodebll.GetfModels(Projectmodel.Id,2);//paymentnode
-                var catmodel = Paymentapplicationformbll.GetModelList("a.ProjectId=" + Projectmodel.Id+ " and ApplyforpaymentType!=''  and a.Distinguish = 0 order by a.xuhao");
+                node nodemodel = nodebll.GetfModels(Projectmodel.Id, 3);
+                node nodemodels = nodebll.GetfModels(Projectmodel.Id, 2);//paymentnode
+                var catmodel = Paymentapplicationformbll.GetModelList("a.ProjectId=" + Projectmodel.Id + " and ApplyforpaymentType!=''  and a.Distinguish = 0 order by a.xuhao");
                 //var catpaymentnode = Paymentnodebll.GetModelList("ProjectId="+ Projectmodel.Id);
                 //查询对个人
-                var personalmodel= Paymentapplicationformbll.GetModelList(" a.ProjectId=" + Projectmodel.Id+ " and shuidian is null and (ApplyforpaymentType is null or ApplyforpaymentType='' )  and a.Distinguish = 2 order by a.xuhao");
+                var personalmodel = Paymentapplicationformbll.GetModelList(" a.ProjectId=" + Projectmodel.Id + " and shuidian is null and (ApplyforpaymentType is null or ApplyforpaymentType='' )  and a.Distinguish = 2 order by a.xuhao");
                 //查询对公司
                 var companymodel = Paymentapplicationformbll.GetModelList("a.ProjectId=" + Projectmodel.Id + " and (ApplyforpaymentType is null or ApplyforpaymentType='') and shuidian is not null  and a.Distinguish = 3 order by a.xuhao");
                 return Json
@@ -304,9 +304,9 @@ namespace QiuoOA.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddProjects(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname)
+        public JsonResult AddProjects(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname, string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban, string processstate)
         {
-            string msg = AddProjectss(name, core, sele, companyname, pingpai, core2, xiangmuuser, date, date2, Totalmoney, Notaxmoney, cost, jingdu, beizhu, usname, porjectname);
+            string msg = AddProjectss(name, core, sele, companyname, pingpai, core2, xiangmuuser, date, date2, Totalmoney, Notaxmoney, cost, jingdu, beizhu, usname, porjectname, ae, sae, ad, sad, yingxiao, caiwu, laoban, zhulaoban, processstate);
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -316,29 +316,27 @@ namespace QiuoOA.Controllers
             bianliang.Response.ContentType = "text/plain";
             HttpPostedFile filePost = bianliang.Request.Files["filed"]; // 获取上传的文件  
             string filePath = SaveExcelFile(filePost); // 保存文件并获取文件路径
-            Model.Project model = Projectbll.GetModels();
             Model.projectCostlujing projectCostlujingmodel = new Model.projectCostlujing();
             Bll.projectCostlujing bll = new Bll.projectCostlujing();
             //修改文件
-            if (filePath!=null)
+            if (filePath != "")
             {
-            if (porjectname!=null)
-            {
-                Project model1 = Projectbll.GetModelss(porjectname);
-                projectCostlujing projectCostlujingmodel1 = bll.GetModels(model1.Id);
-                projectCostlujingmodel1.projectCostUrl = filePath;
-                bll.Update(projectCostlujingmodel1);
-            }
-            else
-            {
+                if (porjectname != "")
+                {
+                    Project model1 = Projectbll.GetModelss(porjectname);
+                    projectCostlujing projectCostlujingmodel1 = bll.GetModels(model1.Id);
+                    projectCostlujingmodel1.projectCostUrl = filePath;
+                    bll.Update(projectCostlujingmodel1);
+                }
+                else
+                {
                     projectCostlujingmodel.projectCostUrl = filePath;
-                    projectCostlujingmodel.ProjectId = model.Id;
+                    projectCostlujingmodel.ProjectId = Convert.ToInt32(model1);
                     bll.Add(projectCostlujingmodel);
-            }
+                }
             }
             return Json(filePath, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public JsonResult ProjectQuotationlujing(string porjectname)
         {
@@ -346,15 +344,13 @@ namespace QiuoOA.Controllers
             bianliang1.Response.ContentType = "text/plain";
             HttpPostedFile filePost1 = bianliang1.Request.Files["filed1"]; // 获取上传的文件  
             string filePath1 = SaveExcelFile(filePost1);
-            if (filePath1 != null)
+            if (filePath1 != "")
             {
-
                 // 保存文件并获取文件路径
-                Model.Project model = Projectbll.GetModels();
                 Model.ProjectQuotationlujing ProjectQuotationlujingmodel = new Model.ProjectQuotationlujing();
                 Bll.ProjectQuotationlujing bll = new Bll.ProjectQuotationlujing();
                 //修改文件
-                if (porjectname!=null)
+                if (porjectname != "")
                 {
                     Project model1 = Projectbll.GetModelss(porjectname);
                     ProjectQuotationlujing projectCostlujingmodel1 = bll.GetModels(model1.Id);
@@ -364,7 +360,7 @@ namespace QiuoOA.Controllers
                 else
                 {
                     ProjectQuotationlujingmodel.ProjectQuotationUrl = filePath1;
-                    ProjectQuotationlujingmodel.ProjectId = model.Id;
+                    ProjectQuotationlujingmodel.ProjectId = Convert.ToInt32(model1);
                     bll.Add(ProjectQuotationlujingmodel);
                 }
 
@@ -372,36 +368,47 @@ namespace QiuoOA.Controllers
 
             return Json(filePath1, JsonRequestBehavior.AllowGet);
         }
-
-        private string AddProjectss(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname)
+        public static int model1;
+        private string AddProjectss(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname, string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban, string processstate)
         {
             Model.Project model = new Model.Project();
             Model.ProjecTtype Ttypemodel = new Model.ProjecTtype();
             Model.Company Companymodel = new Model.Company();
             Model.Brand Brandmodel = new Model.Brand();
             Model.Money Moneymodel = new Model.Money();
+            Bll.node nodebll = new Bll.node();
+            node nodemodel1 = new node();
             if (name != null && core != null && sele != null && companyname != null && pingpai != null && core2 != null && xiangmuuser != null && date != null && date2 != null && Totalmoney != null && Notaxmoney != null && cost != null)
             {
                 if (porjectname == "")
                 {
+                    //反序列化AE人员
+                    JavaScriptSerializer jsonSerialzer = new JavaScriptSerializer();
+                    string[] retObj = jsonSerialzer.Deserialize<string[]>(ae);
+                    StringBuilder str = new StringBuilder();
+                    for (int i = 0; i < retObj.Length; i++)
+                    {
+                        str.Append(retObj[i] + ",");
+                    }
                     Ttypemodel.Name = sele; //项目类型
                     Ttypemodel.USName = usname;
                     Companymodel.Name = companyname;//公司名称
                     Brandmodel.Name = pingpai;//品牌名称
+                    var ProjecTtypes = 0;
                     if (Ttypemodel.Name != null)
                     {
-                        ProjecTtype.Add(Ttypemodel);
+                        ProjecTtypes = ProjecTtype.Add(Ttypemodel);
                     }
                     //添加公司表
+                    var Companymodels = 0;
                     if (Companymodel.Name != null)
                     {
-                        Companybll.Add(Companymodel);
+                        Companymodels = Companybll.Add(Companymodel);
                     }
                     //添加品牌表
                     if (Brandmodel.Name != null)
                     {
-                        Companymodel = Companybll.GetModels();
-                        Brandmodel.CompanyId = Companymodel.Id;
+                        Brandmodel.CompanyId = Companymodels;
                         brandbll.Add(Brandmodel);
                     }
 
@@ -412,26 +419,41 @@ namespace QiuoOA.Controllers
 
                     model.ProjectStartDate = Convert.ToDateTime(date);//开始时间
                     model.ProjectEndDate = Convert.ToDateTime(date2);//结束时间
-                    model.CompanyId = Companymodel.Id;
-                    Ttypemodel = ProjecTtype.GetModels();
-                    model.ProjecttypeId = Ttypemodel.Id;
+                    model.CompanyId = Companymodels;
+                    model.ProjecttypeId = ProjecTtypes;
                     if (usermodel != null)
                     {
                         model.userid = usermodel.id;//项目负责人
                     }
                     model.Remarks = beizhu; //备注
                     model.Planprogress = jingdu; //计划进度
-                    Projectbll.Add(model);
-
-                    model = Projectbll.GetModels();
+                    //获取最新的自增ID
+                    model1 = Projectbll.Add(model);
                     Moneymodel.projectcost = Convert.ToDecimal(cost); //项目成本
                     Moneymodel.TotalMoney = Convert.ToDecimal(Totalmoney);//非税金额
                     Moneymodel.NoTaxlMoney = Convert.ToDecimal(Notaxmoney);//含税金额
-                    Moneymodel.ProjectId = model.Id; //项目id
+                    Moneymodel.ProjectId = Convert.ToInt32(model1); //项目id
                     if (Moneymodel != null)
                     {
                         Moneybll.Add(Moneymodel);
                     }
+
+                    nodemodel1.projectid = Convert.ToInt32(model1);
+                    nodemodel1.AE = str.ToString();
+                    nodemodel1.SAE = sae;
+                    nodemodel1.AD = ad;
+                    nodemodel1.SAD = sad;
+                    nodemodel1.yinxiaozongjian = yingxiao;
+                    nodemodel1.caiwu = caiwu;
+                    nodemodel1.laoban = laoban;
+                    nodemodel1.zhulaoban = zhulaoban;
+                    nodemodel1.Stateofapproval = 1;
+                    //插入三条数据
+                    nodemodel1.processstate = Convert.ToInt32(processstate);
+                    nodebll.Add(nodemodel1);
+                    nodemodel1.processstate = Convert.ToInt32(processstate) + 2;
+                    nodebll.Add(nodemodel1);
+
 
                     return "{\"status\": 1,\"msg\":\"申请成功！\"}";
                 }
@@ -578,7 +600,7 @@ namespace QiuoOA.Controllers
                         return "{\"status\": 1,\"msg\":\"修改成功，但由于您的上一审批人未审批,或您已审批或您没有权限，未能进行审批通过操作\"}";
                     }
                     nodebll.Update(nodemodel);
-                    
+
 
                     return "{\"status\": 3,\"msg\":\"修改成功！\"}";
                 }
@@ -591,7 +613,6 @@ namespace QiuoOA.Controllers
 
 
         }
-
         //对个人付款
         [Authorizer]
         public ActionResult PersonalPayment(string projectname, string wangming, string xuhao)
@@ -605,15 +626,15 @@ namespace QiuoOA.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult PersonalPayments(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish,string chenbenleibie,string yongtu,string pingtai,string Applicant)
+        public JsonResult PersonalPayments(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applicant)
         {
-            string msg = PersonalPaymentss(ZFjine, ZFdate, shoukuanren, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu,pingtai, Applicant);
+            string msg = PersonalPaymentss(ZFjine, ZFdate, shoukuanren, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu, pingtai, Applicant);
             Project model = Projectbll.GetModelss(projectname);
             Model.Paymentapplicationform formmodel = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
             return Json(new { msg, formmodel });
 
         }
-        private string PersonalPaymentss(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai, string Applican)
+        private string PersonalPaymentss(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applican)
         {
             //数据库加一个区分字段 1,2,3 然后页面添加的时候传过来这个字段用这个字段+序号+项目ID查询，有就修改没有添加，不用管是A还是B还是C，
             //页面绑定数据加隐藏域获取区分字段以便于修改能定位到该数据
@@ -642,13 +663,13 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.CostQuotation = Convert.ToDecimal(chenbenbaojia);//成本报价
                     Paymentapplicationmodel.Salesquotation = Convert.ToDecimal(xiaoshoubaojia);//销售报价
                     Paymentapplicationmodel.Distinguish = Convert.ToInt32(Distinguish); // Paymentapplicationmodel.Financialcost = Convert.ToDecimal(caiwuchengben);//财务成本
-                    if (wangming!="" && wangming!=null)
+                    if (wangming != "" && wangming != null)
                     {
                         Paymentapplicationmodel.wangming = wangming;
                     }
                     Paymentapplicationmodel.Costcategory = chenbenleibie;
                     Paymentapplicationmodel.purpose = yongtu;
-                    Paymentapplicationmodel.Distinguish=Convert.ToInt32(Distinguish);
+                    Paymentapplicationmodel.Distinguish = Convert.ToInt32(Distinguish);
                     Paymentapplicationmodel.pingtai = pingtai;
                     Paymentapplicationmodel.Applicant = Applican;
                     //李：判定当前实际付款金额，若为空，则为实际付款与含税成本合计赋上初始值
@@ -739,7 +760,7 @@ namespace QiuoOA.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult PaymentCompanys(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai,string Applicant)
+        public JsonResult PaymentCompanys(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applicant)
         {
             string msg = PaymentCompanyss(ZFjine, fapiao, fapiaosuie, ZFdate, gsname, kaihuhang, Bankcode, projectname, Paymentobject, xuhao, leixing, beizhu, suidian, chenbenbaojia, xiaoshoubaojia, wangming, chenbenbaojia2, Distinguish, chenbenleibie, yongtu, pingtai, Applicant);
             Project model = Projectbll.GetModelss(projectname);
@@ -748,7 +769,7 @@ namespace QiuoOA.Controllers
             // return Json(msg, formmodel, JsonRequestBehavior.AllowGet);
 
         }
-        private string PaymentCompanyss(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2,string Distinguish, string chenbenleibie, string yongtu,string pingtai,string Applicant)
+        private string PaymentCompanyss(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applicant)
         {
             Model.Paymentapplicationform Paymentapplicationmodel = new Paymentapplicationform();
             Model.Paymentnode Paymentnodemodel = new Paymentnode();
@@ -781,7 +802,7 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.shuidian = Convert.ToDecimal(suidian);//税点
                     Paymentapplicationmodel.pingtai = pingtai;
                     Paymentapplicationmodel.Applicant = Applicant;
-                    if (wangming!="" && wangming!=null)
+                    if (wangming != "" && wangming != null)
                     {
                         Paymentapplicationmodel.wangming = wangming;
                     }
@@ -795,9 +816,9 @@ namespace QiuoOA.Controllers
                     Paymentapplicationmodel.purpose = yongtu;
                     Paymentapplicationmodel.Distinguish = Convert.ToInt32(Distinguish);
                     //保存付款审批流程表的数据
-                    Paymentnodemodel.projectId= model.Id;
+                    Paymentnodemodel.projectId = model.Id;
                     Paymentnodemodel.xuhao = Convert.ToInt32(xuhao);
-                    Paymentnodemodel.Distinguish= Convert.ToInt32(Distinguish);
+                    Paymentnodemodel.Distinguish = Convert.ToInt32(Distinguish);
                     Paymentnodemodel.Stateofapproval = 1;
                     //获取项目审批人员并且保存到数据库
                     node nodemodel = nodebll.GetModels(model.Id);
@@ -865,7 +886,7 @@ namespace QiuoOA.Controllers
         }
         //修改按钮回显数据
         [HttpPost]
-        public JsonResult updateview(string xuhao, string projectname,string Distinguish)
+        public JsonResult updateview(string xuhao, string projectname, string Distinguish)
         {
             if (xuhao != null && projectname != null)
             {
@@ -919,12 +940,12 @@ namespace QiuoOA.Controllers
         }
         //添加(修改)明细表
         [HttpPost]
-        public JsonResult mixibaocun(string beizu, string xsbjhj, string sjhj, string Noheji, string heji, string maolirun, string Nozhifu, string yuangongjiangjin, string weifenpeilirun, string lirunbaifenbi, string prijectname,  string Expectedreturndate, string Actualdate, string daozhangjine, string AMargemBrutapercentual, string Olucrolíquido, string Aporcentagemdelucrolíquido)
+        public JsonResult mixibaocun(string beizu, string xsbjhj, string sjhj, string Noheji, string heji, string maolirun, string Nozhifu, string yuangongjiangjin, string weifenpeilirun, string lirunbaifenbi, string prijectname, string Expectedreturndate, string Actualdate, string daozhangjine, string AMargemBrutapercentual, string Olucrolíquido, string Aporcentagemdelucrolíquido)
         {
             string msg = mixibaocuns(beizu, xsbjhj, sjhj, Noheji, heji, maolirun, Nozhifu, yuangongjiangjin, weifenpeilirun, lirunbaifenbi, prijectname, Expectedreturndate, Actualdate, daozhangjine, AMargemBrutapercentual, Olucrolíquido, Aporcentagemdelucrolíquido);
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
-        private string mixibaocuns(string beizu, string xsbjhj, string sjhj, string Noheji, string heji, string maolirun, string Nozhifu, string yuangongjiangjin, string weifenpeilirun, string lirunbaifenbi, string prijectname,  string Expectedreturndate, string Actualdate, string daozhangjine, string AMargemBrutapercentual, string Olucrolíquido, string Aporcentagemdelucrolíquido)
+        private string mixibaocuns(string beizu, string xsbjhj, string sjhj, string Noheji, string heji, string maolirun, string Nozhifu, string yuangongjiangjin, string weifenpeilirun, string lirunbaifenbi, string prijectname, string Expectedreturndate, string Actualdate, string daozhangjine, string AMargemBrutapercentual, string Olucrolíquido, string Aporcentagemdelucrolíquido)
         {
             Project promodel = Projectbll.GetModelss(prijectname);
             Money moneymodel = Moneybll.GetModels(promodel.Id);
@@ -949,7 +970,7 @@ namespace QiuoOA.Controllers
             }
             if (moneymodel != null)
             {
-                if (xsbjhj!="")
+                if (xsbjhj != "")
                 {
                     moneymodel.SalesQuotations = Convert.ToDecimal(xsbjhj);//销售报价合计
                 }
@@ -958,30 +979,30 @@ namespace QiuoOA.Controllers
                     moneymodel.TaxSum = Convert.ToDecimal(sjhj);//税金合计
                 }
                 moneymodel.NonTaxCostCombined = Convert.ToDecimal(Noheji); //不含税成本合计
-                if (heji!=null && heji!="")
+                if (heji != null && heji != "")
                 {
                     moneymodel.Totaltaxcosttow = Convert.ToDecimal(heji);//含税成本合计
                 }
                 moneymodel.Grossprofit = Convert.ToDecimal(maolirun);//毛利润
-                if (Nozhifu!="")
+                if (Nozhifu != "")
                 {
-                moneymodel.Unpaidchannel = Convert.ToDecimal(Nozhifu); //未支付渠道款
+                    moneymodel.Unpaidchannel = Convert.ToDecimal(Nozhifu); //未支付渠道款
                 }
-                if (yuangongjiangjin!="")
+                if (yuangongjiangjin != "")
                 {
                     moneymodel.Employeebonus = Convert.ToDecimal(yuangongjiangjin);//员工奖金
                 }
-                if (weifenpeilirun!="")
+                if (weifenpeilirun != "")
                 {
                     moneymodel.Undistributedprofit = Convert.ToDecimal(weifenpeilirun);//未分配利润
                 }
                 moneymodel.Percentageofprofit = lirunbaifenbi;//利润百分比
                 moneymodel.AMargemBrutapercentual = AMargemBrutapercentual;
-                if (Olucrolíquido!="")
+                if (Olucrolíquido != "")
                 {
                     moneymodel.Olucrolíquido = Convert.ToDecimal(Olucrolíquido);
                 }
-                if (Aporcentagemdelucrolíquido!="")
+                if (Aporcentagemdelucrolíquido != "")
                 {
                     moneymodel.Aporcentagemdelucrolíquido = Aporcentagemdelucrolíquido;
                 }
@@ -1001,12 +1022,12 @@ namespace QiuoOA.Controllers
         }
         //审批提交
         [HttpPost]
-        public JsonResult shenpi(string projectname,string processstate,string xuhao,string Distinguish)
+        public JsonResult shenpi(string projectname, string processstate, string xuhao, string Distinguish)
         {
             string msg = shenpis(projectname, processstate, xuhao, Distinguish);
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
-        private string shenpis(string projectname,string processstate, string xuhao, string Distinguish)
+        private string shenpis(string projectname, string processstate, string xuhao, string Distinguish)
         {
             Project projectmodel = Projectbll.GetModelss(projectname);
             Paymentapplicationform formmodel = Paymentapplicationformbll.GetModelsDistinguish(projectmodel.Id, xuhao, Distinguish);
@@ -1019,7 +1040,7 @@ namespace QiuoOA.Controllers
             //{
             //    return "{\"status\": 12,\"msg\":\"上次审批未审批通过!\"}";
             //}
-            if (processstate=="2"&& formmodel.readState==1)
+            if (processstate == "2" && formmodel.readState == 1)
             {
                 return "{\"status\": 13,\"msg\":\"审批已通过!\"}";
             }
@@ -1033,12 +1054,12 @@ namespace QiuoOA.Controllers
                 //{
                 //    return "{\"status\": 0,\"msg\":\"您是当前项目负责人已经审批过了!\"}";
                 //}
-                    if (model.Stateofapproval == 0)
-                    {
-                        model.Stateofapproval = 1;
-                        nodebll.Update(model);
-                        return "{\"status\": 1,\"msg\":\"项目负责人审批成功!\"}";
-                    }
+                if (model.Stateofapproval == 0)
+                {
+                    model.Stateofapproval = 1;
+                    nodebll.Update(model);
+                    return "{\"status\": 1,\"msg\":\"项目负责人审批成功!\"}";
+                }
                 //if (model.AE=="" && model.Stateofapproval == 1)
                 //{
                 //    model.Stateofapproval = 2;
@@ -1050,7 +1071,7 @@ namespace QiuoOA.Controllers
                 //    nodebll.Update(model);
                 //    return "{\"status\": 2,\"msg\":\"AE审批成功\"}";
                 //}
-                if (model.SAE=="" && model.Stateofapproval==1)
+                if (model.SAE == "" && model.Stateofapproval == 1)
                 {
                     model.Stateofapproval = 3;
                     nodebll.Update(model);
@@ -1059,10 +1080,10 @@ namespace QiuoOA.Controllers
                 {
                     model.Stateofapproval = 3;
                     //预读此审批人后的两个流程审批人，若为空，则更改流程步骤代码，以便待办事务页面获取到
-                    if (model.AD=="")
+                    if (model.AD == "")
                     {
                         model.Stateofapproval = 4;
-                        if (model.SAD=="")
+                        if (model.SAD == "")
                         {
                             model.Stateofapproval = 5;
                         }
@@ -1071,7 +1092,7 @@ namespace QiuoOA.Controllers
                     return "{\"status\": 3,\"msg\":\"SAE审批成功\"}";
 
                 }
-                if (model.AD=="" && model.Stateofapproval==3)
+                if (model.AD == "" && model.Stateofapproval == 3)
                 {
                     model.Stateofapproval = 4;
                     nodebll.Update(model);
@@ -1090,7 +1111,7 @@ namespace QiuoOA.Controllers
                     nodebll.Update(model);
                     return "{\"status\": 4,\"msg\":\"AD审批成功\"}";
                 }
-                if (model.SAD=="" && model.Stateofapproval == 4)
+                if (model.SAD == "" && model.Stateofapproval == 4)
                 {
                     model.Stateofapproval = 5;
                     nodebll.Update(model);
@@ -1098,7 +1119,7 @@ namespace QiuoOA.Controllers
                 else if (model.SAD == usermodel.employeename && model.Stateofapproval == 4)
                 {
                     model.Stateofapproval = 5;
-                    if (model.yinxiaozongjian  == "")
+                    if (model.yinxiaozongjian == "")
                     {
                         model.Stateofapproval = 6;
                         if (model.caiwu == "")
@@ -1109,7 +1130,7 @@ namespace QiuoOA.Controllers
                     nodebll.Update(model);
                     return "{\"status\": 5,\"msg\":\"SAD审批成功\"}";
                 }
-                if (model.yinxiaozongjian=="" && model.Stateofapproval == 5)
+                if (model.yinxiaozongjian == "" && model.Stateofapproval == 5)
                 {
                     model.Stateofapproval = 6;
                     nodebll.Update(model);
@@ -1124,26 +1145,36 @@ namespace QiuoOA.Controllers
                     nodebll.Update(model);
                     return "{\"status\": 6,\"msg\":\"营销负责人审批成功\"}";
                 }
-                if (model.caiwu=="" && model.Stateofapproval == 6)
+                if (model.caiwu == "" && model.Stateofapproval == 6)
                 {
-                    model.Stateofapproval = 8;
+                    model.Stateofapproval = 7;
                     nodebll.Update(model);
                 }
                 else if (model.caiwu == usermodel.employeename && model.Stateofapproval == 6)
                 {
+                    if (processstate == "1")
+                    {
+                        model.Stateofapproval = 8;
+                        nodebll.Update(model);
+                        return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                    }
+                    else
+                    {
+                        model.Stateofapproval = 7;
+                        nodebll.Update(model);
+                        return "{\"status\": 7,\"msg\":\"财务审批成功\"}";
+                    }
+                       
+                }
+                if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
+                {
                     model.Stateofapproval = 8;
                     nodebll.Update(model);
-                    return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                    return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
                 }
-              //if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
-              //  {
-              //      model.Stateofapproval = 8;
-              //      nodebll.Update(model);
-              //      return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
-              //  }
-               if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
+                if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
                 {
-                    if (processstate=="2")
+                    if (processstate == "2")
                     {
                         model.Stateofapproval = 0;
                         formmodel.readState = 1;
@@ -1151,7 +1182,7 @@ namespace QiuoOA.Controllers
                         nodebll.Update(model);
                         return "{\"status\":15,\"msg\":\"当前付款,审批成功!\"}";
                     }
-                    else if(processstate=="3")
+                    else if (processstate == "3")
                     {
                         model.Stateofapproval = 9;
                         projectmodel.typefinished = 1;
@@ -1159,7 +1190,7 @@ namespace QiuoOA.Controllers
                         nodebll.Update(model);
                         return "{\"status\": 9,\"msg\":\"审批成功,已结案!\"}";
                     }
-                    else if (processstate=="1")
+                    else if (processstate == "1")
                     {
                         model.Stateofapproval = 9;
                         projectmodel.caseclosed = 1;
@@ -1174,13 +1205,13 @@ namespace QiuoOA.Controllers
             {
                 return "{\"status\": 11,\"msg\":\"审批失败\"}";
             }
-        } 
+        }
 
 
 
         //付款审批
         [HttpPost]
-        public JsonResult paymentshenpi(string projectname,string xuhao, string Distinguish)
+        public JsonResult paymentshenpi(string projectname, string xuhao, string Distinguish)
         {
             string msg = paymentshenpis(projectname, xuhao, Distinguish);
             return Json(msg, JsonRequestBehavior.AllowGet);
@@ -1303,23 +1334,23 @@ namespace QiuoOA.Controllers
                 }
                 else if (model.caiwu == usermodel.employeename && model.Stateofapproval == 6)
                 {
+                    model.Stateofapproval = 7;
+                    nodebll.Update(model);
+                    return "{\"status\": 7,\"msg\":\"财务审批成功\"}";
+                }
+                if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
+                {
                     model.Stateofapproval = 8;
                     nodebll.Update(model);
-                    return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                    return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
                 }
-                //if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
-                //  {
-                //      model.Stateofapproval = 8;
-                //      nodebll.Update(model);
-                //      return "{\"status\": 8,\"msg\":\"老板审批成功\"}";
-                //  }
                 if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
                 {
-                       model.Stateofapproval = 9;
-                       formmodel.readState = 1;
-                        Paymentapplicationformbll.Update(formmodel);
-                        nodebll.Update(model);
-                        return "{\"status\":15,\"msg\":\"当前付款,审批成功!\"}";
+                    model.Stateofapproval = 9;
+                    formmodel.readState = 1;
+                    Paymentapplicationformbll.Update(formmodel);
+                    nodebll.Update(model);
+                    return "{\"status\":15,\"msg\":\"当前付款,审批成功!\"}";
                 }
                 return "{\"status\": 10,\"msg\":\"您的上一审批人未审批,或您已审批或您没有权限\"}";
             }
@@ -1333,56 +1364,57 @@ namespace QiuoOA.Controllers
 
 
         //保存当前项目的审批人
-        [HttpPost]
-        public JsonResult shenpiren(string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban,string processstate)
-        {
-            string msg = shenpirens(ae, sae, ad, sad, yingxiao, caiwu, laoban, zhulaoban, processstate);
-            return Json(msg, JsonRequestBehavior.AllowGet);
-        }
-        private string shenpirens(string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban,string processstate)
-        {
-            Bll.node nodebll = new Bll.node();
-            node model = new node();
-            Project projectmodel = Projectbll.GetModels();
-            t_user usermodel = GetUserInfo();
-            //if (projectmodel.userid != usermodel.id)
-            //{
-            //    return "您没有权限添加当前项目的审批人!";
-            //}
-            if (projectmodel != null)
-            {
-                JavaScriptSerializer jsonSerialzer = new JavaScriptSerializer();
-                string[] retObj = jsonSerialzer.Deserialize<string[]>(ae);
-                StringBuilder str = new StringBuilder();
-                for (int i = 0; i < retObj.Length; i++)
-                {
-                    str.Append(retObj[i] + ",");
-                }
-                model.projectid = projectmodel.Id;
-                model.AE = str.ToString();
-                model.SAE = sae;
-                model.AD = ad;
-                model.SAD = sad;
-                model.yinxiaozongjian = yingxiao;
-                model.caiwu = caiwu;
-                model.laoban = laoban;
-                model.zhulaoban = zhulaoban;
-                model.Stateofapproval = 1;
-                //插入三条数据
-                model.processstate = Convert.ToInt32(processstate);
-                nodebll.Add(model);
-                model.processstate = Convert.ToInt32(processstate) + 2;
-                nodebll.Add(model);
+        
+        //public JsonResult shenpiren(string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban,string processstate)
+        //{
+        //    string msg = shenpirens(ae, sae, ad, sad, yingxiao, caiwu, laoban, zhulaoban, processstate);
+        //    return Json(msg, JsonRequestBehavior.AllowGet);
+        //}
+        //private string shenpirens(string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban,string processstate)
+        //{
+        //    Bll.node nodebll = new Bll.node();
+        //    node model = new node();
+        //    Project projectmodel = Projectbll.GetModels();
+        //    t_user usermodel = GetUserInfo();
+        //    //if (projectmodel.userid != usermodel.id)
+        //    //{
+        //    //    return "您没有权限添加当前项目的审批人!";
+        //    //}
+        //    if (projectmodel != null)
+        //    {
+        //        JavaScriptSerializer jsonSerialzer = new JavaScriptSerializer();
+        //        string[] retObj = jsonSerialzer.Deserialize<string[]>(ae);
+        //        StringBuilder str = new StringBuilder();
+        //        for (int i = 0; i < retObj.Length; i++)
+        //        {
+        //            str.Append(retObj[i] + ",");
+        //        }
+        //        model.projectid = projectmodel.Id;
+        //        model.AE = str.ToString();
+        //        model.SAE = sae;
+        //        model.AD = ad;
+        //        model.SAD = sad;
+        //        model.yinxiaozongjian = yingxiao;
+        //        model.caiwu = caiwu;
+        //        model.laoban = laoban;
+        //        model.zhulaoban = zhulaoban;
+        //        model.Stateofapproval = 1;
+        //        //插入三条数据
+        //        model.processstate = Convert.ToInt32(processstate);
+        //        nodebll.Add(model);
+        //        model.processstate = Convert.ToInt32(processstate) + 2;
+        //        nodebll.Add(model);
 
-                return "成功添加当前项目审批人!";
-            }
-            else
-            {
-                return "添加当前项目审批人失败!";
-            }
-        }
+        //        return "成功添加当前项目审批人!";
+        //    }
+        //    else
+        //    {
+        //        return "添加当前项目审批人失败!";
+        //    }
+        //}
 
-        [HttpPost]
+    
+[HttpPost]
         public JsonResult Updatechaiwuchenben1(string xuhao, string caiwuchengben, string proname, string Distinguish, string hansuiheji)
         {
             Project promodle = Projectbll.GetModelss(proname);
@@ -1499,6 +1531,12 @@ namespace QiuoOA.Controllers
             if (model != null)
             {
                 if (model.zhulaoban == usermodel.employeename && model.Stateofapproval == 8)
+                {
+                    model.Stateofapproval = 7;
+                    Paymentnodebll.Update(model);
+                    return "{\"status\":1,\"msg\":\"驳回成功!\"}";
+                }
+                if (model.laoban == usermodel.employeename && model.Stateofapproval == 7)
                 {
                     model.Stateofapproval = 6;
                     Paymentnodebll.Update(model);

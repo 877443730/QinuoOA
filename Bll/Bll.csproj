@@ -33,9 +33,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DBUtility">
-      <HintPath>E:\DBUtility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -79,6 +76,10 @@
     <ProjectReference Include="..\Dal\Dal.csproj">
       <Project>{38bdbc74-1151-468e-8f01-9187cd956822}</Project>
       <Name>Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{678d773d-ccf5-4073-b9ca-2a7aa59ba585}</Project>
+      <Name>DBUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{b91fb939-c7e0-42e7-94ea-fe56b49d4e2b}</Project>

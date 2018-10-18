@@ -1,4 +1,4 @@
-﻿using LC.ClassLibraries.DBUtility;
+﻿//using LC.ClassLibraries.DBUtility;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,18 +19,18 @@ namespace Bll
         { }
         #region  BasicMethod
 
-        public List<Project> getcesshi(string userid) {
-            try
-            {
-                StringBuilder str = new StringBuilder();
-                return LCDBHelper.GetAllList<Project>("userid=@userid", new SqlParameter[] {new SqlParameter("@userid", userid) });
-            }
-            catch (Exception)
-            {
+        //public List<Project> getcesshi(string userid) {
+        //    try
+        //    {
+        //        StringBuilder str = new StringBuilder();
+        //        return LCDBHelper.GetAllList<Project>("userid=@userid", new SqlParameter[] {new SqlParameter("@userid", userid) });
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
         /// <summary>
         /// 是否存在该记录
         /// </summary>

@@ -48,7 +48,7 @@
                             <tr>
                                 <th class="k">项目名称</th>
                                 <td class="k">
-                                    <input class="form-control" id="name" type="text" name="greeting" list="greetings"  value="@ViewBag.projectname">
+                                    <input class="form-control" id="name" type="text" name="greeting" list="greetings" value="@ViewBag.projectname">
                                 </td>
                                 <th class="k">项目代码</th>
                                 <td class="k">
@@ -152,7 +152,7 @@
                                                 }
                                             }
                                         }*@
-                                    <input id="shenpiren" onclick="renyuan()" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none"/>
+                                    <input id="shenpiren" onclick="renyuan()" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
                                 </td>
                             </tr>
                             <tr>
@@ -183,7 +183,7 @@
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                                         <p>
-                                            <input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">
+                                            @*<input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">*@
                                             <input class="form-control" type="file" name="filed1" id="filed1" value="@ViewBag.ProjectQuotationlujing">
                                         </p>
                                     </form>
@@ -428,24 +428,12 @@ else
                                     <input id="date2" type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2">
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="k">项目成员(申请后选择)</th>
-                                <td class="k" colspan="5">
-                                    @*@{
-                                            IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
-                                            if (lists.Any())
-                                            {
-                                                foreach (var item in lists1)
-                                                {
-                                                    <label>
-                                                        <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
-                                                    </label>
-                                                }
-                                            }
-                                        }*@
-                                    <input id="shenpiren" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
-                                </td>
-                            </tr>
+                            @*<tr>
+                                    <th class="k">项目成员(申请后选择)</th>
+                                    <td class="k" colspan="5">
+                                        <input id="shenpiren" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
+                                    </td>
+                                </tr>*@
                             <tr>
                                 <th class="k">不含税金额</th>
                                 <td class="k">
@@ -474,7 +462,7 @@ else
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                                         <p>
-                                            <input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">
+                                           @*<input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">*@
                                             <input class="form-control" type="file" name="filed1" id="filed1">
                                         </p>
                                     </form>
@@ -494,7 +482,16 @@ else
                             </tr>
                         </table>
                         <div style="text-align:center"><span style="color:red;font-weight:bolder;font-size:inherit">提交申请后，添加项目成员及上传项目报价单、成本单</span></div>
-                        <div> <input onclick="but();" type="button" class="btn btn-primary btn-lg btn-block" value="确认申请" /> </div>
+                        <div>
+                            @if (@ViewBag.projectname !=null )
+                            {
+                                <input onclick="but();" type="button" class="btn btn-primary btn-lg btn-block" value="确认申请" />
+                            }
+                            else
+                            {
+                                <input type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal2" value="确认申请" />
+                            }
+                        </div>
                     </div>
                     <!-- 选择审批人员模态框（Modal） -->
                     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-keyboard="true" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -576,7 +573,7 @@ else
                                             </tr>
                                             <tr>
                                                 <th class="k">营销总监</th>
-                                                <td  id="yingxiao">齐雅卿</td>
+                                                <td id="yingxiao">齐雅卿</td>
                                                 <th class="k">财务</th>
                                                 <td>
                                                     <select class="form-control" type="text" id="caiwu">
@@ -605,7 +602,7 @@ else
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                         关闭
                                     </button>
-                                    <input onclick="butss2();" type="button" class="btn btn-primary" value="提交">
+                                    <input @*onclick="butss2();"*@ onclick="but();" type="button" class="btn btn-primary" value="提交">
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal -->
@@ -615,7 +612,7 @@ else
         </section>
     </body>
 }
-    <script>
+<script>
     //项目代码判断
     function checkcore(x) {
         var pattern = /^[a-zA-Z]{5}[0-9]{6}[a-z]$/;
@@ -657,11 +654,14 @@ else
     }
         function importExcel1() {
          var porjectname ="@ViewBag.projectname";
-        var file = $("#filed").val();
-        if (file == null || file.length == 0) {
-            alert("请先上传文件");
-            return false;
-        }
+            var file = $("#filed").val();
+            if (porjectname=="") {
+                if (file == null || file.length == 0) {
+                    alert("请先上传文件");
+                    return false;
+                }
+            }
+
         $('#file-from1').ajaxSubmit({
             type: 'post', // HTTP请求方式
             url: '/Home/projectCostlujing', // 请求的URL地址
@@ -670,15 +670,16 @@ else
                 porjectname: porjectname
             }
         });
-        alert("上传成功");
     }
         function importExcel2() {
             var porjectname ="@ViewBag.projectname";
-        var file = $("#filed1").val();
-        if (file == null || file.length == 0) {
-            alert("请先上传文件");
-            return false;
-        }
+            var file = $("#filed1").val();
+            if (porjectname=="") {
+                if (file == null || file.length == 0) {
+                    alert("请先上传文件");
+                    return false;
+                }
+            }
         $('#file-from2').ajaxSubmit({
             type: 'post', // HTTP请求方式
             url: '/Home/ProjectQuotationlujing', // 请求的URL地址
@@ -687,7 +688,6 @@ else
                 porjectname: porjectname
             }
         });
-        alert("上传成功");
     }
     var xiangmufuzeren;
     function zhiwu1(_this) {
@@ -701,6 +701,31 @@ else
             } else {
                 porjectname = "";
             }
+            obj = document.getElementsByName("chengyuan");
+          var  check_val = [];
+            for (k in obj) {
+                if (obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            var sae = $("#SAE").val();
+            var ad = $("#AD").val();
+            var sad = $("#SAD").val();
+            var yingxiao = $("#yingxiao").text();
+            var caiwu = $("#caiwu").val();
+            var laoban = $("#laoban").text();
+            var zhulaoban = $("#zhulaoban").text();
+            if (porjectname==null) {
+                if (sae == "" || caiwu == "") {
+                    alert("未能成功提交，请填写SAE或财务人员");
+                    return;
+                }
+                //var xiangmuchengyuan = check_val;//项目成员
+                if (check_val.length == 0) {
+                    alert("请勾选AE人员");
+                    return;
+                }
+            }
+            var result = JSON.stringify(check_val);
         var name = $("#name").val();//项目名称
         var core = $("#core").val();//项目代码
         var sele = $("#sele").val();//项目类别
@@ -717,6 +742,7 @@ else
         var cost = $("#cost").val();//项目成本
         var jingdu = $("#jingdu").val();//计划进度
             var beizhu = $("#beizhu").val();//备注
+           
             if (name == "" || core == "" || sele == "" || xiangmufuzeren == "" || usname == "" || companyname == "" || pingpai == "" || core2 == "" || date == "" || date2 == "" || Totalmoney == "" || Notaxmoney == "" || cost == "") {
                 alert("表内仍有未填写的内容，请仔细核对后再次提交");
                 return;
@@ -740,9 +766,21 @@ else
                     jingdu: jingdu,
                     beizhu: beizhu,
                     usname: usname,
-                    porjectname: porjectname
+                    porjectname: porjectname,
+                    //项目审批人员
+                    ae: result,
+                    sae: sae,
+                    ad: ad,
+                    sad: sad,
+                    yingxiao: yingxiao,
+                    caiwu: caiwu,
+                    laoban: laoban,
+                    zhulaoban: zhulaoban,
+                    processstate: 1
                 },
                 success: function (data) {
+                    importExcel1();
+                    importExcel2();
                     var d = eval('(' + data + ')');
                     if (d.status == 0) {
                         layer.msg(d.msg, {
@@ -752,9 +790,6 @@ else
                         layer.msg(d.msg, {
                             icon: 1
                         });
-                        $("#btnMCToOut").removeAttr("style");
-                        $("#btnMCToOut1").removeAttr("style");
-                        $("#shenpiren").removeAttr("style");
                         var sum = 0;
                         var t = document.getElementsByTagName("input");
                         for (var i = 0; i
@@ -770,7 +805,7 @@ else
     }
 
     //保存当前项目的审批人
-        function butss2() {
+        @*function butss2() {
             var porjectname = "@ViewBag.projectname";
             if (porjectname!="") {
                 porjectname = porjectname;
@@ -832,7 +867,7 @@ else
                     alert("注意：项目报价表与成本表必须点击上传按钮，请仔细核对！");
                 }
             });
-        }
+        }*@
         function renyuan() {
          var porjectname="@ViewBag.projectname";
             $.ajax({
@@ -876,4 +911,4 @@ else
             });
         }
 
-    </script>
+</script>
