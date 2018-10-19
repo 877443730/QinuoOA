@@ -1725,7 +1725,17 @@
         $('#k5l').removeAttr("style");
         $('#k6l').removeAttr("style");
         $('#k7l').removeAttr("style");
+        $('#k8l').removeAttr("style");
         $('#k9l').removeAttr("style");
+        $('#k1').removeAttr("style");
+        $('#k2').removeAttr("style");
+        $('#k3').removeAttr("style");
+        $('#k4').removeAttr("style");
+        $('#k5').removeAttr("style");
+        $('#k6').removeAttr("style");
+        $('#k7').removeAttr("style");
+        $('#k8').removeAttr("style");
+        $('#k9').removeAttr("style");
         $.ajax({
             url: "/Home/indexs",
             type: 'post',
@@ -2152,7 +2162,7 @@
                         $("#Paymentobject1").attr('readonly', 'readonly');
                         document.getElementById("insideChengbenbaojia1").value = chenbenbaojia;
                         document.getElementById("insedeXiaoshoubaojia1").value = xiaoshoubaojia;
-                        document.getElementById("insideSuidian1").value = suidian;
+                        document.getElementById("insideSuidian1").value = suidian+"%";
                         document.getElementById("code1").value = $("#code").val();
                         document.getElementById("projectname1").value = s;
                         document.getElementById("myModalLabel1").innerHTML = "申请付款" + leixing;

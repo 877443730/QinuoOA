@@ -780,11 +780,11 @@ namespace QiuoOA.Controllers
             //页面绑定数据加隐藏域获取区分字段以便于修改能定位到该数据
             if (Paymentapplicationmodel1 == null)
             {
-                if (projectname != null && ZFjine != null && fapiao != null && fapiaosuie != null && ZFdate != null && gsname != null && kaihuhang != null)
+                if (projectname != null && ZFjine != null && fapiao != null && ZFdate != null && gsname != null && kaihuhang != null)
                 {
                     Paymentapplicationmodel.ProjectId = model.Id; //项目ID
                     Paymentapplicationmodel.Invoicenumber = Convert.ToInt32(fapiao);//发票号
-                    Paymentapplicationmodel.Invoicetax = Convert.ToDecimal(fapiaosuie);//发票税额
+                    Paymentapplicationmodel.Invoicetax = Convert.ToDecimal(0);//发票税额
                     Paymentapplicationmodel.Timeofpayment = Convert.ToDateTime(ZFdate);//付款时间
                     Paymentapplicationmodel.Receivablescompany = gsname;//收款公司
                     Paymentapplicationmodel.Openingbank = kaihuhang;//开户行
