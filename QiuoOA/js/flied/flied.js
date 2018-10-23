@@ -13,17 +13,26 @@ function importExcel() {
             projectname: s
         },
         success: function (data) {
-            var d = eval('(' + data + ')');
-            if (d == "上传失败请选择项目!") {
+            console.log(data);
+            //var d = eval('(' + data + ')');
+            if (data.msg == "上传失败请选择项目!") {
                 layer.msg(d, {
                     icon: 5
                 });
                 return;
-            } else if (d != "上传失败请选择项目!") {
+            } else {
+                var polujing = data.substr(34);
+                $("#btnMCToOut").attr('style', 'display:none');
+                $("#filed").attr('style', 'display:none');
+                $("#POdownloadtext").removeAttr('style');
+                $("#POdownloadbtn").removeAttr('style');
+                $("#POdownloadtext").val(polujing);
+                $("#POdownloadbtn").attr('href', '/' + polujing + '');
                 layer.msg("上传成功", {
                     icon: 1
                 });
             }
+            
         }
     });
 }

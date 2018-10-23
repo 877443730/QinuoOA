@@ -141,7 +141,9 @@
                     <td>
                         <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                             <p>
-                                <input id="btnMCToOut" type="button" onclick="importExcel1()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+                                <input id="btnMCToOut1" type="button" onclick="importExcel1()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+                                <a id="reportdownloadbtn" style="display:none"><input type="button" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="下载文件" /></a>
+                                <input class="form-control" type="text" id="reportdownloadtext" disabled="disabled" style="display:none">
                                 <input class="form-control" type="file" name="filed1" id="filed1">
                             </p>
                         </form>
@@ -152,8 +154,9 @@
                     <td colspan="3">
                         <form enctype="multipart/form-data" id="file-from3" name="file-from3">
                             <p>
-                                <input id="btnMCToOut" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
-
+                                <input id="btnMCToOut2" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
+                                <a id="summdownloadbtn" style="display:none"><input type="button" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="下载文件" /></a>
+                                <input class="form-control" type="text" id="summdownloadtext" disabled="disabled" style="display:none">
                                 <input class="form-control" type="file" name="filed2" id="filed2">
                             </p>
                         </form>
@@ -1822,10 +1825,10 @@
                 var Quotationlujing = projectQuotationlujing.substr(34);
                 $('#Objectbaojia').val(Costlujing);
                 $('#Objectchengben').val(Quotationlujing);
+                //po单上传下载
                 var polujing = data.po['POlujing'];
-                
                 if (polujing != "1") {
-                    polujing = polujing.substr(30);
+                    polujing = polujing.substr(34);
                     $("#btnMCToOut").attr('style', 'display:none');
                     $("#filed").attr('style', 'display:none');
                     $("#POdownloadtext").removeAttr('style');
@@ -1839,6 +1842,42 @@
                     $("#POdownloadbtn").attr('style', 'display:none');
                     $("#POdownloadtext").val("");
                     $("#POdownloadbtn").removeAttr('href');
+                }
+                //结案报告上传下载
+                var reportlujing = data.projectFinalReport['Reportlujing'];
+                if (reportlujing != "1") {
+                    reportlujing = reportlujing.substr(34);
+                    $("#btnMCToOut1").attr('style', 'display:none');
+                    $("#filed1").attr('style', 'display:none');
+                    $("#reportdownloadtext").removeAttr('style');
+                    $("#reportdownloadbtn").removeAttr('style');
+                    $("#reportdownloadtext").val(reportlujing);
+                    $("#reportdownloadbtn").attr('href', '/' + reportlujing + '');
+                } else {
+                    $("#btnMCToOut1").removeAttr('style');
+                    $("#filed1").removeAttr('style');
+                    $("#reportdownloadtext").attr('style', 'display:none');
+                    $("#reportdownloadbtn").attr('style', 'display:none');
+                    $("#reportdownloadtext").val("");
+                    $("#reportdownloadbtn").removeAttr('href');
+                }
+                //链接汇总上传下载
+                var summlujing = data.publishlinksummary['summarylujing'];
+                if (summlujing != "1") {
+                    summlujing = summlujing.substr(34);
+                    $("#btnMCToOut2").attr('style', 'display:none');
+                    $("#filed2").attr('style', 'display:none');
+                    $("#summdownloadtext").removeAttr('style');
+                    $("#summdownloadbtn").removeAttr('style');
+                    $("#summdownloadtext").val(summlujing);
+                    $("#summdownloadbtn").attr('href', '/' + summlujing + '');
+                } else {
+                    $("#btnMCToOut2").removeAttr('style');
+                    $("#filed2").removeAttr('style');
+                    $("#summdownloadtext").attr('style', 'display:none');
+                    $("#summdownloadbtn").attr('style', 'display:none');
+                    $("#summdownloadtext").val("");
+                    $("#summdownloadbtn").removeAttr('href');
                 }
                 $("#baojia").attr('href', '/' + Costlujing + '');
                 $("#chenben").attr('href', '/' + Quotationlujing + '');

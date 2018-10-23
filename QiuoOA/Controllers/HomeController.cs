@@ -144,6 +144,7 @@ namespace QiuoOA.Controllers
                 Money moneymodel = Moneybll.GetModels(Projectmodel.Id);
                 Model.projectCostlujing projectCostlujingmodel = projectCostlujingbll.GetModels(Projectmodel.Id);
                 Model.ProjectQuotationlujing ProjectQuotationlujingmodel = ProjectQuotationlujingbll.GetModels(Projectmodel.Id);
+                //判定PO是否已经上传
                 PO po = pobll.GetModels(Projectmodel.Id);
                 if (po==null)
                 {
@@ -152,6 +153,26 @@ namespace QiuoOA.Controllers
                     po1.Id = 0;
                     po1.PorjectId = 0;
                     po = po1;
+                }
+                //判定结案报告是否已经上传
+                ProjectFinalReport projectFinalReport = reportbll.GetModels(Projectmodel.Id);
+                if (projectFinalReport==null)
+                {
+                    ProjectFinalReport projectFinalReport1 = new ProjectFinalReport();
+                    projectFinalReport1.Reportlujing = "1";
+                    projectFinalReport1.Id = 0;
+                    projectFinalReport1.ProjectId = 0;
+                    projectFinalReport = projectFinalReport1;
+                }
+                //判定链接汇总是否已经上传
+                Publishlinksummary publishlinksummary = summarybll.GetModels(Projectmodel.Id);
+                if (publishlinksummary==null)
+                {
+                    Publishlinksummary publishlinksummary1 = new Publishlinksummary();
+                    publishlinksummary1.summarylujing = "1";
+                    publishlinksummary1.Id = 0;
+                    publishlinksummary1.ProjectId = 0;
+                    publishlinksummary = publishlinksummary1;
                 }
                 node nodesmodel = nodebll.GetfModels(Projectmodel.Id, 1);
                 node nodemodel = nodebll.GetfModels(Projectmodel.Id, 3);
@@ -179,7 +200,9 @@ namespace QiuoOA.Controllers
                         companymodel,
                         nodemodels,
                         nodesmodel,
-                        po
+                        po,
+                        projectFinalReport,
+                        publishlinksummary
                     });
             }
             else
