@@ -13,10 +13,10 @@
         var menu = document.getElementById("menu" + id);
         if (list.style.display == "none") {
             document.getElementById("list" + id).style.display = "";
-            $(menu).attr("src", "/img/icons/上拉图标.png");
+            $(menu).attr("class", "glyphicon glyphicon-chevron-up title");
         } else {
             document.getElementById("list" + id).style.display = "none";
-            $(menu).attr("src", "/img/icons/下拉图标.png");
+            $(menu).attr("class", "glyphicon glyphicon-chevron-down title");
         }
     }
 </script>
@@ -25,6 +25,7 @@
         margin: 0;
         padding: 0;
     }
+
     .title {
         cursor: pointer;
     }
@@ -32,6 +33,7 @@
     .title1 {
         cursor: pointer;
     }
+
     .aaa {
         margin-left: 40%;
         float: left;
@@ -39,6 +41,139 @@
     }
 </style>
 <body id="money1">
+    <section id="container" class="">
+        <section id="main-content">
+            <section class="wrapper" style="background-color:white">
+                <table class="table" style="width:47%;float:left;TABLE-LAYOUT: fixed; WORD-BREAK: break-all;">
+                    <caption>立项未审批</caption>
+                    <caption><div class="glyphicon glyphicon-chevron-up title" id="menu2" onclick="showmenu('2')" height="18" width="18"></div></caption>
+                    <thead>
+                        <tr>
+                            <th>项目名称</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list2">
+                        @{
+                            List<Model.node> list1 = ViewData["lixiang"] as List<Model.node>;
+                            if (list1.Any())
+                            {
+                                foreach (var item in list1)
+                                {
+                                    if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.laoban == ViewBag.employeename && @item.Stateofapproval == 7)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        }
+                    </tbody>
+                </table>
+                <table class="table" style="width:47%; float:right;TABLE-LAYOUT: fixed; WORD-BREAK: break-all;">
+                    <caption>结案未审批</caption>
+                    <caption><div class="glyphicon glyphicon-chevron-up title" id="menu3" onclick="showmenu('3')" height="18" width="18"></div></caption>
+                    <thead>
+                        <tr>
+                            <th>项目名称</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list3">
+                        @{
+                            List<Model.node> list2 = ViewData["jiean"] as List<Model.node>;
+                            if (list2.Any())
+                            {
+                                foreach (var item in list2)
+                                {
+                                    if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.laoban == ViewBag.employeename && @item.Stateofapproval == 7)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                    else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
+                                    {
+                                        <tr>
+                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    </section>
+
     <section id="container" class="">
         <section id="main-content">
             <section class="wrapper" style="background-color:white">
@@ -52,7 +187,7 @@
                             <th>驳回意见</th>
                         </tr>
                     </thead>
-                    <caption><img class="title" id="menu1" onclick="showmenu('1')" height="18" width="18" src="~/img/icons/上拉图标.png" /></caption>
+                    <caption><div class="glyphicon glyphicon-chevron-up title" id="menu1" onclick="showmenu('1')" height="18" width="18"></div></caption>
                     <tbody id="list1">
                         @{
                             List<Model.Paymentnode> list4 = ViewData["Nofukuan"] as List<Model.Paymentnode>;
@@ -206,135 +341,16 @@
 
                     </tbody>
                 </table>
-                <table class="table" style="width:47%;float:left;TABLE-LAYOUT: fixed; WORD-BREAK: break-all;">
-                    <caption>立项未审批</caption>
-                    <caption><img class="title" id="menu2" onclick="showmenu('2')" height="18" width="18" src="~/img/icons/上拉图标.png" /></caption>
-                    <thead>
-                        <tr>
-                            <th>项目名称</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list2">
-                        @{
-                            List<Model.node> list1 = ViewData["lixiang"] as List<Model.node>;
-                            if (list1.Any())
-                            {
-                                foreach (var item in list1)
-                                {
-                                    if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.laoban == ViewBag.employeename && @item.Stateofapproval == 7)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                }
-                            }
+            </section>
+        </section>
+    </section>
 
-                        }
-                    </tbody>
-                </table>
-                <table class="table" style="width:47%; float:right;TABLE-LAYOUT: fixed; WORD-BREAK: break-all;">
-                    <caption>结案未审批</caption>
-                    <caption><img class="title" id="menu3" onclick="showmenu('3')" height="18" width="18" src="~/img/icons/上拉图标.png" /></caption>
-                    <thead>
-                        <tr>
-                            <th>项目名称</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list3">
-                        @{
-                            List<Model.node> list2 = ViewData["jiean"] as List<Model.node>;
-                            if (list2.Any())
-                            {
-                                foreach (var item in list2)
-                                {
-                                    if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.laoban == ViewBag.employeename && @item.Stateofapproval == 7)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                    else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
-                                    {
-                                        <tr>
-                                            <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        </tr>
-                                    }
-                                }
-                            }
-
-                        }
-                    </tbody>
-                </table>
+    <section id="container" class="">
+        <section id="main-content">
+            <section class="wrapper" style="background-color:white">
                 <table class="table" style="TABLE-LAYOUT: fixed; WORD-BREAK: break-all;">
                     <caption>付款未审批</caption>
-                    <caption><img class="title" id="menu4" onclick="showmenu('4')" height="18" width="18" src="~/img/icons/上拉图标.png" /></caption>
+                    <caption><div class="glyphicon glyphicon-chevron-up title" id="menu4" onclick="showmenu('4')" height="18" width="18"></div></caption>
                     <thead>
                         <tr>
                             <th>序号</th>
@@ -345,7 +361,7 @@
                     <tbody id="list4">
                         @{
                             List<Model.Paymentnode> list3 = ViewData["fukuan"] as List<Model.Paymentnode>;
-                            if (list4.Any())
+                            if (list3.Any())
                             {
                                 foreach (var item in list3)
                                 {
@@ -488,144 +504,6 @@
 
                     </tbody>
                 </table>
-
-
-
-                @*付款审批*@
-                @*<div class="aaa">
-                    <p style="color:red">您当前还有以下付款未审批的项目：</p>
-                    @{
-                        List<Model.Paymentnode> list3 = ViewData["fukuan"] as List<Model.Paymentnode>;
-                        if (list3.Any())
-                        {
-                            foreach (var item in list3)
-                            {
-                                if (@item.SAE == ViewBag.employeename && (@item.Stateofapproval == 2 || @item.Stateofapproval == 1))
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-
-                                else if (@item.AD == ViewBag.employeename && @item.Stateofapproval == 3)
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-                                else if (@item.SAD == ViewBag.employeename && @item.Stateofapproval == 4)
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-                                else if (@item.yinxiaozongjian == ViewBag.employeename && @item.Stateofapproval == 5)
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-                                else if (@item.caiwu == ViewBag.employeename && @item.Stateofapproval == 6)
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-                                else if (@item.zhulaoban == ViewBag.employeename && @item.Stateofapproval == 8)
-                                {
-                                    <div class="biankuang">
-                                        <p style="float:left;">项目名称：</p><p><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></p>
-                                        @switch (@item.Distinguish)
-                                        {
-                                            case 0:
-                                                <p style="float:left;">类型：</p><p>其它</p>
-                                                break;
-                                            case 2:
-                                                <p style="float:left;">类型：</p><p>对个人</p>
-                                                break;
-                                            case 3:
-                                                <p style="float:left;">类型：</p><p>对公司</p>
-                                                break;
-
-                                        }
-                                        <p style="float:left;">序号：</p><p>@item.xuhao</p>
-                                    </div>
-                                }
-
-                            }
-                        }
-                    }
-                </div>*@
             </section>
         </section>
     </section>

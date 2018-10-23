@@ -144,6 +144,15 @@ namespace QiuoOA.Controllers
                 Money moneymodel = Moneybll.GetModels(Projectmodel.Id);
                 Model.projectCostlujing projectCostlujingmodel = projectCostlujingbll.GetModels(Projectmodel.Id);
                 Model.ProjectQuotationlujing ProjectQuotationlujingmodel = ProjectQuotationlujingbll.GetModels(Projectmodel.Id);
+                PO po = pobll.GetModels(Projectmodel.Id);
+                if (po==null)
+                {
+                    PO po1 = new PO();
+                    po1.POlujing = "1";
+                    po1.Id = 0;
+                    po1.PorjectId = 0;
+                    po = po1;
+                }
                 node nodesmodel = nodebll.GetfModels(Projectmodel.Id, 1);
                 node nodemodel = nodebll.GetfModels(Projectmodel.Id, 3);
                 node nodemodels = nodebll.GetfModels(Projectmodel.Id, 2);//paymentnode
@@ -169,7 +178,8 @@ namespace QiuoOA.Controllers
                         personalmodel,
                         companymodel,
                         nodemodels,
-                        nodesmodel
+                        nodesmodel,
+                        po
                     });
             }
             else
@@ -501,7 +511,7 @@ namespace QiuoOA.Controllers
                         {
                             nodemodel.Stateofapproval = 1;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且项目负责人审批成功!\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.SAE == "" && nodemodel.Stateofapproval == 1)
                         {
@@ -521,7 +531,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且SAE审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
 
                         }
                         if (nodemodel.AD == "" && nodemodel.Stateofapproval == 3)
@@ -541,7 +551,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且AD审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.SAD == "" && nodemodel.Stateofapproval == 4)
                         {
@@ -560,7 +570,7 @@ namespace QiuoOA.Controllers
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且SAD审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.yinxiaozongjian == "" && nodemodel.Stateofapproval == 5)
                         {
@@ -575,7 +585,7 @@ namespace QiuoOA.Controllers
                                 nodemodel.Stateofapproval = 8;
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且营销负责人审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.caiwu == "" && nodemodel.Stateofapproval == 6)
                         {
@@ -586,7 +596,7 @@ namespace QiuoOA.Controllers
                         {
                             nodemodel.Stateofapproval = 8;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，且财务审批成功\"}";
+                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
 
                         if (nodemodel.zhulaoban == getusermodel.employeename && nodemodel.Stateofapproval == 8)

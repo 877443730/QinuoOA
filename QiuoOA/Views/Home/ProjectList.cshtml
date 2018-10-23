@@ -38,7 +38,7 @@
                                 if (item.typefinished != 1)
                                 {
                                     <tr>
-                                        <td>@item.ProjectName</td>
+                                        <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
                                         <td>@item.ProjectCode</td>
                                         <td>@hanshuijine</td>
                                         <td>@xiangmuchengben</td>
@@ -50,7 +50,7 @@
                                 else if (item.typefinished == 1)
                                 {
                                     <tr class="success">
-                                        <td>@item.ProjectName</td>
+                                        <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
                                         <td>@item.ProjectCode</td>
                                         <td>@hanshuijine</td>
                                         <td>@xiangmuchengben</td>

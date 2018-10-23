@@ -42,7 +42,7 @@
 
 <section id="main-content">
     <section class="wrapper" style="background-color:white;margin-top: 1px;text-align:center">
-        <div style="display: inline-block;overflow: auto"><h2 style="font-weight:800">项目明细表</h2></div>
+        <div style="display: inline-block;overflow: auto;margin-top:15px"><h2 style="font-weight:800">项目明细表</h2></div>
         <div class="col-md-12 col-lg-12 portlets">
             <table class="table table-bordered">
                 <tr>
@@ -131,7 +131,8 @@
                         <form enctype="multipart/form-data" id="file-from" name="file-from1">
                             <p>
                                 <input id="btnMCToOut" type="button" onclick="importExcel()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="导入文件">
-
+                                <a id="POdownloadbtn" style="display:none"><input type="button" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="下载文件" /></a>
+                                <input class="form-control" type="text" id="POdownloadtext" disabled="disabled" style="display:none">
                                 <input class="form-control" type="file" name="filed" id="filed">
                             </p>
                         </form>
@@ -186,7 +187,7 @@
                     </tr>
                 </table>
             </div>
-            <div style="display: inline-block;overflow: auto">
+            <div style="display: inline-block;overflow: auto;margin-top:15px">
                 <input id="shenpi" type="button" onclick="shenpi(1)" class="btn btn-primary" value="通过审批" />
                 <input style="margin-left: 200px;" id="shenpi" type="button" onclick="lixiangxiugai()" class="btn btn-danger" value="立项修改" />
             </div>
@@ -536,7 +537,7 @@
                             </table>
                         </div>
                         @*修改 2018年9月13日16:34:06*@
-                        <div style="display: inline-block;overflow: auto">
+                        <div style="display: inline-block;overflow: auto;margin-top:15px">
                             <input id="shenpi" type="button" onclick="paymentshenpi()" class="btn btn-primary" value="通过审批" />
                             <input style="margin-left: 200px;" id="shenpi" type="button" onclick="Noshenpi1()" class="btn btn-danger" value="拒绝审批" />
                         </div>
@@ -1259,7 +1260,7 @@
         //净利润百分比
         var jinglirunbfb = (Nofenpeilirun - document.getElementById("heji").value) / Nofenpeilirun;
         $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) * 100 + "%");
-        mingxi();
+        mingxi("付款审批");
     }
     function personaltextchange12(_this1, _this2, _this3) {
         caiwuchengben = $(_this1).val();
@@ -1389,7 +1390,7 @@
         //净利润百分比
         var jinglirunbfb = (Nofenpeilirun - document.getElementById("heji").value) / Nofenpeilirun;
         $("#jinglirunbfb").val(jinglirunbfb.toFixed(2) * 100 + "%");
-        mingxi();//保存
+        mingxi("付款审批");//保存
     }
     function companytextchange12(_this1, _this2, _this3) {
         caiwuchengben = $(_this1).val();
@@ -1522,7 +1523,7 @@
         var jinglirunbfb = (Nofenpeilirun - document.getElementById("heji").value) / Nofenpeilirun;
         
         $("#jinglirunbfb").val((jinglirunbfb * 100).toFixed(2) * 100 + "%");
-        mingxi();
+        mingxi("付款审批");
     }
 
     //function shifoufukuan1(_this1,_this2, _this3) {
@@ -1770,6 +1771,9 @@
                     date2.setTime(newdate1.replace(/\/Date\((\d+)\)\//gi, '$1'));
                     var newdate11 = date2.toLocaleDateString();
                     $('#Expectedreturndate').val(newdate11);
+                    if (newdate11 == "1999/9/9") {
+                        $("#Expectedreturndate").val("");
+                    }
                 }
                 var newdate2 = data.Projectmodel['Actualdate'];
                 if (newdate2 != null) {
@@ -1818,6 +1822,24 @@
                 var Quotationlujing = projectQuotationlujing.substr(34);
                 $('#Objectbaojia').val(Costlujing);
                 $('#Objectchengben').val(Quotationlujing);
+                var polujing = data.po['POlujing'];
+                
+                if (polujing != "1") {
+                    polujing = polujing.substr(30);
+                    $("#btnMCToOut").attr('style', 'display:none');
+                    $("#filed").attr('style', 'display:none');
+                    $("#POdownloadtext").removeAttr('style');
+                    $("#POdownloadbtn").removeAttr('style');
+                    $("#POdownloadtext").val(polujing);
+                    $("#POdownloadbtn").attr('href', '/' + polujing + '');
+                } else {
+                    $("#btnMCToOut").removeAttr('style');
+                    $("#filed").removeAttr('style');
+                    $("#POdownloadtext").attr('style', 'display:none');
+                    $("#POdownloadbtn").attr('style', 'display:none');
+                    $("#POdownloadtext").val("");
+                    $("#POdownloadbtn").removeAttr('href');
+                }
                 $("#baojia").attr('href', '/' + Costlujing + '');
                 $("#chenben").attr('href', '/' + Quotationlujing + '');
                 //判断当前所处的审批流程，选择显示或隐藏明细表格
@@ -2001,7 +2023,7 @@
                         }else if (data.catmodel[i].Stateofapproval == 8 && data.catmodel[i].zhulaoban == "@ViewBag.employeename") {
                             shenpibutton = "";
                         }
-                        if (data.catmodel[i].Stateofapproval == "7" || data.catmodel[i].Stateofapproval == "8" || data.catmodel[i].Stateofapproval == "9") {
+                        if (data.catmodel[i].Stateofapproval == "6" || data.catmodel[i].Stateofapproval == "7" || data.catmodel[i].Stateofapproval == "8" || data.catmodel[i].Stateofapproval == "9") {
                             read = 'disabled="disabled"';
                         }
                         if (data.catmodel[i].shuidian == undefined || data.catmodel[i].shuidian == "" || data.catmodel[i].shuidian == null) {
@@ -2043,7 +2065,7 @@
                         } else if (data.personalmodel[i].Stateofapproval == 8 && data.personalmodel[i].zhulaoban == "@ViewBag.employeename") {
                             shenpibutton = "";
                         }
-                        if (data.personalmodel[i].Stateofapproval == "7" || data.personalmodel[i].Stateofapproval == "8" || data.personalmodel[i].Stateofapproval == "9") {
+                        if (data.personalmodel[i].Stateofapproval == "6" || data.personalmodel[i].Stateofapproval == "7" || data.personalmodel[i].Stateofapproval == "8" || data.personalmodel[i].Stateofapproval == "9") {
                             read = 'disabled="disabled"';
                         }
                         if (data.personalmodel[i].Totaltaxcost == undefined || data.personalmodel[i].Totaltaxcost == "" || data.personalmodel[i].Totaltaxcost == null) {
@@ -2088,7 +2110,7 @@
                         if (data.companymodel[i].Totaltaxcost == undefined || data.companymodel[i].Totaltaxcost == "" || data.companymodel[i].Totaltaxcost == null) {
                             data.companymodel[i].Totaltaxcost = 0;
                         }
-                        if (data.companymodel[i].Stateofapproval == "7" || data.companymodel[i].Stateofapproval == "8" || data.companymodel[i].Stateofapproval == "9") {
+                        if (data.companymodel[i].Stateofapproval == "6" || data.companymodel[i].Stateofapproval == "7" || data.companymodel[i].Stateofapproval == "8" || data.companymodel[i].Stateofapproval == "9") {
                             read = 'disabled="disabled"';
                         }
                         if (data.companymodel[i].Financialcost == undefined || data.companymodel[i].Financialcost == "" || data.companymodel[i].Financialcost == null) {
@@ -3024,11 +3046,15 @@
         //2018年9月14日17:45:59
         //var po = $("#po").val();
         var Expectedreturndate = $("#Expectedreturndate").val();
-        if (Expectedreturndate == "") {
-            layer.msg("请填写预计回款日期日期", {
-                icon: 5
-            });
-            return;
+        if (_this != "付款审批") {
+            if (Expectedreturndate == "" || Expectedreturndate == "1999/9/9") {
+                layer.msg("请填写预计回款日期日期", {
+                    icon: 5
+                });
+                return;
+            }
+        } else {
+            Expectedreturndate = "1999-09-09";
         }
         var Actualdate = $("#Actualdate").val();
         //2018年9月14日17:45:59
