@@ -21,7 +21,8 @@ function importExcel() {
                 });
                 return;
             } else {
-                var polujing = data.substr(34);
+                var json = data.replace("\\", "");
+                var polujing = json.substr(34);
                 $("#btnMCToOut").attr('style', 'display:none');
                 $("#filed").attr('style', 'display:none');
                 $("#POdownloadtext").removeAttr('style');

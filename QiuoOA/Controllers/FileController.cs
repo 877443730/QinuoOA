@@ -37,7 +37,9 @@ namespace QiuoOA.Controllers
                 {
                     pobll.Add(POgmodel);
                 }
-                return Json(filePath, JsonRequestBehavior.AllowGet);
+                Model.PO po1 = pobll.GetModels(model.Id);
+                var lujing= po1.POlujing;
+                return Json(lujing, JsonRequestBehavior.AllowGet);
             }
             else
             {
