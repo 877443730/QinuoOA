@@ -14,7 +14,7 @@ function importExcel() {
         },
         success: function (data) {
             console.log(data);
-            //var d = eval('(' + data + ')');
+            //var d = eval('(' + data + ')'); 
             if (data.msg == "上传失败请选择项目!") {
                 layer.msg(d, {
                     icon: 5
