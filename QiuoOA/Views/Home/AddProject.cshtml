@@ -138,24 +138,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">项目成员(申请后选择)</th>
-                                <td class="k" colspan="5">
-                                    @*@{
-                                            IList<Model.t_user> lists1 = ViewData["user"] as IList<Model.t_user>;
-                                            if (lists.Any())
-                                            {
-                                                foreach (var item in lists1)
-                                                {
-                                                    <label>
-                                                        <input name="chengyuan" class="bingpai" type="checkbox" checked="checked" value="@item.employeename" /> @item.employeename<br>
-                                                    </label>
-                                                }
-                                            }
-                                        }*@
-                                    <input id="shenpiren" onclick="renyuan()" type="button" class="btn btn-primary btn-lg btn-block" value="选择项目成员/选择审批人员" data-toggle="modal" data-target="#myModal2" style="display:none" />
-                                </td>
-                            </tr>
-                            <tr>
                                 <th class="k">不含税金额</th>
                                 <td class="k">
                                     <input class="form-control" type="text" id="Totalmoney" value="@ViewBag.TotalMoney" />
@@ -170,7 +152,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">项目报价表(申请后上传)</th>
+                                <th class="k">项目报价表</th>
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from1" name="file-from1">
                                         <p>
@@ -179,7 +161,7 @@
                                         </p>
                                     </form>
                                 </td>
-                                <th class="k">项目成本表(申请后上传)</th>
+                                <th class="k">项目成本表</th>
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                                         <p>
@@ -448,7 +430,7 @@ else
                                 </td>
                             </tr>
                             <tr>
-                                <th class="k">项目报价表(申请后上传)</th>
+                                <th class="k">项目报价表</th>
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from1" name="file-from1">
                                         <p>
@@ -457,7 +439,7 @@ else
                                         </p>
                                     </form>
                                 </td>
-                                <th class="k">项目成本表(申请后上传)</th>
+                                <th class="k">项目成本表</th>
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                                         <p>

@@ -192,7 +192,7 @@
             </div>
             <div style="display: inline-block;overflow: auto;margin-top:15px">
                 <input id="shenpi" type="button" onclick="shenpi(1)" class="btn btn-primary" value="通过审批" />
-                <input style="margin-left: 200px;" id="shenpi" type="button" onclick="lixiangxiugai()" class="btn btn-danger" value="立项修改" />
+                <input style="margin-left: 200px;" id="shenpi1" type="button" onclick="lixiangxiugai()" class="btn btn-danger" value="立项修改" />
             </div>
         </div>
         <div id="detailed">
@@ -1725,6 +1725,12 @@
         }
         $('#companyck').empty();
         $('#personalck').empty();
+        var file = document.getElementById('filed');
+        file.value = "";
+        var file1 = document.getElementById('filed1');
+        file.value = "";
+        var file2 = document.getElementById('filed2');
+        file.value = "";
         $('#ck').empty();
         $('#k1l').removeAttr("style");
         $('#k2l').removeAttr("style");
@@ -2041,6 +2047,26 @@
                     }
                 }
                 var unpaysum = 0;
+                //用当前登陆人与项目成员内容对比，确定是否启用上传下载按钮
+                var xiangmuchengyuan = $("#xiangmuchengyuan").val();
+                if (xiangmuchengyuan.indexOf("@ViewBag.employeename") == -1) {
+                    $("#POdownloadbtn input").attr("disabled", true);
+                    $("#reportdownloadbtn input").attr("disabled", true);
+                    $("#summdownloadbtn input").attr("disabled", true);
+                    //立项修改按钮是否启用
+                    $("#shenpi1").attr("disabled", true);
+                    $("#btnMCToOut").attr("disabled", true);
+                    $("#btnMCToOut1").attr("disabled", true);
+                    $("#btnMCToOut2").attr("disabled", true);
+                } else {
+                    $("#POdownloadbtn input").removeAttr("disabled");
+                    $("#reportdownloadbtn input").removeAttr("disabled");
+                    $("#summdownloadbtn input").removeAttr("disabled");
+                    $("#shenpi1").removeAttr("disabled");
+                    $("#btnMCToOut").removeAttr("disabled");
+                    $("#btnMCToOut1").removeAttr("disabled");
+                    $("#btnMCToOut2").removeAttr("disabled");
+                }
                 //李：税点若为空则赋值为0
                 if (data.catmodel != null) {
                     for (var i = 0; i < data.catmodel.length; i++) {

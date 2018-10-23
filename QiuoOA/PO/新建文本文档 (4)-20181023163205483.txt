@@ -1,0 +1,119 @@
+                    //审批人修改后默认当前审批人已审批2018年9月13日12:05:02
+                    node nodemodel = nodebll.GetfModels(model1.Id, 1);
+                    Model.t_user getusermodel = GetUserInfo();
+                    Project projectmodel = Projectbll.GetModelss(porjectname);
+                    if (model != null)
+                    {
+                        if (nodemodel.Stateofapproval == 0)
+                        {
+                            nodemodel.Stateofapproval = 1;
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 1,\"msg\":\"项目负责人审批成功!\"}";
+                        }
+                        if (nodemodel.SAE == "" && nodemodel.Stateofapproval == 1)
+                        {
+                            nodemodel.Stateofapproval = 3;
+                            nodebll.Update(nodemodel);
+                        }
+                        else if (nodemodel.SAE == usermodel.employeename && nodemodel.Stateofapproval == 1)
+                        {
+                            nodemodel.Stateofapproval = 3;
+                            //预读此审批人后的两个流程审批人，若为空，则更改流程步骤代码，以便待办事务页面获取到
+                            if (nodemodel.AD == "")
+                            {
+                                nodemodel.Stateofapproval = 4;
+                                if (nodemodel.SAD == "")
+                                {
+                                    nodemodel.Stateofapproval = 5;
+                                }
+                            }
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 3,\"msg\":\"SAE审批成功\"}";
+
+                        }
+                        if (nodemodel.AD == "" && nodemodel.Stateofapproval == 3)
+                        {
+                            nodemodel.Stateofapproval = 4;
+                            nodebll.Update(nodemodel);
+                        }
+                        else if (nodemodel.AD == usermodel.employeename && nodemodel.Stateofapproval == 3)
+                        {
+                            nodemodel.Stateofapproval = 4;
+                            if (nodemodel.SAD == "")
+                            {
+                                nodemodel.Stateofapproval = 5;
+                                if (nodemodel.yinxiaozongjian == "")
+                                {
+                                    nodemodel.Stateofapproval = 6;
+                                }
+                            }
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 4,\"msg\":\"AD审批成功\"}";
+                        }
+                        if (nodemodel.SAD == "" && nodemodel.Stateofapproval == 4)
+                        {
+                            nodemodel.Stateofapproval = 5;
+                            nodebll.Update(nodemodel);
+                        }
+                        else if (nodemodel.SAD == usermodel.employeename && nodemodel.Stateofapproval == 4)
+                        {
+                            nodemodel.Stateofapproval = 5;
+                            if (nodemodel.yinxiaozongjian == "")
+                            {
+                                nodemodel.Stateofapproval = 6;
+                                if (nodemodel.caiwu == "")
+                                {
+                                    nodemodel.Stateofapproval = 8;
+                                }
+                            }
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 5,\"msg\":\"SAD审批成功\"}";
+                        }
+                        if (nodemodel.yinxiaozongjian == "" && nodemodel.Stateofapproval == 5)
+                        {
+                            nodemodel.Stateofapproval = 6;
+                            nodebll.Update(nodemodel);
+                        }
+                        else if (nodemodel.yinxiaozongjian == usermodel.employeename && nodemodel.Stateofapproval == 5)
+                        {
+                            nodemodel.Stateofapproval = 6;
+                            if (nodemodel.caiwu == "")
+                            {
+                                nodemodel.Stateofapproval = 8;
+                            }
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 6,\"msg\":\"营销负责人审批成功\"}";
+                        }
+                        if (nodemodel.caiwu == "" && nodemodel.Stateofapproval == 6)
+                        {
+                            nodemodel.Stateofapproval = 8;
+                            nodebll.Update(nodemodel);
+                        }
+                        else if (nodemodel.caiwu == usermodel.employeename && nodemodel.Stateofapproval == 6)
+                        {
+                            nodemodel.Stateofapproval = 8;
+                            nodebll.Update(nodemodel);
+                            return "{\"status\": 8,\"msg\":\"财务审批成功\"}";
+                        }
+                        
+                        if (nodemodel.zhulaoban == usermodel.employeename && nodemodel.Stateofapproval == 8)
+                        {
+                            nodemodel.Stateofapproval = 9;
+                                projectmodel.caseclosed = 1;
+                                Projectbll.Update(projectmodel);
+                                nodebll.Update(nodemodel);
+                                return "{\"status\": 14,\"msg\":\"审批成功,已立案!\"}";
+                        }
+                        return "{\"status\": 10,\"msg\":\"您的上一审批人未审批,或您已审批或您没有权限\"}";
+                    }
+                    nodebll.Update(nodemodel);
+                    Moneybll.Update(Moneymodel1);
+
+                    return "{\"status\": 3,\"msg\":\"修改成功！\"}";
+                }
+                return "{\"status\": 2,\"msg\":\"修改失败！\"}";
+            }
+            else
+            {
+                return "{\"status\": 0,\"msg\":\"申请失败！\"}";
+            }
