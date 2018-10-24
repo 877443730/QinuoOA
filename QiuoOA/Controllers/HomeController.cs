@@ -48,22 +48,6 @@ namespace QiuoOA.Controllers
                     t_role rolemodel = rolebll.GetModel(urmodel.roleid);
                     ViewBag.rolename = rolemodel.name;
                     ViewData["Project"] = Projectbll.GetModelList("1=1");
-                    //AE所有人员
-                    ViewData["AE"] = userbll.GetModelListss("26");
-                    //SAE所有人员
-                    ViewData["SAE"] = userbll.GetModelListss("27");
-                    //AD所有人员
-                    ViewData["AD"] = userbll.GetModelListss("28");
-                    //SAD所有人员
-                    ViewData["SAD"] = userbll.GetModelListss("29");
-                    //营销总监所有人员
-                    ViewData["yingxiao"] = userbll.GetModelListss("30");
-                    //财务所有人员
-                    ViewData["caiwu"] = userbll.GetModelListss("22");
-                    //老板
-                    ViewData["laoban"] = userbll.GetModelListss("1");
-                    //朱老板
-                    ViewData["zhulaoban"] = userbll.GetModelListss("1");
                 }
                 ViewData["Paymentapplicationform"] = Paymentapplicationformbll.GetModelList("1=1");
                 //var model5 = Projectbll.getcesshi("1025");
@@ -716,6 +700,10 @@ namespace QiuoOA.Controllers
                     Paymentnodemodel.xuhao = Convert.ToInt32(xuhao);
                     Paymentnodemodel.Distinguish = Convert.ToInt32(Distinguish);
                     Paymentnodemodel.Stateofapproval = 1;
+                    if (Applican == "朱媛媛")
+                    {
+                        Paymentnodemodel.Stateofapproval = 8;
+                    }
                     //获取项目审批人员并且保存到数据库
                     node nodemodel = nodebll.GetModels(model.Id);
                     Paymentnodemodel.SAE = nodemodel.SAE;
@@ -853,6 +841,10 @@ namespace QiuoOA.Controllers
                     Paymentnodemodel.xuhao = Convert.ToInt32(xuhao);
                     Paymentnodemodel.Distinguish = Convert.ToInt32(Distinguish);
                     Paymentnodemodel.Stateofapproval = 1;
+                    if (Applicant=="朱媛媛")
+                    {
+                        Paymentnodemodel.Stateofapproval = 8;
+                    }
                     //获取项目审批人员并且保存到数据库
                     node nodemodel = nodebll.GetModels(model.Id);
                     Paymentnodemodel.SAE = nodemodel.SAE;
