@@ -21,14 +21,15 @@ namespace QiuoOA.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Fileds(string projectname) {
-            var msg ="";
+        public JsonResult Fileds(string projectname)
+        {
+            var msg = "";
             var bianliang = System.Web.HttpContext.Current;
             bianliang.Response.ContentType = "text/plain";
             HttpPostedFile filePost = bianliang.Request.Files["filed"]; // 获取上传的文件  
-            if (projectname!=null)
+            if (projectname != null)
             {
-            string filePath = SaveFileds(filePost);// 保存文件并获取文件路径
+                string filePath = SaveFileds(filePost);// 保存文件并获取文件路径
                 Model.Project model = Projectbll.GetModelss(projectname);
                 Model.PO POgmodel = new Model.PO();
                 POgmodel.POlujing = filePath;
@@ -37,16 +38,17 @@ namespace QiuoOA.Controllers
                 {
                     pobll.Add(POgmodel);
                 }
-                var lujing= POgmodel.POlujing;
+                var lujing = POgmodel.POlujing;
                 return Json(lujing, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(msg= "上传失败请选择项目!", JsonRequestBehavior.AllowGet);
+                return Json(msg = "上传失败请选择项目!", JsonRequestBehavior.AllowGet);
             }
         }
 
-        private string SaveFileds(HttpPostedFile file) {
+        private string SaveFileds(HttpPostedFile file)
+        {
 
             try
             {
@@ -71,7 +73,7 @@ namespace QiuoOA.Controllers
         [HttpPost]
         public JsonResult Fileds1(string projectname)
         {
-            var msg="";
+            var msg = "";
             var bianliang = System.Web.HttpContext.Current;
             bianliang.Response.ContentType = "text/plain";
             HttpPostedFile filePost = bianliang.Request.Files["filed1"]; // 获取上传的文件  
@@ -174,9 +176,9 @@ namespace QiuoOA.Controllers
             var bianliang = System.Web.HttpContext.Current;
             bianliang.Response.ContentType = "text/plain";
             HttpPostedFile filePost = bianliang.Request.Files["fileds"]; // 获取上传的文件  
-           
-                string filePath = SaveFileds3(filePost);// 保存文件并获取文件路径
-                Model.Paymentapplicationform formmodel =formbll.GetModelsss();
+
+            string filePath = SaveFileds3(filePost);// 保存文件并获取文件路径
+            Model.Paymentapplicationform formmodel = formbll.GetModelsss();
             if (formmodel != null)
             {
                 Model.InvoiceAttachments invoicemodel = new Model.InvoiceAttachments();

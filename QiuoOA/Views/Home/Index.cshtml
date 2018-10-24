@@ -108,7 +108,7 @@
                     <th class="k">项目成本表</th>
                     <td colspan="4"><a id="chenben"><input class="form-control" readonly="readonly" type="text" id="Objectchengben" /></a></td>
                     @*<th class="k">PO单号(手填)</th>
-                    <td><input class="form-control" type="text" id="po" /></td>*@
+                        <td><input class="form-control" type="text" id="po" /></td>*@
                 </tr>
                 <tr></tr>
                 <tr>
@@ -121,7 +121,7 @@
                         <input type="text" onclick="laydate({istime: true, format: 'YYYY-MM-DD',min:'1500-01-01 00:00:00'})" class="form-control" aria-describedby="basic-addon2" id="Actualdate" disabled="disabled">
                     </td>
                     <th>到账金额</th>
-                    <td><input type="text" class="form-control" id="daozhangjine" disabled="disabled"/></td>
+                    <td><input type="text" class="form-control" id="daozhangjine" disabled="disabled" /></td>
                 </tr>
             </table>
             <table class="table table-bordered">
@@ -403,7 +403,7 @@
                                         </form>
                                     </td>
                                     @*<th class="k">发票税额</th>
-                                    <td><input class="form-control p shuieSymbol fapiaosuie" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this)" /></td>*@
+                                        <td><input class="form-control p shuieSymbol fapiaosuie" type="text" id="fapiaosuie" onblur="shuieSymbol(this)" onfocus="shuieSymbol(this)" /></td>*@
                                 </tr>
                                 <tr>
                                     <th class="k">付款时间</th>
@@ -1524,7 +1524,7 @@
         $("#jinglirun").val(jinglirun);
         //净利润百分比
         var jinglirunbfb = (Nofenpeilirun - document.getElementById("heji").value) / Nofenpeilirun;
-        
+
         $("#jinglirunbfb").val((jinglirunbfb * 100).toFixed(2) * 100 + "%");
         mingxi("付款审批");
     }
@@ -1662,7 +1662,7 @@
             var len = $(".personalddd").length;
             $('.personalddd').eq(len - 1).text($("#personaltable1 tr").length - 2);
         }
-        
+
     }
     //对公司
     function companyaddLabel() {
@@ -1825,6 +1825,32 @@
                 $('#Nozhifu').val(data.moneymodel['Unpaidchannel']);
                 $('#yuangongjiangjin').val(data.moneymodel['Employeebonus']);
                 $('#weifenpeilirun').val(data.moneymodel['Undistributedprofit']);
+                var admin = "齐雅卿,师国庆,朱媛媛";
+        if (admin.indexOf("@ViewBag.employeename") == -1) {
+            $('#Nofenpeilirun').attr("style", "visibility:hidden");
+            $('#fenpeilirun').attr("style", "visibility:hidden");
+            $('#suijinheji').attr("style", "visibility:hidden");
+            $('#heji').attr("style", "visibility:hidden");
+            $('#maolirun').attr("style", "visibility:hidden");
+            $('#maolirunbfb').attr("style", "visibility:hidden");
+            $('#jinglirun').attr("style", "visibility:hidden");
+            $('#jinglirunbfb').attr("style", "visibility:hidden");
+            $('#Nozhifu').attr("style", "visibility:hidden");
+            $('#yuangongjiangjin').attr("style", "visibility:hidden");
+            $('#weifenpeilirun').attr("style", "visibility:hidden");
+        } else {
+            $('#Nofenpeilirun').removeAttr("style");
+            $('#fenpeilirun').removeAttr("style");
+            $('#suijinheji').removeAttr("style");
+            $('#heji').removeAttr("style");
+            $('#maolirun').removeAttr("style");
+            $('#maolirunbfb').removeAttr("style");
+            $('#jinglirun').removeAttr("style");
+            $('#jinglirunbfb').removeAttr("style");
+            $('#Nozhifu').removeAttr("style");
+            $('#yuangongjiangjin').removeAttr("style");
+            $('#weifenpeilirun').removeAttr("style");
+        }
                 projectCostlujing = data.projectCostlujing;
                 projectQuotationlujing = data.ProjectQuotationlujing;
                 var Costlujing = projectCostlujing.substr(34);
@@ -2073,20 +2099,52 @@
                         var read = "";
                         //李：判定当前流程是否该当前登录人审批，若是，则启用审批按钮
                         var shenpibutton = 'disabled="disabled"';
+                        var shenpibuttonname = "";
+                        switch (data.catmodel[i].Stateofapproval) {
+                            case 1:
+                                shenpibuttonname = "待" + data.catmodel[i].SAE + "审批";
+                                break;
+                            case 3:
+                                shenpibuttonname = "待" + data.catmodel[i].AD + "审批";
+                                break;
+                            case 4:
+                                shenpibuttonname = "待" + data.catmodel[i].SAD + "审批";
+                                break;
+                            case 5:
+                                shenpibuttonname = "待" + data.catmodel[i].yinxiaozongjian + "审批";
+                                break;
+                            case 6:
+                                shenpibuttonname = "待" + data.catmodel[i].caiwu + "审批";
+                                break;
+                            case 7:
+                                shenpibuttonname = "待" + data.catmodel[i].laoban + "审批";
+                                break;
+                            case 8:
+                                shenpibuttonname = "待" + data.catmodel[i].zhulaoban + "审批";
+                                break;
+                            default:
+                        }
                         if (data.catmodel[i].Stateofapproval == 1 && data.catmodel[i].SAE == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.catmodel[i].Stateofapproval == 3 && data.catmodel[i].AD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.catmodel[i].Stateofapproval == 4 && data.catmodel[i].SAD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.catmodel[i].Stateofapproval == 5 && data.catmodel[i].yinxiaozongjian == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.catmodel[i].Stateofapproval == 6 && data.catmodel[i].caiwu == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.catmodel[i].Stateofapproval == 7 && data.catmodel[i].laoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         }else if (data.catmodel[i].Stateofapproval == 8 && data.catmodel[i].zhulaoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         }
                         if (data.catmodel[i].Stateofapproval == "6" || data.catmodel[i].Stateofapproval == "7" || data.catmodel[i].Stateofapproval == "8" || data.catmodel[i].Stateofapproval == "9") {
                             read = 'disabled="disabled"';
@@ -2104,7 +2162,7 @@
                             var trhtml = '<tr><td class="xuhao">' + data.catmodel[i].xuhao + '</td><td class="chenbenleibie">' + data.catmodel[i].Costcategory + '</td><td  class="yongtu">' + data.catmodel[i].purpose + '</td><td class="duigongsi">' + data.catmodel[i].ApplyforpaymentType + '</td><td class="suidian">' + data.catmodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.catmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2 chenben" value = "' + data.catmodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td><input id="xiugai" disabled="disabled" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.catmodel[i].Applicant +'</td></tr > ';
                         } else {
                             unpaysum += data.catmodel[i].Actualamountofpayment;
-                            var trhtml = '<tr><td class="xuhao">' + data.catmodel[i].xuhao + '</td><td class="chenbenleibie">' + data.catmodel[i].Costcategory + '</td><td  class="yongtu">' + data.catmodel[i].purpose + '</td><td class="duigongsi">' + data.catmodel[i].ApplyforpaymentType + '</td><td class="suidian">' + data.catmodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.catmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2"  onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2 chenben" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,0)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="审批" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.catmodel[i].Applicant +'</td></tr > ';
+                            var trhtml = '<tr><td class="xuhao">' + data.catmodel[i].xuhao + '</td><td class="chenbenleibie">' + data.catmodel[i].Costcategory + '</td><td  class="yongtu">' + data.catmodel[i].purpose + '</td><td class="duigongsi">' + data.catmodel[i].ApplyforpaymentType + '</td><td class="suidian">' + data.catmodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.catmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.catmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.catmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2"  onchange="textchange12($(this),' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" class="form-control caiwuchenben2 chenben" value = "' + data.catmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="hansuihejichenben2">' + data.catmodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,0)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.catmodel[i].xuhao + ',' + data.catmodel[i].Distinguish + ')" value="' + shenpibuttonname+'" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.catmodel[i].Applicant +'</td></tr > ';
                         }
                         $('#ck').append(trhtml);
                     }
@@ -2115,20 +2173,52 @@
                         var read = "";
                         //李：判定当前流程是否该当前登录人审批，若是，则启用审批按钮
                         var shenpibutton = 'disabled="disabled"';
+                        var shenpibuttonname = "";
+                        switch (data.personalmodel[i].Stateofapproval) {
+                            case 1:
+                                shenpibuttonname = "待" + data.personalmodel[i].SAE + "审批";
+                                break;
+                            case 3:
+                                shenpibuttonname = "待" + data.personalmodel[i].AD + "审批";
+                                break;
+                            case 4:
+                                shenpibuttonname = "待" + data.personalmodel[i].SAD + "审批";
+                                break;
+                            case 5:
+                                shenpibuttonname = "待" + data.personalmodel[i].yinxiaozongjian + "审批";
+                                break;
+                            case 6:
+                                shenpibuttonname = "待" + data.personalmodel[i].caiwu + "审批";
+                                break;
+                            case 7:
+                                shenpibuttonname = "待" + data.personalmodel[i].laoban + "审批";
+                                break;
+                            case 8:
+                                shenpibuttonname = "待" + data.personalmodel[i].zhulaoban + "审批";
+                                break;
+                            default:
+                        }
                         if (data.personalmodel[i].Stateofapproval == 1 && data.personalmodel[i].SAE == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 3 && data.personalmodel[i].AD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 4 && data.personalmodel[i].SAD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 5 && data.personalmodel[i].yinxiaozongjian == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 6 && data.personalmodel[i].caiwu == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 7 && data.personalmodel[i].laoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.personalmodel[i].Stateofapproval == 8 && data.personalmodel[i].zhulaoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         }
                         if (data.personalmodel[i].Stateofapproval == "6" || data.personalmodel[i].Stateofapproval == "7" || data.personalmodel[i].Stateofapproval == "8" || data.personalmodel[i].Stateofapproval == "9") {
                             read = 'disabled="disabled"';
@@ -2143,31 +2233,63 @@
                             var personaltrhtml = '<tr><td class="xuhao">' + data.personalmodel[i].xuhao + '</td><td class="pingtai">' + data.personalmodel[i].pingtai + '</td><td class="ddd2">' + data.personalmodel[i].wangming + '</td><td class="ccc2 chenbenbaojia">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.personalmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2 chenben" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,2)" disabled="disabled" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批" ' + shenpibutton + '  data-toggle="modal" data-target="#myModal2" /></td></td><td id="Applicant" class="Applicant">' + data.personalmodel[i].Applicant + '</td></tr > ';
                         } else if (data.personalmodel[i].readState != "1") {
                             unpaysum += data.personalmodel[i].Actualamountofpayment;
-                            var personaltrhtml = '<tr><td class="xuhao">' + data.personalmodel[i].xuhao + '</td><td class="pingtai">' + data.personalmodel[i].pingtai + '</td><td class="ddd2">' + data.personalmodel[i].wangming + '</td><td class="ccc2 chenbenbaojia">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.personalmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2 chenben" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,2)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="审批" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td></td><td id="Applicant" class="Applicant">' + data.personalmodel[i].Applicant + '</td></tr > ';
+                            var personaltrhtml = '<tr><td class="xuhao">' + data.personalmodel[i].xuhao + '</td><td class="pingtai">' + data.personalmodel[i].pingtai + '</td><td class="ddd2">' + data.personalmodel[i].wangming + '</td><td class="ccc2 chenbenbaojia">' + data.personalmodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.personalmodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.personalmodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="personaltextchange12($(this),' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" class="form-control personalcaiwuchenben2 chenben" value = "' + data.personalmodel[i].Financialcost + '" />}}</td ><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="personalhansuihejichenben2">' + data.personalmodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,2)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.personalmodel[i].xuhao + ',' + data.personalmodel[i].Distinguish + ')" value="' + shenpibuttonname+'" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td></td><td id="Applicant" class="Applicant">' + data.personalmodel[i].Applicant + '</td></tr > ';
                         }
                         $('#personalck').append(personaltrhtml);
                     }
                 }
-                
+
                 if (data.companymodel != null) {
                     for (var i = 0; i < data.companymodel.length; i++) {
                         var read = "";
                         //李：判定当前流程是否该当前登录人审批，若是，则启用审批按钮
                         var shenpibutton = 'disabled="disabled"';
+                        var shenpibuttonname = "";
+                        switch (data.companymodel[i].Stateofapproval) {
+                            case 1:
+                                shenpibuttonname = "待" + data.companymodel[i].SAE + "审批";
+                                break;
+                            case 3:
+                                shenpibuttonname = "待" + data.companymodel[i].AD + "审批";
+                                break;
+                            case 4:
+                                shenpibuttonname = "待" + data.companymodel[i].SAD + "审批";
+                                break;
+                            case 5:
+                                shenpibuttonname = "待" + data.companymodel[i].yinxiaozongjian + "审批";
+                                break;
+                            case 6:
+                                shenpibuttonname = "待" + data.companymodel[i].caiwu + "审批";
+                                break;
+                            case 7:
+                                shenpibuttonname = "待" + data.companymodel[i].laoban + "审批";
+                                break;
+                            case 8:
+                                shenpibuttonname = "待" + data.companymodel[i].zhulaoban + "审批";
+                                break;
+                            default:
+                        }
                         if (data.companymodel[i].Stateofapproval == 1 && data.companymodel[i].SAE == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname="审批"
                         } else if (data.companymodel[i].Stateofapproval == 3 && data.companymodel[i].AD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.companymodel[i].Stateofapproval == 4 && data.companymodel[i].SAD == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.companymodel[i].Stateofapproval == 5 && data.companymodel[i].yinxiaozongjian == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.companymodel[i].Stateofapproval == 6 && data.companymodel[i].caiwu == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.companymodel[i].Stateofapproval == 7 && data.companymodel[i].laoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         } else if (data.companymodel[i].Stateofapproval == 8 && data.companymodel[i].zhulaoban == "@ViewBag.employeename") {
                             shenpibutton = "";
+                            shenpibuttonname = "审批"
                         }
                         if (data.companymodel[i].shuidian == undefined || data.companymodel[i].shuidian == "" || data.companymodel[i].shuidian == null) {
                             data.companymodel[i].shuidian = 0;
@@ -2181,11 +2303,13 @@
                         if (data.companymodel[i].Financialcost == undefined || data.companymodel[i].Financialcost == "" || data.companymodel[i].Financialcost == null) {
                             data.companymodel[i].Financialcost = 0;
                         }
+
+
                         if (data.companymodel[i].readState == "1" && data.companymodel[i].Distinguish == 3) {
                             var companytrhtml = '<tr><td class="xuhao">' + data.companymodel[i].xuhao + '</td><td class="pingtai">' + data.companymodel[i].pingtai + '</td><td  class="ddd2">' + data.companymodel[i].wangming + '</td><td  class="suidian">' + data.companymodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.companymodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,3)" disabled="disabled" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.companymodel[i].Applicant +'</td></tr > ';
                         } else {
                             unpaysum += data.companymodel[i].Actualamountofpayment;
-                            var companytrhtml = '<tr><td class="xuhao">' + data.companymodel[i].xuhao + '</td><td class="pingtai">' + data.companymodel[i].pingtai + '</td><td  class="ddd2">' + data.companymodel[i].wangming + '</td><td  class="suidian">' + data.companymodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.companymodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,3)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="审批" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.companymodel[i].Applicant +'</td></tr > ';
+                            var companytrhtml = '<tr><td class="xuhao">' + data.companymodel[i].xuhao + '</td><td class="pingtai">' + data.companymodel[i].pingtai + '</td><td  class="ddd2">' + data.companymodel[i].wangming + '</td><td  class="suidian">' + data.companymodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.companymodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan1">未付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,3)" ' + read + ' type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="fangfa(' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" value="'+ shenpibuttonname+'" ' + shenpibutton + ' data-toggle="modal" data-target="#myModal2" /></td><td id="Applicant" class="Applicant">' + data.companymodel[i].Applicant +'</td></tr > ';
                         }
                         $('#companyck').append(companytrhtml);
                     }
