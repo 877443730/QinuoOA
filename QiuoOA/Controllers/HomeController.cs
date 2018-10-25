@@ -33,6 +33,7 @@ namespace QiuoOA.Controllers
         Bll.ProjectFinalReport reportbll = new Bll.ProjectFinalReport();
         Bll.Publishlinksummary summarybll = new Bll.Publishlinksummary();
         Bll.user_role urbll = new Bll.user_role();
+        [Authorizer]
         public ActionResult Index(string projectname)
         {
             ViewBag.islogin = IsUserLogin() ? 1 : 0;
@@ -58,6 +59,7 @@ namespace QiuoOA.Controllers
         public ActionResult cheshi() {
             return View();
         }
+        [Authorizer]
         public ActionResult Unapproved() {
             ViewBag.islogin = IsUserLogin() ? 1 : 0;
             if (IsUserLogin())
@@ -79,6 +81,7 @@ namespace QiuoOA.Controllers
             }
             return View();
         }
+        [Authorizer]
         public ActionResult ProjectList(string proname, int count)
         {
             Model.t_user model = GetUserInfo();
