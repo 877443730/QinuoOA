@@ -1,7 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-<script src="~/js/jquery.form.js"></script>
+﻿<script src="~/js/jquery.form.js"></script>
 <script src="~/js/layer.js"></script>
 <script src="~/js/layer.ext.js"></script>
 <link href="~/js/layer/skin/layer.css" rel="stylesheet" />
@@ -51,15 +48,19 @@
                         <select class="form-control" type="text" id="projectname" onchange="namechange(this.value)">
                             @{
                                 List<Model.Project> list = ViewData["Project"] as List<Model.Project>;
-                                <option value="">--请选择--</option>
-                                if (list.Any())
+                                if (list != null)
                                 {
-                                    foreach (var item in list)
+                                    <option value="">--请选择--</option>
+                                    if (list.Any())
                                     {
-                                        <option value="@item.ProjectName">@item.ProjectName</option>
+                                        foreach (var item in list)
+                                        {
+                                            <option value="@item.ProjectName">@item.ProjectName</option>
 
+                                        }
                                     }
                                 }
+
                             }
                         </select>
                     </td>
@@ -570,14 +571,18 @@
             <datalist id="greetings" style="display:none;">
                 @{
                     List<Model.Paymentapplicationform> lists1 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
-                    if (lists1.Any())
+                    if (lists1 != null)
                     {
-                        foreach (var item in lists1)
+                        if (lists1.Any())
                         {
-                            <option value="@item.wangming">@item.wangming</option>
-                        }
+                            foreach (var item in lists1)
+                            {
+                                <option value="@item.wangming">@item.wangming</option>
+                            }
 
+                        }
                     }
+
                 }
             </datalist>
         </td>
@@ -626,15 +631,19 @@
             <datalist id="greetings" style="display:none;">
                 @{
                     List<Model.Paymentapplicationform> lists2 = ViewData["Paymentapplicationform"] as List<Model.Paymentapplicationform>;
-                    if (lists2.Any())
+                    if (lists2 != null)
                     {
-
-                        foreach (var item in lists2)
+                        if (lists2.Any())
                         {
-                            <option value="@item.wangming">@item.wangming</option>
-                        }
 
+                            foreach (var item in lists2)
+                            {
+                                <option value="@item.wangming">@item.wangming</option>
+                            }
+
+                        }
                     }
+
                 }
             </datalist>
         </td>

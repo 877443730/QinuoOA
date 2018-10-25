@@ -1,6 +1,8 @@
 ﻿using Cll;
 using Model;
 using QiuoOA.Authorizers;
+using NWJ.Cmn;
+using qinuo.Cmn;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -633,18 +635,6 @@ namespace QiuoOA.Controllers
 
 
         }
-        //对个人付款
-        [Authorizer]
-        public ActionResult PersonalPayment(string projectname, string wangming, string xuhao)
-        {
-            if (projectname != null && wangming != null)
-            {
-                Model.Project model = Projectbll.GetModelss(projectname);
-                ViewBag.wangming = wangming;
-                return View(model);
-            }
-            return View();
-        }
         [HttpPost]
         public JsonResult PersonalPayments(string ZFjine, string ZFdate, string shoukuanren, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applicant)
         {
@@ -770,18 +760,6 @@ namespace QiuoOA.Controllers
             {
                 return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
             }
-        }
-        //对公司付款
-        [Authorizer]
-        public ActionResult PaymentCompany(string projectname, string wangming, string xuhao)
-        {
-            if (projectname != null && wangming != null && xuhao != null)
-            {
-                Model.Project model = Projectbll.GetModelss(projectname);
-                ViewBag.wangming = wangming;
-                return View(model);
-            }
-            return View();
         }
         [HttpPost]
         public JsonResult PaymentCompanys(string ZFjine, string fapiao, string fapiaosuie, string ZFdate, string gsname, string kaihuhang, string Bankcode, string projectname, string Paymentobject, string xuhao, string leixing, string beizhu, string suidian, string chenbenbaojia, string xiaoshoubaojia, string wangming, string chenbenbaojia2, string Distinguish, string chenbenleibie, string yongtu, string pingtai, string Applicant)

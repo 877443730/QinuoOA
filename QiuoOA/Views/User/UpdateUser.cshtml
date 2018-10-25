@@ -42,7 +42,7 @@
                                         @{
                                             List<Model.t_role> list = ViewData["zhiwu1"] as List<Model.t_role>;
                                             <option value="">--请选择--</option>
-                                            if (list.Any())
+                                            if (list!=null)
                                             {
                                                 foreach (var item in list)
                                                 {

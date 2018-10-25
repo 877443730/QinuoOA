@@ -55,7 +55,7 @@
                     <tbody id="list2">
                         @{
                             List<Model.node> list1 = ViewData["lixiang"] as List<Model.node>;
-                            if (list1.Any())
+                            if (list1!=null)
                             {
                                 foreach (var item in list1)
                                 {
@@ -118,7 +118,7 @@
                     <tbody id="list3">
                         @{
                             List<Model.node> list2 = ViewData["jiean"] as List<Model.node>;
-                            if (list2.Any())
+                            if (list2!=null)
                             {
                                 foreach (var item in list2)
                                 {
@@ -191,7 +191,7 @@
                     <tbody id="list1">
                         @{
                             List<Model.Paymentnode> list4 = ViewData["Nofukuan"] as List<Model.Paymentnode>;
-                            if (list4.Any())
+                            if (list4!=null)
                             {
                                 foreach (var item in list4)
                                 {
@@ -361,7 +361,7 @@
                     <tbody id="list4">
                         @{
                             List<Model.Paymentnode> list3 = ViewData["fukuan"] as List<Model.Paymentnode>;
-                            if (list3.Any())
+                            if (list3!=null)
                             {
                                 foreach (var item in list3)
                                 {

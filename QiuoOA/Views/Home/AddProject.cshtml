@@ -333,14 +333,18 @@ else
                                     <datalist id="seles" style="display:none;">
                                         @{
                                             List<Model.ProjecTtype> list1 = ViewData["ProjecTtype"] as List<Model.ProjecTtype>;
-                                            if (list1.Any())
+                                            if (list1 != null)
                                             {
-                                                foreach (var item in list1)
+                                                if (list1.Any())
                                                 {
-                                                    <option value="@item.Name">@item.USName</option>
-                                                    <input type="hidden" id="usname" value="@item.USName" />
+                                                    foreach (var item in list1)
+                                                    {
+                                                        <option value="@item.Name">@item.USName</option>
+                                                        <input type="hidden" id="usname" value="@item.USName" />
+                                                    }
                                                 }
                                             }
+
                                         }
                                     </datalist>
                                 </td>
@@ -352,13 +356,17 @@ else
                                     <datalist id="companynames" style="display:none;">
                                         @{
                                             List<Model.Company> list2 = ViewData["company"] as List<Model.Company>;
-                                            if (list2.Any())
+                                            if (list2 != null)
                                             {
-                                                foreach (var item in list2)
+                                                if (list2.Any())
                                                 {
-                                                    <option value="@item.Name">@item.Name</option>
+                                                    foreach (var item in list2)
+                                                    {
+                                                        <option value="@item.Name">@item.Name</option>
+                                                    }
                                                 }
                                             }
+
                                         }
                                     </datalist>
                                 </td>
@@ -368,13 +376,17 @@ else
                                     <datalist id="pingpais" style="display:none;">
                                         @{
                                             List<Model.Brand> list3 = ViewData["brand"] as List<Model.Brand>;
-                                            if (list3.Any())
+                                            if (list3 != null)
                                             {
-                                                foreach (var item in list3)
+                                                if (list3.Any())
                                                 {
-                                                    <option value="@item.Name">@item.Name</option>
+                                                    foreach (var item in list3)
+                                                    {
+                                                        <option value="@item.Name">@item.Name</option>
+                                                    }
                                                 }
                                             }
+
                                         }
                                     </datalist>
                                 </td>
@@ -390,13 +402,17 @@ else
                                         <option value="">--请选择--</option>
                                         @{
                                             IList<Model.t_user> lists = ViewData["user"] as IList<Model.t_user>;
-                                            if (lists.Any())
+                                            if (lists != null)
                                             {
-                                                foreach (var item in lists)
+                                                if (lists.Any())
                                                 {
-                                                    <option value="@item.employeename">@item.employeename</option>
+                                                    foreach (var item in lists)
+                                                    {
+                                                        <option value="@item.employeename">@item.employeename</option>
+                                                    }
                                                 }
                                             }
+
                                         }
                                     </select>
                                 </td>
@@ -443,7 +459,7 @@ else
                                 <td class="k" colspan="2">
                                     <form enctype="multipart/form-data" id="file-from2" name="file-from2">
                                         <p>
-                                           @*<input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">*@
+                                            @*<input style="display:none" id="btnMCToOut1" type="button" onclick="importExcel2()" class="easyui-linkbutton" data-options="iconCls:'icon_CloseAll'" value="上传">*@
                                             <input class="form-control" type="file" name="filed1" id="filed1">
                                         </p>
                                     </form>
@@ -463,7 +479,7 @@ else
                             </tr>
                         </table>
                         <div>
-                            @if (@ViewBag.projectname !=null )
+                            @if (@ViewBag.projectname != null)
                             {
                                 <input onclick="but();" type="button" class="btn btn-primary btn-lg btn-block" value="确认申请" />
                             }
@@ -491,7 +507,7 @@ else
                                                 <td>
                                                     @{
                                                         List<Model.t_user> list15 = ViewData["AE"] as List<Model.t_user>;
-                                                        if (list1.Any())
+                                                        if (list1!=null)
                                                         {
                                                             foreach (var item in list15)
                                                             {
@@ -508,7 +524,7 @@ else
                                                         <option value="">--请选择--</option>
                                                         @{
                                                             List<Model.t_user> list25 = ViewData["SAE"] as List<Model.t_user>;
-                                                            if (list25.Any())
+                                                            if (list25!=null)
                                                             {
                                                                 foreach (var item in list25)
                                                                 {
@@ -524,7 +540,7 @@ else
                                                         <option value="">--请选择--</option>
                                                         @{
                                                             List<Model.t_user> list35 = ViewData["AD"] as List<Model.t_user>;
-                                                            if (list35.Any())
+                                                            if (list35!=null)
                                                             {
                                                                 foreach (var item in list35)
                                                                 {
@@ -540,7 +556,7 @@ else
                                                         <option value="">--请选择--</option>
                                                         @{
                                                             List<Model.t_user> list4 = ViewData["SAD"] as List<Model.t_user>;
-                                                            if (list4.Any())
+                                                            if (list4!=null)
                                                             {
                                                                 foreach (var item in list4)
                                                                 {
@@ -560,7 +576,7 @@ else
                                                         <option value="">--请选择--</option>
                                                         @{
                                                             List<Model.t_user> list6 = ViewData["caiwu"] as List<Model.t_user>;
-                                                            if (list6.Any())
+                                                            if (list6!=null)
                                                             {
                                                                 foreach (var item in list6)
                                                                 {
@@ -722,7 +738,7 @@ else
         var cost = $("#cost").val();//项目成本
         var jingdu = $("#jingdu").val();//计划进度
             var beizhu = $("#beizhu").val();//备注
-           
+
             if (name == "" || core == "" || sele == "" || xiangmufuzeren == "" || usname == "" || companyname == "" || pingpai == "" || core2 == "" || date == "" || date2 == "" || Totalmoney == "" || Notaxmoney == "" || cost == "") {
                 alert("表内仍有未填写的内容，请仔细核对后再次提交");
                 return;

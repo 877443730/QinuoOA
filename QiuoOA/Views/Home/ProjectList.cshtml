@@ -21,7 +21,7 @@
                     @{
                         List<Model.Project> list = ViewData["projectlist"] as List<Model.Project>;
                         List<Model.Money> list1 = ViewData["moneylist"] as List<Model.Money>;
-                        if (list.Any())
+                        if (list!=null)
                         {
                             foreach (var item in list)
                             {
