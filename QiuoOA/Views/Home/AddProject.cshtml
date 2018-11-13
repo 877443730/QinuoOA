@@ -42,7 +42,7 @@
         <section id="container" class="">
             <section id="main-content">
                 <section class="wrapper" style="background-color:white">
-                    <div style="display: inline-block;overflow: auto;margin-top:15px"><h2 style="font-weight:800">立项申请表</h2></div>
+                    <div style="display: inline-block;overflow: auto;margin-top:15px;margin-left: 40%;"><h2 style="font-weight:800">立项申请表</h2></div>
                     <div class="col-md-12 col-lg-12 portlets">
                         <table class="table table-bordered">
                             <tr>
@@ -315,7 +315,7 @@ else
         <section id="container" class="">
             <section id="main-content">
                 <section class="wrapper" style="background-color:white">
-                    <div style="position:relative;left:35%;width:300px;"><h2 style="font-weight:800">立项申请表</h2></div>
+                    <div style="display: inline-block;overflow: auto;margin-top:15px;margin-left: 40%;"><h2 style="font-weight:800">立项申请表</h2></div>
                     <div class="col-md-12 col-lg-12 portlets">
                         <table class="table table-bordered">
                             <tr>
@@ -611,7 +611,7 @@ else
 <script>
     //项目代码判断
     function checkcore(x) {
-        var pattern = /^[a-zA-Z]{5}[0-9]{6}[a-z]$/;
+        var pattern = /^[a-zA-Z]{5}[0-9]{6}[a-zA-Z]$/;
         var core = $("#core").val();//项目代码
         if (!pattern.test(core)) {
             $("#core").focus();
@@ -619,7 +619,6 @@ else
             return;
         }
     }
-
     function money() {
         var f = Math.round(document.getElementById("Totalmoney").value * 100) / 100;
         var s = f.toString();
@@ -738,10 +737,12 @@ else
         var cost = $("#cost").val();//项目成本
         var jingdu = $("#jingdu").val();//计划进度
             var beizhu = $("#beizhu").val();//备注
-
-            if (name == "" || core == "" || sele == "" || xiangmufuzeren == "" || usname == "" || companyname == "" || pingpai == "" || core2 == "" || date == "" || date2 == "" || Totalmoney == "" || Notaxmoney == "" || cost == "") {
+            if (name == "" || core == "" || sele == "" || xiangmufuzeren == "" || usname == "" || companyname == "" || pingpai == "" || /*core2 == "" ||*/ date == "" || date2 == "" || Totalmoney == "" || Notaxmoney == "" || cost == "") {
                 alert("表内仍有未填写的内容，请仔细核对后再次提交");
                 return;
+            }
+            if (core2=="") {
+                core2 = "";
             }
             $.ajax({
                 type: 'post',

@@ -32,6 +32,11 @@ namespace Bll
             return dal.Add(model);
         }
 
+        public Model.ProjecTtype GetModelss(string name)
+        {
+            return dal.GetModelss(name);
+        }
+
         /// <summary>
         /// 更新一条数据
         /// </summary>

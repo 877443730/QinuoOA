@@ -675,6 +675,7 @@
     <Content Include="js\sliders.js" />
     <Content Include="js\sparkline-chart.js" />
     <Content Include="js\sparklines.js" />
+    <Content Include="js\vue.js" />
     <Content Include="js\xcharts.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

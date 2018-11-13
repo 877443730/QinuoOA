@@ -33,7 +33,21 @@ namespace Dal
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
 
-
+        public Model.ProjecTtype GetModelss(string name)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Name,USName from ProjecTtype ");
+            strSql.Append(" where Name='" + name + "'");
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 增加一条数据
         /// </summary>

@@ -30,7 +30,6 @@
                                         </div>
                                     </div>
                                     <!-- Content -->
-
                                     <div class="form-group">
                                         <label class="control-label col-lg-2" for="content">用户密码</label>
                                         <div class="col-lg-10">
@@ -44,7 +43,7 @@
                                                 @{
                                                     List<Model.t_role> list = ViewData["zhiwu"] as List<Model.t_role>;
                                                     <option value="">--请选择--</option>
-                                                    if (list!=null)
+                                                    if (list != null)
                                                     {
                                                         foreach (var item in list)
                                                         {
@@ -126,13 +125,15 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
-                    location.reload();
+                    $("#username1").val("");
+                    $("#name").val("");
+                    $("#pwd1").val("");
+                    $("#zhiwu").val("");
+                    $("#jurisdiction").val("");
                 };
             }
-
         })
     }
-
 </script>
 
 
