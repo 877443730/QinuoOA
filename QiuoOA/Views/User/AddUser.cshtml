@@ -117,6 +117,7 @@
             },
             success: function (data) {
                 var d = eval('(' + data + ')');
+                console.log(d);
                 if (d.status == 0) {
                     layer.msg(d.msg, {
                         icon: 5

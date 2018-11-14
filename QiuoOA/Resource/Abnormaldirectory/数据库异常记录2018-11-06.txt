@@ -1,0 +1,12 @@
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+delete from t_permission  where id=@id
+DELETE 语句与 REFERENCE 约束"FK_role_permission_t_permission"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.role_permission", column 'permissionid'。
+语句已终止。
+　  2018/11/6 10:50:42
+
+----------- 执行SQL语句，返回影响的记录数ExecuteSql-----------
+delete from t_permission  where id=@id
+DELETE 语句与 REFERENCE 约束"FK_role_permission_t_permission"冲突。该冲突发生于数据库"QinuoOA"，表"dbo.role_permission", column 'permissionid'。
+语句已终止。
+　  2018/11/6 10:57:37
+
