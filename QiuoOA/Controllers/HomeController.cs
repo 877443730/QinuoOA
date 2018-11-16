@@ -255,9 +255,9 @@ namespace QiuoOA.Controllers
                 ViewData["ProjecTtype"] = ProjecTtype.GetModelList("1=1");
                 ViewData["Project"] = Projectbll.GetModelList("1=1");
                 //AE所有人员
-                ViewData["AE"] = userbll.GetModelListss("26");
+                ViewData["AE"] = userbll.GetModelListss("26 or b.roleid = 1026");
                 //SAE所有人员
-                ViewData["SAE"] = userbll.GetModelListss("27");
+                ViewData["SAE"] = userbll.GetModelListss("27 or (b.roleid=1026 and a.employeename='赵悦')");
                 //AD所有人员
                 ViewData["AD"] = userbll.GetModelListss("28");
                 //SAD所有人员

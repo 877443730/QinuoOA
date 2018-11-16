@@ -36,7 +36,7 @@ function importExcel() {
     });
 }
 function importExcel1() {
-    var file = $("#filed1").val();
+    var file = $("#filed").val();
     if (file == null || file.length == 0) {
         alert("请先上传文件");
         return false;
@@ -70,7 +70,7 @@ function importExcel1() {
     });
 }
 function importExcel2() {
-    var file = $("#filed2").val();
+    var file = $("#filed1").val();
     if (file == null || file.length == 0) {
         alert("请先上传文件");
         return false;

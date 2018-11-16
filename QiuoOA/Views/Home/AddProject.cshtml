@@ -507,7 +507,7 @@ else
                                                 <td>
                                                     @{
                                                         List<Model.t_user> list15 = ViewData["AE"] as List<Model.t_user>;
-                                                        if (list1!=null)
+                                                        if (list15!=null)
                                                         {
                                                             foreach (var item in list15)
                                                             {
@@ -717,6 +717,16 @@ else
                 //var xiangmuchengyuan = check_val;//项目成员
                 if (check_val.length == 0) {
                     alert("请勾选AE人员");
+                    return;
+                }
+                var file = $("#filed").val();
+                if (file == null || file.length == 0) {
+                    alert("请先上传文件");
+                    return;
+                }
+                var file2 = $("#filed1").val();
+                if (file2 == null || file2.length == 0) {
+                    alert("请先上传文件");
                     return;
                 }
             }

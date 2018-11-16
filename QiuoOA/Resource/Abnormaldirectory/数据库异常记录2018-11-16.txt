@@ -1,0 +1,10 @@
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where b.roleid=26 and 1026
+在应使用条件的上下文(在 '1026' 附近)中指定了非布尔类型的表达式。
+　  2018/11/16 10:48:21
+
+-----------执行查询语句，返回DataSet)Query-----------
+select DISTINCT  a.*,c.name,e.pename  from [dbo].[t_user] a left join [dbo].[user_role] b on  a.id=b.userid left join [dbo].[t_role] c on c.id=b.roleid left join [dbo].[role_permission] d on d.roleid=c.id left join [dbo].[t_permission] e on e.id=d.permissionid where b.roleid=26 , 1026
+“,”附近有语法错误。
+　  2018/11/16 10:49:24
+
