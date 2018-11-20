@@ -2891,8 +2891,11 @@
         if (insideSuidian.indexOf("%") != -1) {
             insideSuidian = insideSuidian.substring(0, insideSuidian.length - 1);
         }
+        if (fapiao == "" || fapiao == null) {
+            fapiao = "0";
+        }
         //判断对公司弹出框是否存在未填写的项
-        if (ZFjine == "" || fapiao == "" ||/* fapiaosuie == "" || */ZFdate == "" || gsname == "" || kaihuhang == "" || Bankcode == "" || insideChengbenbaojia == "" || insideXiaoshoubaojia == "" || insideSuidian == "") {
+        if (ZFjine == ""/* || fapiao == ""*/ ||/* fapiaosuie == "" || */ZFdate == "" || gsname == "" || kaihuhang == "" || Bankcode == "" || insideChengbenbaojia == "" || insideXiaoshoubaojia == "" || insideSuidian == "") {
             layer.msg("页面上仍存在未填写的项，请填写后再次提交", {
                 icon: 2
             });
@@ -2973,6 +2976,9 @@
     function outbut2() {
         var ZFjine = $("#ZFjine").val();//支付金额
         var fapiao = $("#fapiao").val();//发票
+        if (fapiao == null||fapiao=="") {
+            fapiao = "0";
+        }
         //var fapiaosuie = $("#fapiaosuie").val();//发票税额
         //if (fapiaosuie.indexOf("%") != -1) {
         //    fapiaosuie = fapiaosuie.substring(0, fapiaosuie.length - 1);
@@ -3005,7 +3011,7 @@
             insideSuidian = insideSuidian.substring(0, insideSuidian.length - 1);
         }
         //判断对公司弹出框是否存在未填写的项
-        if (ZFjine == "" || fapiao == "" || /*fapiaosuie == ""  || */ZFdate == "" || gsname == "" || kaihuhang == "" || Bankcode == "" || insideChengbenbaojia == "" || insideXiaoshoubaojia == "" || insideSuidian == "") {
+        if (ZFjine == "" /*|| fapiao == "" */|| /*fapiaosuie == ""  || */ZFdate == "" || gsname == "" || kaihuhang == "" || Bankcode == "" || insideChengbenbaojia == "" || insideXiaoshoubaojia == "" || insideSuidian == "") {
             layer.msg("页面上仍存在未填写的项，请填写后再次提交", {
                 icon: 2
             });
@@ -3378,6 +3384,8 @@
                 $("#k7s").html(data.nodemodel['caiwu']);
                 $("#k8s").html(data.nodemodel['laoban']);
                 $("#k9s").html(data.nodemodel['zhulaoban']);
+                var fapiao =data.Invoicenumber;
+                alert(fapiao);
                 if (data.nodemodel != null) {
                     switch (data.nodemodel['Stateofapproval']) {
                         case 1:
@@ -3437,6 +3445,12 @@
                             break;
                     }
                 }
+                if (fapiao == 0) {
+                    if (!confirm("还未填写发票号,你确定继续审批吗？")) {
+                        $(".modal").modal("hide");
+                    }
+                }
+                
             }
         })
     }

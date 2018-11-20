@@ -728,7 +728,6 @@
     <Content Include="assets\jquery-easy-pie-chart\jquery.easy-pie-chart.coffee" />
     <Content Include="assets\jquery-easy-pie-chart\Makefile" />
     <Content Include="assets\jquery-easy-pie-chart\Readme.md" />
-    <Content Include="assets\jquery-file-upload\.DS_Store" />
     <Content Include="assets\jquery-file-upload\.gitignore" />
     <Content Include="assets\jquery-file-upload\blueimp-file-upload.jquery.json" />
     <Content Include="assets\jquery-file-upload\CONTRIBUTING.md" />

@@ -1527,7 +1527,8 @@ namespace QiuoOA.Controllers
             Paymentapplicationform cationformmodel = Paymentapplicationformbll.GetModelsDistinguish(projectmodel.Id, xuhao, Distinguish);
             //修改 2018年9月13日16:04:09
             var Applicant = cationformmodel.Applicant;
-            return Json(new { msg, nodemodel, Applicant });
+            var Invoicenumber = cationformmodel.Invoicenumber;
+            return Json(new { msg, nodemodel, Applicant, Invoicenumber });
         }
         //修改 2018年9月13日17:39:01
         [HttpPost]
