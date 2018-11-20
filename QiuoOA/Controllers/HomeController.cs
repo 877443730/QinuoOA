@@ -35,6 +35,7 @@ namespace QiuoOA.Controllers
         Bll.ProjectFinalReport reportbll = new Bll.ProjectFinalReport();
         Bll.Publishlinksummary summarybll = new Bll.Publishlinksummary();
         Bll.user_role urbll = new Bll.user_role();
+        Bll.InvoiceAttachments InvoiceAttachmentsBll = new Bll.InvoiceAttachments();
         [Authorizer]
         public ActionResult Index(string projectname)
         {
@@ -223,7 +224,7 @@ namespace QiuoOA.Controllers
                 return string.Empty;
             }
         }
-
+       
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -392,7 +393,56 @@ namespace QiuoOA.Controllers
 
             return Json(filePath1, JsonRequestBehavior.AllowGet);
         }
+        //保存/修改项目附件
+        [HttpPost]
+        public JsonResult Invoice(string projectname, string Invoiceurl)
+        {
+            var bianliang1 = System.Web.HttpContext.Current;
+            bianliang1.Response.ContentType = "text/plain";
+            HttpPostedFile filePost1 = bianliang1.Request.Files["fileds"]; // 获取上传的文件
+            string filePath1 = SaveExcelFile(filePost1);
+            // 保存文件并获取文件路径
+            Model.InvoiceAttachments InvoiceAttachmentsmodel = new Model.InvoiceAttachments();
+            Bll.InvoiceAttachments bll = new Bll.InvoiceAttachments();
+            Project projectmodel = Projectbll.GetModelss(projectname);
+            //  Paymentapplicationform model1 = Paymentapplicationformbll.GetModel(Paymentapplicatmodel1);
+            //修改文件
+            if (Invoiceurl == "2")
+            {
+                
+                //根据当前付款列的ID查询出当前需要修改的数据
+                InvoiceAttachments InvoiceAttachmentsmodel1 = bll.GetModels(Paymentapplicatmodel2);
+                if (InvoiceAttachmentsmodel1.Invoiceurl == "1" && filePath1 == "")
+                {
+                    InvoiceAttachmentsmodel1.Invoiceurl = "1";
+                }
+                else {
+                    InvoiceAttachmentsmodel1.Invoiceurl = filePath1;
+                }
+                bll.Update(InvoiceAttachmentsmodel1);
+            }
+            else
+            {
+
+                if (filePath1 != "")
+                {
+                    InvoiceAttachmentsmodel.Invoiceurl = filePath1;
+                }
+                else
+                {
+                    InvoiceAttachmentsmodel.Invoiceurl = "1";
+                }
+                InvoiceAttachmentsmodel.ProjectId = Convert.ToInt32(projectmodel.Id);
+                InvoiceAttachmentsmodel.PaymentapplicationformId = Paymentapplicatmodel1;
+                bll.Add(InvoiceAttachmentsmodel);
+            }
+
+
+
+            return Json(filePath1, JsonRequestBehavior.AllowGet);
+        }
         public static int model1;
+        public static int Paymentapplicatmodel1;
         private string AddProjectss(string name, string core, string sele, string companyname, string pingpai, string core2, string xiangmuuser, string date, string date2, string Totalmoney, string Notaxmoney, string cost, string jingdu, string beizhu, string usname, string porjectname, string ae, string sae, string ad, string sad, string yingxiao, string caiwu, string laoban, string zhulaoban, string processstate)
         {
             Model.Project model = new Model.Project();
@@ -842,8 +892,7 @@ namespace QiuoOA.Controllers
                     Paymentnodemodel.laoban = nodemodel.laoban;
                     Paymentnodemodel.zhulaoban = nodemodel.zhulaoban;
                     Paymentnodebll.Add(Paymentnodemodel);
-                    Paymentapplicationformbll.Add(Paymentapplicationmodel);
-
+                    Paymentapplicatmodel1 = Paymentapplicationformbll.Add(Paymentapplicationmodel);
                     return "{\"status\": 1,\"msg\":\"消息提示:添加成功！\"}";
                 }
                 else
@@ -896,6 +945,7 @@ namespace QiuoOA.Controllers
                 return "{\"status\": 0,\"msg\":\"消息提示:修改失败！\"}";
             }
         }
+        public static int Paymentapplicatmodel2;
         //修改按钮回显数据
         [HttpPost]
         public JsonResult updateview(string xuhao, string projectname, string Distinguish)
@@ -904,7 +954,10 @@ namespace QiuoOA.Controllers
             {
                 Project projectmodel = Projectbll.GetModelss(projectname);
                 Paymentapplicationform model = Paymentapplicationformbll.GetModelsDistinguish(projectmodel.Id, xuhao, Distinguish);
-                return Json(new { model });
+
+                Paymentapplicatmodel2 = model.Id;
+                InvoiceAttachments model1 = InvoiceAttachmentsBll.GetModels(model.Id);
+                return Json(new { model, model1 });
             }
             else
             {
@@ -1528,7 +1581,10 @@ namespace QiuoOA.Controllers
             //修改 2018年9月13日16:04:09
             var Applicant = cationformmodel.Applicant;
             var Invoicenumber = cationformmodel.Invoicenumber;
-            return Json(new { msg, nodemodel, Applicant, Invoicenumber });
+            //发票附件InvoiceAttachmentsBll
+            InvoiceAttachments invoice = InvoiceAttachmentsBll.GetModels(cationformmodel.Id);
+            var Invoice = invoice.Invoiceurl;
+            return Json(new { msg, nodemodel, Applicant, Invoicenumber, Invoice });
         }
         //修改 2018年9月13日17:39:01
         [HttpPost]

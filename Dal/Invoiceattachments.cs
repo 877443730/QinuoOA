@@ -163,7 +163,28 @@ namespace Dal
                 return null;
             }
         }
+        public Model.InvoiceAttachments GetModels(int Id)
+        {
 
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Invoiceurl,ProjectId,PaymentapplicationformId from InvoiceAttachments ");
+            strSql.Append(" where PaymentapplicationformId=@Id");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@Id", SqlDbType.Int,4)
+            };
+            parameters[0].Value = Id;
+
+            Model.InvoiceAttachments model = new Model.InvoiceAttachments();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         /// <summary>
         /// 得到一个对象实体

@@ -59,6 +59,12 @@ namespace Bll
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
+        ///
+        public  Model.InvoiceAttachments GetModels(int Id)
+        {
+
+            return dal.GetModels(Id);
+        }
         public  Model.InvoiceAttachments GetModel(int Id)
         {
 
