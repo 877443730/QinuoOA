@@ -55,7 +55,7 @@
                     <tbody id="list2">
                         @{
                             List<Model.node> list1 = ViewData["lixiang"] as List<Model.node>;
-                            if (list1!=null)
+                            if (list1 != null)
                             {
                                 foreach (var item in list1)
                                 {
@@ -101,6 +101,48 @@
                                             <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
                                         </tr>
                                     }
+                                    else
+                                    {
+                                        switch (@item.Stateofapproval)
+                                        {
+                                            case 1:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待 @item.SAE 审批</td>
+                                                </tr>
+                                                break;
+                                            case 3:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.AD 审批</td>
+                                                </tr>
+                                                break;
+                                            case 4:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.SAD 审批</td>
+                                                </tr>
+                                                break;
+                                            case 5:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待 @item.yinxiaozongjian 审批</td>
+                                                </tr>
+                                                break;
+                                            case 6:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.caiwu 审批</td>
+                                                </tr>
+                                                break;
+                                            case 7:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.laoban 审批</td>
+                                                </tr>
+                                                break;
+                                            case 8:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.zhulaoban 审批</td>
+                                                </tr>
+                                                break;
+                                        }
+                                    }
+
                                 }
                             }
 
@@ -118,7 +160,7 @@
                     <tbody id="list3">
                         @{
                             List<Model.node> list2 = ViewData["jiean"] as List<Model.node>;
-                            if (list2!=null)
+                            if (list2 != null)
                             {
                                 foreach (var item in list2)
                                 {
@@ -164,6 +206,48 @@
                                             <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
                                         </tr>
                                     }
+                                    else
+                                    {
+                                        switch (@item.Stateofapproval)
+                                        {
+                                            case 1:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待 @item.SAE 审批</td>
+                                                </tr>
+                                                break;
+                                            case 3:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.AD 审批</td>
+                                                </tr>
+                                                break;
+                                            case 4:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.SAD 审批</td>
+                                                </tr>
+                                                break;
+                                            case 5:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待 @item.yinxiaozongjian 审批</td>
+                                                </tr>
+                                                break;
+                                            case 6:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.caiwu 审批</td>
+                                                </tr>
+                                                break;
+                                            case 7:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.laoban 审批</td>
+                                                </tr>
+                                                break;
+                                            case 8:
+                                                <tr>
+                                                    <td style="color:blue">项目名称：@item.ProjectName &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;待 @item.zhulaoban 审批</td>
+                                                </tr>
+                                                break;
+                                        }
+                                    }
+
                                 }
                             }
 
