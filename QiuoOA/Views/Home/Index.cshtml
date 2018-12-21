@@ -347,8 +347,8 @@
                     </tr>
                 </table>
             </div>
-            <input type="button" id="detailed1" onclick="mingxi()" class="btn btn-info btn-block" value="确定" />
-            <input id="shenpi" type="button" onclick="shenpi(3)" class="btn btn-primary btn-lg btn-block" value="通过审批" />
+            <input type="button" id="detailed1" onclick="mingxi()" class="btn btn-info btn-block" value="合计确认" />
+            <input id="shenpi" type="button" onclick="shenpi(3)" class="btn btn-primary btn-lg btn-block" value="结案审批" />
         </div>
         @*对公司弹出层*@
         <div class="modal fade" id="myModal" tabindex="-1" data-keyboard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -3483,18 +3483,19 @@
                             break;
                     }
                 }
-                if (fapiao == 0) {
-                    warning+="发票号未填写，";
-                }
-                if (invoice == "1") {
-                    warning+="发票附件未添加";
-                }
-                if (fapiao == 0 || invoice == "1") {
-                    if (!confirm("" + warning + "你确定继续审批吗？")) {
-                        $(".modal").modal("hide");
+                if (data.Invoice!="") {
+                    if (fapiao == 0) {
+                        warning += "发票号未填写，";
+                    }
+                    if (invoice == "1") {
+                        warning += "发票附件未添加";
+                    }
+                    if (fapiao == 0 || invoice == "1") {
+                        if (!confirm("" + warning + "你确定继续审批吗？")) {
+                            $(".modal").modal("hide");
+                        }
                     }
                 }
-                
             }
         })
     }
@@ -3549,7 +3550,7 @@
                 Distinguish: Distinguishs
             },
             success: function (data) {
-                var d = eval('(' + data + ')');
+                var d = eval('(' + data.msg + ')');
                 if (d.status == 0) {
                     layer.msg(d.msg, {
                         icon: 5
@@ -3558,6 +3559,9 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['SAE'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 2) {
                     layer.msg(d.msg, {
                         icon: 1
@@ -3566,26 +3570,44 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['AD'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 4) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['SAD'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 5) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['yinxiaozongjian'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 6) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['caiwu'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 7) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['laoban'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 8) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['zhulaoban'];
+                    var Email = data.usermodel['Email'];
+                    Mail(shenpitype, name, Email)
                 } else if (d.status == 9) {
                     layer.msg(d.msg, {
                         icon: 1
@@ -3636,7 +3658,7 @@
             },
             success: function (data) {
                 namechange(s);//李：2018年9月14日19:51:13
-                var d = eval('(' + data + ')');
+                var d = eval('(' + data.msg + ')');
                 if (d.status == 0) {
                     layer.msg(d.msg, {
                         icon: 5
@@ -3645,6 +3667,9 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['SAE'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 2) {
                     layer.msg(d.msg, {
                         icon: 1
@@ -3653,26 +3678,44 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['AD'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 4) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['SAD'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 5) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['yinxiaozongjian'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 6) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['caiwu'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 7) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['laoban'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 8) {
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var name = data.model['zhulaoban'];
+                    var Email = data.usermodel['Email'];
+                    Mail(null, name, Email, xuhao, Distinguishs)
                 } else if (d.status == 9) {
                     layer.msg(d.msg, {
                         icon: 1
@@ -3774,7 +3817,7 @@
                 Distinguish: Distinguishs
             },
             success: function (data) {
-                var d = eval('(' + data + ')');
+                var d = eval('(' + data.msg + ')');
                 if (d.status == 0) {
                     layer.msg(d.msg, {
                         icon: 5
@@ -3783,9 +3826,12 @@
                     layer.msg(d.msg, {
                         icon: 1
                     });
+                    var Email = data.usermodel['Email'];
+                    Mail(null, null, Email, xuhao, Distinguishs)
                 }
                 //2018年9月14日14:10:11
                 $("#Rejection").val("");
+                namechange(s);
             }
 
         })
@@ -3821,6 +3867,49 @@
                 }
             }
         });
+    }
+    //发送邮件
+    function Mail(_this, _this1, _this2, _this3, _this4) {
+        var SendContent;
+        var type;
+        if (_this4 != null) {
+            switch (_this4) {
+                case 3:
+                    type = "对公司"
+                    break;
+                case 2:
+                    type = "对个人"
+                    break;
+                case 0:
+                    type = "对其他"
+                    break;
+            }
+        }
+        if (_this == 1) {
+            SendContent = "项目：" + s + "," + "立项审批到您处理了,请尽快处理"
+        } else if (_this == 3) {
+            SendContent = "项目：" + s + "," + "结案审批到您处理了,请尽快处理"
+        } else if (_this3 != null && _this1 != null) {
+            SendContent = "项目：" + s + "," + type + "," + "序号：" + _this3 + "，" + "付款审批到您处理了,请尽快处理"
+        } else if (_this1 == null && _this3 != null) {
+            SendContent = "项目：" + s + "," + type + "," + "序号：" + _this3 + "，" + "付款审批被驳回处理,请尽快处理后审批。"
+        }
+        $.ajax({
+            url: "/Home/MailSend",
+            type: "post",
+            data: {
+                SendEmail: "18548913705@163.com",
+                SendPwd: "liujunhao123321",
+                SendSetSmtp: "smtp.163.com",
+                ConsigneeAddress: _this2,
+                ConsigneeTheme: "OA审批",
+                ConsigneeHand: "祈诺OA",
+                ConsigneeName: _this1,
+                SendContent: SendContent,
+                success: function (data) {
+                }
+            }
+        })
     }
     //jQuery.support.cors = true;
     //function ceshibut() {

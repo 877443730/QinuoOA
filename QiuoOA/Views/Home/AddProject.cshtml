@@ -789,6 +789,8 @@ else
                     importExcel1();
                     importExcel2();
                     var d = eval('(' + data + ')');
+                    var email=d.Email;
+                    Mail(1, name, email);
                     if (d.status == 0) {
                         layer.msg(d.msg, {
                             icon: 5
@@ -810,71 +812,6 @@ else
                 }
             });
     }
-
-    //保存当前项目的审批人
-        @*function butss2() {
-            var porjectname = "@ViewBag.projectname";
-            if (porjectname!="") {
-                porjectname = porjectname;
-            } else {
-                porjectname = "";
-            }
-        obj = document.getElementsByName("chengyuan");
-        check_val = [];
-        for (k in obj) {
-            if (obj[k].checked)
-                check_val.push(obj[k].value);
-        }
-        var sae = $("#SAE").val();
-        var ad = $("#AD").val();
-        var sad = $("#SAD").val();
-        var yingxiao = $("#yingxiao").text();
-        var caiwu = $("#caiwu").val();
-        var laoban = $("#laoban").text();
-            var zhulaoban = $("#zhulaoban").text();
-            if (sae == "" || caiwu == "") {
-                alert("未能成功提交，请填写SAE或财务人员");
-                return;
-            }
-            var xiangmuchengyuan = check_val;//项目成员
-            if (xiangmuchengyuan.length == 0) {
-                alert("请勾选AE人员");
-                return;
-            }
-        var result = JSON.stringify(xiangmuchengyuan);
-            $.ajax({
-                url: "/Home/shenpiren",
-                type: "post",
-                data: {
-                    ae: result,
-                    sae: sae,
-                    ad: ad,
-                    sad: sad,
-                    yingxiao: yingxiao,
-                    caiwu: caiwu,
-                    laoban: laoban,
-                    zhulaoban: zhulaoban,
-                    processstate: 1,
-                    projectname: porjectname
-                },
-                success: function (data) {
-                    if (data == "成功添加当前项目审批人!") {
-                        layer.msg(data, {
-                            icon: 1
-                        });
-                    } else if (data == "添加当前项目审批人失败!") {
-                        layer.msg(data, {
-                            icon: 5
-                        });
-                    } else if (data == "您没有权限添加当前项目的审批人!") {
-                        layer.msg(data, {
-                            icon: 5
-                        });
-                    }
-                    alert("注意：项目报价表与成本表必须点击上传按钮，请仔细核对！");
-                }
-            });
-        }*@
         function renyuan() {
          var porjectname="@ViewBag.projectname";
             $.ajax({
@@ -917,5 +854,28 @@ else
                 }
             });
         }
-
+    function Mail(_this, _this1, _this2) {
+        var SendContent;
+        if (_this == 1) {
+            SendContent = "项目:" + _this1 + "立项审批到您处理了,请尽快处理"
+        } else if (_this == 3) {
+            SendContent = "项目:" + _this1 + "结案审批到您处理了,请尽快处理"
+        }
+        $.ajax({
+            url: "/Home/MailSend",
+            type: "post",
+            data: {
+                SendEmail: "18548913705@163.com",
+                SendPwd: "liujunhao123321",
+                SendSetSmtp: "smtp.163.com",
+                ConsigneeAddress: _this2,
+                ConsigneeTheme: "OA审批",
+                ConsigneeHand: "祈诺OA",
+                ConsigneeName: _this1,
+                SendContent: SendContent,
+                success: function (data) {
+                }
+            }
+        })
+    }
 </script>

@@ -21,7 +21,7 @@
                     @{
                         List<Model.Project> list = ViewData["projectlist"] as List<Model.Project>;
                         List<Model.Money> list1 = ViewData["moneylist"] as List<Model.Money>;
-                        if (list!=null)
+                        if (list != null)
                         {
                             foreach (var item in list)
                             {
@@ -35,19 +35,7 @@
                                         xiangmuchengben = Convert.ToInt32(item1.projectcost);
                                     }
                                 }
-                                if (item.typefinished != 1)
-                                {
-                                    <tr>
-                                        <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
-                                        <td>@item.ProjectCode</td>
-                                        <td>@hanshuijine</td>
-                                        <td>@xiangmuchengben</td>
-                                        <td>@item.ProjectStartDate</td>
-                                        <td>@item.ProjectEndDate</td>
-                                        <td>未审批</td>
-                                    </tr>
-                                }
-                                else if (item.typefinished == 1)
+                                if (item.typefinished == 2 && item.caseclosed == 1)
                                 {
                                     <tr class="success">
                                         <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
@@ -57,6 +45,30 @@
                                         <td>@item.ProjectStartDate</td>
                                         <td>@item.ProjectEndDate</td>
                                         <td>已结案</td>
+                                    </tr>
+                                }
+                                else if (item.caseclosed == 1)
+                                {
+                                    <tr>
+                                        <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        <td>@item.ProjectCode</td>
+                                        <td>@hanshuijine</td>
+                                        <td>@xiangmuchengben</td>
+                                        <td>@item.ProjectStartDate</td>
+                                        <td>@item.ProjectEndDate</td>
+                                        <td>结案未审批</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td><a href="/Home/Index?projectname=@item.ProjectName">@item.ProjectName</a></td>
+                                        <td>@item.ProjectCode</td>
+                                        <td>@hanshuijine</td>
+                                        <td>@xiangmuchengben</td>
+                                        <td>@item.ProjectStartDate</td>
+                                        <td>@item.ProjectEndDate</td>
+                                        <td>立项未审批</td>
                                     </tr>
                                 }
                             }

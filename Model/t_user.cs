@@ -27,6 +27,6 @@ namespace Model
         public string name { set; get; }
         public string pename { set; get; }
        public string adddate { set; get; }
-
+        public string Email { set; get; }
     }
 }

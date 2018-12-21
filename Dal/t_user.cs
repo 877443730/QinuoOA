@@ -41,19 +41,22 @@ namespace Dal
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into t_user(");
-            strSql.Append("username,pwd,employeename,adddate)");
+            strSql.Append("username,pwd,employeename,adddate,Email)");
             strSql.Append(" values (");
-            strSql.Append("@username,@pwd,@employeename,@adddate)");
+            strSql.Append("@username,@pwd,@employeename,@adddate,@Email)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
                     new SqlParameter("@username", SqlDbType.VarChar,50),
                     new SqlParameter("@pwd", SqlDbType.VarChar,50),
                     new SqlParameter("@employeename", SqlDbType.VarChar,50),
-                    new SqlParameter("@adddate", SqlDbType.VarChar,50)};
+                    new SqlParameter("@adddate", SqlDbType.VarChar,50),
+                    new SqlParameter("@Email",SqlDbType.NVarChar,50)
+            };
             parameters[0].Value = model.username;
             parameters[1].Value = model.pwd;
             parameters[2].Value = model.employeename;
             parameters[3].Value = model.adddate;
+            parameters[4].Value = model.Email;
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
             {
@@ -74,19 +77,22 @@ namespace Dal
             strSql.Append("username=@username,");
             strSql.Append("pwd=@pwd,");
             strSql.Append("employeename=@employeename,");
-            strSql.Append("adddate=@adddate");
+            strSql.Append("adddate=@adddate,");
+            strSql.Append("Email=@Email");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
                     new SqlParameter("@username", SqlDbType.VarChar,50),
                     new SqlParameter("@pwd", SqlDbType.VarChar,50),
                       new SqlParameter("@employeename", SqlDbType.VarChar,50),
                        new SqlParameter("@adddate", SqlDbType.VarChar,50),
+                       new SqlParameter("@Email",SqlDbType.NVarChar,50),
                     new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = model.username;
             parameters[1].Value = model.pwd;
             parameters[2].Value = model.employeename;
             parameters[3].Value = model.adddate;
-            parameters[4].Value = model.id;
+            parameters[4].Value = model.Email;
+            parameters[5].Value = model.id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -325,6 +331,10 @@ namespace Dal
                 {
                     model.adddate = row["adddate"].ToString();
                 }
+                if (row["Email"] != null)
+                {
+                    model.Email = row["Email"].ToString();
+                }
             }
             return model;
         }
@@ -384,7 +394,7 @@ namespace Dal
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,username,pwd,employeename,adddate ");
+            strSql.Append(" id,username,pwd,employeename,adddate,Email ");
             strSql.Append(" FROM t_user ");
             if (strWhere.Trim() != "")
             {

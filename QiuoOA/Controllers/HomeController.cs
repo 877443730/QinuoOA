@@ -11,6 +11,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Net.Mail;
 
 namespace QiuoOA.Controllers
 {
@@ -532,9 +533,8 @@ namespace QiuoOA.Controllers
                     nodebll.Add(nodemodel1);
                     nodemodel1.processstate = Convert.ToInt32(processstate) + 2;
                     nodebll.Add(nodemodel1);
-
-
-                    return "{\"status\": 1,\"msg\":\"申请成功！\"}";
+                    string SAEEmail = userbll.GetModelssss(sae).Email;
+                    return "{\"status\": 1,\"Email\":\"" + SAEEmail + "\",\"msg\":\"申请成功！\"}";
                 }
                 else if (porjectname != "")
                 {
@@ -574,13 +574,15 @@ namespace QiuoOA.Controllers
                     node nodemodel = nodebll.GetfModels(model1.Id, 1);
                     Model.t_user getusermodel = GetUserInfo();
                     Project projectmodel = Projectbll.GetModelss(porjectname);
+                    string nextUserEmail = "";
                     if (model != null)
                     {
                         if (nodemodel.Stateofapproval == 0)
                         {
                             nodemodel.Stateofapproval = 1;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.SAE)).Email;
+                            return "{\"status\": 1,\"Email\":\"" + nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.SAE == "" && nodemodel.Stateofapproval == 1)
                         {
@@ -590,17 +592,20 @@ namespace QiuoOA.Controllers
                         else if (nodemodel.SAE == getusermodel.employeename && nodemodel.Stateofapproval == 1)
                         {
                             nodemodel.Stateofapproval = 3;
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.AD)).Email;
                             //预读此审批人后的两个流程审批人，若为空，则更改流程步骤代码，以便待办事务页面获取到
                             if (nodemodel.AD == "")
                             {
                                 nodemodel.Stateofapproval = 4;
+                                nextUserEmail = (userbll.GetModelssss(nodemodel.SAD)).Email;
                                 if (nodemodel.SAD == "")
                                 {
                                     nodemodel.Stateofapproval = 5;
+                                    nextUserEmail = (userbll.GetModelssss(nodemodel.yinxiaozongjian)).Email;
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            return "{\"status\": 1,\"Email\":\""+ nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
 
                         }
                         if (nodemodel.AD == "" && nodemodel.Stateofapproval == 3)
@@ -611,16 +616,19 @@ namespace QiuoOA.Controllers
                         else if (nodemodel.AD == getusermodel.employeename && nodemodel.Stateofapproval == 3)
                         {
                             nodemodel.Stateofapproval = 4;
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.SAD)).Email;
                             if (nodemodel.SAD == "")
                             {
                                 nodemodel.Stateofapproval = 5;
+                                nextUserEmail = (userbll.GetModelssss(nodemodel.yinxiaozongjian)).Email;
                                 if (nodemodel.yinxiaozongjian == "")
                                 {
                                     nodemodel.Stateofapproval = 6;
+                                    nextUserEmail = (userbll.GetModelssss(nodemodel.caiwu)).Email;
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            return "{\"status\": 1,\"Email\":\"" + nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.SAD == "" && nodemodel.Stateofapproval == 4)
                         {
@@ -630,16 +638,19 @@ namespace QiuoOA.Controllers
                         else if (nodemodel.SAD == getusermodel.employeename && nodemodel.Stateofapproval == 4)
                         {
                             nodemodel.Stateofapproval = 5;
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.yinxiaozongjian)).Email;
                             if (nodemodel.yinxiaozongjian == "")
                             {
                                 nodemodel.Stateofapproval = 6;
+                                nextUserEmail = (userbll.GetModelssss(nodemodel.caiwu)).Email;
                                 if (nodemodel.caiwu == "")
                                 {
                                     nodemodel.Stateofapproval = 8;
+                                    nextUserEmail = (userbll.GetModelssss(nodemodel.zhulaoban)).Email;
                                 }
                             }
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            return "{\"status\": 1,\"Email\":\"" + nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.yinxiaozongjian == "" && nodemodel.Stateofapproval == 5)
                         {
@@ -649,12 +660,14 @@ namespace QiuoOA.Controllers
                         else if (nodemodel.yinxiaozongjian == getusermodel.employeename && nodemodel.Stateofapproval == 5)
                         {
                             nodemodel.Stateofapproval = 6;
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.caiwu)).Email;
                             if (nodemodel.caiwu == "")
                             {
                                 nodemodel.Stateofapproval = 8;
-                            }
+                                nextUserEmail = (userbll.GetModelssss(nodemodel.zhulaoban)).Email;
+                            }                  
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            return "{\"status\": 1,\"Email\":\"" + nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
                         if (nodemodel.caiwu == "" && nodemodel.Stateofapproval == 6)
                         {
@@ -664,8 +677,9 @@ namespace QiuoOA.Controllers
                         else if (nodemodel.caiwu == getusermodel.employeename && nodemodel.Stateofapproval == 6)
                         {
                             nodemodel.Stateofapproval = 8;
+                            nextUserEmail = (userbll.GetModelssss(nodemodel.zhulaoban)).Email;
                             nodebll.Update(nodemodel);
-                            return "{\"status\": 1,\"msg\":\"修改成功，待下一级审批人审批!\"}";
+                            return "{\"status\": 1,\"Email\":\"" + nextUserEmail + "\",\"msg\":\"修改成功，待下一级审批人审批!\"}";
                         }
 
                         if (nodemodel.zhulaoban == getusermodel.employeename && nodemodel.Stateofapproval == 8)
@@ -1090,7 +1104,37 @@ namespace QiuoOA.Controllers
         public JsonResult shenpi(string projectname, string processstate, string xuhao, string Distinguish)
         {
             string msg = shenpis(projectname, processstate, xuhao, Distinguish);
-            return Json(msg, JsonRequestBehavior.AllowGet);
+            node model = new node();
+            Project projectmodel = Projectbll.GetModelss(projectname);
+            model = nodebll.GetfModels(projectmodel.Id, Convert.ToInt32(processstate));
+            t_user usermodel = new t_user();
+            switch (model.Stateofapproval)
+            {
+                case 1:
+                    usermodel = userbll.GetModelssss(model.SAE);
+                    break;
+                case 3:
+                    usermodel = userbll.GetModelssss(model.AD);
+                    break;
+                case 4:
+                    usermodel = userbll.GetModelssss(model.SAD);
+                    break;
+                case 5:
+                    usermodel = userbll.GetModelssss(model.yinxiaozongjian);
+                    break;
+                case 6:
+                    usermodel = userbll.GetModelssss(model.caiwu);
+                    break;
+                case 7:
+                    usermodel = userbll.GetModelssss(model.laoban);
+                    break;
+                case 8:
+                    usermodel = userbll.GetModelssss(model.zhulaoban);
+                    break;
+            }
+            //usermodel=userbll.GetModelssss()
+            //return Json(msg, JsonRequestBehavior.AllowGet);
+            return Json(new { msg, model, usermodel });
         }
         private string shenpis(string projectname, string processstate, string xuhao, string Distinguish)
         {
@@ -1243,14 +1287,16 @@ namespace QiuoOA.Controllers
                     {
                         model.Stateofapproval = 0;
                         formmodel.readState = 1;
+                        projectmodel.typefinished = 1;
                         Paymentapplicationformbll.Update(formmodel);
+                        Projectbll.Update(projectmodel);
                         nodebll.Update(model);
                         return "{\"status\":15,\"msg\":\"当前付款,审批成功!\"}";
                     }
                     else if (processstate == "3")
                     {
                         model.Stateofapproval = 9;
-                        projectmodel.typefinished = 1;
+                        projectmodel.typefinished = 2;
                         Projectbll.Update(projectmodel);
                         nodebll.Update(model);
                         return "{\"status\": 9,\"msg\":\"审批成功,已结案!\"}";
@@ -1259,6 +1305,7 @@ namespace QiuoOA.Controllers
                     {
                         model.Stateofapproval = 9;
                         projectmodel.caseclosed = 1;
+                        projectmodel.typefinished = 0;
                         Projectbll.Update(projectmodel);
                         nodebll.Update(model);
                         return "{\"status\": 14,\"msg\":\"审批成功,已立案!\"}";
@@ -1271,15 +1318,41 @@ namespace QiuoOA.Controllers
                 return "{\"status\": 11,\"msg\":\"审批失败\"}";
             }
         }
-
-
-
         //付款审批
         [HttpPost]
         public JsonResult paymentshenpi(string projectname, string xuhao, string Distinguish)
         {
+            Bll.Paymentnode nodebll = new Bll.Paymentnode();
             string msg = paymentshenpis(projectname, xuhao, Distinguish);
-            return Json(msg, JsonRequestBehavior.AllowGet);
+            Paymentnode model = new Paymentnode();
+            Project projectmodel = Projectbll.GetModelss(projectname);
+            model = nodebll.GetModels(projectmodel.Id, Convert.ToInt32(xuhao), Convert.ToInt32(Distinguish));
+            t_user usermodel = new t_user();
+            switch (model.Stateofapproval)
+            {
+                case 1:
+                    usermodel = userbll.GetModelssss(model.SAE);
+                    break;
+                case 3:
+                    usermodel = userbll.GetModelssss(model.AD);
+                    break;
+                case 4:
+                    usermodel = userbll.GetModelssss(model.SAD);
+                    break;
+                case 5:
+                    usermodel = userbll.GetModelssss(model.yinxiaozongjian);
+                    break;
+                case 6:
+                    usermodel = userbll.GetModelssss(model.caiwu);
+                    break;
+                case 7:
+                    usermodel = userbll.GetModelssss(model.laoban);
+                    break;
+                case 8:
+                    usermodel = userbll.GetModelssss(model.zhulaoban);
+                    break;
+            }
+            return Json(new { msg, model, usermodel });
         }
         private string paymentshenpis(string projectname, string xuhao, string Distinguish)
         {
@@ -1580,10 +1653,15 @@ namespace QiuoOA.Controllers
             Paymentapplicationform cationformmodel = Paymentapplicationformbll.GetModelsDistinguish(projectmodel.Id, xuhao, Distinguish);
             //修改 2018年9月13日16:04:09
             var Applicant = cationformmodel.Applicant;
-            var Invoicenumber = cationformmodel.Invoicenumber;
-            //发票附件InvoiceAttachmentsBll
-            InvoiceAttachments invoice = InvoiceAttachmentsBll.GetModels(cationformmodel.Id);
-            var Invoice = invoice.Invoiceurl;
+            var Invoice = "";
+            int? Invoicenumber=0;
+            if (cationformmodel.shuidian != null)
+            {
+                Invoicenumber = cationformmodel.Invoicenumber;
+                //发票附件InvoiceAttachmentsBll
+                InvoiceAttachments invoice = InvoiceAttachmentsBll.GetModels(cationformmodel.Id);
+                Invoice = invoice.Invoiceurl;
+            }
             return Json(new { msg, nodemodel, Applicant, Invoicenumber, Invoice });
         }
         //修改 2018年9月13日17:39:01
@@ -1591,7 +1669,35 @@ namespace QiuoOA.Controllers
         public JsonResult Rejection(string projectname, string Rejection, string xuhao, string Distinguish)
         {
             string msg = Rejections(projectname, Rejection, xuhao, Distinguish);
-            return Json(msg, JsonRequestBehavior.AllowGet);
+            Project promodel = Projectbll.GetModelss(projectname);
+            Paymentnode model = Paymentnodebll.GetModels(promodel.Id, Convert.ToInt32(xuhao), Convert.ToInt32(Distinguish));
+            t_user usermodel = new t_user();
+            switch (model.Stateofapproval)
+            {
+                case 1:
+                    usermodel = userbll.GetModelssss(model.SAE);
+                    break;
+                case 3:
+                    usermodel = userbll.GetModelssss(model.AD);
+                    break;
+                case 4:
+                    usermodel = userbll.GetModelssss(model.SAD);
+                    break;
+                case 5:
+                    usermodel = userbll.GetModelssss(model.yinxiaozongjian);
+                    break;
+                case 6:
+                    usermodel = userbll.GetModelssss(model.caiwu);
+                    break;
+                case 7:
+                    usermodel = userbll.GetModelssss(model.laoban);
+                    break;
+                case 8:
+                    usermodel = userbll.GetModelssss(model.zhulaoban);
+                    break;
+            }
+            return Json(new { msg, model, usermodel });
+
         }
         private string Rejections(string projectname, string Rejection, string xuhao, string Distinguish)
         {
@@ -1674,6 +1780,39 @@ namespace QiuoOA.Controllers
             else
             {
                 return "{\"status\": 2,\"msg\":\"驳回失败\"}";
+            }
+        }
+        //发送邮件
+        [HttpPost]
+        public JsonResult MailSend(string SendEmail, string SendPwd, string SendSetSmtp, string ConsigneeAddress, string ConsigneeTheme, string ConsigneeHand, string ConsigneeName, string SendContent)
+        {
+            // 设置发送方的邮件信息,例如使用网易的smtp
+            string smtpServer = SendSetSmtp;
+            string userPassword = SendPwd;//登陆密码
+            // 邮件服务设置
+            SmtpClient smtpClient = new SmtpClient();
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
+            smtpClient.Host = smtpServer; //指定SMTP服务器
+            smtpClient.Credentials = new System.Net.NetworkCredential(SendEmail, userPassword);//用户名和密码
+            MailAddress _from = new MailAddress(SendEmail, ConsigneeHand);
+            MailAddress _to = new MailAddress(ConsigneeAddress);
+            // 发送邮件设置        
+            MailMessage mailMessage = new MailMessage(_from, _to); // 发送人和收件人
+            mailMessage.Subject = ConsigneeTheme;//主题
+            mailMessage.Body = SendContent;//内容
+            mailMessage.BodyEncoding = Encoding.UTF8;//正文编码
+            mailMessage.IsBodyHtml = true;//设置为HTML格式
+            mailMessage.Priority = MailPriority.Low;//优先级
+
+            try
+            {
+                smtpClient.Send(mailMessage); // 发送邮件
+                return Json("邮件发送成功", JsonRequestBehavior.AllowGet);
+            }
+
+            catch (SmtpException ex)
+            {
+                return Json("邮件发送失败", JsonRequestBehavior.AllowGet);
             }
         }
     }
