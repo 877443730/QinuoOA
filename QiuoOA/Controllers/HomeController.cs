@@ -855,7 +855,7 @@ namespace QiuoOA.Controllers
                 if (projectname != null && ZFjine != null && fapiao != null && ZFdate != null && gsname != null && kaihuhang != null)
                 {
                     Paymentapplicationmodel.ProjectId = model.Id; //项目ID
-                    Paymentapplicationmodel.Invoicenumber = Convert.ToInt32(fapiao);//发票号
+                    Paymentapplicationmodel.Invoicenumber = fapiao;//发票号
                     Paymentapplicationmodel.Invoicetax = Convert.ToDecimal(0);//发票税额
                     Paymentapplicationmodel.Timeofpayment = Convert.ToDateTime(ZFdate);//付款时间
                     Paymentapplicationmodel.Receivablescompany = gsname;//收款公司
@@ -918,7 +918,7 @@ namespace QiuoOA.Controllers
             {
                 Model.Paymentapplicationform cationmodel = Paymentapplicationformbll.GetModelsDistinguish(model.Id, xuhao, Distinguish);
                 cationmodel.ProjectId = model.Id; //项目ID
-                cationmodel.Invoicenumber = Convert.ToInt32(fapiao);//发票号
+                cationmodel.Invoicenumber = fapiao;//发票号
                 cationmodel.Invoicetax = Convert.ToDecimal(fapiaosuie);//发票税额
                 cationmodel.Timeofpayment = Convert.ToDateTime(ZFdate);//付款时间
                 cationmodel.Receivablescompany = gsname;//收款公司
@@ -1654,7 +1654,7 @@ namespace QiuoOA.Controllers
             //修改 2018年9月13日16:04:09
             var Applicant = cationformmodel.Applicant;
             var Invoice = "";
-            int? Invoicenumber=0;
+            var Invoicenumber="0";
             if (cationformmodel.shuidian != null)
             {
                 Invoicenumber = cationformmodel.Invoicenumber;

@@ -47,7 +47,7 @@ namespace Dal
             strSql.Append("@Invoicenumber,@Invoicetax,@Timeofpayment,@Receivablescompany,@Openingbank,@Bankaccount,@Remarks,@ProjectId,@Payee,@ApplyforpaymentType,@Paymentobject,@xuhao,@MoneyId,@CostQuotation,@Salesquotation,@Actualamountofpayment,@Financialcost,@Totaltaxcost,@shuidian,@wangming,@Distinguish,@Costcategory,@purpose,@paystate,@readState,@pingtai,@Applicant)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-                    new SqlParameter("@Invoicenumber", SqlDbType.Int,4),
+                    new SqlParameter("@Invoicenumber", SqlDbType.NVarChar,50),
                     new SqlParameter("@Invoicetax", SqlDbType.Decimal,9),
                     new SqlParameter("@Timeofpayment", SqlDbType.DateTime),
                     new SqlParameter("@Receivablescompany", SqlDbType.NVarChar,200),
@@ -148,7 +148,7 @@ namespace Dal
             strSql.Append("Applicant=@Applicant");
             strSql.Append(" where Id=@Id");
             SqlParameter[] parameters = {
-                    new SqlParameter("@Invoicenumber", SqlDbType.Int,4),
+                    new SqlParameter("@Invoicenumber", SqlDbType.NVarChar,50),
                     new SqlParameter("@Invoicetax", SqlDbType.Decimal,9),
                     new SqlParameter("@Timeofpayment", SqlDbType.DateTime),
                     new SqlParameter("@Receivablescompany", SqlDbType.NVarChar,200),
@@ -416,9 +416,9 @@ namespace Dal
                 {
                     model.Id = int.Parse(row["Id"].ToString());
                 }
-                if (row["Invoicenumber"] != null && row["Invoicenumber"].ToString() != "")
+                if (row["Invoicenumber"] != null )
                 {
-                    model.Invoicenumber = int.Parse(row["Invoicenumber"].ToString());
+                    model.Invoicenumber = row["Invoicenumber"].ToString();
                 }
                 if (row["Invoicetax"] != null && row["Invoicetax"].ToString() != "")
                 {

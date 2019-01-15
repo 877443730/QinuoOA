@@ -23,7 +23,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public int? Invoicenumber { set; get; }
+        public string Invoicenumber { set; get; }
         /// <summary>
         /// 
         /// </summary>
