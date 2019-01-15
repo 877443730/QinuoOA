@@ -1772,18 +1772,26 @@
                 name: s
             },
             success: function (data) {
-                 if (data !="") {
+                if (data != "") {
+                    $("#beizhu").val("");
                     $("#xiangmuchengyuan").val(data.nodemodel['AE'] + "," + data.nodemodel['SAE'] + "," + data.nodemodel['AD'] + "," + data.nodemodel['SAD'] + "," + data.nodemodel['yinxiaozongjian'] + "," + data.nodemodel['caiwu'] + "," + data.nodemodel['laoban'] + "," + data.nodemodel['zhulaoban']);
                     if ($("#xiangmuchengyuan").val().indexOf("@ViewBag.employeename") == -1) {
                         //用当前登陆人与项目成员内容对比，确定是否启用上传下载按钮
-                    $("#POdownloadbtn input").attr("disabled", true);
-                    $("#reportdownloadbtn input").attr("disabled", true);
-                    $("#summdownloadbtn input").attr("disabled", true);
-                    //立项修改按钮是否启用
-                    $("#shenpi1").attr("disabled", true);
-                    $("#btnMCToOut").attr("disabled", true);
-                    $("#btnMCToOut1").attr("disabled", true);
-                    $("#btnMCToOut2").attr("disabled", true);
+                        $("#POdownloadbtn input").attr("disabled", true);
+                        $("#reportdownloadbtn input").attr("disabled", true);
+                        $("#summdownloadbtn input").attr("disabled", true);
+                        //立项修改按钮是否启用
+                        $("#shenpi1").attr("disabled", true);
+                        $("#btnMCToOut").attr("disabled", true);
+                        $("#btnMCToOut1").attr("disabled", true);
+                        $("#btnMCToOut2").attr("disabled", true);
+                        $("#add").attr("disabled", true);
+                        $("#add1").attr("disabled", true);
+                        $("#add2").attr("disabled", true);
+                        $(".form-control").val("");
+                        $(".easyui-linkbutton").val("导入文件");
+                        $(".btn-default.form-control").val("添加");
+                        alert("您没有参与\""+s+"\"，所以无法查看该项目详情！");
                     return;
                     }
                     else {
@@ -1794,6 +1802,9 @@
                         $("#btnMCToOut").removeAttr("disabled");
                         $("#btnMCToOut1").removeAttr("disabled");
                         $("#btnMCToOut2").removeAttr("disabled");
+                        $("#add").removeAttr("disabled");
+                        $("#add1").removeAttr("disabled");
+                        $("#add2").removeAttr("disabled");
                     }
                 }
                 if (data == "") {
@@ -1865,7 +1876,7 @@
                 $('#weifenpeilirun').val(data.moneymodel['Undistributedprofit']);
                 var admin = "齐雅卿,师国庆,朱媛媛";
         if (admin.indexOf("@ViewBag.employeename") == -1) {
-            //$('#Nofenpeilirun').attr("style", "visibility:hidden");
+            //$('#xsbaojiaheji').attr("style", "visibility:hidden");
             //$('#fenpeilirun').attr("style", "visibility:hidden");
             //$('#suijinheji').attr("style", "visibility:hidden");
             $('#heji').attr("style", "visibility:hidden");
@@ -2173,6 +2184,9 @@
                                 read = '';
                             }
                         }
+                        if (data.catmodel[i].Applicant=="@ViewBag.employeename") {
+                            read = '';
+                        }
                         if (data.catmodel[i].shuidian == undefined || data.catmodel[i].shuidian == "" || data.catmodel[i].shuidian == null) {
                             data.catmodel[i].shuidian = 0;
                         }
@@ -2258,6 +2272,9 @@
                             if ("@ViewBag.employeename"=="朱媛媛") {
                                 read = '';
                             }
+                        }
+                        if (data.personalmodel[i].Applicant=="@ViewBag.employeename") {
+                            read = '';
                         }
                         if (data.personalmodel[i].Totaltaxcost == undefined || data.personalmodel[i].Totaltaxcost == "" || data.personalmodel[i].Totaltaxcost == null) {
                             data.personalmodel[i].Totaltaxcost = 0;
@@ -2345,7 +2362,9 @@
                         if (data.companymodel[i].Financialcost == undefined || data.companymodel[i].Financialcost == "" || data.companymodel[i].Financialcost == null) {
                             data.companymodel[i].Financialcost = 0;
                         }
-
+                        if (data.companymodel[i].Applicant=="@ViewBag.employeename") {
+                            read = '';
+                        }
 
                         if (data.companymodel[i].readState == "1" && data.companymodel[i].Distinguish == 3) {
                             var companytrhtml = '<tr title="公司名称：' + data.companymodel[i].Receivablescompany + '"><td class="xuhao">' + data.companymodel[i].xuhao + '</td><td class="pingtai">' + data.companymodel[i].pingtai + '</td><td  class="ddd2">' + data.companymodel[i].wangming + '</td><td  class="suidian">' + data.companymodel[i].shuidian + '</td><td class="ccc2 chenbenbaojia">' + data.companymodel[i].CostQuotation + '</td><td class="bbb2 xiaoshoubaojia">' + data.companymodel[i].Salesquotation + '</td><td class="chaiwuchenben">' + data.companymodel[i].Actualamountofpayment + '</td><td>@{if (@ViewBag.rolename == "管理员") {<input type="text" id="caiwuchenben2" readonly="readonly" onchange="companytextchange12($(this),' + data.companymodel[i].xuhao + ',' + data.companymodel[i].Distinguish + ')" class="form-control companycaiwuchenben2 chenben" value = "' + data.companymodel[i].Financialcost + '" />}}</td><td readonly="readonly" id="shifoufukuan" class="shifoufukuan">已付款</td><td class="companyhansuihejichenben2">' + data.companymodel[i].Totaltaxcost + '</td><td><input id="xiugai" onclick="updateout(this,3)" disabled="disabled" type="button" class="btn btn-primary form-control xiugai" value="修改" data-toggle="modal" /></td><td><input id="caiwushenpi" type="button" class="btn btn-primary form-control caiwushenpi" onclick="updateout(this,3,1)" value="查看"  data-toggle="modal"/></td><td id="Applicant" class="Applicant">' + data.companymodel[i].Applicant + '</td></tr > ';
